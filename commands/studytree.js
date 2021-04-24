@@ -106,6 +106,7 @@ function generateTree(theorem, path) {
     desc = "Do note: EC10 is done between this list and the previous.";
   } else {
     tree = lightDark(theorem);
+    desc = "If you can't get the last TT, to unlock dilation, use \`++dilationgrind\`.";
   }
   return `${desc === null ? "" : `${desc} `}\`${tree.join(",")}|0\``;
 }
