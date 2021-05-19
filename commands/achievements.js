@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 "use strict";
+/* eslint-disable no-negated-condition */
 
 // These are genius shortened versions of the achievement names, what do you mean?
 
