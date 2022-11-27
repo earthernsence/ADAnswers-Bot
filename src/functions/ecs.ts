@@ -44,15 +44,15 @@ export function ecsAtTTAmount(tt: number): string {
   if (tt < 130) return "No ECs can be reasonably completed yet!";
   if (tt === 130) return "1x1";
   if (tt > 12350) return "all ECs completed!";
-  let highestEC: string = "";
+
+  const completions = Array(12);
   for (const chall of EternityChallenges) {
     if (chall.tt <= tt) {
-      highestEC = `${chall.challenge}x${chall.completion}`;
+      completions[chall.challenge - 1] = chall.completion;
     }
   }
-  const index = order.indexOf(highestEC) + 1;
 
-  return findCompletionsAtIndex(index);
+  return completions.filter(Number).map((value, index) => `${index + 1}x${value}`).join(", ");
 }
 
 export const eternityChallenge = (challengeInfo: EC, requestedFields?: string): EmbedBuilder => new EmbedBuilder()
