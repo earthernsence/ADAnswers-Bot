@@ -33,6 +33,12 @@ export const ts: Command = {
       description: "Will show current ECs for that TT amount; x >= 130 where 130 is TT",
       type: ApplicationCommandOptionType.Boolean,
       required: false
+    },
+    {
+      name: "mobile",
+      description: "Removes codeblock so copying on mobile is simpler",
+      type: ApplicationCommandOptionType.Boolean,
+      required: false,
     }
   ],
   run: async(interaction: CommandInteraction) => {
@@ -41,7 +47,8 @@ export const ts: Command = {
     const theorems: number = interaction.options.getInteger("theorems") as number;
     const path: string = interaction.options.getString("path") as string;
     const showECs: boolean = interaction.options.getBoolean("showecs") as boolean;
-    const tree = new Tree(theorems, path).generateTree();
+    let mobile: boolean = interaction.options.getBoolean("mobile") as boolean;
+    const tree = new Tree(theorems, path, mobile).generateTree();
     const ecs = ecsAtTTAmount(theorems);
     const next = typeof ecs === "string" ? "" : `(Next: ${makeEnumeration<string>(ecs.nextECs, ", ", "", "and")} at ${ecs.nextEC.tt} TT)`;
     const ecString: string = showECs && theorems >= 130 ? `EC completions for ${theorems} TT: ${typeof ecs === "string" ? ecs : ecs.completions} ${next}` : "";

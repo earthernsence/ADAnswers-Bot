@@ -6,10 +6,12 @@ export class Tree {
   theorems: number;
   path: string;
   trees: Trees[];
-  constructor(theorems: number, path?: string) {
+  mobile: boolean;
+  constructor(theorems: number, path?: string, mobile?:boolean) {
     this.theorems = Math.max(theorems, 0);
     this.path = path === undefined ? "active" : path;
     this.trees = trees(this.path);
+    this.mobile = mobile === undefined ? false : mobile;
   }
 
   get realPath(): string {
@@ -25,6 +27,11 @@ export class Tree {
     for (const tree of this.trees) {
       if (this.theorems >= tree.requirement) {
         const affordableStudies = getAffordableStudiesFromStudyList(tree.ts, this.theorems);
+        if (this.mobile) {
+          return `${tree.desc === undefined
+            ? ""
+            : `${tree.desc} `}${affordableStudies.join(",")}|0`;
+        }
         return `${tree.desc === undefined
           ? ""
           : `${tree.desc} `}\`${affordableStudies.join(",")}|0\``;
