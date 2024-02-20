@@ -186,7 +186,7 @@ You can attempt IC4 at e68+ IP.
     
 **In challenge:**
 - hold M+D until you get stuck (Max+D on mobile)
-- press the "Perform a Dimension Boost reset" button at the bottom
+- press the "Perform a Dimension Boost reset" button at the bottom of the Dimensions tab
 - press M one or two times (don't hold it, just press)
 - repeatedly buy dimensions 7 to 1 until you reach the next Galaxy (on web you can press keys 7,6,5,4,3,2,1; on mobile you need to press the dimension buttons)
 - repeat
