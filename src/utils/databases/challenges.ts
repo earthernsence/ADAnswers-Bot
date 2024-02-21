@@ -181,22 +181,22 @@ You can attempt IC4 at e68+ IP.
 **Before challenge:**
 - in the Dimboost autobuyer set "Activates every X seconds" to 0 and enable "Only Dimboost to unlock new Dimensions until X Galaxies" at 100
 - in the Galaxy autobuyer disable "Limit Antimatter Galaxies to"
-- disable Sacrifice autobuyer and Dimension autobuyers 1-7
-- keep Dimension 8, Tickspeed, Dimboost, and Galaxy autobuyers enabled
-    
+- disable Sacrifice autobuyer and AD autobuyers 1-7
+- keep AD8, Tickspeed, Dimboost, and Galaxy autobuyers enabled
+
 **In challenge:**
-- hold M+D until you get stuck (Max+D on mobile)
-- press the "Perform a Dimension Boost reset" button at the bottom of the Dimensions tab
-- press M one or two times (don't hold it, just press)
-- repeatedly buy dimensions 7 to 1 until you reach the next Galaxy (on web you can press keys 7,6,5,4,3,2,1; on mobile you need to press the dimension buttons)
+- hold M/Max + D until you get stuck
+- press "Perform a Dimension Boost reset" button at the bottom of the AD tab
+- press (not hold) M/Max one or two times
+- repeatedly buy ADs 7 to 1 until you reach the next Galaxy (on web: press keys 7,6,5,4,3,2,1; on mobile: press the AD buttons)
 - repeat
-    
+
 **After challenge:**
-- enable the Sacrifice autobuyer and Dimension autobuyers 1-7
+- enable Sacrifice autobuyer and AD autobuyers 1-7
 - in the Dimboost autobuyer disable "Only Dimboost to unlock new Dimensions until X Galaxies" and set "Activates every X seconds" either to 0 or 0.3
-    
-Video guide for web/steam: <https://youtu.be/R9v49lCAUk4>
-Video guide for mobile: <https://youtu.be/lI70hBlpaqc>`,
+
+PC guide: <https://youtu.be/R9v49lCAUk4>
+Mobile guide: <https://youtu.be/lI70hBlpaqc>`,
     reward: `All Antimatter Dimension multipliers become multiplier^1.05`,
     rewardFormula: `\`multiplier ^ 1.05\``,
     image: `https://cdn.discordapp.com/attachments/824678601160917003/980928603996946542/IC4.png`,
