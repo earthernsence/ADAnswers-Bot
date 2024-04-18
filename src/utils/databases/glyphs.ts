@@ -305,12 +305,6 @@ export const specialGlyphs: GlyphData = {
     altText: Symbols.effarig,
     effects: {
       "Southwest": {
-        name: "Game Speed Power",
-        effect: "Raise game speed to a power.",
-        effectFormula: "1 + (level ^ .25) * ((1 + 2.5 * Rarity) ^ 0.4) / 75",
-        stacking: "More than one Effarig Glyph cannot be equipped simultaneously, dummy!"
-      },
-      "West": {
         name: "Reality Machine Multiplier",
         effect: "Multiply Reality Machine gain.",
         effectFormula: "level ^ 0.6 * (1 + 2.5 * Rarity)",
@@ -322,10 +316,16 @@ export const specialGlyphs: GlyphData = {
           type: ALTERATION_TYPE.EMPOWER
         }
       },
-      "Northwest": {
+      "West": {
         name: "Instability Delay",
         effect: "Increase Glyph Instability starting level",
         effectFormula: "floor(10 * sqrt(level * (1 + 2.5 * rarity))",
+        stacking: "More than one Effarig Glyph cannot be equipped simultaneously, dummy!"
+      },
+      "Northwest": {
+        name: "Game Speed Power",
+        effect: "Raise game speed to a power.",
+        effectFormula: "1 + (level ^ .25) * ((1 + 2.5 * Rarity) ^ 0.4) / 75",
         stacking: "More than one Effarig Glyph cannot be equipped simultaneously, dummy!"
       },
       "North": {
