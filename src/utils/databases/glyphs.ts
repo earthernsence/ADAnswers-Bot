@@ -300,8 +300,7 @@ export const specialGlyphs: GlyphData = {
   effarig: {
     name: "effarig",
     colour: Colour.effarig,
-    // AD doesn't have emotes for Effarig, Cursed, or Reality, so they get the text
-    emote: Symbols.effarig,
+    emote: <:glyph_effarig:1156626795177726032>,
     altText: Symbols.effarig,
     effects: {
       "Southwest": {
@@ -373,6 +372,7 @@ export const specialGlyphs: GlyphData = {
   cursed: {
     name: "cursed",
     colour: "#000000",
+    // AD doesn't have emotes for Cursed, or Reality, so they get the text
     emote: Symbols.cursed,
     altText: Symbols.cursed,
     effects: {
