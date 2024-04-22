@@ -37,7 +37,7 @@ export const ECRewards: Reward = {
     formula: "+`completions * 0.72`"
   },
   "4": {
-    reward: "Infinity Dimension multiplier based on unspent Infinity Points",
+    reward: "Infinity Dimension multiplier based on unspent Infinity Points, capping at ×1e200",
     formula: "×`Infinity Points ^ 0.003 + completions * 0.002`"
   },
   "5": {
