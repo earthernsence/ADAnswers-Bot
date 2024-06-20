@@ -14,7 +14,7 @@ export const adbonus: Command = {
 The highest unlocked effect on this list, is the only effect that applies
 Celestial 7: ||Ad Bonus has been Nullified||
 Celestial 6: ||DM: 2||
-Celestial 5: ||Memory Gain: 1.5
+Celestial 5: ||Memory Gain: 1.5||
 Celestial 3: ||Rarity: +5%||
 Celestial 2: ||RS: 1.5||
 Celestial 1: ||RM: 2x||
