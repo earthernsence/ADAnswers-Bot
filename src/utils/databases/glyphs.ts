@@ -300,7 +300,7 @@ export const specialGlyphs: GlyphData = {
   effarig: {
     name: "effarig",
     colour: Colour.effarig,
-    emote: <:glyph_effarig:1156626795177726032>,
+    emote: "<:glyph_effarig:1156626795177726032>",
     altText: Symbols.effarig,
     effects: {
       "Southwest": {
