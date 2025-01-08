@@ -1,0 +1,25 @@
+{
+  "name": "project-moksha",
+  "version": "0.0.1",
+  "module": "index.ts",
+  "type": "module",
+  "author": "earth",
+  "license": "CC BY-NC-SA 4.0",
+  "scripts": {
+    "start": "bun deploy.ts && bun ."
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
+    "@types/bun": "latest",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "typescript-eslint": "^8.19.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.17.3"
+  }
+}
