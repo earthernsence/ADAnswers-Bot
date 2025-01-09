@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageFlags, SlashCommandBuilder, inlineCode, spoiler } from "discord.js";
-import type { Command } from "../../types/Command";
-import { isUserHelper } from "../../utils/utils_commands";
+import type { Command } from "@/types/Command";
+import { isUserHelper } from "@/utils/utils_commands";
 
-export default <Command>{
+export default {
   data: new SlashCommandBuilder()
     .setName("breakinfinity")
     .setDescription("describes break infinity"),
@@ -18,4 +18,4 @@ For the recommended upgrade order use ${inlineCode("/bugo")}.`;
       flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
     });
   }
-};
+} satisfies Command;

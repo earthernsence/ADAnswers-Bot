@@ -1,6 +1,6 @@
 import { Client, Collection, GatewayIntentBits } from "discord.js";
-import type { Command } from "./types/Command";
-import type { CommandClient } from "./types/CommandClient";
+import type { Command } from "@/types/Command";
+import type { CommandClient } from "@/types/CommandClient";
 import fs from "node:fs";
 import path from "node:path";
 

@@ -1,5 +1,5 @@
 import { Client, Events } from "discord.js";
-import type { BaseEvent } from "../types/BaseEvent";
+import type { BaseEvent } from "@/types/BaseEvent";
 
 export default <BaseEvent>{
   name: Events.ClientReady,

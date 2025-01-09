@@ -1,8 +1,8 @@
 import { CommandInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
-import type { Command } from "../../types/Command";
-import { isUserHelper } from "../../utils/utils_commands";
+import type { Command } from "@/types/Command";
+import { isUserHelper } from "@/utils/utils_commands";
 
-export default <Command>{
+export default {
   data: new SlashCommandBuilder()
     .setName("1minuteinf")
     .setDescription("explains the UI change at infinity in under a minute"),
@@ -15,4 +15,4 @@ export default <Command>{
       flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
     });
   }
-};
+} satisfies Command;
