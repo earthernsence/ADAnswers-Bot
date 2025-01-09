@@ -1,7 +1,7 @@
-import { REST, Routes, type RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js";
+import { REST, type RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "discord.js";
+import { Channels } from "./Channels";
 import fs from "node:fs";
 import path from "node:path";
-import { Channels } from "./Channels";
 
 const commands: Array<RESTPostAPIChatInputApplicationCommandsJSONBody> = [];
 const foldersPath = path.join(__dirname, "commands");
@@ -23,17 +23,17 @@ for (const folder of commandFolders) {
 
 const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
 
-(async () => {
+(async() => {
   try {
     console.log(`Updating ${commands.length} commands...`);
 
-    const data = await rest.put(
+    await rest.put(
       Routes.applicationGuildCommands(process.env.APPLICATION_ID as string, Channels.TestingServer),
       { body: commands },
     );
 
     // TODO: Global commands:
-    // const data = await rest.put(
+    // await rest.put(
     //   Routes.applicationCommands(process.env.APPLICATION_ID as string),
     //   { body: commands },
     // );

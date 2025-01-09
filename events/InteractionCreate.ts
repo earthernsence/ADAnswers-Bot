@@ -1,6 +1,6 @@
-import { Events, MessageFlags, type CacheType, type Interaction } from "discord.js";
-import type { CommandClient } from "../types/CommandClient";
+import { type CacheType, Events, type Interaction, MessageFlags } from "discord.js";
 import type { BaseEvent } from "../types/BaseEvent";
+import type { CommandClient } from "../types/CommandClient";
 
 export default <BaseEvent>{
   name: Events.InteractionCreate,
@@ -25,4 +25,4 @@ export default <BaseEvent>{
       }
     }
   }
-}
+};

@@ -1,5 +1,6 @@
 import { CommandInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { Command } from "../../types/Command";
+import { isUserHelper } from "../../utils/utils_commands";
 
 export default <Command>{
   data: new SlashCommandBuilder()
@@ -9,8 +10,9 @@ export default <Command>{
     if (!interaction) return;
 
     await interaction.reply({
+      // eslint-disable-next-line @stylistic/max-len
       content: `When you infinity in under a minute, the UI changes on the screen. Instead of the Dimensions disappearing, they stay and the Big Crunch button appears on top of them. This is merely visual, and is there to prevent flickering.`,
-      flags: MessageFlags.Ephemeral,
+      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
     });
   }
-}
+};

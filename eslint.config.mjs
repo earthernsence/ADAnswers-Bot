@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import globals from "globals";
 import js from "@eslint/js";
 import path from "node:path";
+import stylistic from "@stylistic/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 
@@ -17,7 +18,10 @@ const compat = new FlatCompat({
 export default [...compat.extends("eslint:recommended"), {
   plugins: {
     "@typescript-eslint": typescriptEslint,
+    "@stylistic": stylistic,
   },
+
+  files: ["**/*.ts", "**/*.js", "**/*.mjs", "**/*.cjs"],
 
   languageOptions: {
     globals: {
@@ -44,7 +48,7 @@ export default [...compat.extends("eslint:recommended"), {
     "array-callback-return": "error",
     complexity: "warn",
     "consistent-return": "error",
-    "dot-location": ["error", "property"],
+    "@stylistic/dot-location": ["error", "property"],
     "dot-notation": "error",
     eqeqeq: "error",
 
@@ -56,7 +60,7 @@ export default [...compat.extends("eslint:recommended"), {
     "no-eval": "error",
     "no-extra-bind": "error",
     "no-extra-label": "error",
-    "no-floating-decimal": "error",
+    "@stylistic/no-floating-decimal": "error",
     "no-implicit-coercion": "error",
     "no-implied-eval": "error",
     "no-invalid-this": "error",
@@ -64,7 +68,7 @@ export default [...compat.extends("eslint:recommended"), {
     "no-labels": "error",
     "no-lone-blocks": "error",
     "no-loop-func": "error",
-    "no-multi-spaces": "error",
+    "@stylistic/no-multi-spaces": "error",
     "no-multi-str": "error",
     "no-new": "error",
     "no-new-func": "error",
@@ -72,7 +76,6 @@ export default [...compat.extends("eslint:recommended"), {
     "no-octal-escape": "error",
     "no-param-reassign": "error",
     "no-proto": "error",
-    "no-return-await": "error",
     "no-script-url": "error",
     "no-self-compare": "error",
     "no-sequences": "error",
@@ -82,13 +85,13 @@ export default [...compat.extends("eslint:recommended"), {
     "no-useless-catch": "error",
     "no-useless-concat": "error",
     "no-useless-return": "error",
-    "no-trailing-spaces": "error",
+    "@stylistic/no-trailing-spaces": "error",
     "no-void": "error",
     "no-with": "error",
     radix: "warn",
     "require-await": "error",
     "require-unicode-regexp": "error",
-    "wrap-iife": "error",
+    "@stylistic/wrap-iife": "error",
     yoda: "error",
     "no-label-var": "error",
     "no-shadow": "error",
@@ -105,10 +108,10 @@ export default [...compat.extends("eslint:recommended"), {
       variables: false,
     }],
 
-    "array-bracket-spacing": "error",
-    "block-spacing": "error",
+    "@stylistic/array-bracket-spacing": "error",
+    "@stylistic/block-spacing": "error",
 
-    "brace-style": ["error", "1tbs", {
+    "@stylistic/brace-style": ["error", "1tbs", {
       allowSingleLine: true,
     }],
 
@@ -118,78 +121,78 @@ export default [...compat.extends("eslint:recommended"), {
       ignoreConsecutiveComments: true,
     }],
 
-    "comma-spacing": "error",
-    "comma-style": "error",
-    "computed-property-spacing": "error",
+    "@stylistic/comma-spacing": "error",
+    "@stylistic/comma-style": "error",
+    "@stylistic/computed-property-spacing": "error",
     "consistent-this": "error",
-    "func-call-spacing": "error",
-    "id-blacklist": ["error", "ret", "helper", "temp", "tmp"],
+    "@stylistic/func-call-spacing": "error",
+    "id-denylist": ["error", "ret", "helper", "temp", "tmp"],
 
-    indent: ["warn", 2, {
+    "@stylistic/indent": ["warn", 2, {
       SwitchCase: 1,
     }],
 
-    "key-spacing": "error",
-    "keyword-spacing": "error",
-    "line-comment-position": "error",
+    "@stylistic/key-spacing": "error",
+    "@stylistic/keyword-spacing": "error",
+    "@stylistic/line-comment-position": "error",
 
-    "lines-between-class-members": ["error", "always", {
+    "@stylistic/lines-between-class-members": ["error", "always", {
       exceptAfterSingleLine: true,
     }],
 
     "max-depth": "warn",
 
-    "max-len": ["warn", {
+    "@stylistic/max-len": ["warn", {
       code: 240,
     }],
 
     "max-params": "warn",
-    "max-statements-per-line": "error",
-    "multiline-comment-style": ["error", "separate-lines"],
-    "new-parens": "error",
+    "@stylistic/max-statements-per-line": "error",
+    "@stylistic/multiline-comment-style": ["error", "separate-lines"],
+    "@stylistic/new-parens": "error",
     "no-array-constructor": "warn",
     "no-bitwise": "warn",
     "no-inline-comments": "error",
     "no-lonely-if": "error",
-    "no-mixed-spaces-and-tabs": "error",
+    "@stylistic/no-mixed-spaces-and-tabs": "error",
     "no-multi-assign": "warn",
-    "no-multiple-empty-lines": "error",
+    "@stylistic/no-multiple-empty-lines": "error",
     "no-negated-condition": "error",
     "no-nested-ternary": "error",
-    "no-new-object": "error",
-    "no-tabs": "error",
+    "no-object-constructor": "error",
+    "@stylistic/no-tabs": "error",
     "no-unneeded-ternary": "error",
-    "no-whitespace-before-property": "error",
-    "object-curly-spacing": ["error", "always"],
+    "@stylistic/no-whitespace-before-property": "error",
+    "@stylistic/object-curly-spacing": ["error", "always"],
     "operator-assignment": "error",
 
-    "operator-linebreak": ["error", "after", {
+    "@stylistic/operator-linebreak": ["error", "after", {
       overrides: {
         "?": "before",
         ":": "before",
       },
     }],
 
-    quotes: ["error", "double", {
+    "@stylistic/quotes": ["error", "double", {
       avoidEscape: true,
       allowTemplateLiterals: true,
     }],
 
-    semi: "warn",
-    "semi-spacing": "error",
-    "space-before-blocks": "error",
-    "space-before-function-paren": ["error", "never"],
-    "space-in-parens": "error",
-    "space-infix-ops": "error",
-    "spaced-comment": "error",
+    "@stylistic/semi": "warn",
+    "@stylistic/semi-spacing": "error",
+    "@stylistic/space-before-blocks": "error",
+    "@stylistic/space-before-function-paren": ["error", "never"],
+    "@stylistic/space-in-parens": "error",
+    "@stylistic/space-infix-ops": "error",
+    "@stylistic/spaced-comment": "error",
     strict: ["error", "global"],
-    "switch-colon-spacing": "error",
-    "template-tag-spacing": "error",
+    "@stylistic/switch-colon-spacing": "error",
+    "@stylistic/template-tag-spacing": "error",
     "arrow-body-style": "error",
-    "arrow-parens": ["error", "as-needed"],
-    "arrow-spacing": "error",
+    "@stylistic/arrow-parens": ["error", "as-needed"],
+    "@stylistic/arrow-spacing": "error",
 
-    "no-confusing-arrow": ["error", {
+    "@stylistic/no-confusing-arrow": ["error", {
       allowParens: true,
     }],
 
@@ -202,8 +205,8 @@ export default [...compat.extends("eslint:recommended"), {
     "prefer-const": "error",
     "prefer-rest-params": "error",
     "prefer-spread": "error",
-    "rest-spread-spacing": "error",
-    "template-curly-spacing": "error",
+    "@stylistic/rest-spread-spacing": "error",
+    "@stylistic/template-curly-spacing": "error",
     "prefer-template": "error",
   },
 }];

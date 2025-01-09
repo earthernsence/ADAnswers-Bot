@@ -1,10 +1,10 @@
-import { Client, Collection, Events, GatewayIntentBits, MessageFlags } from "discord.js";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
 import type { Command } from "./types/Command";
 import type { CommandClient } from "./types/CommandClient";
 import fs from "node:fs";
 import path from "node:path";
 
-const client: CommandClient = <CommandClient>new Client({ intents: [GatewayIntentBits.Guilds] });
+const client: CommandClient = <CommandClient> new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection<string, Command>();
 
@@ -20,8 +20,8 @@ for (const folder of commandFolders) {
     const filePath = path.join(commandsPath, file);
     await import(filePath).then((command: { default: Command }) => {
       client.commands.set(command.default.data.name, command.default);
-    }).catch((e) => {
-      console.log("Error importing command file: " + filePath, " " + e);
+    }).catch(e => {
+      console.log(`Error importing command file: ${filePath}`, ` ${e}`);
     });
   }
 }
@@ -39,8 +39,8 @@ for (const file of eventFiles) {
     } else {
       client.on(event.default.name, (...args) => event.default.execute(...args));
     }
-  }).catch((e) => {
-    console.log("Error importing event file: " + filePath, " " + e);
+  }).catch(e => {
+    console.log(`Error importing event file: ${filePath}`, ` ${e}`);
   });
 }
 
