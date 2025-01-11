@@ -27,3 +27,14 @@ export function authorTitleFromUser(user: User): string {
 export function link(content: string, url: string) {
   return hyperlink(content, hideLinkEmbed(url));
 }
+
+export function pluralise(word: string, count: number) {
+  if (count === 1) {
+    return word;
+  }
+  return `${word}s`;
+}
+
+export function quantify(word: string, count: number): string {
+  return `${count} ${pluralise(word, count)}`;
+}

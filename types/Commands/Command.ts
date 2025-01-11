@@ -9,6 +9,9 @@ interface CommandProps {
   execute: (interaction: ChatInputCommandInteraction) => void,
 }
 
+// This is a super generic command class that can easily be extended.
+// Generally, we'll extend this class if there's a really repetitive command type,
+// otherwise, this class itself can be used to create a command (see /challenge) for that case.
 export class Command {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
   // eslint-disable-next-line no-unused-vars
