@@ -1,4 +1,4 @@
-import { type CommandInteraction, hideLinkEmbed, hyperlink } from "discord.js";
+import { type CommandInteraction, User, hideLinkEmbed, hyperlink } from "discord.js";
 import { Channels } from "../Channels";
 import { Roles } from "../Roles";
 
@@ -8,6 +8,19 @@ export function isUserHelper(interaction: CommandInteraction): boolean | undefin
 
   // Else determine if the user is a helper or not, then return that value
   return interaction.guild?.members.resolve(interaction.user)?.roles.cache.has(Roles.HelperRole);
+}
+
+export function authorTitle(interaction: CommandInteraction): string {
+  const user: User = interaction.member === null ? interaction.user : interaction.member.user as User;
+
+  return authorTitleFromUser(user);
+}
+
+export function authorTitleFromUser(user: User): string {
+  const hasDiscriminator: boolean = user.discriminator !== "0";
+
+  if (hasDiscriminator) return `${user.username}#${user.discriminator}`;
+  return `${user.username}`;
 }
 
 // Hides link embeds and masks the URL

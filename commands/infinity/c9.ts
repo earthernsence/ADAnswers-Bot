@@ -1,6 +1,9 @@
-import { CommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
+import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/AntimatterChallengeCustomEmbed";
+import { ChallengeShorthandCommand } from "@/types/Commands/ChallengeShorthandCommand";
+import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 
-export default {
+export default new ChallengeShorthandCommand({
   data: new SlashCommandBuilder()
     .setName("c9")
     .setDescription(`shorthand for ${inlineCode("/challenge c9")}`)
@@ -10,9 +13,8 @@ export default {
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
     ),
-  execute: async(interaction: CommandInteraction) => {
-    if (!interaction) return;
-
-    const target = interaction.options.get("target")?.user;
-  }
-};
+  embed: (interaction: ChatInputCommandInteraction) => new AntimatterChallengeCustomEmbed({
+    interaction,
+    challenge: antimatterChallenges.c9
+  })
+});
