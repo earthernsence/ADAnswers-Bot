@@ -5,7 +5,7 @@ const base = ` It is recommended to have at least the first 12 infinity upgrades
 
 // It's not my preferred way of doing this, but to save bandwidth,
 // we provide a direct link to a discord attachment to display the images,
-// instead of trying toi upload them every time someone requests a challenge message.
+// instead of trying to upload them every time someone requests a challenge message.
 // There are likely better hosting solutions, but for now, I figure "if it ain't broke, don't fix it."
 // See this section of the discord.js guide for more information:
 // https://discordjs.guide/popular-topics/embeds.html#attaching-images

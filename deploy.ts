@@ -10,9 +10,11 @@ const commandFolders = fs.readdirSync(foldersPath);
 for (const folder of commandFolders) {
   const commandsPath = path.join(foldersPath, folder);
   const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
+  console.log(`Preparing ${commandFiles.length} command(s) from ${commandsPath}...`);
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = await import(filePath);
+    if (!command.default) continue;
     if ("data" in command.default && "execute" in command.default) {
       commands.push(command.default.data.toJSON());
     } else {
@@ -30,7 +32,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
     await rest.put(
       Routes.applicationGuildCommands(process.env.APPLICATION_ID as string, Channels.TestingServer),
       { body: commands },
-    );
+    ).then(() => console.log(`Loaded ${commands.length} commands to the testing server`));
 
     // TODO: Global commands:
     // await rest.put(
@@ -38,7 +40,6 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
     //   { body: commands },
     // );
 
-    console.log(`Reloaded all ${commands.length} commands!`);
   } catch (e) {
     console.error(e);
   }
