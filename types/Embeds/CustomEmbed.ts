@@ -1,4 +1,5 @@
-import { type ColorResolvable, CommandInteraction, EmbedBuilder, type EmbedField, User } from "discord.js";
+import { AttachmentBuilder, type ColorResolvable, CommandInteraction, EmbedBuilder, type EmbedField, User } from "discord.js";
+import { NotImplementedError } from "../NotImplementedError";
 import { authorTitle } from "@/utils/utils_commands";
 
 const FOOTER_IMAGE_URL = `https://cdn.discordapp.com/attachments/351479640755404820/980696250389254195/antimatter.png`;
@@ -38,6 +39,15 @@ export class CustomEmbed {
   public setColour(colour: ColorResolvable): CustomEmbed {
     this.embed.setColor(colour);
     return this;
+  }
+
+  public setDescription(value: string): CustomEmbed {
+    this.embed.setDescription(value);
+    return this;
+  }
+
+  public getAndSetThumbnail(): AttachmentBuilder {
+    throw new NotImplementedError();
   }
 
   private getFooterText(): string {

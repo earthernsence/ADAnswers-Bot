@@ -1,8 +1,10 @@
 export interface EternityChallengeReward {
-  [key: number]: {
-    reward: string,
-    formula: string,
-  }
+  reward: string,
+  formula: string,
+}
+
+export interface EternityChallengeRewards {
+  [key: number]: EternityChallengeReward
 }
 
 export interface EternityChallengeDescriptions {
@@ -19,7 +21,7 @@ export interface EternityChallengeCompletionGoals {
   [key: number]: (completions: number) => string;
 }
 
-interface EternityChallengeUnlock {
+export interface EternityChallengeUnlock {
   currency: string,
   amount: string,
   theorems: number
@@ -30,7 +32,7 @@ export type EC = {
   completion: number,
   theorems: number,
   ip: string,
-  note: null | string,
+  note?: string,
   tree: string,
   completionReqs?: string,
   description: string,

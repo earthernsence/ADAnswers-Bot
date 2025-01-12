@@ -1,6 +1,7 @@
 import { type ApplicationCommandOptionChoiceData, ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, italic, userMention } from "discord.js";
 import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/AntimatterChallengeCustomEmbed";
 import { Command } from "@/types/Commands/Command";
+import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { InfinityChallengeCustomEmbed } from "@/types/Embeds/InfinityChallengeCustomEmbed";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challenges";
@@ -50,8 +51,16 @@ export default new Command({
     const targetUser = interaction.options.getUser("target");
 
     if (!requestedChallenge) {
+      const errorEmbed = new ErrorCustomEmbed({
+        interaction,
+        text: `There was a problem processing your requested challenge of ${requestedChallenge}`
+      });
+
+      const errorImage = errorEmbed.getAndSetThumbnail();
+
       interaction.reply({
-        content: `There was an error processing your requested challenge of ${requestedChallenge}`,
+        embeds: [errorEmbed.create()],
+        files: [errorImage],
         flags: MessageFlags.Ephemeral
       });
       return;

@@ -1,7 +1,13 @@
-import type { EC, EternityChallengeCompletionGoals, EternityChallengeDescriptions, EternityChallengeReward, EternityChallengeSecondaryUnlock } from "@/types/game_data/EternityChallenges";
+import type { EternityChallengeCompletionGoals, EternityChallengeDescriptions, EternityChallengeRewards, EternityChallengeSecondaryUnlock } from "@/types/game_data/EternityChallenges";
 import Decimal from "break_infinity.js";
+import EternityChallenge from "./EternityChallenge";
 
-const eternityChallengeDescriptions: EternityChallengeDescriptions = {
+// Considering the game isn't going to receive any more content updates, I feel okay
+// about hardcoding all of this. Even if something does change, you know exactly where it is.
+// This file is, admittedly, a bit of a mess, but I tried to cut down on as much common-ground
+// stuff as I could.
+
+export const eternityChallengeDescriptions: EternityChallengeDescriptions = {
   1: `Time Dimensions are disabled.`,
   2: `Infinity Dimensions are disabled.`,
   3: `Antimatter Dimensions 5-8 don't produce anything. Dimensional Sacrifice is disabled.`,
@@ -16,7 +22,7 @@ const eternityChallengeDescriptions: EternityChallengeDescriptions = {
   12: `The game runs ×1,000 slower. The goal must be reached within a certain amount of time or you will fail the Challenge.`
 };
 
-const eternityChallengeSecondaryUnlockRequirements: EternityChallengeSecondaryUnlock = {
+export const eternityChallengeSecondaryUnlockRequirements: EternityChallengeSecondaryUnlock = {
   1: (completions: number) => new Decimal(20000).plus(completions * 20000).toString(),
   2: (completions: number) => new Decimal(1300).plus(completions * 150).toString(),
   3: (completions: number) => new Decimal(17300).plus(completions * 1250).toString(),
@@ -33,7 +39,7 @@ const eternityChallengeSecondaryUnlockRequirements: EternityChallengeSecondaryUn
   12: (completions: number) => `Use only the Time Dimension path (TS73, 83, 93, 103)`,
 };
 
-const eternityChallengeRewards: EternityChallengeReward = {
+export const eternityChallengeRewards: EternityChallengeRewards = {
   "1": {
     reward: "Time Dimension multiplier based on time spent this Eternity",
     formula: "×`max(time in this eternity / 10, 0.9) ^ 0.3 + (completions * 0.05)`",
@@ -84,7 +90,7 @@ const eternityChallengeRewards: EternityChallengeReward = {
   }
 };
 
-const eternityChallengeCompletionGoals: EternityChallengeCompletionGoals = {
+export const eternityChallengeCompletionGoals: EternityChallengeCompletionGoals = {
   1: (completions: number) => new Decimal("1e1800").times(new Decimal(1e200).pow(completions)).toString(),
   2: (completions: number) => new Decimal("1e975").times(new Decimal(1e175).pow(completions)).toString(),
   3: (completions: number) => new Decimal("1e600").times(new Decimal(1e75).pow(completions)).toString(),
@@ -99,933 +105,482 @@ const eternityChallengeCompletionGoals: EternityChallengeCompletionGoals = {
   12: (completions: number) => new Decimal("1e110000").times(new Decimal("1e12000").pow(completions)).toString(),
 };
 
-export const eternityChallenges: Array<EC> = [
-  // EC1
-  {
-    challenge: 1,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 130,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,171|1`",
-    unlock: {
-      currency: "Eternities",
-      amount: eternityChallengeSecondaryUnlockRequirements["1"](0),
-      theorems: 30,
-    }
+export const eternityChallengeSecondaryUnlockCurrency: { [key: number]: string } = {
+  1: "Eternities",
+  2: "Tickspeed upgrades from Time Dimensions",
+  3: "8th Antimatter Dimensions",
+  4: "Infinities",
+  5: "Antimatter Galaxies",
+  6: "Replicanti Galaxies",
+  7: "Antimatter",
+  8: "Infinity Points",
+  9: "Infinity Power",
+  10: "Eternity Points",
+  11: "",
+  12: "",
+};
+
+export const eternityChallengeTimeTheoremCost: { [key: number]: number } = {
+  1: 30,
+  2: 35,
+  3: 40,
+  4: 70,
+  5: 130,
+  6: 85,
+  7: 115,
+  8: 115,
+  9: 415,
+  10: 550,
+  11: 1,
+  12: 1,
+};
+
+// eslint-disable-next-line no-unused-vars
+export const eternityChallengeCompletionRequirements: { [key: number]: (completion: number) => string } = {
+  4: (completions: number) => {
+    const infinities = 16 - (completions * 4);
+    return `${infinities} Infinities or less`;
   },
-  {
-    challenge: 1,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 140,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get 60,000 Eternities before trying.`",
-    tree: "`11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1`",
-    unlock: {
-      currency: "Eternities",
-      amount: eternityChallengeSecondaryUnlockRequirements["1"](1),
-      theorems: 30,
-    }
+  12: (completions: number) => {
+    const seconds = 1 - (completions * 0.2);
+    const realTimeMinutes = ((seconds * 1000) / 60).toFixed(1);
+
+    return `${seconds} seconds or less (${realTimeMinutes} real-time minutes)`;
+  }
+};
+
+export const eternityChallenges: Record<number, Record<number, EternityChallenge>> = {
+  1: {
+    1: new EternityChallenge({
+      challenge: 1,
+      completion: 1,
+      recommendedTheorems: 130,
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,171|1!",
+    }),
+    2: new EternityChallenge({
+      challenge: 1,
+      completion: 2,
+      recommendedTheorems: 140,
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
+      note: "Get 60,000 Eternities before trying.",
+    }),
+    3: new EternityChallenge({
+      challenge: 1,
+      completion: 3,
+      recommendedTheorems: 147,
+      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
+    }),
+    4: new EternityChallenge({
+      challenge: 1,
+      completion: 4,
+      recommendedTheorems: 163,
+      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
+    }),
+    5: new EternityChallenge({
+      challenge: 1,
+      completion: 5,
+      recommendedTheorems: 176,
+      recommendedTree: "11,21,22,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|1!",
+    }),
   },
-  {
-    challenge: 1,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 147,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1`",
-    unlock: {
-      currency: "Eternities",
-      amount: eternityChallengeSecondaryUnlockRequirements["1"](2),
-      theorems: 30,
-    }
+  2: {
+    1: new EternityChallenge({
+      challenge: 2,
+      completion: 1,
+      recommendedTheorems: 135,
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,171|2!",
+    }),
+    2: new EternityChallenge({
+      challenge: 2,
+      completion: 2,
+      recommendedTheorems: 157,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+    }),
+    3: new EternityChallenge({
+      challenge: 2,
+      completion: 3,
+      recommendedTheorems: 182,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+    }),
+    4: new EternityChallenge({
+      challenge: 2,
+      completion: 4,
+      recommendedTheorems: 208,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+    }),
+    5: new EternityChallenge({
+      challenge: 2,
+      completion: 5,
+      recommendedTheorems: 240,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+    }),
   },
-  {
-    challenge: 1,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 163,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1`",
-    unlock: {
-      currency: "Eternities",
-      amount: eternityChallengeSecondaryUnlockRequirements["1"](3),
-      theorems: 30,
-    }
+  3: {
+    1: new EternityChallenge({
+      challenge: 3,
+      completion: 1,
+      recommendedTheorems: 140,
+      recommendedTree: "11,22,32,42,51,61,71,81,91,101,111,122,132,142,151,161,162,171|3!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    2: new EternityChallenge({
+      challenge: 3,
+      completion: 2,
+      recommendedTheorems: 155,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,71,81,91,101,111,121,131,141,151,161,162,171|3!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    3: new EternityChallenge({
+      challenge: 3,
+      completion: 3,
+      recommendedTheorems: 165,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    4: new EternityChallenge({
+      challenge: 3,
+      completion: 4,
+      recommendedTheorems: 182,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    5: new EternityChallenge({
+      challenge: 3,
+      completion: 5,
+      recommendedTheorems: 208,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
   },
-  {
-    challenge: 1,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 176,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|1`",
-    unlock: {
-      currency: "Eternities",
-      amount: eternityChallengeSecondaryUnlockRequirements["1"](4),
-      theorems: 30,
-    }
+  4: {
+    1: new EternityChallenge({
+      challenge: 4,
+      completion: 1,
+      recommendedTheorems: 145,
+      recommendedTree: "11,21,22,32,33,42,51,61,73,83,93,103,111,123,133,143|4!",
+      note: "Fail once for achievement",
+    }),
+    2: new EternityChallenge({
+      challenge: 4,
+      completion: 2,
+      recommendedTheorems: 170,
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171|4!",
+    }),
+    3: new EternityChallenge({
+      challenge: 4,
+      completion: 3,
+      recommendedTheorems: 176,
+      recommendedTree: "11,21,22,32,42,51,61,62,73,83,93,103,111,123,133,143,151,162,171|4!",
+    }),
+    4: new EternityChallenge({
+      challenge: 4,
+      completion: 4,
+      recommendedTheorems: 252,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|4!",
+    }),
+    5: new EternityChallenge({
+      challenge: 4,
+      completion: 5,
+      recommendedTheorems: 370,
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171,181|4!",
+      note: "TS181 required",
+    }),
   },
-  // EC2
-  {
-    challenge: 2,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 135,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,171|2`",
-    unlock: {
-      currency: "Tickspeed upgrades from Time Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["2"](0),
-      theorems: 35,
-    }
+  5: {
+    1: new EternityChallenge({
+      challenge: 5,
+      completion: 1,
+      recommendedTheorems: 147,
+      recommendedTree: "11,21,22,32,42,51|5!",
+    }),
+    2: new EternityChallenge({
+      challenge: 5,
+      completion: 2,
+      recommendedTheorems: 182,
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111|5!",
+    }),
+    3: new EternityChallenge({
+      challenge: 5,
+      completion: 3,
+      recommendedTheorems: 200,
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141|5!",
+    }),
+    4: new EternityChallenge({
+      challenge: 5,
+      completion: 4,
+      recommendedTheorems: 220,
+      recommendedTree: "11,21,22,31,32,33,42,51,61,62,72,82,92,102,111,121,131,141,151|5!",
+    }),
+    5: new EternityChallenge({
+      challenge: 5,
+      completion: 5,
+      recommendedTheorems: 252,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|5!",
+    }),
   },
-  {
-    challenge: 2,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 157,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2`",
-    unlock: {
-      currency: "Tickspeed upgrades from Time Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["2"](1),
-      theorems: 35,
-    }
+  6: {
+    1: new EternityChallenge({
+      challenge: 6,
+      completion: 1,
+      recommendedTheorems: 161,
+      recommendedTree: "11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,33|6!",
+      note: "1e15 times last crunch, wait for RGs (+TS33 at 163 theorems). Remember to buy DimBoosts!",
+    }),
+    2: new EternityChallenge({
+      challenge: 6,
+      completion: 2,
+      recommendedTheorems: 176,
+      recommendedTree: "11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,162|6!",
+      note: "Remember to buy DimBoosts!",
+    }),
+    3: new EternityChallenge({
+      challenge: 6,
+      completion: 3,
+      recommendedTheorems: 208,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
+      note: "Remember to buy DimBoosts!",
+    }),
+    4: new EternityChallenge({
+      challenge: 6,
+      completion: 4,
+      recommendedTheorems: 252,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
+      note: "Remember to buy DimBoosts!",
+    }),
+    5: new EternityChallenge({
+      challenge: 6,
+      completion: 5,
+      recommendedTheorems: 320,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
+      note: "Get eternity upgrade 5 (1e40 EP). Remember to buy DimBoosts!",
+    }),
   },
-  {
-    challenge: 2,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 182,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2`",
-    unlock: {
-      currency: "Tickspeed upgrades from Time Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["2"](2),
-      theorems: 35,
-    }
+  7: {
+    1: new EternityChallenge({
+      challenge: 7,
+      completion: 1,
+      recommendedTheorems: 167,
+      recommendedTree: "11,21,22,32,42,51,61,62,71,81,91,101,111|7!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    2: new EternityChallenge({
+      challenge: 7,
+      completion: 2,
+      recommendedTheorems: 193,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141|7!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    3: new EternityChallenge({
+      challenge: 7,
+      completion: 3,
+      recommendedTheorems: 220,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162|7!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    4: new EternityChallenge({
+      challenge: 7,
+      completion: 4,
+      recommendedTheorems: 252,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171|7!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
+    5: new EternityChallenge({
+      challenge: 7,
+      completion: 5,
+      recommendedTheorems: 895,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,193,214|7!",
+      note: "To unlock the challenge, use TD, and then switch to the tree.",
+    }),
   },
-  {
-    challenge: 2,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 208,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2`",
-    unlock: {
-      currency: "Tickspeed upgrades from Time Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["2"](3),
-      theorems: 35,
-    }
+  8: {
+    1: new EternityChallenge({
+      challenge: 8,
+      completion: 1,
+      recommendedTheorems: 207,
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,161,162|8!",
+      // eslint-disable-next-line @stylistic/max-len
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
+    }),
+    2: new EternityChallenge({
+      challenge: 8,
+      completion: 2,
+      recommendedTheorems: 320,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|8!",
+      // eslint-disable-next-line @stylistic/max-len
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162,171. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
+    }),
+    3: new EternityChallenge({
+      challenge: 8,
+      completion: 3,
+      recommendedTheorems: 450,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
+      // eslint-disable-next-line @stylistic/max-len
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 4 RG, 9% chance, remaining on interval - all on ID1.",
+    }),
+    4: new EternityChallenge({
+      challenge: 8,
+      completion: 4,
+      recommendedTheorems: 600,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
+      // eslint-disable-next-line @stylistic/max-len
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 5 RG, 9% chance, remaining on interval - all on ID1.",
+    }),
+    5: new EternityChallenge({
+      challenge: 8,
+      completion: 5,
+      recommendedTheorems: 825,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
+      note: "Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
+    }),
   },
-  {
-    challenge: 2,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 240,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2`",
-    unlock: {
-      currency: "Tickspeed upgrades from Time Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["2"](4),
-      theorems: 35,
-    }
+  9: {
+    1: new EternityChallenge({
+      challenge: 9,
+      completion: 1,
+      recommendedTheorems: 522,
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|9!",
+      note: "Can be done with less theorems.",
+    }),
+    2: new EternityChallenge({
+      challenge: 9,
+      completion: 2,
+      recommendedTheorems: 575,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
+      note: "Can be done with less theorems.",
+    }),
+    3: new EternityChallenge({
+      challenge: 9,
+      completion: 3,
+      recommendedTheorems: 660,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
+      note: "Can be done with less theorems.",
+    }),
+    4: new EternityChallenge({
+      challenge: 9,
+      completion: 4,
+      recommendedTheorems: 760,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
+      note: "Can be done with less theorems.",
+    }),
+    5: new EternityChallenge({
+      challenge: 9,
+      completion: 5,
+      recommendedTheorems: 830,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171,181|9!",
+    }),
   },
-  // EC3
-  {
-    challenge: 3,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 140,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,22,32,42,51,61,71,81,91,101,111,122,132,142,151,161,162,171|3`",
-    unlock: {
-      currency: "8th Antimatter Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["3"](0),
-      theorems: 40,
-    }
+  10: {
+    1: new EternityChallenge({
+      challenge: 10,
+      completion: 1,
+      recommendedTheorems: 895,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181|10!",
+      note: "Farm 150M infinities inside the challenge.",
+    }),
+    2: new EternityChallenge({
+      challenge: 10,
+      completion: 2,
+      recommendedTheorems: 1900,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,193,211,214|10!",
+      note: "10M+ Banked Infinities recommended.",
+    }),
+    3: new EternityChallenge({
+      challenge: 10,
+      completion: 3,
+      recommendedTheorems: 2050,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,214|10!",
+      note: "20M+ Banked Infinities recommended.",
+    }),
+    4: new EternityChallenge({
+      challenge: 10,
+      completion: 4,
+      recommendedTheorems: 3650,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,213,214|10!",
+      note: "30M+ Banked Infinities recommended.",
+    }),
+    5: new EternityChallenge({
+      challenge: 10,
+      completion: 5,
+      recommendedTheorems: 5200,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,213,214,225,228,233|10!",
+      note: "40M+ Banked Infinities recommended.",
+    }),
   },
-  {
-    challenge: 3,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 155,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,71,81,91,101,111,121,131,141,151,161,162,171|3`",
-    unlock: {
-      currency: "8th Antimatter Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["3"](1),
-      theorems: 40,
-    }
+  11: {
+    1: new EternityChallenge({
+      challenge: 11,
+      completion: 1,
+      recommendedTheorems: 5600,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
+      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+    }),
+    2: new EternityChallenge({
+      challenge: 11,
+      completion: 2,
+      recommendedTheorems: 5600,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
+      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+    }),
+    3: new EternityChallenge({
+      challenge: 11,
+      completion: 3,
+      recommendedTheorems: 5950,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+    }),
+    4: new EternityChallenge({
+      challenge: 11,
+      completion: 4,
+      recommendedTheorems: 5950,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+    }),
+    5: new EternityChallenge({
+      challenge: 11,
+      completion: 5,
+      recommendedTheorems: 5950,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "This takes around 1h 45m. Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+    }),
   },
-  {
-    challenge: 3,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 165,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3`",
-    unlock: {
-      currency: "8th Antimatter Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["3"](2),
-      theorems: 40,
-    }
+  12: {
+    1: new EternityChallenge({
+      challenge: 12,
+      completion: 1,
+      recommendedTheorems: 9800,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity.",
+    }),
+    2: new EternityChallenge({
+      challenge: 12,
+      completion: 2,
+      recommendedTheorems: 9800,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity.",
+    }),
+    3: new EternityChallenge({
+      challenge: 12,
+      completion: 3,
+      recommendedTheorems: 10750,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity.",
+    }),
+    4: new EternityChallenge({
+      challenge: 12,
+      completion: 4,
+      recommendedTheorems: 11200,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity.",
+    }),
+    5: new EternityChallenge({
+      challenge: 12,
+      completion: 5,
+      recommendedTheorems: 12350,
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough - achievement.",
+    }),
   },
-  {
-    challenge: 3,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 182,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3`",
-    unlock: {
-      currency: "8th Antimatter Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["3"](3),
-      theorems: 40,
-    }
-  },
-  {
-    challenge: 3,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 208,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3`",
-    unlock: {
-      currency: "8th Antimatter Dimensions",
-      amount: eternityChallengeSecondaryUnlockRequirements["3"](4),
-      theorems: 40,
-    }
-  },
-  // EC4
-  {
-    challenge: 4,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 145,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Fail once for achievement`",
-    tree: "`11,21,22,32,33,42,51,61,73,83,93,103,111,123,133,143|4`",
-    completionReqs: "16 Infinities or less",
-    unlock: {
-      currency: "Infinities",
-      amount: eternityChallengeSecondaryUnlockRequirements["4"](0),
-      theorems: 70,
-    }
-  },
-  {
-    challenge: 4,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 170,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171|4`",
-    completionReqs: "12 Infinities or less",
-    unlock: {
-      currency: "Infinities",
-      amount: eternityChallengeSecondaryUnlockRequirements["4"](1),
-      theorems: 70,
-    }
-  },
-  {
-    challenge: 4,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 176,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,32,42,51,61,62,73,83,93,103,111,123,133,143,151,162,171|4`",
-    completionReqs: "8 Infinities or less",
-    unlock: {
-      currency: "Infinities",
-      amount: eternityChallengeSecondaryUnlockRequirements["4"](2),
-      theorems: 70,
-    }
-  },
-  {
-    challenge: 4,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 252,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|4`",
-    completionReqs: "4 Infinities or less",
-    unlock: {
-      currency: "Infinities",
-      amount: eternityChallengeSecondaryUnlockRequirements["4"](3),
-      theorems: 70,
-    }
-  },
-  {
-    challenge: 4,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 370,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`TS181 required`",
-    tree: "`11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171,181|4`",
-    completionReqs: "0 Infinities or less",
-    unlock: {
-      currency: "Infinities",
-      amount: eternityChallengeSecondaryUnlockRequirements["4"](4),
-      theorems: 70,
-    }
-  },
-  // EC5
-  {
-    challenge: 5,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 147,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,32,42,51|5`",
-    unlock: {
-      currency: "Antimatter Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["5"](0),
-      theorems: 130,
-    }
-  },
-  {
-    challenge: 5,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 182,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,72,82,92,102,111|5`",
-    unlock: {
-      currency: "Antimatter Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["5"](1),
-      theorems: 130,
-    }
-  },
-  {
-    challenge: 5,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 200,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,22,32,42,51,61,72,82,92,102,111,121,131,141|5`",
-    unlock: {
-      currency: "Antimatter Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["5"](2),
-      theorems: 130,
-    }
-  },
-  {
-    challenge: 5,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 220,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,42,51,61,62,72,82,92,102,111,121,131,141,151|5`",
-    unlock: {
-      currency: "Antimatter Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["5"](3),
-      theorems: 130,
-    }
-  },
-  {
-    challenge: 5,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 252,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|5`",
-    unlock: {
-      currency: "Antimatter Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["5"](4),
-      theorems: 130,
-    }
-  },
-  // EC6
-  {
-    challenge: 6,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 161,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`1e15 times last crunch, wait for RGs (+TS33 at 163 theorems)`. Remember to buy DimBoosts!`",
-    tree: "`11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,33|6`",
-    unlock: {
-      currency: "Replicanti Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["6"](0),
-      theorems: 85,
-    }
-  },
-  {
-    challenge: 6,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 176,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Remember to buy DimBoosts!`",
-    tree: "`11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,162|6`",
-    unlock: {
-      currency: "Replicanti Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["6"](1),
-      theorems: 85,
-    }
-  },
-  {
-    challenge: 6,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 208,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Remember to buy DimBoosts!`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6`",
-    unlock: {
-      currency: "Replicanti Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["6"](2),
-      theorems: 85,
-    }
-  },
-  {
-    challenge: 6,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 252,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Remember to buy DimBoosts!`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6`",
-    unlock: {
-      currency: "Replicanti Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["6"](3),
-      theorems: 85,
-    }
-  },
-  {
-    challenge: 6,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 320,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get eternity upgrade 5 (1e40 EP). Remember to buy DimBoosts!`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6`",
-    unlock: {
-      currency: "Replicanti Galaxies",
-      amount: eternityChallengeSecondaryUnlockRequirements["6"](4),
-      theorems: 85,
-    }
-  },
-  // EC7
-  {
-    challenge: 7,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 167,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,32,42,51,61,62,71,81,91,101,111|7`",
-    unlock: {
-      currency: "Antimatter",
-      amount: eternityChallengeSecondaryUnlockRequirements["7"](0),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 7,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 193,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141|7`",
-    unlock: {
-      currency: "Antimatter",
-      amount: eternityChallengeSecondaryUnlockRequirements["7"](1),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 7,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 220,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162|7`",
-    unlock: {
-      currency: "Antimatter",
-      amount: eternityChallengeSecondaryUnlockRequirements["7"](2),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 7,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 252,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171|7`",
-    unlock: {
-      currency: "Antimatter",
-      amount: eternityChallengeSecondaryUnlockRequirements["7"](3),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 7,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 895,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`To unlock the challenge, use TD, and then switch to the tree.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,193,214|7`",
-    unlock: {
-      currency: "Antimatter",
-      amount: eternityChallengeSecondaryUnlockRequirements["7"](4),
-      theorems: 115,
-    }
-  },
-  // EC8
-  {
-    challenge: 8,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 207,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    // eslint-disable-next-line @stylistic/max-len
-    note: "`Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.`",
-    tree: "`11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,161,162|8`",
-    unlock: {
-      currency: "Infinity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["8"](0),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 8,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 320,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    // eslint-disable-next-line @stylistic/max-len
-    note: "`Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162,171. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|8`",
-    unlock: {
-      currency: "Infinity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["8"](1),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 8,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 450,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    // eslint-disable-next-line @stylistic/max-len
-    note: "`Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 4 RG, 9% chance, remaining on interval - all on ID1.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8`",
-    unlock: {
-      currency: "Infinity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["8"](2),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 8,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 600,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    // eslint-disable-next-line @stylistic/max-len
-    note: "`Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 5 RG, 9% chance, remaining on interval - all on ID1.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8`",
-    unlock: {
-      currency: "Infinity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["8"](3),
-      theorems: 115,
-    }
-  },
-  {
-    challenge: 8,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 825,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8`",
-    unlock: {
-      currency: "Infinity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["8"](4),
-      theorems: 115,
-    }
-  },
-  // EC9
-  {
-    challenge: 9,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 522,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Can be done with less theorems.`",
-    tree: "`11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|9`",
-    unlock: {
-      currency: "Infinity Power",
-      amount: eternityChallengeSecondaryUnlockRequirements["9"](0),
-      theorems: 415,
-    }
-  },
-  {
-    challenge: 9,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 575,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Can be done with less theorems.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9`",
-    unlock: {
-      currency: "Infinity Power",
-      amount: eternityChallengeSecondaryUnlockRequirements["9"](1),
-      theorems: 415,
-    }
-  },
-  {
-    challenge: 9,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 660,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Can be done with less theorems.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9`",
-    unlock: {
-      currency: "Infinity Power",
-      amount: eternityChallengeSecondaryUnlockRequirements["9"](2),
-      theorems: 415,
-    }
-  },
-  {
-    challenge: 9,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 760,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Can be done with less theorems.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9`",
-    unlock: {
-      currency: "Infinity Power",
-      amount: eternityChallengeSecondaryUnlockRequirements["9"](3),
-      theorems: 415,
-    }
-  },
-  {
-    challenge: 9,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 830,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: null,
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171,181|9`",
-    unlock: {
-      currency: "Infinity Power",
-      amount: eternityChallengeSecondaryUnlockRequirements["9"](4),
-      theorems: 415,
-    }
-  },
-  // EC10
-  {
-    challenge: 10,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 895,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Farm 150M infinities inside the challenge.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181|10`",
-    unlock: {
-      currency: "Eternity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["10"](0),
-      theorems: 550,
-    }
-  },
-  {
-    challenge: 10,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 1900,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`10M+ Banked Infinities recommended.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,193,211,214|10`",
-    unlock: {
-      currency: "Eternity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["10"](1),
-      theorems: 550,
-    }
-  },
-  {
-    challenge: 10,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 2050,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`20M+ Banked Infinities recommended.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,214|10`",
-    unlock: {
-      currency: "Eternity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["10"](2),
-      theorems: 550,
-    }
-  },
-  {
-    challenge: 10,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 3650,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`30M+ Banked Infinities recommended.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,213,214|10`",
-    unlock: {
-      currency: "Eternity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["10"](3),
-      theorems: 550,
-    }
-  },
-  {
-    challenge: 10,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5200,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`40M+ Banked Infinities recommended.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,213,214,225,228,233|10`",
-    unlock: {
-      currency: "Eternity Points",
-      amount: eternityChallengeSecondaryUnlockRequirements["10"](4),
-      theorems: 550,
-    }
-  },
-  // EC11
-  {
-    challenge: 11,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5600,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["11"](0),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 11,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5600,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["11"](1),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 11,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5950,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["11"](2),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 11,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5950,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["11"](3),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 11,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 5950,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`This takes around 1h 45m. Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["11"](4),
-      theorems: 1,
-    }
-  },
-  // EC12
-  {
-    challenge: 12,
-    completion: 1,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 9800,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Enable Auto-Eternity.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12`",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["12"](0),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 12,
-    completion: 2,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 9800,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Enable Auto-Eternity.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12`",
-    completionReqs: "0.8 seconds or less (13.3 real-time minutes)",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["12"](1),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 12,
-    completion: 3,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 10750,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Enable Auto-Eternity.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12`",
-    completionReqs: "0.6 seconds or less (10 real-time minutes)",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["12"](2),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 12,
-    completion: 4,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 11200,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Enable Auto-Eternity.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12`",
-    completionReqs: "0.4 seconds or less (6.6 real-time minutes)",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["12"](3),
-      theorems: 1,
-    }
-  },
-  {
-    challenge: 12,
-    completion: 5,
-    get description() { return eternityChallengeDescriptions[this.challenge]; },
-    get reward() { return eternityChallengeRewards[this.challenge]; },
-    theorems: 12350,
-    get ip() { return eternityChallengeCompletionGoals[this.challenge](this.completion - 1); },
-    note: "`Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough - achievement.`",
-    tree: "`11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12`",
-    completionReqs: "0.2 seconds or less (3.3 real-time minutes)",
-    unlock: {
-      currency: "",
-      amount: eternityChallengeSecondaryUnlockRequirements["12"](4),
-      theorems: 1,
-    }
-  },
-];
+};
 
 // eslint-disable-next-line @stylistic/max-len
 export const order = ["1x1", "2x1", "1x2", "3x1", "4x1", "5x1", "1x3", "3x2", "2x2", "6x1", "1x4", "3x3", "7x1", "4x2", "4x3", "6x2", "1x5", "5x2", "2x3", "3x4", "7x2", "5x3", "8x1", "3x5", "6x3", "2x4", "5x4", "7x3", "2x5", "5x5", "4x4", "6x4", "7x4", "8x2", "6x5", "4x5", "8x3", "9x1", "9x2", "8x4", "9x3", "9x4", "8x5", "9x5", "10x1", "7x5", "10x2", "10x3", "10x4", "10x5", "11x1", "11x2", "11x3", "11x4", "11x5", "12x1", "12x2", "12x3", "12x4", "12x5"];

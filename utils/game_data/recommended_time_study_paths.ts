@@ -1,5 +1,6 @@
-import type { EC, ECsAtTTInfo } from "@/types/game_data/EternityChallenges";
 import { eternityChallenges, order } from "./challenges/eternity_challenges";
+import type { ECsAtTTInfo } from "@/types/game_data/EternityChallenges";
+import type EternityChallenge from "./challenges/EternityChallenge";
 import { inlineCode } from "discord.js";
 import { timeStudies } from "./time_studies";
 
@@ -177,11 +178,11 @@ export function getRecommendedTree(theoremAmount: number, path: string = "active
   return `${recommendedTree.desc ?? ""} ${inlineCode(`${affordableStudies.join(",")}|0`)}`;
 }
 
-export function findEC(challenge: number, completion: number): EC {
-  return eternityChallenges[(challenge - 1) * 5 + (completion - 1)];
+export function findEC(challenge: number, completion: number): EternityChallenge {
+  return eternityChallenges[challenge][completion];
 }
 
-const orderAsECs: Array<EC> = order.map(ec => findEC(Number(ec.split("x")[0]), Number(ec.split("x")[1])));
+const orderAsECs: Array<EternityChallenge> = order.map(ec => findEC(Number(ec.split("x")[0]), Number(ec.split("x")[1])));
 
 // Function rewritten by Mirai
 export function ecsAtTTAmount(tt: number): ECsAtTTInfo {
@@ -195,7 +196,7 @@ export function ecsAtTTAmount(tt: number): ECsAtTTInfo {
   let completions = Array(12);
   const nextECs = [];
   let i: number = 0;
-  let ec: EC = orderAsECs[0];
+  let ec: EternityChallenge = orderAsECs[0];
 
   while (ec.theorems <= tt) {
     completions[ec.challenge - 1] = ec.completion;
@@ -206,7 +207,7 @@ export function ecsAtTTAmount(tt: number): ECsAtTTInfo {
 
   // Hacky, but it works
   while (i <= 59 && ec.theorems === nextChallengeTT) {
-    nextECs.push(`${ec.challenge}x${ec.completion}`);
+    nextECs.push(`${ec.shortName}`);
     ec = orderAsECs[++i];
   }
 
