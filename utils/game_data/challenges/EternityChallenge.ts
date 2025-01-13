@@ -11,6 +11,7 @@ import {
 } from "./eternity_challenges";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { inlineCode } from "discord.js";
+import { quantify } from "@/utils/utils_commands";
 
 interface EternityChallengeProps {
   challenge: number,
@@ -95,8 +96,8 @@ export default class EternityChallenge implements EC {
   }
 
   public formatUnlock(): string {
-    if (this.challenge === 11 || this.challenge === 12) return `${this.unlock.amount} and ${this.unlock.theorems}`;
-    return `${this.unlock.amount} ${this.unlock.currency} and ${this.unlock.theorems}`;
+    if (this.challenge === 11 || this.challenge === 12) return `${this.unlock.amount} and ${quantify("Time Theorem", this.unlock.theorems)}`;
+    return `${this.unlock.amount} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
   }
 
   public formatGoal(): string {

@@ -55,25 +55,8 @@ export default new Command({
   execute: async(interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
-    const challengeRequested = interaction.options.getInteger("challenge");
-    const completionRequested = interaction.options.getInteger("completion");
-
-    if (!challengeRequested || !completionRequested) {
-      const errorEmbed = new ErrorCustomEmbed({
-        interaction,
-        text: `There was a problem processing either your requested challenge of ${challengeRequested} or your requested completion of ${completionRequested}`,
-      });
-
-      const errorImage = errorEmbed.getAndSetThumbnail();
-
-      interaction.reply({
-        embeds: [errorEmbed.create()],
-        files: [errorImage],
-        flags: MessageFlags.Ephemeral
-      });
-      return;
-    }
-
+    const challengeRequested = interaction.options.getInteger("challenge", true);
+    const completionRequested = interaction.options.getInteger("completion", true);
     const challenge = orderAsDoublyLinkedList.search(value => challengeRequested === value.challenge && completionRequested === value.completion);
 
     if (!challenge) {
