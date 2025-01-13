@@ -20,6 +20,11 @@ for (const folder of commandFolders) {
     const filePath = path.join(commandsPath, file);
     await import(filePath).then((command: { default: Command }) => {
       client.commands.set(command.default.data.name, command.default);
+
+      // Aliases are stupid.
+      for (const alias of command.default.aliases) {
+        client.commands.set(alias, command.default);
+      }
     }).catch(e => {
       console.log(`Error importing command file: ${filePath}`, ` ${e}`);
     });

@@ -171,4 +171,5 @@ export default new Command({
       });
     });
   },
+  aliases: ["ec"]
 });

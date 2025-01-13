@@ -8,6 +8,7 @@ interface CommandProps {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
   // eslint-disable-next-line no-unused-vars
   execute: (interaction: ChatInputCommandInteraction) => void,
+  aliases?: Array<string>
 }
 
 interface CommandErrorProps {
@@ -22,10 +23,12 @@ export class Command {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
   // eslint-disable-next-line no-unused-vars
   execute: (interaction: ChatInputCommandInteraction) => void;
+  aliases: Array<string>;
 
-  constructor({ data, execute }: CommandProps) {
+  constructor({ data, execute, aliases }: CommandProps) {
     this.data = data;
     this.execute = execute;
+    this.aliases = aliases ?? [];
   }
 
   public error({ interaction, text }: CommandErrorProps) {

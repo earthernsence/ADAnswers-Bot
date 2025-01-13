@@ -60,5 +60,6 @@ export default new Command({
       content: `${targetString}${recommendedTree}\n${ecString}`,
       flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
     });
-  }
+  },
+  aliases: ["ts"]
 });

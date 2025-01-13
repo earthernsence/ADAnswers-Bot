@@ -17,6 +17,12 @@ for (const folder of commandFolders) {
     if (!command.default) continue;
     if ("data" in command.default && "execute" in command.default) {
       commands.push(command.default.data.toJSON());
+
+      // Aliases are stupid.
+      for (const alias of command.default.aliases) {
+        command.default.data.setName(alias);
+        commands.push(command.default.data.toJSON());
+      }
     } else {
       console.log(`Command at ${filePath} does not have a data and execute property`);
     }
