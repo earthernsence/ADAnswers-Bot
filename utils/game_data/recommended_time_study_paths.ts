@@ -1,4 +1,4 @@
-import { eternityChallenges, order } from "./challenges/eternity_challenges";
+import { eternityChallenges, orderAsDoublyLinkedList } from "./challenges/eternity_challenges";
 import type { ECsAtTTInfo } from "@/types/game_data/EternityChallenges";
 import type EternityChallenge from "./challenges/EternityChallenge";
 import { inlineCode } from "discord.js";
@@ -182,7 +182,7 @@ export function findEC(challenge: number, completion: number): EternityChallenge
   return eternityChallenges[challenge][completion];
 }
 
-const orderAsECs: Array<EternityChallenge> = order.map(ec => findEC(Number(ec.split("x")[0]), Number(ec.split("x")[1])));
+const orderAsECs: Array<EternityChallenge> = orderAsDoublyLinkedList.traverse();
 
 // Function rewritten by Mirai
 export function ecsAtTTAmount(tt: number): ECsAtTTInfo {

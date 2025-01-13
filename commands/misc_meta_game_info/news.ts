@@ -19,7 +19,7 @@ export default new ChoiceTextCommand({
         ])
     ),
   possibleText: {
-    "listmobile": `${link("List of mobile news messages in the game Antimatter Dimensions", "https://gist.github.com/earthernsence/2661619a3e4ca8089709f9fe19395f77")}`,
+    "listmobile": `${link("List of mobile news messages in the game Antimatter Dimensions", "https://gist.github.com/earthernsence/59410925035a3346092b7aa6b75c2b36")}`,
     "listweb": `${link("List of web news messages in the game Antimatter Dimensions", "https://github.com/IvarK/AntimatterDimensionsSourceCode/blob/master/src/core/secret-formula/news.js")}`,
     // eslint-disable-next-line @stylistic/max-len
     "info": `The news ticker is an art form. Back in the day Antimatter Dimensions used to have a channel called news ticker suggestions, where people would suggest news messages as they saw fit. However, due to the horrible quality of these suggestions, the channel was shut down. However, the legacy of the channel still lives on in game, and you can read all of the messages as they come across the top. They were all community submitted or snuck in by the developers.`,

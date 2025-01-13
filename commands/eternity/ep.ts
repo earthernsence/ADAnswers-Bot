@@ -7,7 +7,7 @@ export default new Command({
   data: new SlashCommandBuilder()
     .setName("ep")
     .setDescription("calculates the amount of IP needed for a provided EP amount (2 < x < 1000")
-    .addNumberOption(option =>
+    .addIntegerOption(option =>
       option
         .setName("ep")
         .setDescription("the amount of EP you want to know the IP requirement for")
@@ -18,7 +18,7 @@ export default new Command({
   execute: (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
-    const epValue = interaction.options.getNumber("ep");
+    const epValue = interaction.options.getInteger("ep");
 
     if (!epValue) {
       interaction.reply({
@@ -28,11 +28,10 @@ export default new Command({
       return;
     }
 
-    const eternityPointsRequested = Math.floor(Math.abs(epValue));
-    const infinityPointsNeeded = Math.ceil(308 * getLogBase(5, eternityPointsRequested) + 215.6);
+    const infinityPointsNeeded = Math.ceil(308 * getLogBase(5, epValue) + 215.6);
 
     interaction.reply({
-      content: `Before any multipliers, to get ${eternityPointsRequested} EP, you need e${infinityPointsNeeded} IP.`,
+      content: `Before any multipliers, to get ${epValue} EP, you need e${infinityPointsNeeded} IP.`,
       flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
     });
   }

@@ -1,22 +1,26 @@
 import { ActionRowBuilder, ButtonBuilder, italic, userMention } from "@discordjs/builders";
 import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import { Command } from "@/types/Commands/Command";
+import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 import { EternityChallengeCustomEmbed } from "@/types/Embeds/EternityChallengeCustomEmbed";
-import { findEC } from "@/utils/game_data/recommended_time_study_paths";
 import { isUserHelper } from "@/utils/utils_commands";
-import { order } from "@/utils/game_data/challenges/eternity_challenges";
+import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 
-const getNextEC = (currentEC: string, forward: boolean): EternityChallenge => {
-  let newEC = forward ? order[order.indexOf(currentEC) + 1] : order[order.indexOf(currentEC) - 1];
-
-  if (!newEC) {
-    if (forward) newEC = order[0];
-    else newEC = order[order.length - 1];
+const getNext = (current: DoublyLinkedListNode<EternityChallenge>, forward: boolean): DoublyLinkedListNode<EternityChallenge> => {
+  if (forward) {
+    const newEC = current.next;
+    // If we can't retrieve the head (for some reason), just default back to the current EC
+    if (!newEC) return orderAsDoublyLinkedList.getFirstValue() ?? current;
+    return newEC;
   }
 
-  return findEC(Number(newEC.split("x")[0]), Number(newEC.split("x")[1]));
+  const newEC = current.prev;
+
+  if (!newEC) return orderAsDoublyLinkedList.getLastValue() ?? current;
+
+  return newEC;
 };
 
 // TODO: Add "tree" option for easier copying
@@ -57,7 +61,7 @@ export default new Command({
     if (!challengeRequested || !completionRequested) {
       const errorEmbed = new ErrorCustomEmbed({
         interaction,
-        text: `There was a problem processing either your requested challenge of ${challengeRequested} or your requested comkpletion of ${completionRequested}`,
+        text: `There was a problem processing either your requested challenge of ${challengeRequested} or your requested completion of ${completionRequested}`,
       });
 
       const errorImage = errorEmbed.getAndSetThumbnail();
@@ -70,7 +74,7 @@ export default new Command({
       return;
     }
 
-    const challenge = findEC(challengeRequested, completionRequested);
+    const challenge = orderAsDoublyLinkedList.search(value => challengeRequested === value.challenge && completionRequested === value.completion);
 
     if (!challenge) {
       const errorEmbed = new ErrorCustomEmbed({
@@ -108,7 +112,7 @@ export default new Command({
     }
 
     const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
-    const embed = new EternityChallengeCustomEmbed({ interaction, challenge, expirationTimestamp });
+    const embed = new EternityChallengeCustomEmbed({ interaction, challenge: challenge.value, expirationTimestamp });
     const picture = embed.getAndSetThumbnail();
 
     let currentChallenge = challenge;
@@ -142,14 +146,14 @@ export default new Command({
 
     collector.on("collect", async(i: ButtonInteraction) => {
       const forward = i.customId.startsWith("ec_button_next");
-      const nextECToShow = getNextEC(currentChallenge.shortName, forward);
+      const nextECToShow = getNext(currentChallenge, forward);
 
       // Prevent non-senders from using the buttons.
       if (i.member?.user.id !== user.id) return;
 
       currentChallenge = nextECToShow;
 
-      const newEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: nextECToShow, expirationTimestamp });
+      const newEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: nextECToShow.value, expirationTimestamp });
       const newImage = newEmbed.getAndSetThumbnail();
 
       await i.update({
@@ -160,7 +164,7 @@ export default new Command({
     });
 
     collector.on("end", async() => {
-      const finalEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: currentChallenge, expirationTimestamp });
+      const finalEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: currentChallenge.value, expirationTimestamp });
 
       const finalImage = finalEmbed.getAndSetThumbnail();
 

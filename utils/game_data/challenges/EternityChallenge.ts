@@ -7,9 +7,9 @@ import {
   eternityChallengeSecondaryUnlockCurrency,
   eternityChallengeSecondaryUnlockRequirements,
   eternityChallengeTimeTheoremCost,
-  order
+  orderAsDoublyLinkedList
 } from "./eternity_challenges";
-import { findEC } from "../recommended_time_study_paths";
+import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { inlineCode } from "discord.js";
 
 interface EternityChallengeProps {
@@ -63,22 +63,35 @@ export default class EternityChallenge implements EC {
   }
 
   get otherRecommendedCompletions(): string {
-    const indexOfCompletion = order.indexOf(this.shortName);
+    const completions: Array<number> = Array(12).fill(0);
+    const challenge = orderAsDoublyLinkedList.search(value => value === this);
 
-    if (indexOfCompletion === -1) throw new Error(`EC not in order for some reason! EC: ${this.shortName}`);
+    if (!challenge) throw new Error(`EC not in order for some reason! EC: ${this.shortName}`);
+    if (!challenge.prev) return "No other Eternity Challenge completions required!";
 
-    if (indexOfCompletion === 0) return `No other Eternity Challenge completions required.`;
+    let previous: DoublyLinkedListNode<EternityChallenge> | null = challenge.prev;
 
-    return this.findCompletionsAtIndex(indexOfCompletion);
+    while (previous) {
+      // If the value is better, then add it to the completions.
+      if (previous.value.completion >= completions[previous.value.challenge - 1]) {
+        completions[previous.value.challenge - 1] = previous.value.completion;
+      }
+
+      previous = previous.prev;
+    }
+
+    return completions
+      .filter(completion => completion !== 0)
+      .map((value, index) => `${index + 1}x${value}`)
+      .join(", ");
   }
 
   get nextRecommendedEternityChallenge(): string {
-    if (this.shortName === "12x5") return "You have no more Eternity Challenges left to complete!";
+    const next = this.nextEC;
 
-    const nextInOrder = order[order.indexOf(this.shortName) + 1].split("x");
-    const ec = findEC(Number(nextInOrder[0]), Number(nextInOrder[1]));
+    if (!next) return "You have no more Eternity Challenges left to complete!";
 
-    return `${ec.shortName} at ${ec.theorems} Time Theorems`;
+    return `${next.shortName} at ${next.theorems} Time Theorems`;
   }
 
   public formatUnlock(): string {
@@ -94,21 +107,12 @@ export default class EternityChallenge implements EC {
   public formatStrategy(): string {
     return `
 Time Theorems recommended: ${this.theorems}
-Other Eternity Challenge completions recommended: ${this.otherRecommendedCompletions}${this.note ? `\nNote: ${inlineCode(this.note)}` : ""}
-    `;
+Other Eternity Challenge completions recommended: ${this.otherRecommendedCompletions}${this.note ? `\nNote: ${inlineCode(this.note)}` : ""}`;
   }
 
-  private findCompletionsAtIndex(indexOfCompletion: number): string {
-    const completions = Array(12);
-
-    for (let i = 0; i < indexOfCompletion; i++) {
-      const previous = order[i].split("x").map(Number);
-      const previousId = previous[0] - 1;
-      const previousCompletion = previous[1];
-
-      completions[previousId] = previousCompletion;
-    }
-
-    return completions.filter(Number).map((value, index) => `${index + 1}x${value}`).join(", ");
+  private get nextEC(): EternityChallenge | undefined {
+    return orderAsDoublyLinkedList.search(value =>
+      value === this
+    )?.next?.value;
   }
 }
