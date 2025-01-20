@@ -18,7 +18,7 @@ export default new Command({
     .addStringOption(option =>
       option
         .setName("second-split")
-        .setDescription("the second-split path you want to use; works when 54 < TT < 123")
+        .setDescription("(Optional) the second-split path you want to use; works when 54 < TT < 123")
         .setRequired(false)
         .setChoices([
           { name: "active (TS121, 131, 141)", value: "active" },
@@ -29,7 +29,7 @@ export default new Command({
     .addBooleanOption(option =>
       option
         .setName("show-recommended-ecs")
-        .setDescription("will show current recommended EC completions for provided TT; TT >= 130")
+        .setDescription("(Optional) will show current recommended EC completions for provided TT; TT >= 130")
         .setRequired(false)
     )
     .addUserOption(option =>

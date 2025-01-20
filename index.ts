@@ -1,12 +1,15 @@
 import { Client, Collection, GatewayIntentBits } from "discord.js";
+import type { ADABClient } from "@/types/ADABClient";
 import { Command } from "@/types/Commands/Command";
-import type { CommandClient } from "@/types/CommandClient";
 import fs from "node:fs";
 import path from "node:path";
 
-const client: CommandClient = <CommandClient> new Client({ intents: [GatewayIntentBits.Guilds] });
+const client: ADABClient = <ADABClient> new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection<string, Command>();
+client.commandsByPage = new Collection<string, Collection<string, Command>>();
+
+client.version = process.env.VERSION;
 
 // Handle importing of all commands
 
@@ -20,6 +23,15 @@ for (const folder of commandFolders) {
     const filePath = path.join(commandsPath, file);
     await import(filePath).then((command: { default: Command }) => {
       client.commands.set(command.default.data.name, command.default);
+
+      // For the help command.
+      if (client.commandsByPage.get(folder)) client.commandsByPage.get(folder)?.set(command.default.data.name, command.default);
+      else client.commandsByPage.set(
+        folder,
+        new Collection<string, Command>([
+          [command.default.data.name, command.default]
+        ])
+      );
 
       // Aliases are stupid.
       for (const alias of command.default.aliases) {

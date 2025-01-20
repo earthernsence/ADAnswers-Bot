@@ -11,7 +11,7 @@ export default new Command({
     .addStringOption(option =>
       option
         .setName("most-recent-challenge")
-        .setDescription("your most recent challenge completed, in form XxY, where X is the challenge and Y is the completion")
+        .setDescription("(Optional) your most recent challenge completed, in form XxY, where X = challenge and Y = completion")
         .setRequired(false)
     ),
   execute: (interaction: ChatInputCommandInteraction) => {

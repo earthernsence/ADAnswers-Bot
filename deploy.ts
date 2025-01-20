@@ -1,5 +1,5 @@
 import { REST, type RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "discord.js";
-import { Channels } from "./Channels";
+import { Channels } from "./utils/utils_channels";
 import fs from "node:fs";
 import path from "node:path";
 
