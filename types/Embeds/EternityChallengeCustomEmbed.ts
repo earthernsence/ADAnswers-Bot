@@ -22,7 +22,7 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
 
   public create(): EmbedBuilder {
     // TODO: figure out why this doesn't change at the end
-    const shouldBeDisabled: boolean = Math.floor((Date.now() + 60000) / 1000) <= this.expirationTimestamp;
+    const shouldBeDisabled: boolean = Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
 
     this.setTitle(`Eternity Challenge ${this.challenge.shortName}`)
       .setDescription(`Expire${shouldBeDisabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.LongDateTime)}`)

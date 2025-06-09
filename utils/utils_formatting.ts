@@ -16,3 +16,35 @@ export function makeEnumeration<itemType>(
 export const capitalise = function(word: string): string {
   return word.toLowerCase().replace(/^\w/u, c => c.toUpperCase());
 };
+
+export const Caesar = {
+  mod: (n: number, p: number) => {
+    let n2 = n;
+
+    if (n < 0) n2 = p - Math.abs(n) % p;
+
+    return n2 % p;
+  },
+  encrypt: (msg: string, key: number) => {
+    let encMsg = "";
+
+    const upper = msg.toUpperCase();
+
+    for (let i = 0; i < upper.length; i++) {
+      let code = upper.charCodeAt(i);
+
+      // Encrypt only letters in 'A' ... 'Z' interval
+      if (code >= 65 && code <= 65 + 26 - 1) {
+        code -= 65;
+        code = Caesar.mod(code + key, 26);
+        code += 65;
+      }
+
+      encMsg += String.fromCharCode(code);
+    }
+
+    return encMsg;
+  },
+  randomKey: () => 1 + Math.floor(Math.random() * 25),
+  randomEncrypt: (msg: string) => Caesar.encrypt(msg, Caesar.randomKey())
+};

@@ -31,6 +31,11 @@ export class CustomEmbed {
     return this;
   }
 
+  public addField(field: EmbedField): CustomEmbed {
+    this.embed.addFields(field);
+    return this;
+  }
+
   public setTitle(title: string): CustomEmbed {
     this.embed.setTitle(title);
     return this;

@@ -1,13 +1,13 @@
 import { type CacheType, Events, type Interaction, MessageFlags } from "discord.js";
+import type { ADABClient } from "@/types/ADABClient";
 import type { BaseEvent } from "@/types/BaseEvent";
-import type { CommandClient } from "@/types/ADABClient";
 
 export default <BaseEvent>{
   name: Events.InteractionCreate,
   execute: async(interaction: Interaction<CacheType>) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = (interaction.client as CommandClient).commands.get(interaction.commandName);
+    const command = (interaction.client as ADABClient).commands.get(interaction.commandName);
 
     if (!command) {
       console.log(`No matching command for command ${interaction.commandName}`);

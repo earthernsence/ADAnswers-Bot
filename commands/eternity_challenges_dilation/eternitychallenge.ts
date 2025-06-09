@@ -109,7 +109,7 @@ export default new Command({
           .setDisabled(disabled),
         new ButtonBuilder()
           .setCustomId(`ec_button_next_${expirationTimestamp}`)
-          .setEmoji({ name: "◀️" })
+          .setEmoji({ name: "▶️" })
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled)
       );
