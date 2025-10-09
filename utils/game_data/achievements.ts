@@ -609,10 +609,232 @@ export const achievements: Record<number, Achievement> = {
     requirement: "Reach 1e26,000 Infinity Points without any Time Studies while Dilated.",
     reward: "Removes the downsides from Time Study 131 (disabling Replicanti Galaxy autobuyer) and Time Study 133 (10x slower Replicanti) in the Active and Idle Time Study paths.",
   }),
+  141: new Achievement({
+    id: 141,
+    fullName: "Snap back to Reality",
+    requirement: "Make a new Reality.",
+    reward: `×4 infinity Point gain, and increase the multiplier for buying 10 Antimatter Dimensions by +0.1`
+  }),
+  142: new Achievement({
+    id: 142,
+    fullName: "How does this work?",
+    requirement: "Unlock the Automator",
+    reward: "Dimension Boosts are 50% stronger."
+  }),
+  143: new Achievement({
+    id: 143,
+    fullName: "Yo dawg, I heard you like reskins...",
+    requirement: "Have all your Eternities in your past 10 Eternities be for at least 1.8e308 times higher Eternity Points than the previous one.",
+    reward: "Galaxies no longer reset Dimension Boosts.",
+    // TODO: Write actual strategy for a143
+    unlockStrategy: ""
+  }),
+  144: new Achievement({
+    id: 144,
+    fullName: "Is this an Interstellar reference?",
+    requirement: "Unlock the Black Hole."
+  }),
+  145: new Achievement({
+    id: 145,
+    fullName: "Are you sure these are the right way around?",
+    requirement: "Have either Black Hole interval smaller than its duration.",
+    reward: "Black Hole intervals are 10% shorter."
+  }),
+  146: new Achievement({
+    id: 146,
+    fullName: "Perks of living",
+    requirement: "Have all Perks bought.",
+    reward: "+1% Glyph rarity."
+  }),
+  147: new Achievement({
+    id: 147,
+    fullName: "Master of Reality",
+    requirement: "Have all Reality upgrades bought.",
+    reward: "Unlock Teresa, the Celestial of Reality."
+  }),
+  148: new Achievement({
+    id: 148,
+    fullName: "Royal flush",
+    requirement: "Reality with one of each basic Glyph type.",
+    reward: "Gained Glyph level is increased by number of distinct Glyph types equipped.",
+    rewardFormula: "`+1` for each unique Glyph type equipped"
+  }),
+  151: new Achievement({
+    id: 151,
+    fullName: "You really didn't need it anyway",
+    requirement: "Get 800 Antimatter Galaxies without buying 8th Antimatter Dimensions in your current Infinity",
+    reward: "Unlock V, the Celestial of Achievements."
+  }),
+  152: new Achievement({
+    id: 152,
+    fullName: "Y'all got any more of them Glyphs?",
+    requirement: "Have 100 Glyphs in your inventory."
+  }),
+  153: new Achievement({
+    id: 153,
+    fullName: "More like \"reallydoesn'tmatter\"",
+    requirement: "Reality without producing antimatter."
+  }),
+  154: new Achievement({
+    id: 154,
+    fullName: "I am speed",
+    requirement: "Reality in under 5 seconds (game time).",
+    reward: "10% chance each Reality of ×2 Realities and Perk Points."
+  }),
+  155: new Achievement({
+    id: 155,
+    fullName: "Achievement #15983",
+    requirement: "Play for 13.7 billion years.",
+    reward: "Black Hole durations are 10% longer"
+  }),
+  156: new Achievement({
+    id: 156,
+    fullName: "College Dropout",
+    requirement: "Reality without buying Time Theorems.",
+    reward: "Gain ×2.5 generated Time Theorems, and a free coupon to McDonalds™️."
+  }),
+  157: new Achievement({
+    id: 157,
+    fullName: "It's super effective!",
+    requirement: "Get a Glyph with 4 effects."
+  }),
+  158: new Achievement({
+    id: 158,
+    fullName: "Bruh, are you like, inside the hole?",
+    requirement: "Make both Black Holes permanent.",
+    reward: "Black Hole power increased by 10%."
+  }),
+  161: new Achievement({
+    id: 161,
+    fullName: "that's where you're wrong kiddo",
+    requirement: "Get 1e100,000,000 antimatter while Dilated."
+  }),
+  162: new Achievement({
+    id: 162,
+    fullName: "Reinstalled the game and rejoined the server",
+    requirement: "Have every Time Study at once."
+  }),
+  163: new Achievement({
+    id: 163,
+    fullName: "Actually, super easy! Barely an inconvenience!",
+    requirement: "Complete all the Eternity Challenges 5 times with less than 1 second (game time) in your current Reality."
+  }),
+  164: new Achievement({
+    id: 164,
+    fullName: "Infinity times two",
+    requirement: "Get 1.8e308 Infinities.",
+    reward: "Gain ×1,024 more Infinities."
+  }),
+  165: new Achievement({
+    id: 165,
+    fullName: "Perfectly balanced",
+    requirement: "Get a level 5,000 Glyph with all Glyph level factors equally weighted.",
+    reward: "Unlock optimal automatic Glyph level factor adjustment.",
+    rewardFormula: "Be sure to go turn this on under \"Glyph Level Factors\" on the Glyphs tab!"
+  }),
+  166: new Achievement({
+    id: 166,
+    fullName: "Nicenice.",
+    requirement: "Get a Glyph with level exactly 6,969.",
+    reward: "+69 to Glyph level."
+  }),
+  167: new Achievement({
+    id: 167,
+    fullName: "Mr. Layer? Sorry, you're not on the list",
+    requirement: "Reach 1.8e308 Reality Machines.",
+    reward: "Gain more Reality Machines based on your current Reality Machines.",
+    rewardFormula: "`max(1, log_2(RM))`"
+  }),
+  168: new Achievement({
+    id: 168,
+    fullName: "Woah, we're halfway there",
+    requirement: "Get 50 total Ra Celestiral Memory levels.",
+    reward: "Get 10% more memories."
+  }),
+  171: new Achievement({
+    id: 171,
+    fullName: "The god is delighted",
+    requirement: "Sacrifice every sacrificable Glyph type at least once.",
+    reward: "Glyph sacrifice is ×2 stronger."
+  }),
+  172: new Achievement({
+    id: 172,
+    fullName: "Hitchhiker's Guide to Reality",
+    requirement: "Reality for 1.8e308 Reality Machines without having any Charged Infinity Upgrades, having any equipped Glyphs, or buying any Triad Studies."
+  }),
+  173: new Achievement({
+    id: 173,
+    fullName: "Cet accomplissement n'existe pas III",
+    requirement: "Reach 9.99999e999 Reality Machines"
+  }),
+  174: new Achievement({
+    id: 174,
+    fullName: "Don't you already have two of these?",
+    requirement: "Get a Singularity."
+  }),
+  175: new Achievement({
+    id: 175,
+    fullName: "The First Antihistorian",
+    requirement: "Get 25,000 of all Alchemy Resources.",
+    reward: "Synergism can go above 100% and Momentum increases ×10 faster."
+  }),
+  176: new Achievement({
+    id: 176,
+    fullName: "Mom counted to 3",
+    requirement: "Annihilate your Dark Matter Dimensions"
+  }),
+  177: new Achievement({
+    id: 177,
+    fullName: "This mile took a celestial",
+    requirement: "Complete all Singularity Milestones at least once.",
+  }),
+  178: new Achievement({
+    id: 178,
+    fullName: "Destroyer of Worlds",
+    requirement: "Get 100,000 Antimatter Galaxies",
+    reward: "All Galaxies are 1% stronger."
+  }),
   181: new Achievement({
-    id: 181,
+    id: 666,
     fullName: "Antimatter Dimensions Eternal",
     requirement: "Doom your Reality.",
+  }),
+  182: new Achievement({
+    id: 182,
+    fullName: "One more time",
+    requirement: "Permanently gain back all Antimatter Dimension autobuyers."
+  }),
+  183: new Achievement({
+    id: 183,
+    fullName: "Déjà vOoM",
+    requirement: "Complete Infinity Challenge 5 while Doomed.",
+    reward: "All Antimatter Dimensions are raised to ^1.081."
+  }),
+  184: new Achievement({
+    id: 184,
+    fullName: "You're out!",
+    requirement: "Encounter the third Pelle Strike."
+  }),
+  185: new Achievement({
+    id: 185,
+    fullName: "Four score and seven years ago",
+    requirement: "Encounter the fourth Pelle Strike."
+  }),
+  186: new Achievement({
+    id: 181,
+    fullName: "An unhealthy obsession",
+    requirement: "Purchase Time Study 181 while Doomed."
+  }),
+  187: new Achievement({
+    id: 187,
+    fullName: "The One with Dilated Time",
+    requirement: "Unlock Dilation while Doomed.",
+    reward: "Increase the multiplier per repeatable Dilated Time multiplier upgrade by ×1.35."
+  }),
+  188: new Achievement({
+    id: 188,
+    fullName: "The End",
+    requirement: "Beat the game."
   })
 };
 

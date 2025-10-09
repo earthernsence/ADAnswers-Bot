@@ -2,6 +2,7 @@ import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "
 import { Command } from "@/types/Commands/Command";
 import { getLogBase } from "@/utils/utils_math";
 import { isUserHelper } from "@/utils/utils_commands";
+import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 
 export default new Command({
   data: new SlashCommandBuilder()
@@ -12,21 +13,13 @@ export default new Command({
         .setName("ep")
         .setDescription("the amount of EP you want to know the IP requirement for")
         .setRequired(true)
-        .setMaxValue(1000)
         .setMinValue(2)
+        .setMaxValue(1000)
     ),
   execute: (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
-    const epValue = interaction.options.getInteger("ep");
-
-    if (!epValue) {
-      interaction.reply({
-        content: `There was an error processing your provided EP value of ${epValue}`,
-        flags: MessageFlags.Ephemeral
-      });
-      return;
-    }
+    const epValue = interaction.options.getInteger("ep", true);
 
     const infinityPointsNeeded = Math.ceil(308 * getLogBase(5, epValue) + 215.6);
 

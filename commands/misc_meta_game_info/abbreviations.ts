@@ -29,6 +29,6 @@ ${spoiler(`${bold("BH")}: Black Hole`)}
 ${spoiler(`${bold("Cel X")}: Celestial X`)}
 ${spoiler(`${bold("iM")}: Imaginary Machine`)}
 ${spoiler(`${bold("DM")}: Dark Matter`)}
-${spoiler(`${bold("IC X")}: Dark Energy`)}
+${spoiler(`${bold("DE")}: Dark Energy`)}
   `
 });
