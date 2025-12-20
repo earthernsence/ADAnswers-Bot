@@ -1,5 +1,5 @@
 import { AttachmentBuilder, type CommandInteraction } from "discord.js";
-import type { AntimatterChallenge } from "../game_data/AntimatterChallenges";
+import type { AntimatterChallenge } from "../game_data/challenges/AntimatterChallenges";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type { EmbedBuilder } from "@discordjs/builders";

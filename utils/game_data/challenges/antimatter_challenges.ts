@@ -1,4 +1,4 @@
-import type { AntimatterChallenges } from "@/types/game_data/AntimatterChallenges";
+import type { AntimatterChallenges } from "@/types/game_data/challenges/AntimatterChallenges";
 
 const base = ` It is recommended to have at least the first 12 infinity upgrades and 100 spare IP.
  If you want to get those 100 IP, you probably want to get upgrade 13 and 14 as well to speed things up. (Note: Those upgrades won't work inside challenges.)`;

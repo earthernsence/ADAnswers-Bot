@@ -1,4 +1,4 @@
-import type { InfinityChallenges } from "@/types/game_data/InfinityChallenges";
+import type { InfinityChallenges } from "@/types/game_data/challenges/InfinityChallenges";
 
 const icBase = (ic: number, ip: number) => `Attempt IC${ic} at ~e${ip} IP. No special strat for this challenge.`;
 

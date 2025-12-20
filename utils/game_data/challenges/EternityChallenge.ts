@@ -1,4 +1,4 @@
-import type { EC, EternityChallengeReward, EternityChallengeUnlock } from "@/types/game_data/EternityChallenges";
+import type { EC, EternityChallengeReward, EternityChallengeUnlock } from "@/types/game_data/challenges/EternityChallenges";
 import {
   eternityChallengeCompletionGoals,
   eternityChallengeCompletionRequirements,

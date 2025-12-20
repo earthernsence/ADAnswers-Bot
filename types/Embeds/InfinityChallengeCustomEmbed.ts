@@ -2,7 +2,7 @@ import { AttachmentBuilder, type CommandInteraction } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type { EmbedBuilder } from "@discordjs/builders";
-import type { InfinityChallenge } from "../game_data/InfinityChallenges";
+import type { InfinityChallenge } from "../game_data/challenges/InfinityChallenges";
 
 interface InfinityChallengeCustomEmbedProps {
   interaction: CommandInteraction,

@@ -1,4 +1,4 @@
-import type { EternityChallengeCompletionGoals, EternityChallengeDescriptions, EternityChallengeRewards, EternityChallengeSecondaryUnlock } from "@/types/game_data/EternityChallenges";
+import type { EternityChallengeCompletionGoals, EternityChallengeDescriptions, EternityChallengeRewards, EternityChallengeSecondaryUnlock } from "@/types/game_data/challenges/EternityChallenges";
 import Decimal from "break_infinity.js";
 import { DoublyLinkedList } from "@/types/DoublyLinkedList";
 import EternityChallenge from "./EternityChallenge";
@@ -513,35 +513,35 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 5600,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
-      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
     }),
     2: new EternityChallenge({
       challenge: 11,
       completion: 2,
       recommendedTheorems: 5600,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
-      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
     }),
     3: new EternityChallenge({
       challenge: 11,
       completion: 3,
       recommendedTheorems: 5950,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
     }),
     4: new EternityChallenge({
       challenge: 11,
       completion: 4,
       recommendedTheorems: 5950,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
     }),
     5: new EternityChallenge({
       challenge: 11,
       completion: 5,
       recommendedTheorems: 5950,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "This takes around 1h 45m. Get the Popular Music - achievement first (if you need help with it use /achievements Popular Music).",
+      note: "This takes around 1h 45m. Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
     }),
   },
   12: {
@@ -578,7 +578,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 5,
       recommendedTheorems: 12350,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough - achievement.",
+      note: "Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough achievement (achievement 134).",
     }),
   },
 };

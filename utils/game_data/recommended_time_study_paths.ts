@@ -1,5 +1,5 @@
 import { eternityChallenges, orderAsDoublyLinkedList } from "./challenges/eternity_challenges";
-import type { ECsAtTTInfo } from "@/types/game_data/EternityChallenges";
+import type { ECsAtTTInfo } from "@/types/game_data/challenges/EternityChallenges";
 import type EternityChallenge from "./challenges/EternityChallenge";
 import { inlineCode } from "discord.js";
 import { timeStudies } from "./time_studies";
