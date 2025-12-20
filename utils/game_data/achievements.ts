@@ -795,7 +795,7 @@ export const achievements: Record<number, Achievement> = {
     reward: "All Galaxies are 1% stronger."
   }),
   181: new Achievement({
-    id: 666,
+    id: 181,
     fullName: "Antimatter Dimensions Eternal",
     requirement: "Doom your Reality.",
   }),

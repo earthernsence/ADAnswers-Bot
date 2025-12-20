@@ -2,7 +2,6 @@ import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "
 import { Command } from "@/types/Commands/Command";
 import { getLogBase } from "@/utils/utils_math";
 import { isUserHelper } from "@/utils/utils_commands";
-import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 
 export default new Command({
   data: new SlashCommandBuilder()

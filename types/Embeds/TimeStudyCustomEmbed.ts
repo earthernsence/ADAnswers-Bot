@@ -57,10 +57,12 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
       fields.push({ name: "Is best waifu?", value: `${this.study.isBestWaifu}`, inline: false });
     }
 
+    this.addImage();
+
     return fields;
   }
 
-  public addImage(): void {
+  private addImage(): void {
     if (this.study.hasGraph) {
       this.embed.addFields({
         name: "Effect formula graph",

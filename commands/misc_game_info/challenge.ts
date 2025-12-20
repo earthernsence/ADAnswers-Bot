@@ -34,7 +34,7 @@ export default new Command({
     .addStringOption(option =>
       option
         .setName("challenge")
-        .setDescription("which challenge do you want to see a guide for?")
+        .setDescription("Which challenge do you want to see a guide for?")
         .setRequired(true)
         .setChoices(getChallengeChoices())
     )
@@ -63,6 +63,7 @@ export default new Command({
         files: [errorImage],
         flags: MessageFlags.Ephemeral
       });
+
       return;
     }
 
