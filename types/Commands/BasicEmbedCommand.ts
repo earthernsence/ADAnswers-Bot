@@ -1,12 +1,12 @@
 import { type ChatInputCommandInteraction, MessageFlags, type SlashCommandBuilder, type SlashCommandOptionsOnlyBuilder, italic, userMention } from "discord.js";
-import type { AnyEmbed } from "../Embeds/AnyEmbedType";
 import { Command } from "./Command";
+import type { CustomEmbed } from "../Embeds/CustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface BasicEmbedCommandProps {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
   // eslint-disable-next-line no-unused-vars
-  embed: (interaction: ChatInputCommandInteraction) => AnyEmbed,
+  embed: (interaction: ChatInputCommandInteraction) => CustomEmbed,
 }
 
 export class BasicEmbedCommand extends Command {

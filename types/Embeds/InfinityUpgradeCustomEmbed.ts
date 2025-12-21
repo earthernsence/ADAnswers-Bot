@@ -1,7 +1,6 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
-import type { EmbedBuilder } from "@discordjs/builders";
 import type { InfinityUpgrade } from "../game_data/upgrades/InfinityUpgrade";
 import { quantify } from "@/utils/utils_commands";
 

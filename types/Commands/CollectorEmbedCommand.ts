@@ -1,14 +1,24 @@
 
 import { type ActionRowBuilder, ButtonBuilder, italic, userMention } from "@discordjs/builders";
-import { type Awaitable, type ButtonInteraction, type ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, type SlashCommandBuilder, type SlashCommandOptionsOnlyBuilder } from "discord.js";
-import type { AnyEmbed } from "../Embeds/AnyEmbedType";
+import {
+  type Awaitable,
+  type ButtonInteraction,
+  type ChatInputCommandInteraction,
+  ComponentType,
+  type InteractionReplyOptions,
+  MessageComponentInteraction,
+  MessageFlags,
+  type SlashCommandBuilder,
+  type SlashCommandOptionsOnlyBuilder
+} from "discord.js";
 import { Command } from "./Command";
+import type { CustomEmbed } from "../Embeds/CustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface CollectorEmbedCommandProps {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
   /* eslint-disable no-unused-vars */
-  embed: (interaction: ChatInputCommandInteraction, expirationTimestamp: number) => AnyEmbed,
+  embed: (interaction: ChatInputCommandInteraction, expirationTimestamp: number) => CustomEmbed,
   components: (disabled: boolean, expirationTimestamp: number) => ActionRowBuilder<ButtonBuilder>,
   onCollect: (i: ButtonInteraction) => Awaitable<void>,
   onEnd: (interaction: ChatInputCommandInteraction) => Awaitable<void>

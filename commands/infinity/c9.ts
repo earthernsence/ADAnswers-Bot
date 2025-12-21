@@ -1,9 +1,9 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
 import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/AntimatterChallengeCustomEmbed";
-import { ChallengeShorthandCommand } from "@/types/Commands/ChallengeShorthandCommand";
+import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 
-export default new ChallengeShorthandCommand({
+export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("c9")
     .setDescription(`shorthand for ${inlineCode("/challenge c9")}`)

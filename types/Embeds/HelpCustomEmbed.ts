@@ -8,7 +8,6 @@ import {
   type EmbedField,
   MessageComponentInteraction,
   StringSelectMenuBuilder,
-  bold,
   inlineCode,
   underline,
 } from "discord.js";
@@ -166,7 +165,7 @@ export class HelpCustomEmbed extends CustomEmbed {
     return this.client.commandsByPage.get(this.pageTitle)?.map(command => {
       const commandOptions = command.data.options
         .map(option => option.toJSON())
-        .map(option => `${bold(option.name)} - ${option.description}`)
+        .map(option => `${inlineCode(option.name)} - ${option.description}`)
         .join("\n");
 
       const commandAliases = command.aliases

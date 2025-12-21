@@ -55,6 +55,11 @@ export class CustomEmbed {
     throw new NotImplementedError();
   }
 
+  // eslint-disable-next-line no-unused-vars
+  public create(_strategyOnly: boolean = false): EmbedBuilder {
+    throw new NotImplementedError();
+  }
+
   private getFooterText(): string {
     return Math.random() > 0.5 ? `Be sure to read the pins in your progression channel!` : `Art by @mrkrutaman`;
   }
