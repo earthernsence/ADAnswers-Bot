@@ -51,6 +51,11 @@ export class CustomEmbed {
     return this;
   }
 
+  public setImage(imageURL: string): CustomEmbed {
+    this.embed.setImage(imageURL);
+    return this;
+  }
+
   public getAndSetThumbnail(): AttachmentBuilder {
     throw new NotImplementedError();
   }

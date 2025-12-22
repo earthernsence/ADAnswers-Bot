@@ -22,8 +22,8 @@ export default new Command({
     const response = ecsAtTTAmount(timeTheorems);
 
     const content = `
-At ${pluralise("total Time Theorem", timeTheorems)}, you should have: ${response.completions}.
-${response.nextECs.length >= 0 ? `Next recommended ${quantify("Eternity Challenge", response.nextECs.length)}: ${makeEnumeration<string>(response.nextECs, ", ", "", "and")} at ${response.nextChallengeTT} total Time Theorems` : ""}`;
+At ${quantify("total Time Theorem", timeTheorems, 1e5)}, you should have: ${response.completions}.
+${response.nextECs.length >= 0 ? `Next recommended ${pluralise("Eternity Challenge", response.nextECs.length)}: ${makeEnumeration<string>(response.nextECs, ", ", "", "and")} at ${response.nextChallengeTT} total Time Theorems` : ""}`;
 
     interaction.reply({
       content,

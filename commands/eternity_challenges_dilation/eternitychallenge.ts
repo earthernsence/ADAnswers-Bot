@@ -4,7 +4,7 @@ import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
-import { EternityChallengeCustomEmbed } from "@/types/Embeds/EternityChallengeCustomEmbed";
+import { EternityChallengeCustomEmbed } from "@/types/Embeds/Challenges/EternityChallengeCustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
 import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 

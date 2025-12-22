@@ -3,7 +3,7 @@
 export enum Colours {
   // General progression
   Antimatter = "#16a94d",
-  Infinity = "#b5813c",
+  "Infinity" = "#b5813c",
   Replication = "#03a9f4",
   Eternity = "#b540df",
   Dilation = "#5ddd33",

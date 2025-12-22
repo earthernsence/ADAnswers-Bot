@@ -44,7 +44,8 @@ export default class EternityChallenge implements EC {
   }
 
   get ip(): string {
-    return eternityChallengeCompletionGoals[this.challenge](this.completion - 1);
+    // [Decimal].toString() formats with a positive/negative sign on the exponent; I don't want it in the response.
+    return eternityChallengeCompletionGoals[this.challenge](this.completion - 1).replace("+", "");
   }
 
   get description(): string {

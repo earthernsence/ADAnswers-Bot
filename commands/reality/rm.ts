@@ -1,7 +1,7 @@
-import { Command } from "@/types/Commands/Command";
-import { isUserHelper } from "@/utils/utils_commands";
-import { getLogBase } from "@/utils/utils_math";
 import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
+import { Command } from "@/types/Commands/Command";
+import { getLogBase } from "@/utils/utils_math";
+import { isUserHelper } from "@/utils/utils_commands";
 
 export default new Command({
   data: new SlashCommandBuilder()
@@ -30,4 +30,4 @@ export default new Command({
       flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
     });
   }
-})
+});

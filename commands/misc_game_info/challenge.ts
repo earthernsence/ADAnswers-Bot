@@ -1,11 +1,10 @@
-import { type ApplicationCommandOptionChoiceData, ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, italic, userMention } from "discord.js";
-import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/AntimatterChallengeCustomEmbed";
-import { Command } from "@/types/Commands/Command";
+import { type ApplicationCommandOptionChoiceData, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/Challenges/AntimatterChallengeCustomEmbed";
+import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
-import { InfinityChallengeCustomEmbed } from "@/types/Embeds/InfinityChallengeCustomEmbed";
+import { InfinityChallengeCustomEmbed } from "@/types/Embeds/Challenges/InfinityChallengeCustomEmbed";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challenges";
-import { isUserHelper } from "@/utils/utils_commands";
 
 function getChallengeChoices(): Array<ApplicationCommandOptionChoiceData<string>> {
   const choices: Array<ApplicationCommandOptionChoiceData<string>> = [];
@@ -27,7 +26,7 @@ function getChallengeChoices(): Array<ApplicationCommandOptionChoiceData<string>
   return choices;
 }
 
-export default new Command({
+export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("challenge")
     .setDescription("Takes in a normal/Infinity challenge and returns a guide. for ECs, use /ec")
@@ -44,40 +43,26 @@ export default new Command({
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
     ),
-  execute: (interaction: ChatInputCommandInteraction) => {
-    if (!interaction) return;
-
+  embed: (interaction: ChatInputCommandInteraction) => {
     const requestedChallenge = interaction.options.getString("challenge");
-    const targetUser = interaction.options.getUser("target");
 
     if (!requestedChallenge) {
-      const errorEmbed = new ErrorCustomEmbed({
+      return new ErrorCustomEmbed({
         interaction,
         text: `There was a problem processing your requested challenge of ${requestedChallenge}`
       });
-
-      const errorImage = errorEmbed.getAndSetThumbnail();
-
-      interaction.reply({
-        embeds: [errorEmbed.create()],
-        files: [errorImage],
-        flags: MessageFlags.Ephemeral
-      });
-
-      return;
     }
 
-    const customEmbed = requestedChallenge?.startsWith("c")
-      ? new AntimatterChallengeCustomEmbed({ interaction, challenge: antimatterChallenges[requestedChallenge] })
-      : new InfinityChallengeCustomEmbed({ interaction, challenge: infinityChallenges[requestedChallenge] });
-
-    const image = customEmbed.getAndSetThumbnail();
-
-    interaction.reply({
-      content: targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}` : undefined,
-      embeds: [customEmbed.create()],
-      files: [image],
-      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
-    });
+    return requestedChallenge?.startsWith("c")
+      ? new AntimatterChallengeCustomEmbed({
+        interaction,
+        challenge: antimatterChallenges[requestedChallenge],
+        strategyOnly: false
+      })
+      : new InfinityChallengeCustomEmbed({
+        interaction,
+        challenge: infinityChallenges[requestedChallenge],
+        strategyOnly: false
+      });
   }
 });

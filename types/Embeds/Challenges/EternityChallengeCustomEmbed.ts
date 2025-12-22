@@ -1,6 +1,6 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, TimestampStyles, inlineCode, time } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
-import { CustomEmbed } from "./CustomEmbed";
+import { CustomEmbed } from "../CustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 
 interface EternityChallengeCustomEmbedProps {

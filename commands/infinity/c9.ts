@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
-import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/AntimatterChallengeCustomEmbed";
+import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/Challenges/AntimatterChallengeCustomEmbed";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 

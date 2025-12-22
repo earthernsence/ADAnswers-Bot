@@ -3,6 +3,7 @@ export type TBaseUpgrade = {
   name: string,
   effect: string,
   cost: number,
+  increment?: number,
   formula?: string,
 };
 
@@ -11,6 +12,7 @@ export interface BaseUpgradeProps {
   name: string,
   effect: string,
   cost: number,
+  increment?: number,
   formula?: string,
 }
 
@@ -20,13 +22,15 @@ export class BaseUpgrade implements TBaseUpgrade {
   name: string;
   effect: string;
   cost: number;
+  increment?: number;
   formula?: string;
 
-  constructor({ id, name, effect, cost, formula }: BaseUpgradeProps) {
+  constructor({ id, name, effect, cost, formula, increment }: BaseUpgradeProps) {
     this.id = id;
     this.name = name;
     this.effect = effect;
     this.cost = cost;
+    this.increment = increment;
     this.formula = formula;
   };
 }

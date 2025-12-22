@@ -1,12 +1,12 @@
 import { BaseUpgrade, type BaseUpgradeProps } from "./BaseUpgrade";
 
 export interface InfinityUpgradeProps extends BaseUpgradeProps {
-  requirement: string
+  requirement?: string
 }
 
 export class InfinityUpgrade extends BaseUpgrade {
   type: string = "infinity";
-  requirement: string;
+  requirement?: string;
 
   constructor({
     id,

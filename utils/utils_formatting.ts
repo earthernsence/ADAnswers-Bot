@@ -1,3 +1,5 @@
+import Decimal from "break_infinity.js";
+
 // eslint-disable-next-line max-params
 export function makeEnumeration<itemType>(
   items: Array<itemType>,
@@ -48,3 +50,18 @@ export const Caesar = {
   randomKey: () => 1 + Math.floor(Math.random() * 25),
   randomEncrypt: (msg: string) => Caesar.encrypt(msg, Caesar.randomKey())
 };
+
+export function formatDecimal(number: Decimal | number | string, decimals: number = 2, lessThan: number = 1000) {
+  const value = number instanceof Decimal ? number : new Decimal(number);
+  if (value.lessThan(lessThan)) return formatDecimalLessThan1000(value);
+  const exponent = Decimal.floor(value.log10());
+  const mantissa = value.div(new Decimal(10).pow(exponent));
+  return `${mantissa.toFixed(decimals)}e${exponent}`;
+}
+
+export function formatDecimalLessThan1000(number: Decimal) {
+  if (number.floor().eq(number)) {
+    return number.toFixed(0);
+  }
+  return number.toFixed(2);
+}

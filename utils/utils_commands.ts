@@ -1,6 +1,7 @@
 import { type CommandInteraction, User, hideLinkEmbed, hyperlink } from "discord.js";
 import { Channels } from "./utils_channels";
 import { Roles } from "./utils_roles";
+import { formatDecimal } from "./utils_formatting";
 
 export function isUserHelper(interaction: CommandInteraction): boolean | undefined {
   // If the command usage is in a DM, or not the AD server, return true
@@ -29,12 +30,12 @@ export function link(content: string, url: string) {
 }
 
 export function pluralise(word: string, count: number) {
-  if (count === 1) {
+  if (Math.abs(count) === 1) {
     return word;
   }
   return `${word}s`;
 }
 
-export function quantify(word: string, count: number): string {
-  return `${count} ${pluralise(word, count)}`;
+export function quantify(word: string, count: number, lessThan: number = 1000): string {
+  return `${formatDecimal(count, 2, lessThan)} ${pluralise(word, count)}`;
 }

@@ -1,19 +1,22 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder } from "discord.js";
-import type { AntimatterChallenge } from "../game_data/challenges/AntimatterChallenges";
+import type { AntimatterChallenge } from "../../game_data/challenges/AntimatterChallenges";
 import { Colours } from "@/utils/utils_colours";
-import { CustomEmbed } from "./CustomEmbed";
+import { CustomEmbed } from "../CustomEmbed";
 
 interface AntimatterChallengeCustomEmbedProps {
   interaction: CommandInteraction,
-  challenge: AntimatterChallenge
+  challenge: AntimatterChallenge,
+  strategyOnly?: boolean
 }
 
 export class AntimatterChallengeCustomEmbed extends CustomEmbed {
   challenge: AntimatterChallenge;
+  strategyOnly: boolean;
 
-  constructor({ interaction, challenge }: AntimatterChallengeCustomEmbedProps) {
+  constructor({ interaction, challenge, strategyOnly }: AntimatterChallengeCustomEmbedProps) {
     super({ interaction });
     this.challenge = challenge;
+    this.strategyOnly = strategyOnly ?? true;
   }
 
   // For the shorthands /c9, /ic4, and /ic5, we don't really care about the other things --
