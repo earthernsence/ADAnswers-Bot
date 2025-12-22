@@ -1,4 +1,4 @@
-import type { Achievement as IAchievement } from "@/types/game_data/Achievements";
+import type { Achievement as TAchievement } from "@/types/game_data/Achievements";
 
 interface AchievementProps {
   id: number;
@@ -9,7 +9,7 @@ interface AchievementProps {
   rewardFormula?: string;
 }
 
-export default class Achievement implements IAchievement {
+export default class Achievement implements TAchievement {
   id: number;
   fullName: string;
   requirement: string;
