@@ -1,9 +1,9 @@
-import { REST, type RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from "discord.js";
+import { REST, type RESTPostAPIChatInputApplicationCommandsJSONBody, type RESTPostAPIContextMenuApplicationCommandsJSONBody, Routes } from "discord.js";
 import { Channels } from "./utils/utils_channels";
 import fs from "node:fs";
 import path from "node:path";
 
-const commands: Array<RESTPostAPIChatInputApplicationCommandsJSONBody> = [];
+const commands: Array<RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody> = [];
 const foldersPath = path.join(__dirname, "commands");
 const commandFolders = fs.readdirSync(foldersPath);
 
@@ -27,6 +27,14 @@ for (const folder of commandFolders) {
       console.log(`Command at ${filePath} does not have a data and execute property`);
     }
   }
+}
+
+const ctxCommandPath = path.join(__dirname, "context_commands");
+for (const file of fs.readdirSync(ctxCommandPath)) {
+  const filePath = path.join(ctxCommandPath, file);
+  const command = await import(filePath);
+  commands.push(command.default.data.toJSON());
+  console.log("Successfully placed context commands.");
 }
 
 const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);

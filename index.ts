@@ -1,12 +1,15 @@
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 import type { ADABClient } from "@/types/ADABClient";
 import { Command } from "@/types/Commands/Command";
+import { ContextMenuCommand } from "./types/Commands/ContextMenuCommand";
 import fs from "node:fs";
 import path from "node:path";
+import reportMessage from "./context_commands/reportMessage";
 
 const client: ADABClient = <ADABClient> new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection<string, Command>();
+client.contextCommands = new Collection<string, ContextMenuCommand>();
 client.commandsByPage = new Collection<string, Collection<string, Command>>();
 
 client.version = process.env.VERSION;
@@ -33,7 +36,6 @@ for (const folder of commandFolders) {
         ])
       );
 
-      // Aliases are stupid.
       for (const alias of command.default.aliases) {
         client.commands.set(alias, command.default);
       }
@@ -42,6 +44,8 @@ for (const folder of commandFolders) {
     });
   }
 }
+
+client.contextCommands.set("Report message", reportMessage);
 
 // Create our event handlers
 
