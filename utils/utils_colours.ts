@@ -26,6 +26,9 @@ export enum Colours {
   Achievement = "#fbda4b",
   Automation = "#ff2a1f",
 
+  // Glyph-specific
+  Power = Antimatter,
+
   // Celestials
   Teresa = "#5151ec",
   Effarig = "#d13737",
