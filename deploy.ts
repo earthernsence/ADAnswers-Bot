@@ -5,11 +5,15 @@ import path from "node:path";
 
 const commands: Array<RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody> = [];
 const foldersPath = path.join(__dirname, "commands");
-const commandFolders = fs.readdirSync(foldersPath);
+const commandFolders = fs
+  .readdirSync(foldersPath)
+  .filter(folder => !folder.startsWith("_"));
 
 for (const folder of commandFolders) {
   const commandsPath = path.join(foldersPath, folder);
-  const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
+  const commandFiles = fs
+    .readdirSync(commandsPath)
+    .filter(file => file.endsWith(".ts"));
   console.log(`Preparing ${commandFiles.length} command(s) from ${commandsPath}...`);
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
