@@ -25,7 +25,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
     const shouldBeDisabled: boolean = Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
 
     this.setTitle(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`)
-      .setDescription(`Expire${shouldBeDisabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.LongDateTime)}`)
+      .setDescription(`Expire${shouldBeDisabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
       .setColour(Colours.Achievement);
 
     this.setFields([

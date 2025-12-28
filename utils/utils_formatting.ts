@@ -15,6 +15,15 @@ export function makeEnumeration<itemType>(
   return `${name}${commaSeparated}, ${finalSeperator} ${name}${last}`;
 }
 
+// In general, I think the [Intl.ListFormat].format() way of doing enumeration is supposed to be better,
+// but I'll keep both for the time being.
+export function enumerate<itemType>(items: Array<itemType>, type: Intl.ListFormatType = "conjunction"): string {
+  return new Intl.ListFormat("en", {
+    style: "long",
+    type,
+  }).format(items.map(item => String(item)));
+}
+
 export const capitalise = function(word: string): string {
   return word.toLowerCase().replace(/^\w/u, c => c.toUpperCase());
 };

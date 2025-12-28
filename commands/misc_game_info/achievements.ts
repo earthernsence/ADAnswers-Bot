@@ -93,11 +93,13 @@ export default new Command({
         new ButtonBuilder()
           .setCustomId(`ach_button_prev_${expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
+          .setLabel(`Previous Achievement (${currentAchievement.prev ? currentAchievement.prev.value.id : "188"})`)
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled),
         new ButtonBuilder()
           .setCustomId(`ach_button_next_${expirationTimestamp}`)
           .setEmoji({ name: "▶️" })
+          .setLabel(`Next Achievement (${currentAchievement.next ? currentAchievement.next.value.id : "11"})`)
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled)
       );
