@@ -102,6 +102,38 @@ export const perks: Record<string, Perk> = {
     prerequisites: ["PEC2"],
     ap: 10
   }),
+  "IDAS": new Perk({
+    id: "IDAS",
+    name: "Infinity Dimension Autobuyer Speed",
+    effect: "Infinity Dimension autobuyers work x3 faster.",
+    family: PERK_FAMILY.AUTOMATION,
+    prerequisites: ["SIP1"],
+    ap: 5
+  }),
+  "REPAS": new Perk({
+    id: "REPAS",
+    name: "Replicanti Autobuyer Speed",
+    effect: "Replicanti autobuyers work x3 faster.",
+    family: PERK_FAMILY.AUTOMATION,
+    prerequisites: ["SIP2"],
+    ap: 5
+  }),
+  "DAU": new Perk({
+    id: "DAU",
+    name: "DIlation Autobuyers for Upgrades",
+    effect: "Unlock autobuyers for the repeatable Dilation Upgrades",
+    family: PERK_FAMILY.AUTOMATION,
+    prerequisites: ["EU1", "TGR"],
+    ap: 5
+  }),
+  "DAS": new Perk({
+    id: "DAS",
+    name: "Dilation Autobuyer Speed",
+    effect: "Dilation Upgrade autobuyers work x3 faster.",
+    family: PERK_FAMILY.AUTOMATION,
+    prerequisites: ["ATT"],
+    ap: 5
+  }),
   // Infinity
   // Eternity
   // Dilation
@@ -111,6 +143,14 @@ export const perks: Record<string, Perk> = {
     name: "Starting Perk",
     effect: "Remove the Achievement requirement from the Reality Study and allow you to choose from 4 different Glyphs on Reality.",
     family: PERK_FAMILY.REALITY
+  }),
+  "REAL": new Perk({
+    id: "REAL",
+    name: "Automatic Reality Study Purchasing",
+    effect: "Auto-unlocks Reality once you have 1e4000 Eternity Points and have unlocked Time Dimension 8",
+    family: PERK_FAMILY.REALITY,
+    prerequisites: ["ATD"],
+    ap: 10
   })
 };
 

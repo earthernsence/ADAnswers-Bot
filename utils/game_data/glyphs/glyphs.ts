@@ -15,6 +15,16 @@ export const glyphs: Record<string, Glyph> = {
           effect: "Decrease the cost of Antimatter Galaxies by a multiplier, in addition to the normal effect.",
           formula: "`2 / ((1.015 + (Level)^0.2 * (1 + 2.5*Rarity)^0.4 / 75) + 1)`"
         }
+      }),
+      "Top Left": new GlyphEffect({
+        name: "Antimatter Dimensions Multiplier",
+        effect: "Multiply Antimatter Dimensions by a static multiplier.",
+        formula: "x`(level * (1 + 2.5 * rarity)) ^ (level * (1 + 2.5 * rarity))`",
+        altered: {
+          name: "Empowered Antimatter Dimensions Multiplier",
+          effect: "Multiply Antimatter Dimensions by a static multiplier with an empowered formula.",
+          formula: "`1e11111 ^ (level * 220)`"
+        }
       })
     },
     sacrifice: {
