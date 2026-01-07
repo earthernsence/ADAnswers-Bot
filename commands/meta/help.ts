@@ -22,7 +22,7 @@ export default new Command({
     const buttonCollector = initialReply.createMessageComponentCollector({
       componentType: ComponentType.Button,
       filter: (i: MessageComponentInteraction) => customEmbed.filter(i),
-      time: 60000,
+      time: 60000
     });
 
     const selectMenuCollector = initialReply.createMessageComponentCollector({

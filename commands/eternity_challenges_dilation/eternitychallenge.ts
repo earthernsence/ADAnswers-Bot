@@ -105,11 +105,13 @@ export default new Command({
         new ButtonBuilder()
           .setCustomId(`ec_button_prev_${expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
+          .setLabel(`Previous EC (${getNext(currentChallenge, false).value.shortName})`)
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled),
         new ButtonBuilder()
           .setCustomId(`ec_button_next_${expirationTimestamp}`)
           .setEmoji({ name: "▶️" })
+          .setLabel(`Next EC (${getNext(currentChallenge, true).value.shortName})`)
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled)
       );

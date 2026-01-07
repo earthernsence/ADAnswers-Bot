@@ -12,7 +12,8 @@ client.commands = new Collection<string, Command>();
 client.contextCommands = new Collection<string, ContextMenuCommand>();
 client.commandsByPage = new Collection<string, Collection<string, Command>>();
 
-client.version = process.env.VERSION;
+client.version = process.env.VERSION ?? "Unknown version";
+client.restartTime = Date.now();
 
 // Handle importing of all commands
 

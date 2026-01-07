@@ -63,10 +63,12 @@ export class HelpCustomEmbed extends CustomEmbed {
         new ButtonBuilder()
           .setCustomId(`help_button_prev_${this.expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
+          .setLabel("Previous page")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
           .setCustomId(`help_button_next_${this.expirationTimestamp}`)
           .setEmoji({ name: "▶️" })
+          .setLabel("Next page")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)

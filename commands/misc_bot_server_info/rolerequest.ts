@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
+import { ActionRowBuilder, ButtonBuilder, bold, italic } from "@discordjs/builders";
 import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder, roleMention } from "discord.js";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
 import { Channels } from "@/utils/utils_channels";
@@ -20,8 +20,12 @@ const requestMessages: RoleRequestMessages = {
     remove: `Doing so will mean that you are no longer mentioned in relevant ADAB update notifications.`,
   },
   [Roles.HelperRole]: {
-    add: ``,
-    remove: ``,
+    add: `Doing so will allow you to ${bold("visibly")} use the bot in public-facing Discord channels, like the Progression discussion chats. \
+To become a Helper, understand that you agree to keep all ${italic("personal")} use of ADAB to <#351479640755404820> or the bot's DMs, \
+and only use the bot outside of those places to assist others in Antimatter Dimensions. ${bold("You are not free from consequences")}. \
+Moderators and Admins reserve the right to pursue appropriate avenues of punishment in the event that this is not respected.
+    `,
+    remove: `Doing so will prevent your usage of ADAB being visible in the Antimatter Dimensions Discord server.`,
   },
   [Roles.TestRole]: {
     add: `Test lorem ipsum ADDING ROLE dolor sit amet.`,
@@ -140,7 +144,10 @@ export default new Command({
 
     collector.on("end", async() => {
       await interaction.editReply({
-        content: `The embed has expired. Your requested role was not ${hasRole ? "removed" : "added"}. You can use \`/rolerequest\` to try again.`
+        content: `The embed has expired. Your requested role was not ${hasRole ? "removed" : "added"}. You can use \`/rolerequest\` to try again.`,
+        embeds: [],
+        components: [],
+        files: [],
       });
     });
   }
