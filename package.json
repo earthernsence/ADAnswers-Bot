@@ -7,7 +7,8 @@
   "license": "CC BY-NC-SA 4.0",
   "scripts": {
     "start": "bun deploy.ts && bun .",
-    "lint": "eslint --inspect-config ."
+    "lint": "eslint --inspect-config .",
+    "dock": "docker build . -t adanswersbot"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
@@ -29,6 +30,7 @@
   "dependencies": {
     "break_infinity.js": "^2.2.0",
     "discord.js": "^14.25.1",
+    "effect": "^3.19.14",
     "eslint-plugin-typescript": "^0.14.0",
     "fast-deep-equal": "^3.1.3"
   }
