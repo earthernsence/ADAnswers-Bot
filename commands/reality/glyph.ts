@@ -1,5 +1,6 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
 import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
+import { effectProbability, rarityProbability, threshold } from "@/utils/game_data/glyphs/glyph_utils";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
 import { Channels } from "@/utils/utils_channels";
@@ -163,6 +164,92 @@ export default new BasicEmbedCommand({
             })))
             .setRequired(true)
         )
+    )
+    .addSubcommandGroup(group =>
+      group
+        .setName("utils")
+        .setDescription("Access some additional calculations for Glyphs")
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName("threshold")
+            .setDescription("Returns the minimum level above which 3 or 4 effect Glyphs start to appear")
+            .addNumberOption(option =>
+              option
+                .setName("rarity")
+                .setDescription("The percentage rarity of the given Glyph, between 0 and 100")
+                .setMinValue(0)
+                .setMaxValue(100)
+                .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName("rarity-probability")
+            .setDescription("Returns the probability of seeing a Glyph with the specified rarity, or greater")
+            .addNumberOption(option =>
+              option
+                .setName("rarity")
+                .setDescription("The percentage rarity of the given Glyph, between 0 and 100")
+                .setMinValue(0)
+                .setMaxValue(100)
+                .setRequired(true)
+            )
+            .addBooleanOption(option =>
+              option
+                .setName("has-ru16")
+                .setDescription("Has Reality Upgrade 16 (Disparity of Rarity) been purchased? default: false")
+                .setRequired(false)
+            )
+            .addNumberOption(option =>
+              option
+                .setName("bonus-rarity")
+                .setDescription("The total percentage rarity added as a bonus in-game (see Glyph Level Factors). default: 0")
+                .setMinValue(0)
+                .setMaxValue(100)
+                .setRequired(false)
+            )
+        )
+        .addSubcommand(subcommand =>
+          subcommand
+            .setName("effect-count-probability")
+            .setDescription("Returns the probability of seeing a specified number of effects on a Glyph")
+            .addIntegerOption(option =>
+              option
+                .setName("effects")
+                .setDescription("The number of effects on the Glyph")
+                .setMinValue(0)
+                .setMaxValue(7)
+                .setRequired(true)
+            )
+            .addIntegerOption(option =>
+              option
+                .setName("level")
+                .setDescription("The level of the Glyph")
+                .setMinValue(0)
+                .setMaxValue(50_000)
+                .setRequired(true)
+            )
+            .addNumberOption(option =>
+              option
+                .setName("rarity")
+                .setDescription("The percentage rarity of the given Glyph, between 0 and 100")
+                .setMinValue(0)
+                .setMaxValue(100)
+                .setRequired(true)
+            )
+            .addBooleanOption(option =>
+              option
+                .setName("has-ru17")
+                .setDescription("Has Reality Upgrade 17 (Duplicity of Potency) been purchased? default: false")
+                .setRequired(false)
+            )
+            .addBooleanOption(option =>
+              option
+                .setName("is-effarig-glyph")
+                .setDescription("Is the Glyph an Effarig Glyph? default: false")
+                .setRequired(false)
+            )
+        )
     ),
   embed: (interaction: ChatInputCommandInteraction) => {
     const subcommand = interaction.options.getSubcommand(true);
@@ -193,6 +280,7 @@ export default new BasicEmbedCommand({
 
     if (subcommand === "info") {
       const requestedInfo = interaction.options.getString("info", true);
+
       return new BasicTextCustomEmbed({
         interaction,
         title: "Glyph Information",
@@ -205,9 +293,60 @@ export default new BasicEmbedCommand({
       });
     }
 
+    if (subcommand === "threshold") {
+      const rarity = interaction.options.getNumber("rarity", true);
+
+      return new BasicTextCustomEmbed({
+        interaction,
+        title: "Glyph Information",
+        field: {
+          name: "Glyph Effect Threshold Calculator",
+          value: threshold(rarity),
+          inline: false
+        },
+        colour: Colours.Reality
+      });
+    }
+
+    if (subcommand === "rarity-probability") {
+      const rarity = interaction.options.getNumber("rarity", true);
+      const ru16 = interaction.options.getBoolean("has-ru16", false) ?? false;
+      const bonus = interaction.options.getNumber("bonus-rarity", false) ?? 0;
+
+      return new BasicTextCustomEmbed({
+        interaction,
+        title: "Glyph Information",
+        field: {
+          name: "Rarity Probability Calculator",
+          value: rarityProbability({ rarity, ru16, bonus }),
+          inline: false
+        },
+        colour: Colours.Reality
+      });
+    }
+
+    if (subcommand === "effect-count-probability") {
+      const effects = interaction.options.getInteger("effects", true);
+      const level = interaction.options.getInteger("level", true);
+      const rarity = interaction.options.getNumber("rarity", true);
+      const ru17 = interaction.options.getBoolean("has-ru17", false) ?? false;
+      const effarig = interaction.options.getBoolean("is-effarig-glyph", false) ?? false;
+
+      return new BasicTextCustomEmbed({
+        interaction,
+        title: "Glyph Information",
+        field: {
+          name: "Effect Count Probability Calculator",
+          value: effectProbability({ effects, level, rarity, ru17, effarig }),
+          inline: false
+        },
+        colour: Colours.Reality
+      });
+    }
+
     return new ErrorCustomEmbed({
       interaction,
-      text: `Testing`
+      text: `Something has gone terribly wrong. Unknown subcommand in ${inlineCode("/glyph")} (${inlineCode(subcommand)}).`
     });
   }
 });
