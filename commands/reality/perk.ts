@@ -61,9 +61,73 @@ export default new BasicEmbedCommand({
         .addStringOption(option =>
           option
             .setName("perk")
-            .setDescription("Which perk would you like information about?")
+            .setDescription("Which Perk would you like information about?")
             .setChoices(perksFromFamily(PERK_FAMILY.ACHIEVEMENT).map(perk => ({
-              name: perk.id,
+              name: `${perk.id} (${perk.name})`,
+              value: perk.id,
+              type: ApplicationCommandOptionType.String
+            })))
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName("automation")
+        .setDescription("View information about Automation Perks")
+        .addStringOption(option =>
+          option
+            .setName("perk")
+            .setDescription("Which Perk would you like information about?")
+            .setChoices(perksFromFamily(PERK_FAMILY.AUTOMATION).map(perk => ({
+              name: `${perk.id} (${perk.name})`,
+              value: perk.id,
+              type: ApplicationCommandOptionType.String
+            })))
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName("infinity")
+        .setDescription("View information about Infinity Perks")
+        .addStringOption(option =>
+          option
+            .setName("perk")
+            .setDescription("Which Perk would you like information about?")
+            .setChoices(perksFromFamily(PERK_FAMILY.INFINITY).map(perk => ({
+              name: `${perk.id} (${perk.name})`,
+              value: perk.id,
+              type: ApplicationCommandOptionType.String
+            })))
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName("eternity")
+        .setDescription("View information about Eternity Perks")
+        .addStringOption(option =>
+          option
+            .setName("perk")
+            .setDescription("Which Perk would you like information about?")
+            .setChoices(perksFromFamily(PERK_FAMILY.ETERNITY).map(perk => ({
+              name: `${perk.id} (${perk.name})`,
+              value: perk.id,
+              type: ApplicationCommandOptionType.String
+            })))
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName("dilation")
+        .setDescription("View information about Dilation Perks")
+        .addStringOption(option =>
+          option
+            .setName("perk")
+            .setDescription("Which Perk would you like information about?")
+            .setChoices(perksFromFamily(PERK_FAMILY.DILATION).map(perk => ({
+              name: `${perk.id} (${perk.name})`,
               value: perk.id,
               type: ApplicationCommandOptionType.String
             })))
@@ -77,9 +141,9 @@ export default new BasicEmbedCommand({
         .addStringOption(option =>
           option
             .setName("perk")
-            .setDescription("Which perk would you like information about?")
+            .setDescription("Which Perk would you like information about?")
             .setChoices(perksFromFamily(PERK_FAMILY.REALITY).map(perk => ({
-              name: perk.id,
+              name: `${perk.id} (${perk.name})`,
               value: perk.id,
               type: ApplicationCommandOptionType.String
             })))

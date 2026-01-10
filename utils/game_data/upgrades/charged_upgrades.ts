@@ -10,7 +10,14 @@ export const ChargedInfinityUpgrades: IChargedUpgrades = {
     baseUpgrade: InfinityUpgrades.timeMult,
     charged: {
       effect: "Antimatter Dimensions gain a power effect based on time played and Teresa level",
-      formula: "`1 + (log10(log10(time played in milleseconds)) * (Teresa level ^ 0.5)) / 150`"
+      formula: "`1 + (log10(log10(time played in milliseconds)) * sqrt(Teresa level)) / 150`"
+    }
+  }),
+  "18mult": new ChargedInfinityUpgrade({
+    baseUpgrade: InfinityUpgrades["18mult"],
+    charged: {
+      effect: "1st and 8th Antimatter Dimensions gain a power effect based on Infinities and Teresa level",
+      formula: "`1 + log10(max(1, log10(infinities))) * sqrt(Teresa level) / 150`"
     }
   })
 };

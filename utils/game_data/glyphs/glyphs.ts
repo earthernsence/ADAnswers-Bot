@@ -1,6 +1,7 @@
 import { Glyph } from "./Glyph";
 import { GlyphEffect } from "./GlyphEffect";
 
+// TODO: finish data entry for Glyphs
 export const glyphs: Record<string, Glyph> = {
   power: new Glyph({
     name: "Power",

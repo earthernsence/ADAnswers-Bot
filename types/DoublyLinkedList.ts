@@ -44,8 +44,9 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
       node.next = this.head;
       this.head = node;
     } else {
-      // If the list doesn't have any values, this new value becomes the head.
+      // If the list doesn't have any values, this new value becomes both head and tail.
       this.head = node;
+      this.tail = node;
     }
 
     return node;
@@ -62,9 +63,13 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 
       newNode.prev = lastNode;
       lastNode.next = newNode;
+
+      // Update tail to the new last node
+      this.tail = newNode;
     } else {
-      // If the list doesn't have any values, this new value becomes the head.
+      // If the list doesn't have any values, this new value becomes both head and tail.
       this.head = newNode;
+      this.tail = newNode;
     }
 
     return newNode;
@@ -76,6 +81,19 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
       previousNode.next = node.next;
     } else {
       this.head = node.next;
+    }
+
+    if (node.next) {
+      // Fix the backward link of the next node
+      node.next.prev = node.prev;
+    } else {
+      // If there's no next node, we removed the tail
+      this.tail = node.prev;
+    }
+
+    // If we removed the only node, ensure head and tail are null
+    if (!this.head) {
+      this.tail = null;
     }
   }
 

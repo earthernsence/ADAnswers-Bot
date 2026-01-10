@@ -21,27 +21,16 @@ export class AchievementCustomEmbed extends CustomEmbed {
     this.expirationTimestamp = expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
-    const shouldBeDisabled: boolean = Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
+  private get disabled(): boolean {
+    return Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
+  }
 
+  public create(): EmbedBuilder {
     this.setTitle(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`)
-      .setDescription(`Expire${shouldBeDisabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
+      .setDescription(`Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
       .setColour(Colours.Achievement);
 
-    this.setFields([
-      { name: "Achievement", value: this.achievement.requirement, inline: false },
-    ]);
-
-    if (this.achievement.unlockStrategy) {
-      this.addField({ name: "Strategy", value: this.achievement.unlockStrategy, inline: false });
-    }
-
-    if (this.achievement.reward) {
-      this.addField({ name: "Reward", value: this.achievement.reward, inline: false });
-      if (this.achievement.rewardFormula) {
-        this.addField({ name: "Reward formula", value: this.achievement.rewardFormula, inline: false });
-      }
-    }
+    this.setFields(this.getFields());
 
     if (this.achievement.isDoomed) {
       this.finalise();
@@ -88,5 +77,24 @@ export class AchievementCustomEmbed extends CustomEmbed {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/achievements/${this.achievement.id}.png`);
     this.embed.setThumbnail(`attachment://${this.achievement.id}.png`);
     return image;
+  }
+
+  private getFields(): Array<EmbedField> {
+    const fields: Array<EmbedField> = [
+      { name: "Achievement", value: this.achievement.requirement, inline: false }
+    ];
+
+    if (this.achievement.unlockStrategy) {
+      fields.push({ name: "Strategy", value: this.achievement.unlockStrategy, inline: false });
+    }
+
+    if (this.achievement.reward) {
+      fields.push({ name: "Reward", value: this.achievement.reward, inline: false });
+      if (this.achievement.rewardFormula) {
+        fields.push({ name: "Reward formula", value: this.achievement.rewardFormula, inline: false });
+      }
+    }
+
+    return fields;
   }
 }

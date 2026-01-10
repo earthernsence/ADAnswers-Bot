@@ -23,11 +23,11 @@ const getNext = (current: DoublyLinkedListNode<Achievement>, forward: boolean): 
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("achievements")
-    .setDescription("generates a guide for the requested achievement.")
+    .setDescription("Provides some information about a requested Achievement.")
     .addIntegerOption(option =>
       option
         .setName("achievement")
-        .setDescription("what achievement would you like a guide for?")
+        .setDescription("What Achivement would you like information about?")
         .setRequired(true)
         .setMinValue(11)
         .setMaxValue(188)

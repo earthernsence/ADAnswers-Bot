@@ -22,11 +22,13 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
     this.expirationTimestamp = expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
-    const shouldBeDisabled: boolean = Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
+  private get disabled(): boolean {
+    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
+  }
 
+  public create(): EmbedBuilder {
     this.setTitle(this.resource.prettyName)
-      .setDescription(`Expire${shouldBeDisabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
+      .setDescription(`Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
       .setColour(Colours.Reality);
 
     this.setFields(this.getFields());

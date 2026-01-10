@@ -1,6 +1,7 @@
 import { PERK_FAMILY } from "@/types/game_data/Perks";
 import Perk from "./Perk";
 
+// TODO: finish data entry for Perks
 export const perks: Record<string, Perk> = {
   // Achievement
   "ACH1": new Perk({
@@ -53,7 +54,7 @@ export const perks: Record<string, Perk> = {
     name: "Antimatter No Reset",
     effect: "Dimension Boosts and Antimatter Galaxies no longer reset Antimatter, Antimatter Dimensions, Tickspeed, or Dimensional Sacrifice.",
     family: PERK_FAMILY.ANTIMATTER,
-    prerequisites: ["SAM"]
+    prerequisites: ["SAM", "SEP1"]
   }),
   // Automation
   "TTS": new Perk({
@@ -123,7 +124,7 @@ export const perks: Record<string, Perk> = {
     name: "DIlation Autobuyers for Upgrades",
     effect: "Unlock autobuyers for the repeatable Dilation Upgrades",
     family: PERK_FAMILY.AUTOMATION,
-    prerequisites: ["EU1", "TGR"],
+    prerequisites: ["EU2", "TGR"],
     ap: 5
   }),
   "DAS": new Perk({
@@ -135,8 +136,30 @@ export const perks: Record<string, Perk> = {
     ap: 5
   }),
   // Infinity
+  "SIP1": new Perk({
+    id: "SIP1",
+    name: "Starting Infinity Points 1",
+    effect: "Start every Eternity and Reality with 5e15 Infinity Points",
+    family: PERK_FAMILY.INFINITY,
+    prerequisites: ["SAM", "SEP1"]
+  }),
   // Eternity
+  "EC5R": new Perk({
+    id: "EC5R",
+    name: "Eternity Challenge 5 Requirement Removal",
+    effect: "Remove the Eternity Challenge 5 requirement from Time Study 62.",
+    family: PERK_FAMILY.ETERNITY,
+    prerequisites: ["START"]
+  }),
   // Dilation
+  "STP": new Perk({
+    id: "STP",
+    name: "Starting Tachyon Particles",
+    effect: "After unlocking Dilation, gain 10 Tachyon Particles.",
+    family: PERK_FAMILY.DILATION,
+    prerequisites: ["SEP1", "TP1"],
+    ap: 5
+  }),
   // Reality
   "START": new Perk({
     id: "START",
