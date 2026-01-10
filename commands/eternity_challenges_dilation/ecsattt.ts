@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "
 import { isUserHelper, pluralise, quantify } from "@/utils/utils_commands";
 import { Command } from "@/types/Commands/Command";
 import { ecsAtTTAmount } from "@/utils/game_data/recommended_time_study_paths";
-import { makeEnumeration } from "@/utils/utils_formatting";
+import { enumerate } from "@/utils/utils_formatting";
 
 export default new Command({
   data: new SlashCommandBuilder()
@@ -23,7 +23,7 @@ export default new Command({
 
     const content = `
 At ${quantify("total Time Theorem", timeTheorems, 1e5)}, you should have: ${response.completions}.
-${response.nextECs.length >= 0 ? `Next recommended ${pluralise("Eternity Challenge", response.nextECs.length)}: ${makeEnumeration<string>(response.nextECs, ", ", "", "and")} at ${response.nextChallengeTT} total Time Theorems` : ""}`;
+${response.nextECs.length >= 0 ? `Next recommended ${pluralise("Eternity Challenge", response.nextECs.length)}: ${enumerate(response.nextECs, "conjunction")} at ${response.nextChallengeTT} total Time Theorems` : ""}`;
 
     interaction.reply({
       content,

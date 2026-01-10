@@ -1,5 +1,5 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, bold } from "discord.js";
-import { capitalise, makeEnumeration } from "@/utils/utils_formatting";
+import { capitalise, enumerate } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type { TimeStudy } from "../game_data/TimeStudy";
@@ -42,7 +42,7 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
     } else {
       fields.push({
         name: "Prerequisites",
-        value: `${this.study.reqType} ${makeEnumeration<number>(this.study.prerequisites, ", TS", "TS", "or")} ${this.study.additionalPrerequisites ? `and ${this.study.additionalPrerequisites}` : ``}`,
+        value: `${this.study.reqType} ${enumerate(this.study.prerequisites.map(study => `TS${study}`), "disjunction")} ${this.study.additionalPrerequisites ? `and ${this.study.additionalPrerequisites}` : ``}`,
         inline: false
       });
     }

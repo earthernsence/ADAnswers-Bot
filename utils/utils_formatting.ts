@@ -1,23 +1,22 @@
 import Decimal from "break_infinity.js";
 
-// eslint-disable-next-line max-params
-export function makeEnumeration<itemType>(
-  items: Array<itemType>,
-  separator: string = ", ",
-  name: string = "",
-  finalSeperator: string = "or"
-) {
-  if (items.length === 0) return "";
-  if (items.length === 1) return `${name}${items[0]}`;
-  if (items.length === 2) return `${name}${items[0]} ${finalSeperator} ${name}${items[1]}`;
-  const commaSeparated = items.slice(0, items.length - 1).join(separator);
-  const last = items[items.length - 1];
-  return `${name}${commaSeparated}, ${finalSeperator} ${name}${last}`;
-}
+// Old implementation for enumerations. In general, enumerate() should be
+// just as effective, and "better" in some way. Keeping both implementations for posterity.
+// export function makeEnumeration<itemType>(
+//   items: Array<itemType>,
+//   separator: string = ", ",
+//   name: string = "",
+//   finalSeperator: string = "or"
+// ) {
+//   if (items.length === 0) return "";
+//   if (items.length === 1) return `${name}${items[0]}`;
+//   if (items.length === 2) return `${name}${items[0]} ${finalSeperator} ${name}${items[1]}`;
+//   const commaSeparated = items.slice(0, items.length - 1).join(separator);
+//   const last = items[items.length - 1];
+//   return `${name}${commaSeparated}, ${finalSeperator} ${name}${last}`;
+// }
 
-// In general, I think the [Intl.ListFormat].format() way of doing enumeration is supposed to be better,
-// but I'll keep both for the time being.
-export function enumerate<itemType>(items: Array<itemType>, type: Intl.ListFormatType = "conjunction"): string {
+export function enumerate<itemType = string>(items: Array<itemType>, type: Intl.ListFormatType = "conjunction"): string {
   return new Intl.ListFormat("en", {
     style: "long",
     type,

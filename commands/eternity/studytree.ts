@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, italic, userMention } from "discord.js";
 import { ecsAtTTAmount, getRecommendedTree } from "@/utils/game_data/recommended_time_study_paths";
 import { Command } from "@/types/Commands/Command";
+import { enumerate } from "@/utils/utils_formatting";
 import { isUserHelper } from "@/utils/utils_commands";
-import { makeEnumeration } from "@/utils/utils_formatting";
 
 export default new Command({
   data: new SlashCommandBuilder()
@@ -50,7 +50,7 @@ export default new Command({
     const recommendedECs = ecsAtTTAmount(theorems);
     const upcomingECs = theorems >= 12350
       ? ""
-      : `(Next: ${makeEnumeration<string>(recommendedECs.nextECs, ", ", "", "and")} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
+      : `(Next: ${enumerate(recommendedECs.nextECs, "conjunction")} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
     const ecString = showRecommendedECs && theorems >= 130
       ? `Recommended EC completions for ${theorems} TT: ${recommendedECs.completions} ${upcomingECs}`
       : "";

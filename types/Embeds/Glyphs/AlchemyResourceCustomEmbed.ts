@@ -96,7 +96,7 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
       if (other.reagents.some(resource => resource[0] === this.resource.name)) resources.push(other);
     }
 
-    const usedIn = enumerate<string>(resources.map(res => res.prettyName));
+    const usedIn = enumerate(resources.map(res => res.prettyName));
 
     return `${this.resource.prettyName} is used in ${bold(quantify("reaction", resources.length))} as a reagent.\nUsed in ${usedIn}.`;
   }
