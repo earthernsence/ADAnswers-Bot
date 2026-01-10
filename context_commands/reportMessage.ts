@@ -1,4 +1,4 @@
-import { ApplicationCommandType, ContextMenuCommandBuilder, MessageContextMenuCommandInteraction, MessageFlags, ModalSubmitInteraction, TextChannel, TextInputStyle } from "discord.js";
+import { ApplicationCommandType, ContextMenuCommandBuilder, InteractionContextType, MessageContextMenuCommandInteraction, MessageFlags, ModalSubmitInteraction, TextChannel, TextInputStyle } from "discord.js";
 import { LabelBuilder, ModalBuilder, TextInputBuilder, channelMention, roleMention, time, userMention } from "@discordjs/builders";
 import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
@@ -10,6 +10,7 @@ import { link } from "@/utils/utils_commands";
 export default new ContextMenuCommand({
   data: new ContextMenuCommandBuilder()
     .setName("Report message")
+    .setContexts(InteractionContextType.Guild)
     .setType(ApplicationCommandType.Message),
   execute: async(interaction: MessageContextMenuCommandInteraction) => {
     const nowTimestamp = Math.floor((Date.now()) / 1000);

@@ -6,7 +6,12 @@ import fs from "node:fs";
 import path from "node:path";
 import reportMessage from "./context_commands/reportMessage";
 
-const client: ADABClient = <ADABClient> new Client({ intents: [GatewayIntentBits.Guilds] });
+const client: ADABClient = <ADABClient> new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.DirectMessages,
+  ]
+});
 
 client.commands = new Collection<string, Command>();
 client.contextCommands = new Collection<string, ContextMenuCommand>();
