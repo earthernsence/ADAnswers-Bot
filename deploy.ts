@@ -56,7 +56,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
     // await rest.put(
     //   Routes.applicationCommands(process.env.APPLICATION_ID as string),
     //   { body: commands },
-    // );
+    // ).then(() => console.log(`Loaded ${commands.length} commands globally`));
 
   } catch (e) {
     console.error(e);

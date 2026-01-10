@@ -106,7 +106,6 @@ Basically what the % is showing really is the decimal in the Glyph level formula
   /* eslint-enable @stylistic/max-len */
 };
 
-// TODO: /glyph utils
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("glyph")
