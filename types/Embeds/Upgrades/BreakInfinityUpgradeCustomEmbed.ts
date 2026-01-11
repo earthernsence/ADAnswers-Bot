@@ -2,6 +2,7 @@ import type { CommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { BreakInfinityUpgrade } from "@/types/game_data/upgrades/BreakInfinityUpgrade";
 import { Colours } from "@/utils/utils_colours";
+import { formatDecimal } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface BreakInfinityUpgradeCustomEmbedProps {
@@ -26,7 +27,7 @@ export class BreakInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       {
         name: "Cost",
         value: `${quantify("Infinity Point", this.upgrade.cost)}\
-${this.upgrade.increment ? `, increasing by a factor of ${this.upgrade.increment} on each purchase` : ""}`,
+${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
       },
     ];

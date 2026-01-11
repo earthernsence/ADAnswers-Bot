@@ -25,7 +25,7 @@ export class DilationUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       {
         name: "Cost",
         value: `${formatDecimal(this.upgrade.cost)} Dilated Time\
-  ${this.upgrade.increment ? `, increasing by a factor of ${this.upgrade.increment} on each purchase` : ""}`,
+  ${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
       },
     ];

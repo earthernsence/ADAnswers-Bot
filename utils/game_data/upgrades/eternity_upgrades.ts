@@ -33,5 +33,30 @@ final multiplier: \`multPreCap * multPostCap\`
     `,
     cost: 10,
     graph: `https://cdn.discordapp.com/attachments/351479640755404820/990792593120063598/idMultEternities.png`
+  }),
+  "idMultICRecords": new EternityUpgrade({
+    id: 3,
+    name: "ID Multiplier from Infinity Challenge Records",
+    effect: "Infinity Dimensions multiplier based on sum of Infinity Challenge times",
+    formula: "`2 ^ (30 / max(0.1, IC times in seconds))`",
+    cost: 5e4
+  }),
+  "tdMultAchs": new EternityUpgrade({
+    id: 4,
+    name: "TD Multiplier from Achievements",
+    effect: "Your Achievement bonus affects Time Dimensions",
+    cost: 1e16
+  }),
+  "tdMultTheorems": new EternityUpgrade({
+    id: 5,
+    name: "TD Multiplier from Time Theorems",
+    effect: "Time Dimensions are multiplied by your unspent Time Theorems",
+    cost: 1e40
+  }),
+  "tdMultDaysPlayed": new EternityUpgrade({
+    id: 6,
+    name: "TD Multiplier from Days Played",
+    effect: "Time Dimensions are multiplied by days played",
+    cost: 1e50
   })
 };

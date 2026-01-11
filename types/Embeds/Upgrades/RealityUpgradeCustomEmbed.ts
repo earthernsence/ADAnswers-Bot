@@ -1,6 +1,7 @@
 import type { CommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { RealityUpgrade } from "@/types/game_data/upgrades/RealityUpgrade";
+import { formatDecimal } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface RealityUpgradeCustomEmbedProps {
@@ -25,7 +26,7 @@ export class RealityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       {
         name: "Cost",
         value: `${quantify("Reality Machine", this.upgrade.cost)}\
-${this.upgrade.increment ? `, increasing by a factor of ${this.upgrade.increment} on each purchase` : ""}`,
+${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
       }
     ];

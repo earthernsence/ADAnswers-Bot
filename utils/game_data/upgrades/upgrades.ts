@@ -13,7 +13,6 @@ interface UpgradeInfo {
   }
 }
 
-// TODO: finish data entry for all upgrade types
 export const upgrades: UpgradeInfo = {
   infinity: InfinityUpgrades,
   charged: ChargedInfinityUpgrades,
