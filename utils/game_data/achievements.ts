@@ -626,8 +626,16 @@ export const achievements: Record<number, Achievement> = {
     fullName: "Yo dawg, I heard you like reskins...",
     requirement: "Have all your Eternities in your past 10 Eternities be for at least 1.8e308 times higher Eternity Points than the previous one.",
     reward: "Galaxies no longer reset Dimension Boosts.",
-    // TODO: Write actual strategy for a143
-    unlockStrategy: ""
+    unlockStrategy: `To note: It is possible to do this Achievement pre-Reality.
+Respec out of all Time Studies and disable all Autobuyers. Buy a 1st Antimatter Dimension, Crunch, then Eternity to ensure you have a small starting EP value (~e900 or so).
+Begin each Eternity with a clean slate (i.e. respec studies) and set your Eternity autobuyer to your next goal (typically add ~320 OoM of EP to your previous Eternity).
+From here on, we will enable things bit by bit to keep gains small:
+- Eternity 2: Turn on all Autobuyers except for Crunch, Sacrifice, and RGs. Manually crunch until you can reach the goal.
+- 3: Begin using this TS tree: ${inlineCode("11,21,22,32,42,51,61,73,83,93,103,111,123,133,143,151,161,162,171,181,31,41,33,62,72,71,81,82,91,92,102,101,191,192,193,211,212,213,214,201|0")}.
+- 4: Activate Sacrifice Autobuyer & use provided TS tree
+- 5-7: Use the provided TS tree & buy RGs manually until you reach the goal.
+- 8-10: Use a standard EP grinding TS tree & buy RGs manually until you reach the goal.
+    `
   }),
   144: new Achievement({
     id: 144,

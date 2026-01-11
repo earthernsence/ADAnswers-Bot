@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, italic, userMention } from "@discordjs/builders";
+import { ActionRowBuilder, ButtonBuilder, inlineCode, italic, userMention } from "@discordjs/builders";
 import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
@@ -23,7 +23,6 @@ const getNext = (current: DoublyLinkedListNode<EternityChallenge>, forward: bool
   return newEC;
 };
 
-// TODO: Add "tree" option for easier copying
 // I really want there to be a super easy way to generalise this, but I haven't come across anything that
 // would be easier than just writing it all in the execute method. I'm sorry for now.
 export default new Command({
@@ -51,6 +50,12 @@ export default new Command({
         .setName("target")
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
+    )
+    .addBooleanOption(option =>
+      option
+        .setName("tree")
+        .setDescription("(Optional) Request only the tree for easy copying.")
+        .setRequired(false)
     ),
   execute: async(interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
@@ -72,6 +77,7 @@ export default new Command({
         files: [errorImage],
         flags: MessageFlags.Ephemeral
       });
+
       return;
     }
 
@@ -91,6 +97,16 @@ export default new Command({
         files: [errorImage],
         flags: MessageFlags.Ephemeral
       });
+
+      return;
+    }
+
+    if (interaction.options.getBoolean("tree", false)) {
+      await interaction.reply({
+        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${inlineCode(challenge.value.tree)}`,
+        flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
+      });
+
       return;
     }
 
