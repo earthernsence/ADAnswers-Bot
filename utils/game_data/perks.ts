@@ -143,6 +143,20 @@ export const perks: Record<string, Perk> = {
     family: PERK_FAMILY.INFINITY,
     prerequisites: ["SAM", "SEP1"]
   }),
+  "SIP2": new Perk({
+    id: "SIP2",
+    name: "Starting Infinity Points 2",
+    effect: "Start every Eternity and Reality with 5e130 Infinity Points",
+    family: PERK_FAMILY.INFINITY,
+    prerequisites: ["SIP1"]
+  }),
+  "IDR": new Perk({
+    id: "IDR",
+    name: "Infinity Dimension Requirement Removal",
+    effect: "Infinity Dimensions no longer have Antimatter requirements.",
+    family: PERK_FAMILY.INFINITY,
+    prerequisites: ["SIP2"]
+  }),
   // Eternity
   "EC5R": new Perk({
     id: "EC5R",
