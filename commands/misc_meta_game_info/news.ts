@@ -1,6 +1,6 @@
 import { ChoiceTextCommand } from "@/types/Commands/ChoiceTextCommand";
-import { SlashCommandBuilder } from "discord.js";
 import { link } from "@/utils/utils_commands";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new ChoiceTextCommand({
   data: new SlashCommandBuilder()

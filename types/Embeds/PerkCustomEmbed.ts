@@ -1,8 +1,8 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, bold } from "discord.js";
+import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type Perk from "@/utils/game_data/Perk";
-import { capitalise } from "@/utils/utils_formatting";
 import { pluralise } from "@/utils/utils_commands";
 
 interface PerkCustomEmbedProps {

@@ -1,15 +1,15 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, SlashCommandBuilder, inlineCode } from "discord.js";
-import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from "discord.js";
 import { effectProbability, rarityProbability, threshold } from "@/utils/game_data/glyphs/glyph_utils";
+import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
+import { capitalise } from "@/utils/utils_formatting";
 import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { GlyphEffectCustomEmbed } from "@/types/Embeds/Glyphs/GlyphEffectCustomEmbed";
-import { GlyphSacrificeCustomEmbed } from "@/types/Embeds/Glyphs/GlyphSacrificeCustomEmbed";
-import { capitalise } from "@/utils/utils_formatting";
 import { glyphs } from "@/utils/game_data/glyphs/glyphs";
+import { GlyphSacrificeCustomEmbed } from "@/types/Embeds/Glyphs/GlyphSacrificeCustomEmbed";
 
 // eslint-disable-next-line no-unused-vars
 const glyphInfo: Record<string, (isADServer: boolean) => string> = {

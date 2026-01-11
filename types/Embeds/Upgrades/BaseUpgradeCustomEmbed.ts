@@ -1,9 +1,9 @@
 import { AttachmentBuilder, type ColorResolvable, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import type { BaseUpgrade } from "@/types/game_data/upgrades/BaseUpgrade";
+import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
 import { NotImplementedError } from "@/types/NotImplementedError";
-import { capitalise } from "@/utils/utils_formatting";
 
 interface BaseUpgradeCustomEmbedProps {
   interaction: CommandInteraction,

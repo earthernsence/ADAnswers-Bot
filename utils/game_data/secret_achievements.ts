@@ -1,8 +1,8 @@
 import { DoublyLinkedList } from "@/types/DoublyLinkedList";
-import SecretAchievement from "./SecretAchievement";
-import { SecretAchievementType } from "@/types/game_data/SecretAchievements";
 import { enumerate } from "../utils_formatting";
 import { inlineCode } from "discord.js";
+import SecretAchievement from "./SecretAchievement";
+import { SecretAchievementType } from "@/types/game_data/SecretAchievements";
 
 export const secretAchievements: Record<string, SecretAchievement> = {
   // Naming scheme here:

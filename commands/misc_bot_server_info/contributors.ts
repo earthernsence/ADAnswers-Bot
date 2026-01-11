@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, inlineCode } from "discord.js";
+import { inlineCode, SlashCommandBuilder } from "discord.js";
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 import { link } from "@/utils/utils_commands";
 

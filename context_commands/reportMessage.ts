@@ -1,11 +1,11 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, InteractionContextType, MessageContextMenuCommandInteraction, MessageFlags, ModalSubmitInteraction, TextChannel, TextInputStyle } from "discord.js";
-import { LabelBuilder, ModalBuilder, TextInputBuilder, channelMention, roleMention, time, userMention } from "@discordjs/builders";
+import { channelMention, LabelBuilder, ModalBuilder, roleMention, TextInputBuilder, time, userMention } from "@discordjs/builders";
 import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
 import { ContextMenuCommand } from "@/types/Commands/ContextMenuCommand";
 import { CustomEmbed } from "@/types/Embeds/CustomEmbed";
-import { Roles } from "@/utils/utils_roles";
 import { link } from "@/utils/utils_commands";
+import { Roles } from "@/utils/utils_roles";
 
 export default new ContextMenuCommand({
   data: new ContextMenuCommandBuilder()

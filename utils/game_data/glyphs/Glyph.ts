@@ -1,10 +1,10 @@
 import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
 import type { AlteredGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
+import { bold } from "discord.js";
+import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import type { GlyphEffect } from "./GlyphEffect";
 import type { Glyph as TGlyph } from "@/types/game_data/glyphs/Glyph";
-import { bold } from "discord.js";
-import { capitalise } from "@/utils/utils_formatting";
 
 interface GlyphProps {
   name: string,

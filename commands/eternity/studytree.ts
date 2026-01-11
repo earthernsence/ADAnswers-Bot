@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, italic, userMention } from "discord.js";
+import { ChatInputCommandInteraction, italic, MessageFlags, SlashCommandBuilder, userMention } from "discord.js";
 import { ecsAtTTAmount, getRecommendedTree } from "@/utils/game_data/recommended_time_study_paths";
 import { Command } from "@/types/Commands/Command";
 import { enumerate } from "@/utils/utils_formatting";

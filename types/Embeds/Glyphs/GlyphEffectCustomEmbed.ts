@@ -1,4 +1,4 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, bold } from "discord.js";
+import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import type { AlteredGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
 import { Channels } from "@/utils/utils_channels";
 import { CustomEmbed } from "../CustomEmbed";

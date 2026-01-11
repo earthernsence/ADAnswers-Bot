@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, bold, inlineCode, underline } from "discord.js";
+import { bold, ChatInputCommandInteraction, inlineCode, MessageFlags, SlashCommandBuilder, underline } from "discord.js";
 import { orderAsDoublyLinkedList, orderAsString } from "@/utils/game_data/challenges/eternity_challenges";
 import { Command } from "@/types/Commands/Command";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";

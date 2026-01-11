@@ -1,11 +1,11 @@
 import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
-import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder, italic, userMention } from "discord.js";
+import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, italic, MessageComponentInteraction, MessageFlags, SlashCommandBuilder, userMention } from "discord.js";
 import Achievement from "@/utils/game_data/Achievement";
 import { AchievementCustomEmbed } from "@/types/Embeds/AchievementCustomEmbed";
+import { achievementsList } from "@/utils/game_data/achievements";
 import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
-import { achievementsList } from "@/utils/game_data/achievements";
 import { isUserHelper } from "@/utils/utils_commands";
 
 const getNext = (current: DoublyLinkedListNode<Achievement>, forward: boolean): DoublyLinkedListNode<Achievement> => {

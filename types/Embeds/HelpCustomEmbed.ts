@@ -6,9 +6,9 @@ import {
   type CommandInteraction,
   type EmbedBuilder,
   type EmbedField,
+  inlineCode,
   MessageComponentInteraction,
   StringSelectMenuBuilder,
-  inlineCode,
   underline,
 } from "discord.js";
 import type { ADABClient } from "../ADABClient";

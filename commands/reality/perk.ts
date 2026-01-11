@@ -2,11 +2,11 @@ import { ApplicationCommandOptionType, ChatInputCommandInteraction, SlashCommand
 import { perks, perksFromFamily } from "@/utils/game_data/perks";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
+import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { PERK_FAMILY } from "@/types/game_data/Perks";
 import { PerkCustomEmbed } from "@/types/Embeds/PerkCustomEmbed";
-import { capitalise } from "@/utils/utils_formatting";
 
 const perkInfo: Record<string, string> = {
   /* eslint-disable @stylistic/max-len */

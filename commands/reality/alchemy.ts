@@ -1,11 +1,11 @@
 import { ApplicationCommandOptionType, ButtonInteraction, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import { AlchemyResourceCustomEmbed } from "@/types/Embeds/Glyphs/AlchemyResourceCustomEmbed";
+import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
+import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { Command } from "@/types/Commands/Command";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
-import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
-import { capitalise } from "@/utils/utils_formatting";
 import { isUserHelper } from "@/utils/utils_commands";
 
 const alchemyInfo: Record<string, string> = {

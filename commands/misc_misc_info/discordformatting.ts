@@ -1,6 +1,6 @@
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
-import { SlashCommandBuilder } from "discord.js";
 import { link } from "@/utils/utils_commands";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new BasicTextCommand({
   data: new SlashCommandBuilder()

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, inlineCode } from "discord.js";
+import { inlineCode, SlashCommandBuilder } from "discord.js";
 import { ChoiceTextCommand } from "@/types/Commands/ChoiceTextCommand";
 
 export default new ChoiceTextCommand({

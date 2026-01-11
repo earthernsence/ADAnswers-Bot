@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
-import { TimeStudyCustomEmbed } from "@/types/Embeds/TimeStudyCustomEmbed";
 import { timeStudies } from "@/utils/game_data/time_studies";
+import { TimeStudyCustomEmbed } from "@/types/Embeds/TimeStudyCustomEmbed";
 
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()

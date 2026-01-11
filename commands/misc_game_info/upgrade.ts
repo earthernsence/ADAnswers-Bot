@@ -12,6 +12,7 @@ import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import type { EternityUpgrade } from "@/types/game_data/upgrades/EternityUpgrade";
 import { EternityUpgradeCustomEmbed } from "@/types/Embeds/Upgrades/EternityUpgradeCustomEmbed";
 import { EternityUpgrades } from "@/utils/game_data/upgrades/eternity_upgrades";
+import { getUpgrade } from "@/utils/game_data/upgrades/upgrades";
 import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgrade";
 import { ImaginaryUpgradeCustomEmbed } from "@/types/Embeds/Upgrades/ImaginaryUpgradeCustomEmbed";
 import { ImaginaryUpgrades } from "@/utils/game_data/upgrades/imaginary_upgrades";
@@ -21,7 +22,6 @@ import { InfinityUpgrades } from "@/utils/game_data/upgrades/infinity_upgrades";
 import type { RealityUpgrade } from "@/types/game_data/upgrades/RealityUpgrade";
 import { RealityUpgradeCustomEmbed } from "@/types/Embeds/Upgrades/RealityUpgradeCustomEmbed";
 import { RealityUpgrades } from "@/utils/game_data/upgrades/reality_upgrades";
-import { getUpgrade } from "@/utils/game_data/upgrades/upgrades";
 
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()

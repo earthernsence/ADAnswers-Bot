@@ -1,5 +1,5 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
-import { TimestampStyles, time } from "@discordjs/builders";
+import { time, TimestampStyles } from "@discordjs/builders";
 import type Achievement from "@/utils/game_data/Achievement";
 import { Caesar } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";

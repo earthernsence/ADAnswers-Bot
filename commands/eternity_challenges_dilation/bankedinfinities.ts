@@ -1,5 +1,5 @@
 /* eslint-disable @stylistic/max-len */
-import { SlashCommandBuilder, inlineCode } from "discord.js";
+import { inlineCode, SlashCommandBuilder } from "discord.js";
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 
 export default new BasicTextCommand({

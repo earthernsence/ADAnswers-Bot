@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, inlineCode, spoiler } from "discord.js";
+import { inlineCode, SlashCommandBuilder, spoiler } from "discord.js";
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 
 export default new BasicTextCommand({

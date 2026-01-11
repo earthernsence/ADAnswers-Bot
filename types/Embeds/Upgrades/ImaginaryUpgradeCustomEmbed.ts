@@ -1,7 +1,7 @@
 import type { CommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
-import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgrade";
 import { formatDecimal } from "@/utils/utils_formatting";
+import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgrade";
 import { quantify } from "@/utils/utils_commands";
 
 interface ImaginaryUpgradeCustomEmbedProps {

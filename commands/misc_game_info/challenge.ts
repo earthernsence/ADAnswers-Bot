@@ -1,9 +1,9 @@
 import { type ApplicationCommandOptionChoiceData, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/Challenges/AntimatterChallengeCustomEmbed";
+import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { InfinityChallengeCustomEmbed } from "@/types/Embeds/Challenges/InfinityChallengeCustomEmbed";
-import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challenges";
 
 function getChallengeChoices(): Array<ApplicationCommandOptionChoiceData<string>> {

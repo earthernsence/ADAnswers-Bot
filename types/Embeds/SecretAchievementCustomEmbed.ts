@@ -1,4 +1,4 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, TimestampStyles, spoiler, time } from "discord.js";
+import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, spoiler, time, TimestampStyles } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type SecretAchievement from "@/utils/game_data/SecretAchievement";

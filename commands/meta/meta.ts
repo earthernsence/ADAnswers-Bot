@@ -1,7 +1,7 @@
 import { ButtonInteraction, ChatInputCommandInteraction, ComponentType, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import { Command } from "@/types/Commands/Command";
-import { MetaCustomEmbed } from "@/types/Embeds/MetaCustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
+import { MetaCustomEmbed } from "@/types/Embeds/MetaCustomEmbed";
 
 export default new Command({
   data: new SlashCommandBuilder()

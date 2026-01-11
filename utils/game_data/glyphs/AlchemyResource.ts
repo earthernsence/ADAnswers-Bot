@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, bold } from "discord.js";
+import { ActionRowBuilder, bold, ButtonBuilder, ButtonStyle } from "discord.js";
 import { Symbols } from "@/utils/utils_symbols";
 import type { AlchemyResource as TAlchemyResource } from "@/types/game_data/glyphs/AlchemyResource";
 

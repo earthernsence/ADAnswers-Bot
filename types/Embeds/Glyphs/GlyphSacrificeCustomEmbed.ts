@@ -1,8 +1,8 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { capitalise } from "@/utils/utils_formatting";
 import { Channels } from "@/utils/utils_channels";
 import { CustomEmbed } from "../CustomEmbed";
 import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
-import { capitalise } from "@/utils/utils_formatting";
 
 interface GlyphSacrificeCustomEmbedProps {
   interaction: CommandInteraction,

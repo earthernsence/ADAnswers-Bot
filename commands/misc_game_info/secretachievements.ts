@@ -6,19 +6,19 @@ import {
   ChatInputCommandInteraction,
   ComponentType,
   type InteractionReplyOptions,
+  italic,
   MessageComponentInteraction,
   MessageFlags,
   SlashCommandBuilder,
-  italic,
   userMention } from "discord.js";
 import { mobileSecretAchievementsList, webSecretAchievementsList } from "@/utils/game_data/secret_achievements";
 import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
+import { isUserHelper } from "@/utils/utils_commands";
 import type SecretAchievement from "@/utils/game_data/SecretAchievement";
 import { SecretAchievementCustomEmbed } from "@/types/Embeds/SecretAchievementCustomEmbed";
 import { SecretAchievementType } from "@/types/game_data/SecretAchievements";
-import { isUserHelper } from "@/utils/utils_commands";
 
 const getNext = (current: DoublyLinkedListNode<SecretAchievement>, forward: boolean, type: SecretAchievementType): DoublyLinkedListNode<SecretAchievement> => {
   if (forward) {

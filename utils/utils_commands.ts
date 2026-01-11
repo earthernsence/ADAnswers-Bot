@@ -1,7 +1,7 @@
-import { type CommandInteraction, User, hideLinkEmbed, hyperlink } from "discord.js";
+import { type CommandInteraction, hideLinkEmbed, hyperlink, User } from "discord.js";
 import { Channels } from "./utils_channels";
-import { Roles } from "./utils_roles";
 import { formatDecimal } from "./utils_formatting";
+import { Roles } from "./utils_roles";
 
 export function isUserHelper(interaction: CommandInteraction): boolean | undefined {
   // If the command usage is in a DM, or not the AD server, return true

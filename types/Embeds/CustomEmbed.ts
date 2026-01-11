@@ -1,6 +1,6 @@
 import { AttachmentBuilder, type ColorResolvable, CommandInteraction, EmbedBuilder, type EmbedField, User } from "discord.js";
-import { NotImplementedError } from "../NotImplementedError";
 import { authorTitle } from "@/utils/utils_commands";
+import { NotImplementedError } from "../NotImplementedError";
 
 const FOOTER_IMAGE_URL = `https://cdn.discordapp.com/attachments/351479640755404820/980696250389254195/antimatter.png`;
 

@@ -1,8 +1,8 @@
-import { AttachmentBuilder, type CommandInteraction, EmbedBuilder, type EmbedField, TimestampStyles, bold, time } from "discord.js";
+import { AttachmentBuilder, bold, type CommandInteraction, EmbedBuilder, type EmbedField, time, TimestampStyles } from "discord.js";
 import type { AlchemyResource } from "@/utils/game_data/glyphs/AlchemyResource";
+import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
-import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
 import { enumerate } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 

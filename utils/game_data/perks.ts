@@ -1,5 +1,5 @@
-import { PERK_FAMILY } from "@/types/game_data/Perks";
 import Perk from "./Perk";
+import { PERK_FAMILY } from "@/types/game_data/Perks";
 
 export const perks: Record<string, Perk> = {
   // Achievement

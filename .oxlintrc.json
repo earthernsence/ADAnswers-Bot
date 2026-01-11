@@ -7,6 +7,17 @@
   "env": {
     "builtin": true
   },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@/types/*", "./types/*"],
+          ["@/images/*", "./images/*"],
+          ["@/utils/*", "./utils/*"]
+        ]
+      }
+    }
+  },
   "rules": {
     "constructor-super": "error",
     "for-direction": "error",
@@ -63,18 +74,41 @@
     "require-yield": "error",
     "use-isnan": "error",
     "valid-typeof": "error",
-    "semi": "warn",
+    "semi": "warn"
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.js",
-        "**/*.mjs",
-        "**/*.cjs"
-      ],
+      "files": ["**/*.ts", "**/*.js", "**/*.mjs", "**/*.cjs"],
       "rules": {
-        "sort-imports": "warn",
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "error",
+        "import/named": "error",
+        "import/namespace": "error",
+        "import/default": "error",
+        "import/export": "error",
+        "import/no-named-as-default": "warn",
+        "import/no-named-as-default-member": "warn",
+        "import/no-duplicates": "warn",
+        "import/extensions": ["warn", "never"],
+        "import/first": "warn",
+        "import/newline-after-import": "warn",
+        "import/no-named-default": "warn",
+        "import/no-self-import": "warn",
+        "import/order": [
+          "warn",
+          {
+            "newlines-between": "always-and-inside-groups",
+            "pathGroups": [{ "pattern": "@/**", "group": "sibling" }]
+          }
+        ],
+        "sort-imports": [
+          "warn",
+          {
+            "ignoreCase": true,
+            "allowSeparatedGroups": true,
+            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+          }
+        ],
         "no-console": "off",
         "no-template-curly-in-string": "warn",
         "array-callback-return": "error",
