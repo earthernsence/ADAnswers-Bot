@@ -62,6 +62,7 @@ export default new Command({
   execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
+    // TODO: Add helper role eligibility condition stuff
     // TODO: Change to AD server for release
     if (!interaction.inGuild() || interaction.guildId !== Channels.TestingServer) {
       const errorEmbed = new ErrorCustomEmbed({
