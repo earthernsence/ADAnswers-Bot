@@ -200,12 +200,12 @@ export const glyphs: Record<string, Glyph> = {
       }),
       "Top Left": new GlyphEffect({
         name: "Tachyon Galaxy Threshold Multiplier",
-        effect: '"Multiply" (Divide) the threshold scaling for Tachyon Galaxies. Only affects the fraction after 1.',
+        effect: `"Multiply" (Divide) the threshold scaling for Tachyon Galaxies. Only affects the fraction after 1.`,
         formula: "`1 - ((Level)^0.17 * (1 + 2.5 * Rarity)^0.35) / 100`",
         altered: {
           name: "Boosted Tachyon Galaxy Threshold Multiplier",
           effect:
-            '"Multiply" (Divide) the threshold scaling for Tachyon Galaxies, with a boosted formula based on Dilation Glyph Sacrifice.',
+            `"Multiply" (Divide) the threshold scaling for Tachyon Galaxies, with a boosted formula based on Dilation Glyph Sacrifice.`,
           formula:
             "`1 - ((Level)^0.17 * (1 + 2.5 * Rarity)^0.35) / 100 - log(max(min(dilation sacrifice, 1e100) / 1e60, 1)) / 2 / 50`"
         }

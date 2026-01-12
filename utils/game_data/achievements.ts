@@ -58,7 +58,7 @@ export const achievements: Record<number, Achievement> = {
     id: 23,
     fullName: "The 9th Dimension is a lie",
     requirement: "Have exactly 99 8th Antimatter Dimensions.",
-    unlockStrategy: 'Once you have the 8th Antimatter Dimension autobuyer, set it to "buy singles" and wait.',
+    unlockStrategy: `Once you have the 8th Antimatter Dimension autobuyer, set it to "buy singles" and wait.`,
     reward: "8th Antimatter Dimensions are 10% stronger."
   }),
   24: new Achievement({
@@ -696,7 +696,7 @@ From here on, we will enable things bit by bit to keep gains small:
   }),
   153: new Achievement({
     id: 153,
-    fullName: 'More like "reallydoesn\'tmatter"',
+    fullName: `More like "reallydoesn'tmatter"`,
     requirement: "Reality without producing antimatter."
   }),
   154: new Achievement({
@@ -755,7 +755,7 @@ From here on, we will enable things bit by bit to keep gains small:
     fullName: "Perfectly balanced",
     requirement: "Get a level 5,000 Glyph with all Glyph level factors equally weighted.",
     reward: "Unlock optimal automatic Glyph level factor adjustment.",
-    rewardFormula: 'Be sure to go turn this on under "Glyph Level Factors" on the Glyphs tab!'
+    rewardFormula: `Be sure to go turn this on under "Glyph Level Factors" on the Glyphs tab!`
   }),
   166: new Achievement({
     id: 166,

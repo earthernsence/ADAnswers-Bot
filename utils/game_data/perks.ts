@@ -293,7 +293,7 @@ export const perks: Record<string, Perk> = {
     id: "TP1",
     name: "Retroactive Tachyon Particles 1",
     effect:
-      'When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 1.5.',
+      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 1.5.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["STP", "TGR"]
   }),
@@ -301,7 +301,7 @@ export const perks: Record<string, Perk> = {
     id: "TP2",
     name: "Retroactive Tachyon Particles 2",
     effect:
-      'When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.',
+      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP1"]
   }),
@@ -309,7 +309,7 @@ export const perks: Record<string, Perk> = {
     id: "TP3",
     name: "Retroactive Tachyon Particles 3",
     effect:
-      'When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.5.',
+      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.5.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP2"]
   }),
@@ -317,7 +317,7 @@ export const perks: Record<string, Perk> = {
     id: "TP4",
     name: "Retroactive Tachyon Particles 4",
     effect:
-      'When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 3.',
+      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 3.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP3"],
     ap: 10
@@ -338,7 +338,7 @@ export const perks: Record<string, Perk> = {
   }),
   ATT: new Perk({
     id: "ATT",
-    name: '"Automatic Time Theorems" Automation',
+    name: `"Automatic Time Theorems" Automation`,
     effect: "Automatically purchase the passive Time Theorem generation Dilation Upgrade once you can afford it.",
     family: PERK_FAMILY.DILATION,
     prerequisites: ["DU2"],

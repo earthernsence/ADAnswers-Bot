@@ -20,7 +20,8 @@ export default [
   {
     plugins: {
       "@typescript-eslint": typescriptEslint,
-      "@stylistic": stylistic
+      "@stylistic": stylistic,
+      "import/": importPlugin
     },
 
     files: ["**/*.ts", "**/*.js", "**/*.mjs", "**/*.cjs"],
