@@ -1,7 +1,7 @@
 import { VAchievementShardReductionType, type VCelestial } from "@/types/game_data/celestials/v";
 import Decimal from "break_infinity.js";
 
-export default (<VCelestial>{
+export default <VCelestial>{
   info: `V is a unique Celestial unlocked by completing Achievement 151. \
 Once unlocked, V has additional requirements for full access. \
 You must complete 10,000 Realities, have 1e60 unspent RM, and reach specific milestones in Eternities, \
@@ -149,4 +149,4 @@ The Exponential Glyph Alchemy effect is disabled. V does not have a direct rewar
       requirement: 36
     }
   ]
-});
+};

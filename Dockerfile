@@ -9,4 +9,4 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 
-CMD ["bun", "run", "start"]
+CMD ["bun", "run", "initialise:global"]

@@ -176,3 +176,4 @@ dist
 
 # Miscellaneous
 .github
+azure-deploy.bat

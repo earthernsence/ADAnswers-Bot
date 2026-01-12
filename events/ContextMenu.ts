@@ -2,7 +2,7 @@ import { type CacheType, Events, type Interaction } from "discord.js";
 import type { ADABClient } from "@/types/ADABClient";
 import type { BaseEvent } from "@/types/BaseEvent";
 
-export default (<BaseEvent>{
+export default <BaseEvent>{
   name: Events.InteractionCreate,
   execute: async (interaction: Interaction<CacheType>) => {
     if (!interaction.isMessageContextMenuCommand()) return;
@@ -20,4 +20,4 @@ export default (<BaseEvent>{
       console.error(error);
     }
   }
-});
+};

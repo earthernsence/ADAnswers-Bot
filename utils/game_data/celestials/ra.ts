@@ -1,6 +1,6 @@
 import type { RaCelestial } from "@/types/game_data/celestials/ra";
 
-export default (<RaCelestial>{
+export default <RaCelestial>{
   info: `Ra, the fifth Celestial, is unlocked by completing all of V's Achievements. \
 Ra utilizes Memories to bring back enhanced positive effects from previous Celestials. \
 Within Ra, you gradually unlock the previous four Celestials, each offering additional upgrades tied to their original themes. \
@@ -179,4 +179,4 @@ Levels are capped at 25. Ra does not directly unlock the next Celestial.`,
       ]
     }
   }
-});
+};

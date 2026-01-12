@@ -1,6 +1,6 @@
 import type { TeresaCelestial } from "@/types/game_data/celestials/teresa";
 
-export default (<TeresaCelestial>{
+export default <TeresaCelestial>{
   info: `Teresa, the first Celestial, is unlocked by obtaining all Reality Upgrades (Achievement 147). \
 The main screen features a bar with a "Pour RM" button, allowing you to deposit RM into a container for a Reality Machine multiplier. \
 Once poured, RM cannot be retrieved. Unlocking Teresa's Reality requires reaching 1e14 RM inside the container. \
@@ -86,4 +86,4 @@ Teresa's Reality can be repeated, with stronger rewards obtained by achieving hi
       reward: "Unlock Teresa's Perk Point Shop."
     }
   ]
-});
+};
