@@ -8,7 +8,7 @@
   "scripts": {
     "initialise": "bun deploy.ts && bun .",
     "initialise:global": "bun deploy.ts --global && bun .",
-    "start": "bun .",
+    "start": "oxlint && oxfmt --check && bun .",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "lint:legacy": "bunx eslint .",
@@ -17,6 +17,7 @@
     "build": "oxlint --fix && oxfmt && docker build . -t adanswersbot"
   },
   "dependencies": {
+    "@antimatter-dimensions/notations": "^3.2.0",
     "break_infinity.js": "^2.2.0",
     "discord.js": "^14.25.1",
     "effect": "^3.19.14",

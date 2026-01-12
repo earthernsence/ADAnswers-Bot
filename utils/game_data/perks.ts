@@ -292,32 +292,28 @@ export const perks: Record<string, Perk> = {
   TP1: new Perk({
     id: "TP1",
     name: "Retroactive Tachyon Particles 1",
-    effect:
-      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 1.5.`,
+    effect: `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 1.5.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["STP", "TGR"]
   }),
   TP2: new Perk({
     id: "TP2",
     name: "Retroactive Tachyon Particles 2",
-    effect:
-      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.`,
+    effect: `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP1"]
   }),
   TP3: new Perk({
     id: "TP3",
     name: "Retroactive Tachyon Particles 3",
-    effect:
-      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.5.`,
+    effect: `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 2.5.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP2"]
   }),
   TP4: new Perk({
     id: "TP4",
     name: "Retroactive Tachyon Particles 4",
-    effect:
-      `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 3.`,
+    effect: `When buying the "You gain 3 times more Tachyon Particles" Dilation Upgrade, multiply your current Tachyon Particle amount by 3.`,
     family: PERK_FAMILY.DILATION,
     prerequisites: ["TP3"],
     ap: 10

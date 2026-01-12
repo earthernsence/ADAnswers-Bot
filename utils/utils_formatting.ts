@@ -62,6 +62,8 @@ export const Caesar = {
   randomEncrypt: (msg: string) => Caesar.encrypt(msg, Caesar.randomKey())
 };
 
+// TODO: switch to ADNotations for formatting after type declaration stuff
+// is taken care of
 export function formatDecimal(number: Decimal | number | string, decimals: number = 2, lessThan: number = 1000) {
   const value = number instanceof Decimal ? number : new Decimal(number);
   if (value.lessThan(lessThan)) return formatDecimalLessThan1000(value);
