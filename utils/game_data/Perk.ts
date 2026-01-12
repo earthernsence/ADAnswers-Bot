@@ -2,12 +2,12 @@ import type { PERK_FAMILY, Perk as TPerk } from "@/types/game_data/Perks";
 import { underline } from "discord.js";
 
 interface PerkProps {
-  id: string,
-  name: string,
-  effect: string,
-  family: PERK_FAMILY,
-  prerequisites?: Array<string>,
-  ap?: number
+  id: string;
+  name: string;
+  effect: string;
+  family: PERK_FAMILY;
+  prerequisites?: Array<string>;
+  ap?: number;
 }
 
 export default class Perk implements TPerk {

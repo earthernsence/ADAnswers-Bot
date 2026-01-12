@@ -1,4 +1,12 @@
-import { AttachmentBuilder, bold, type CommandInteraction, EmbedBuilder, type EmbedField, time, TimestampStyles } from "discord.js";
+import {
+  AttachmentBuilder,
+  bold,
+  type CommandInteraction,
+  EmbedBuilder,
+  type EmbedField,
+  time,
+  TimestampStyles
+} from "discord.js";
 import type { AlchemyResource } from "@/utils/game_data/glyphs/AlchemyResource";
 import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
 import { Colours } from "@/utils/utils_colours";
@@ -7,9 +15,9 @@ import { enumerate } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface AlchemyResourceCustomEmbedProps {
-  interaction: CommandInteraction,
-  resource: AlchemyResource,
-  expirationTimestamp: number,
+  interaction: CommandInteraction;
+  resource: AlchemyResource;
+  expirationTimestamp: number;
 }
 
 export class AlchemyResourceCustomEmbed extends CustomEmbed {
@@ -28,7 +36,9 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
 
   public create(): EmbedBuilder {
     this.setTitle(this.resource.prettyName)
-      .setDescription(`Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
+      .setDescription(
+        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
+      )
       .setColour(Colours.Reality);
 
     this.setFields(this.getFields());
@@ -87,7 +97,8 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
   private findUses(): string {
     // Reality is the only resource that isn't used as a reagent anywhere, so I feel okay
     // about hardcoding this in.
-    if (this.resource.name === "Reality") return `${this.resource.prettyName} is not used in any reactions as a reagent.`;
+    if (this.resource.name === "Reality")
+      return `${this.resource.prettyName} is not used in any reactions as a reagent.`;
 
     const resources: Array<AlchemyResource> = [];
 

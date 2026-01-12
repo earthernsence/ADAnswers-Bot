@@ -1,5 +1,5 @@
 export interface BaseEvent {
-  name: string,
-  once?: boolean,
-  execute: () => void | Promise<void>,
-};
+  name: string;
+  once?: boolean;
+  execute: () => void | Promise<void>;
+}

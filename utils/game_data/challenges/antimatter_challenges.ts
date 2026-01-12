@@ -11,7 +11,7 @@ const base = ` It is recommended to have at least the first 12 infinity upgrades
 // https://discordjs.guide/popular-topics/embeds.html#attaching-images
 
 export const antimatterChallenges: AntimatterChallenges = {
-  "c2": {
+  c2: {
     number: 2,
     requirements: `Reach Infinity`,
     challenge: `Buying anything halts your production, gradually coming back over 3 minutes.`,
@@ -20,52 +20,52 @@ export const antimatterChallenges: AntimatterChallenges = {
     goal: `Reach Infinity under these circumstances`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980907127730233425/C2.png`
   },
-  "c3": {
+  c3: {
     number: 3,
     requirements: `Reach Infinity`,
     challenge: `The 1st Antimatter Dimension is heavily weakened, but gets an exponentially increasing bonus that resets after DImension Boosts and Antimatter Galaxies.`,
     strategy: base,
     reward: `Upgradeable 3rd Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980907128040591410/C3.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c4": {
+  c4: {
     number: 4,
     requirements: `Reach Infinity`,
     challenge: `Buying an Antimatter Dimension automatically erases all lower tier Antimatter Dimensions, like a sacrifice without the boost.`,
     strategy: base,
     reward: `Upgradeable 4th Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980907128254496858/C4.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c5": {
+  c5: {
     number: 5,
     requirements: `Reach Infinity`,
     challenge: `The Tickspeed purchase multiplier starts at ×1.080 instead of ×1.125.`,
     strategy: base,
     reward: `Upgradeable 5th Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908583430533120/C5.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c6": {
+  c6: {
     number: 6,
     requirements: `Reach Infinity`,
     challenge: `Each Antimatter Dimension costs the dimension 2 dimensions below it, instead of antimatter. Antimatter Dimension prices are modified.`,
     strategy: base,
     reward: `Upgradeable 6th Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908583623483452/C6.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c7": {
+  c7: {
     number: 7,
     requirements: `Reach Infinity`,
     challenge: `The multiplier from buying 10 Antimatter Dimensions is reduced to ×1, but is increased by ×0.2 per Dimension Boost, up to a maximum of ×2.`,
     strategy: base,
     reward: `Upgradeable 7th Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908583841595422/C7.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c8": {
+  c8: {
     number: 8,
     requirements: `Reach Infinity`,
     challenge: `Dimension Boosts provide no boost and Antimatter Galaxies cannot be bought, but Dimensional Sacrifice is significantly stronger and resets antimatter and all Antimatter Dimensions.`,
@@ -73,9 +73,9 @@ export const antimatterChallenges: AntimatterChallenges = {
       Make sure to do the antitable achievement in these runs, because this achievement is pretty easy for now. If you need a guide for it, feel free to call the bot with "/antitables prebreak".`,
     reward: `Upgradeable 8th Antimatter Dimension autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908584101609472/C8.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c9": {
+  c9: {
     number: 9,
     requirements: `Reach Infinity`,
     challenge: `Whenever you buy Tickspeed upgrades, or 10 of an Antimatter Dimension, everything else of equal cost will increase to its next cost step.`,
@@ -94,27 +94,27 @@ For post 1e7 IP upgrade:
 - Hold M/Max for additional speed -- if this causes trouble, try tapping it instead of holding`,
     reward: `Upgradeable Tickspeed autobuyer`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908584332308490/C9.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c10": {
+  c10: {
     number: 10,
     requirements: `Have 16 Infinities`,
     challenge: `There are only 6 Antimatter Dimensions, with Dimension Boost and Antimatter Galaxy costs modified.`,
     strategy: base,
     reward: "Dimension Boost autobuyer",
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908584546230292/C10.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c11": {
+  c11: {
     number: 11,
     requirements: `Have 16 Infinities`,
     challenge: `There's normal matter which rises once you have at least 1 2nd Antimatter Dimension. If it exceeds your antimatter, it will Dimension Boost without giving the bonus.`,
     strategy: `${base}\n If you are on web, this challenge becomes a normal infinity run once you have the "Galaxies are twice as effective" upgrade. Just do it once you have that upgrade.`,
     reward: "Antimatter Galaxy autobuyer",
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908584919531541/C11.png`,
-    goal: `Reach Infinity under these circumstances`,
+    goal: `Reach Infinity under these circumstances`
   },
-  "c12": {
+  c12: {
     number: 12,
     requirements: `Have 16 Infinities`,
     challenge: `Each Antimatter Dimension produces the dimension 2 dimensions below it (1st Antimatter Dimensions still produce antimatter). The 2nd, 4th, and 6th Antimatter Dimensions are made stronger to compensate.`,
@@ -123,7 +123,6 @@ For post 1e7 IP upgrade:
       The exact number of infinities could be arugued, but 200 was relatively reasonable to Tables -- who completed C12 in 5 minutes with 200 Infinities and 0 Infinity Points.`,
     reward: "Big Crunches autobuyer",
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980908585162784778/C12.png`,
-    goal: `Reach Infinity under these circumstances`,
-  },
+    goal: `Reach Infinity under these circumstances`
+  }
 };
-

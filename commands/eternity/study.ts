@@ -24,7 +24,7 @@ export default new BasicEmbedCommand({
     if (!studyRequested) {
       return new ErrorCustomEmbed({
         interaction,
-        text: `The Time Study you provided (TS${studyID}) does not exist!`,
+        text: `The Time Study you provided (TS${studyID}) does not exist!`
       });
     }
 

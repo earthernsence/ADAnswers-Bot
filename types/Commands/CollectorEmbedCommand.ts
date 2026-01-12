@@ -1,4 +1,3 @@
-
 import { type ActionRowBuilder, ButtonBuilder, italic, userMention } from "@discordjs/builders";
 import {
   type Awaitable,
@@ -16,12 +15,12 @@ import type { CustomEmbed } from "../Embeds/CustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface CollectorEmbedCommandProps {
-  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
   /* eslint-disable no-unused-vars */
-  embed: (interaction: ChatInputCommandInteraction, expirationTimestamp: number) => CustomEmbed,
-  components: (disabled: boolean, expirationTimestamp: number) => ActionRowBuilder<ButtonBuilder>,
-  onCollect: (i: ButtonInteraction) => Awaitable<void>,
-  onEnd: (interaction: ChatInputCommandInteraction) => Awaitable<void>
+  embed: (interaction: ChatInputCommandInteraction, expirationTimestamp: number) => CustomEmbed;
+  components: (disabled: boolean, expirationTimestamp: number) => ActionRowBuilder<ButtonBuilder>;
+  onCollect: (i: ButtonInteraction) => Awaitable<void>;
+  onEnd: (interaction: ChatInputCommandInteraction) => Awaitable<void>;
   /* eslint-enable no-unused-vars */
 }
 
@@ -29,7 +28,7 @@ export class CollectorEmbedCommand extends Command {
   constructor({ data, embed, components, onCollect, onEnd }: CollectorEmbedCommandProps) {
     super({
       data,
-      execute: async(interaction: ChatInputCommandInteraction) => {
+      execute: async (interaction: ChatInputCommandInteraction) => {
         if (!interaction) return;
 
         // If the command has a target option, get it and add it to the message.
@@ -62,7 +61,11 @@ export class CollectorEmbedCommand extends Command {
 
         const sentReply = await interaction.reply(initialContent);
 
-        const collector = sentReply.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 });
+        const collector = sentReply.createMessageComponentCollector({
+          componentType: ComponentType.Button,
+          filter,
+          time: 60000
+        });
 
         collector.on("collect", onCollect);
         collector.on("end", onEnd);

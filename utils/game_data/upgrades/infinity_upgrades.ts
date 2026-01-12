@@ -1,11 +1,11 @@
 import { InfinityUpgrade } from "@/types/game_data/upgrades/InfinityUpgrade";
 
 interface IInfinityUpgrades {
-  [key: string]: InfinityUpgrade
+  [key: string]: InfinityUpgrade;
 }
 
 export const InfinityUpgrades: IInfinityUpgrades = {
-  "timeMult": new InfinityUpgrade({
+  timeMult: new InfinityUpgrade({
     id: 11,
     name: "Time Multiplier",
     effect: "Antimatter Dimensions gain a multiplier based on time played",
@@ -43,35 +43,35 @@ export const InfinityUpgrades: IInfinityUpgrades = {
     requirement: "2nd & 7th Antimatter Dimension Multiplier",
     cost: 1
   }),
-  "resetBoost": new InfinityUpgrade({
+  resetBoost: new InfinityUpgrade({
     id: 41,
     name: "Dimboost & Galaxy Requirement Reduction",
     effect: "Dimboost and Galaxy requirements are reduced by 9",
     requirement: "3rd & 6th Antimatter Dimension Multiplier",
     cost: 1
   }),
-  "buy10mult": new InfinityUpgrade({
+  buy10mult: new InfinityUpgrade({
     id: 12,
     name: "Buy 10 Multiplier Increase",
     effect: "Increase the multiplier for buying 10 Antimatter Dimensions",
     formula: "`2.0` -> `2.2`",
     cost: 1
   }),
-  "galaxyBoost": new InfinityUpgrade({
+  galaxyBoost: new InfinityUpgrade({
     id: 42,
     name: "Galaxy Effect Boost",
     effect: "All Galaxies are twice as strong",
     requirement: "4th & 5th Antimatter Dimension Multiplier",
     cost: 2
   }),
-  "thisInfinityTimeMult": new InfinityUpgrade({
+  thisInfinityTimeMult: new InfinityUpgrade({
     id: 13,
     name: "This Infinity Time Multiplier",
     effect: "Antimatter Dimensions gain a multiplier based on time spent in current Infinity",
     formula: "`max((time in this infinity in minutes / 5) ^ 0.25, 1)`",
     cost: 3
   }),
-  "unspentIPMult": new InfinityUpgrade({
+  unspentIPMult: new InfinityUpgrade({
     id: 23,
     name: "Unspent IP Multiplier",
     effect: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points",
@@ -79,7 +79,7 @@ export const InfinityUpgrades: IInfinityUpgrades = {
     requirement: "This Infinity Time Multiplier",
     cost: 5
   }),
-  "dimboostMult": new InfinityUpgrade({
+  dimboostMult: new InfinityUpgrade({
     id: 33,
     name: "Dimboost Multiplier Increase",
     effect: "Increase Dimension Boost multiplier",
@@ -87,7 +87,7 @@ export const InfinityUpgrades: IInfinityUpgrades = {
     requirement: "Unspent IP Multiplier",
     cost: 7
   }),
-  "ipGen": new InfinityUpgrade({
+  ipGen: new InfinityUpgrade({
     id: 43,
     name: "Infinity Point Generation",
     effect: "Passively generate Infinity Points 10 times slower than your fastest Infinity",
@@ -95,30 +95,31 @@ export const InfinityUpgrades: IInfinityUpgrades = {
     requirement: "Dimboost Multiplier Increase",
     cost: 10
   }),
-  "skipReset1": new InfinityUpgrade({
+  skipReset1: new InfinityUpgrade({
     id: 14,
     name: "Free Dimboost 1",
     effect: "Start every reset with 1 Dimension Boost, automatically unlocking the 5th Antimatter Dimension",
     cost: 20
   }),
-  "skipReset2": new InfinityUpgrade({
+  skipReset2: new InfinityUpgrade({
     id: 24,
     name: "Free Dimboost 2",
     effect: "Start every reset with 2 Dimension Boosts, automatically unlocking the 6th Antimatter Dimension",
     requirement: "Free Dimboost 1",
     cost: 40
   }),
-  "skipReset3": new InfinityUpgrade({
+  skipReset3: new InfinityUpgrade({
     id: 34,
     name: "Free Dimboost 3",
     effect: "Start every reset with 3 Dimension Boosts, automatically unlocking the 7th Antimatter Dimension",
     requirement: "Free Dimboost 2",
     cost: 80
   }),
-  "skipReset4": new InfinityUpgrade({
+  skipReset4: new InfinityUpgrade({
     id: 44,
     name: "Free Dimboost 4",
-    effect: "Start every reset with 4 Dimension Boosts, automatically unlocking the 8th Antimatter Dimension; and an Antimatter Galaxy",
+    effect:
+      "Start every reset with 4 Dimension Boosts, automatically unlocking the 8th Antimatter Dimension; and an Antimatter Galaxy",
     requirement: "Free Dimboost 3",
     cost: 300
   })

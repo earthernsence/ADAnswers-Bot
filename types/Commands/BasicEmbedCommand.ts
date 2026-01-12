@@ -1,12 +1,20 @@
-import { type ChatInputCommandInteraction, italic, MessageFlags, type SlashCommandBuilder, type SlashCommandOptionsOnlyBuilder, type SlashCommandSubcommandsOnlyBuilder, userMention } from "discord.js";
+import {
+  type ChatInputCommandInteraction,
+  italic,
+  MessageFlags,
+  type SlashCommandBuilder,
+  type SlashCommandOptionsOnlyBuilder,
+  type SlashCommandSubcommandsOnlyBuilder,
+  userMention
+} from "discord.js";
 import { Command } from "./Command";
 import type { CustomEmbed } from "../Embeds/CustomEmbed";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface BasicEmbedCommandProps {
-  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder,
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
   // eslint-disable-next-line no-unused-vars
-  embed: (interaction: ChatInputCommandInteraction) => CustomEmbed,
+  embed: (interaction: ChatInputCommandInteraction) => CustomEmbed;
 }
 
 export class BasicEmbedCommand extends Command {

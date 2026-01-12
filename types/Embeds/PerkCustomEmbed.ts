@@ -6,8 +6,8 @@ import type Perk from "@/utils/game_data/Perk";
 import { pluralise } from "@/utils/utils_commands";
 
 interface PerkCustomEmbedProps {
-  interaction: CommandInteraction,
-  perk: Perk
+  interaction: CommandInteraction;
+  perk: Perk;
 }
 
 export class PerkCustomEmbed extends CustomEmbed {
@@ -19,8 +19,7 @@ export class PerkCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.perk.name)
-      .setColour(Colours[capitalise(this.perk.family) as keyof typeof Colours]);
+    this.setTitle(this.perk.name).setColour(Colours[capitalise(this.perk.family) as keyof typeof Colours]);
 
     this.setFields(this.getFields());
 
@@ -43,17 +42,19 @@ export class PerkCustomEmbed extends CustomEmbed {
       }
     ];
 
-    if (this.perk.prerequisites.length > 0) fields.push({
-      name: pluralise("Prerequisite", this.perk.prerequisites.length),
-      value: this.perk.formattedPrerequisites,
-      inline: false
-    });
+    if (this.perk.prerequisites.length > 0)
+      fields.push({
+        name: pluralise("Prerequisite", this.perk.prerequisites.length),
+        value: this.perk.formattedPrerequisites,
+        inline: false
+      });
 
-    if (this.perk.ap > 0) fields.push({
-      name: "Automator Points",
-      value: `This Perk grants ${bold(`${this.perk.ap} Automator Points`)} on purchase.\n(Reminder: AP are used to unlock the Automator; after the Automator is unlocked, they are useless.)`,
-      inline: false
-    });
+    if (this.perk.ap > 0)
+      fields.push({
+        name: "Automator Points",
+        value: `This Perk grants ${bold(`${this.perk.ap} Automator Points`)} on purchase.\n(Reminder: AP are used to unlock the Automator; after the Automator is unlocked, they are useless.)`,
+        inline: false
+      });
 
     return fields;
   }

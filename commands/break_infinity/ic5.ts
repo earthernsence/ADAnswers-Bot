@@ -13,8 +13,9 @@ export default new BasicEmbedCommand({
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
     ),
-  embed: (interaction: ChatInputCommandInteraction) => new InfinityChallengeCustomEmbed({
-    interaction,
-    challenge: infinityChallenges.ic5
-  })
+  embed: (interaction: ChatInputCommandInteraction) =>
+    new InfinityChallengeCustomEmbed({
+      interaction,
+      challenge: infinityChallenges.ic5
+    })
 });

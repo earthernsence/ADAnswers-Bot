@@ -9,8 +9,8 @@ import { RealityUpgrades } from "./reality_upgrades";
 
 interface UpgradeInfo {
   [key: string]: {
-    [key: string]: BaseUpgrade
-  }
+    [key: string]: BaseUpgrade;
+  };
 }
 
 export const upgrades: UpgradeInfo = {

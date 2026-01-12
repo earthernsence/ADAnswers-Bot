@@ -1,12 +1,18 @@
-import { ButtonInteraction, ChatInputCommandInteraction, ComponentType, MessageComponentInteraction, MessageFlags, SlashCommandBuilder, StringSelectMenuInteraction } from "discord.js";
+import {
+  ButtonInteraction,
+  ChatInputCommandInteraction,
+  ComponentType,
+  MessageComponentInteraction,
+  MessageFlags,
+  SlashCommandBuilder,
+  StringSelectMenuInteraction
+} from "discord.js";
 import { Command } from "@/types/Commands/Command";
 import { HelpCustomEmbed } from "@/types/Embeds/HelpCustomEmbed";
 
 export default new Command({
-  data: new SlashCommandBuilder()
-    .setName("help")
-    .setDescription("displays a help embed with all possible commands"),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  data: new SlashCommandBuilder().setName("help").setDescription("displays a help embed with all possible commands"),
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     const customEmbed = new HelpCustomEmbed({ interaction });
@@ -31,7 +37,7 @@ export default new Command({
       time: 60000
     });
 
-    buttonCollector.on("collect", async(i: ButtonInteraction) => {
+    buttonCollector.on("collect", async (i: ButtonInteraction) => {
       const forward = i.customId.startsWith("help_button_next");
 
       const newEmbed = customEmbed.nextPage(forward);
@@ -39,11 +45,11 @@ export default new Command({
       await i.update({
         files: [image],
         embeds: [newEmbed],
-        components: [customEmbed.buttons, customEmbed.selectMenu],
+        components: [customEmbed.buttons, customEmbed.selectMenu]
       });
     });
 
-    selectMenuCollector.on("collect", async(i: StringSelectMenuInteraction) => {
+    selectMenuCollector.on("collect", async (i: StringSelectMenuInteraction) => {
       const selected = i.values[0];
       await i.update({
         files: [image],

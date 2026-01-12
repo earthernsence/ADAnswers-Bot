@@ -1,5 +1,14 @@
 import { ActionRowBuilder, ButtonBuilder, inlineCode, italic, userMention } from "@discordjs/builders";
-import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
+import {
+  ButtonInteraction,
+  ButtonStyle,
+  ChatInputCommandInteraction,
+  ComponentType,
+  type InteractionReplyOptions,
+  MessageComponentInteraction,
+  MessageFlags,
+  SlashCommandBuilder
+} from "discord.js";
 import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
@@ -8,7 +17,10 @@ import { EternityChallengeCustomEmbed } from "@/types/Embeds/Challenges/Eternity
 import { isUserHelper } from "@/utils/utils_commands";
 import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 
-const getNext = (current: DoublyLinkedListNode<EternityChallenge>, forward: boolean): DoublyLinkedListNode<EternityChallenge> => {
+const getNext = (
+  current: DoublyLinkedListNode<EternityChallenge>,
+  forward: boolean
+): DoublyLinkedListNode<EternityChallenge> => {
   if (forward) {
     const newEC = current.next;
     // If we can't retrieve the head (for some reason), just default back to the current EC
@@ -52,17 +64,16 @@ export default new Command({
         .setRequired(false)
     )
     .addBooleanOption(option =>
-      option
-        .setName("tree")
-        .setDescription("(Optional) Request only the tree for easy copying.")
-        .setRequired(false)
+      option.setName("tree").setDescription("(Optional) Request only the tree for easy copying.").setRequired(false)
     ),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     const challengeRequested = interaction.options.getInteger("challenge", true);
     const completionRequested = interaction.options.getInteger("completion", true);
-    const challenge = orderAsDoublyLinkedList.search(value => challengeRequested === value.challenge && completionRequested === value.completion);
+    const challenge = orderAsDoublyLinkedList.search(
+      value => challengeRequested === value.challenge && completionRequested === value.completion
+    );
 
     if (!challenge) {
       const errorEmbed = new ErrorCustomEmbed({
@@ -116,8 +127,8 @@ export default new Command({
 
     let currentChallenge = challenge;
 
-    const buttons = (disabled: boolean) => new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
+    const buttons = (disabled: boolean) =>
+      new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId(`ec_button_prev_${expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
@@ -143,9 +154,13 @@ export default new Command({
     const sentReply = await interaction.reply(initialContent);
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-    const collector = sentReply.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 });
+    const collector = sentReply.createMessageComponentCollector({
+      componentType: ComponentType.Button,
+      filter,
+      time: 60000
+    });
 
-    collector.on("collect", async(i: ButtonInteraction) => {
+    collector.on("collect", async (i: ButtonInteraction) => {
       const forward = i.customId.startsWith("ec_button_next");
       const nextECToShow = getNext(currentChallenge, forward);
 
@@ -154,7 +169,11 @@ export default new Command({
 
       currentChallenge = nextECToShow;
 
-      const newEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: nextECToShow.value, expirationTimestamp });
+      const newEmbed = new EternityChallengeCustomEmbed({
+        interaction,
+        challenge: nextECToShow.value,
+        expirationTimestamp
+      });
       const newImage = newEmbed.getAndSetThumbnail();
 
       await i.update({
@@ -164,15 +183,19 @@ export default new Command({
       });
     });
 
-    collector.on("end", async() => {
-      const finalEmbed = new EternityChallengeCustomEmbed({ interaction, challenge: currentChallenge.value, expirationTimestamp });
+    collector.on("end", async () => {
+      const finalEmbed = new EternityChallengeCustomEmbed({
+        interaction,
+        challenge: currentChallenge.value,
+        expirationTimestamp
+      });
 
       const finalImage = finalEmbed.getAndSetThumbnail();
 
       await interaction.editReply({
         embeds: [finalEmbed.create()],
         components: [buttons(true)],
-        files: [finalImage],
+        files: [finalImage]
       });
     });
   },

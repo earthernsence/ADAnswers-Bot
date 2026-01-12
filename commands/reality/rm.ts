@@ -20,10 +20,9 @@ export default new Command({
 
     const rmValue = interaction.options.getInteger("rm", true);
 
-    const eternityPointsNeeded = Math.ceil(Math.min(
-      4000 * (getLogBase(1000, rmValue) + 1),
-      4000 / 27 * (rmValue + 26)
-    ));
+    const eternityPointsNeeded = Math.ceil(
+      Math.min(4000 * (getLogBase(1000, rmValue) + 1), (4000 / 27) * (rmValue + 26))
+    );
 
     interaction.reply({
       content: `After your first Reality, before any multipliers, to get ${rmValue} RM, you need e${eternityPointsNeeded} EP.`,

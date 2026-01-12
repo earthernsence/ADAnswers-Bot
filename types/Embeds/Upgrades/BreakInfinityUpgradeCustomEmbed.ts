@@ -6,8 +6,8 @@ import { formatDecimal } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface BreakInfinityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction,
-  upgrade: BreakInfinityUpgrade
+  interaction: CommandInteraction;
+  upgrade: BreakInfinityUpgrade;
 }
 
 export class BreakInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
@@ -29,14 +29,15 @@ export class BreakInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
         value: `${quantify("Infinity Point", this.upgrade.cost)}\
 ${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
-      },
+      }
     ];
 
-    if (this.upgrade.formula) fields.push({
-      name: "Effect formula",
-      value: this.upgrade.formula,
-      inline: false
-    });
+    if (this.upgrade.formula)
+      fields.push({
+        name: "Effect formula",
+        value: this.upgrade.formula,
+        inline: false
+      });
 
     return fields;
   }

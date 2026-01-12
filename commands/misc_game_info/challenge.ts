@@ -19,7 +19,7 @@ function getChallengeChoices(): Array<ApplicationCommandOptionChoiceData<string>
   for (const challenge in infinityChallenges) {
     choices.push({
       name: challenge,
-      value: challenge,
+      value: challenge
     });
   }
 
@@ -55,14 +55,14 @@ export default new BasicEmbedCommand({
 
     return requestedChallenge?.startsWith("c")
       ? new AntimatterChallengeCustomEmbed({
-        interaction,
-        challenge: antimatterChallenges[requestedChallenge],
-        strategyOnly: false
-      })
+          interaction,
+          challenge: antimatterChallenges[requestedChallenge],
+          strategyOnly: false
+        })
       : new InfinityChallengeCustomEmbed({
-        interaction,
-        challenge: infinityChallenges[requestedChallenge],
-        strategyOnly: false
-      });
+          interaction,
+          challenge: infinityChallenges[requestedChallenge],
+          strategyOnly: false
+        });
   }
 });

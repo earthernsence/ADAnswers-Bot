@@ -3,8 +3,8 @@ import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface ErrorCustomEmbedProps {
-  interaction: CommandInteraction,
-  text: string
+  interaction: CommandInteraction;
+  text: string;
 }
 
 export class ErrorCustomEmbed extends CustomEmbed {
@@ -16,14 +16,11 @@ export class ErrorCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle("Error!")
-      .setColour(Colours.Forbidden);
+    this.setTitle("Error!").setColour(Colours.Forbidden);
 
     this.embed.setDescription("Please try again!");
 
-    this.setFields([
-      { name: "Issue", value: this.text, inline: false }
-    ]);
+    this.setFields([{ name: "Issue", value: this.text, inline: false }]);
 
     return this.finalise();
   }

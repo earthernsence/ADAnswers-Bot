@@ -1,13 +1,21 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, spoiler, time, TimestampStyles } from "discord.js";
+import {
+  AttachmentBuilder,
+  type CommandInteraction,
+  type EmbedBuilder,
+  type EmbedField,
+  spoiler,
+  time,
+  TimestampStyles
+} from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 import type SecretAchievement from "@/utils/game_data/SecretAchievement";
 import { SecretAchievementType } from "../game_data/SecretAchievements";
 
 interface SecretAchievementCustomEmbedProps {
-  interaction: CommandInteraction,
-  achievement: SecretAchievement,
-  expirationTimestamp: number,
+  interaction: CommandInteraction;
+  achievement: SecretAchievement;
+  expirationTimestamp: number;
 }
 
 export class SecretAchievementCustomEmbed extends CustomEmbed {
@@ -21,12 +29,14 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
   }
 
   private get disabled(): boolean {
-    return Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
+    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public create(): EmbedBuilder {
     this.setTitle(this.achievement.title)
-      .setDescription(`Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
+      .setDescription(
+        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
+      )
       .setColour(Colours.Achievement);
 
     this.setFields(this.getFields());
@@ -59,7 +69,7 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
       {
         name: "Achievement",
         value: spoiler(this.achievement.description),
-        inline: false,
+        inline: false
       },
       {
         name: "Strategy",

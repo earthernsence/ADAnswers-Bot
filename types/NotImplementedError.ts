@@ -3,4 +3,4 @@ export class NotImplementedError extends Error {
     super("The method is not implemented.");
     this.name = "NotImplementedError";
   }
-};
+}

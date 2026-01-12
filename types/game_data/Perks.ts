@@ -6,7 +6,7 @@ export enum PERK_FAMILY {
   DILATION = "dilation",
   REALITY = "reality",
   AUTOMATION = "automation",
-  ACHIEVEMENT = "achievement",
+  ACHIEVEMENT = "achievement"
 }
 /* eslint-enable no-unused-vars */
 

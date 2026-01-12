@@ -1,4 +1,15 @@
-import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, type CommandInteraction, type EmbedBuilder, type EmbedField, MessageComponentInteraction, time, TimestampStyles } from "discord.js";
+import {
+  ActionRowBuilder,
+  AttachmentBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  type CommandInteraction,
+  type EmbedBuilder,
+  type EmbedField,
+  MessageComponentInteraction,
+  time,
+  TimestampStyles
+} from "discord.js";
 import type { ADABClient } from "../ADABClient";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
@@ -6,7 +17,7 @@ import { link } from "@/utils/utils_commands";
 import ms from "ms";
 
 interface MetaCustomEmbedProps {
-  interaction: CommandInteraction,
+  interaction: CommandInteraction;
 }
 
 export class MetaCustomEmbed extends CustomEmbed {
@@ -39,25 +50,24 @@ Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampSty
   }
 
   public get buttons(): ActionRowBuilder<ButtonBuilder> {
-    return new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId(`meta_button_prev_${this.expirationTimestamp}`)
-          .setEmoji({ name: "◀️" })
-          .setLabel("Previous page")
-          .setStyle(ButtonStyle.Primary)
-          .setDisabled(this.disabled),
-        new ButtonBuilder()
-          .setCustomId(`meta_button_next_${this.expirationTimestamp}`)
-          .setEmoji({ name: "▶️" })
-          .setLabel("Next page")
-          .setStyle(ButtonStyle.Primary)
-          .setDisabled(this.disabled),
-        new ButtonBuilder()
-          .setStyle(ButtonStyle.Link)
-          .setLabel("GitHub repository")
-          .setURL("https://github.com/earthernsence/ADAnswers-Bot")
-      );
+    return new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`meta_button_prev_${this.expirationTimestamp}`)
+        .setEmoji({ name: "◀️" })
+        .setLabel("Previous page")
+        .setStyle(ButtonStyle.Primary)
+        .setDisabled(this.disabled),
+      new ButtonBuilder()
+        .setCustomId(`meta_button_next_${this.expirationTimestamp}`)
+        .setEmoji({ name: "▶️" })
+        .setLabel("Next page")
+        .setStyle(ButtonStyle.Primary)
+        .setDisabled(this.disabled),
+      new ButtonBuilder()
+        .setStyle(ButtonStyle.Link)
+        .setLabel("GitHub repository")
+        .setURL("https://github.com/earthernsence/ADAnswers-Bot")
+    );
   }
 
   public filter(i: MessageComponentInteraction): boolean {
@@ -72,7 +82,10 @@ Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampSty
 
   public nextPage(forward: boolean): EmbedBuilder {
     // Oxlint-disable-next-line no-unused-vars
-    const possiblePages: Array<number> = Array(this.MAX_PAGES).fill(0).map((_value, index) => index + 1);
+    const possiblePages: Array<number> = Array(this.MAX_PAGES)
+      .fill(0)
+      // oxlint-disable-next-line no-unused-vars
+      .map((_value, index) => index + 1);
     let index = possiblePages.indexOf(this.pageNumber);
 
     if (forward) index++;

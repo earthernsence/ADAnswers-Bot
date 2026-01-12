@@ -1,19 +1,22 @@
-import { REST, type RESTPostAPIChatInputApplicationCommandsJSONBody, type RESTPostAPIContextMenuApplicationCommandsJSONBody, Routes } from "discord.js";
+import {
+  REST,
+  type RESTPostAPIChatInputApplicationCommandsJSONBody,
+  type RESTPostAPIContextMenuApplicationCommandsJSONBody,
+  Routes
+} from "discord.js";
 import { Channels } from "./utils/utils_channels";
 import fs from "node:fs";
 import path from "node:path";
 
-const commands: Array<RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody> = [];
+const commands: Array<
+  RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody
+> = [];
 const foldersPath = path.join(__dirname, "commands");
-const commandFolders = fs
-  .readdirSync(foldersPath)
-  .filter(folder => !folder.startsWith("_"));
+const commandFolders = fs.readdirSync(foldersPath).filter(folder => !folder.startsWith("_"));
 
 for (const folder of commandFolders) {
   const commandsPath = path.join(foldersPath, folder);
-  const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter(file => file.endsWith(".ts"));
+  const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
   console.log(`Preparing ${commandFiles.length} command(s) from ${commandsPath}...`);
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
@@ -43,21 +46,21 @@ for (const file of fs.readdirSync(ctxCommandPath)) {
 
 const rest = new REST().setToken(process.env.DISCORD_TOKEN as string);
 
-(async() => {
+(async () => {
   try {
     console.log(`Updating ${commands.length} commands...`);
 
-    await rest.put(
-      Routes.applicationGuildCommands(process.env.APPLICATION_ID as string, Channels.TestingServer),
-      { body: commands },
-    ).then(() => console.log(`Loaded ${commands.length} commands to the testing server`));
+    await rest
+      .put(Routes.applicationGuildCommands(process.env.APPLICATION_ID as string, Channels.TestingServer), {
+        body: commands
+      })
+      .then(() => console.log(`Loaded ${commands.length} commands to the testing server`));
 
-    // TODO: Global commands:
-    // await rest.put(
-    //   Routes.applicationCommands(process.env.APPLICATION_ID as string),
-    //   { body: commands },
-    // ).then(() => console.log(`Loaded ${commands.length} commands globally`));
-
+    if (process.argv.includes("--global")) {
+      await rest
+        .put(Routes.applicationCommands(process.env.APPLICATION_ID as string), { body: commands })
+        .then(() => console.log(`Loaded ${commands.length} commands globally`));
+    }
   } catch (e) {
     console.error(e);
   }

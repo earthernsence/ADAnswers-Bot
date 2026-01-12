@@ -1,7 +1,7 @@
 import type { ContextMenuCommandBuilder, MessageContextMenuCommandInteraction } from "discord.js";
 
 interface ContextMenuCommandProps {
-  data: ContextMenuCommandBuilder,
+  data: ContextMenuCommandBuilder;
   // eslint-disable-next-line no-unused-vars
   execute: (interaction: MessageContextMenuCommandInteraction) => void;
   aliases?: Array<string>;

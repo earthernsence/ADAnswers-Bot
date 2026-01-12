@@ -6,8 +6,8 @@ import { quantify } from "@/utils/utils_commands";
 import type { TimeStudy } from "../game_data/TimeStudy";
 
 interface TimeStudyCustomEmbedProps {
-  interaction: CommandInteraction,
-  study: TimeStudy
+  interaction: CommandInteraction;
+  study: TimeStudy;
 }
 
 export class TimeStudyCustomEmbed extends CustomEmbed {
@@ -19,8 +19,9 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(`Time Study ${this.study.id}`)
-      .setColour(Colours[capitalise(this.study.type) as keyof typeof Colours]);
+    this.setTitle(`Time Study ${this.study.id}`).setColour(
+      Colours[capitalise(this.study.type) as keyof typeof Colours]
+    );
 
     this.setFields(this.getFields());
 
@@ -30,7 +31,11 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
   private getFields(): Array<EmbedField> {
     const fields: Array<EmbedField> = [
       { name: "Effect", value: `${this.study.effect}`, inline: false },
-      { name: "Cost", value: `${quantify(this.study.isTriad ? "Space Theorem" : "Time Theorem", this.study.cost)}`, inline: false },
+      {
+        name: "Cost",
+        value: `${quantify(this.study.isTriad ? "Space Theorem" : "Time Theorem", this.study.cost)}`,
+        inline: false
+      }
     ];
 
     if (this.study.prerequisites.length === 0 || this.study.id >= 231) {
@@ -42,7 +47,10 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
     } else {
       fields.push({
         name: "Prerequisites",
-        value: `${this.study.reqType} ${enumerate(this.study.prerequisites.map(study => `TS${study}`), "disjunction")} ${this.study.additionalPrerequisites ? `and ${this.study.additionalPrerequisites}` : ``}`,
+        value: `${this.study.reqType} ${enumerate(
+          this.study.prerequisites.map(study => `TS${study}`),
+          "disjunction"
+        )} ${this.study.additionalPrerequisites ? `and ${this.study.additionalPrerequisites}` : ``}`,
         inline: false
       });
     }
@@ -67,7 +75,7 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
       this.embed.addFields({
         name: "Effect formula graph",
         value: `${bold("")}`,
-        inline: false,
+        inline: false
       });
 
       if (!this.study.graph) {

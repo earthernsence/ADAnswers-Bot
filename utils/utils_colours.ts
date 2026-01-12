@@ -1,4 +1,5 @@
-/* eslint-disable no-unused-vars */
+// Sorry oxlint -- it's just the name of the feature
+// oxlint-disable no-shadow-restricted-names
 
 export enum Colours {
   // General progression
@@ -39,5 +40,5 @@ export enum Colours {
   Pelle = "#dc143c",
 
   // Special
-  Companion = "#feaec9",
+  Companion = "#feaec9"
 }

@@ -6,7 +6,7 @@ import type { ContextMenuCommand } from "./Commands/ContextMenuCommand";
 export interface ADABClient extends Client {
   commands: Collection<string, Command>;
   contextCommands: Collection<string, ContextMenuCommand>;
-  commandsByPage: Collection<string, Collection<string, Command>>,
-  version: string,
-  restartTime: number,
+  commandsByPage: Collection<string, Collection<string, Command>>;
+  version: string;
+  restartTime: number;
 }

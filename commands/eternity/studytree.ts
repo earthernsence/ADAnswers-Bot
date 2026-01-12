@@ -9,11 +9,7 @@ export default new Command({
     .setName("studytree")
     .setDescription("generate a recommended Time Study tree based on total Time Theorems")
     .addIntegerOption(option =>
-      option
-        .setName("theorems")
-        .setDescription("your total time theorems")
-        .setRequired(true)
-        .setMinValue(1)
+      option.setName("theorems").setDescription("your total time theorems").setRequired(true).setMinValue(1)
     )
     .addStringOption(option =>
       option
@@ -23,7 +19,7 @@ export default new Command({
         .setChoices([
           { name: "active (TS121, 131, 141)", value: "active" },
           { name: "passive (TS122, 132, 142)", value: "passive" },
-          { name: "idle (TS123, 133, 143)", value: "idle" },
+          { name: "idle (TS123, 133, 143)", value: "idle" }
         ])
     )
     .addBooleanOption(option =>
@@ -48,12 +44,14 @@ export default new Command({
 
     const recommendedTree = getRecommendedTree(theorems, path);
     const recommendedECs = ecsAtTTAmount(theorems);
-    const upcomingECs = theorems >= 12350
-      ? ""
-      : `(Next: ${enumerate(recommendedECs.nextECs, "conjunction")} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
-    const ecString = showRecommendedECs && theorems >= 130
-      ? `Recommended EC completions for ${theorems} TT: ${recommendedECs.completions} ${upcomingECs}`
-      : "";
+    const upcomingECs =
+      theorems >= 12350
+        ? ""
+        : `(Next: ${enumerate(recommendedECs.nextECs, "conjunction")} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
+    const ecString =
+      showRecommendedECs && theorems >= 130
+        ? `Recommended EC completions for ${theorems} TT: ${recommendedECs.completions} ${upcomingECs}`
+        : "";
     const targetString = target ? `${italic(`Suggested for ${userMention(target.id)}\n`)}` : "";
 
     interaction.reply({

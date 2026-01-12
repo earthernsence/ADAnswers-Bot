@@ -1,5 +1,22 @@
-import { ApplicationCommandType, ContextMenuCommandBuilder, InteractionContextType, MessageContextMenuCommandInteraction, MessageFlags, ModalSubmitInteraction, TextChannel, TextInputStyle } from "discord.js";
-import { channelMention, LabelBuilder, ModalBuilder, roleMention, TextInputBuilder, time, userMention } from "@discordjs/builders";
+import {
+  ApplicationCommandType,
+  ContextMenuCommandBuilder,
+  InteractionContextType,
+  MessageContextMenuCommandInteraction,
+  MessageFlags,
+  ModalSubmitInteraction,
+  TextChannel,
+  TextInputStyle
+} from "discord.js";
+import {
+  channelMention,
+  LabelBuilder,
+  ModalBuilder,
+  roleMention,
+  TextInputBuilder,
+  time,
+  userMention
+} from "@discordjs/builders";
 import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
 import { ContextMenuCommand } from "@/types/Commands/ContextMenuCommand";
@@ -12,8 +29,8 @@ export default new ContextMenuCommand({
     .setName("Report message")
     .setContexts(InteractionContextType.Guild)
     .setType(ApplicationCommandType.Message),
-  execute: async(interaction: MessageContextMenuCommandInteraction) => {
-    const nowTimestamp = Math.floor((Date.now()) / 1000);
+  execute: async (interaction: MessageContextMenuCommandInteraction) => {
+    const nowTimestamp = Math.floor(Date.now() / 1000);
 
     const { content, channelId, author, createdTimestamp, createdAt, id, guildId, url } = interaction.targetMessage;
 
@@ -42,9 +59,7 @@ export default new ContextMenuCommand({
       return;
     }
 
-    const reportModal = new ModalBuilder()
-      .setCustomId(`report_modal_${nowTimestamp}`)
-      .setTitle("Report message...");
+    const reportModal = new ModalBuilder().setCustomId(`report_modal_${nowTimestamp}`).setTitle("Report message...");
 
     const reasonInput = new TextInputBuilder()
       .setCustomId(`report_modal_input_${nowTimestamp}`)
@@ -83,7 +98,7 @@ export default new ContextMenuCommand({
             {
               name: "Message",
               value: `${content.substring(0, 400)}${content.length > 400 ? "..." : ""} \n ${link("__**[link]**__", url)}`,
-              inline: false,
+              inline: false
             },
             {
               name: "Channel",

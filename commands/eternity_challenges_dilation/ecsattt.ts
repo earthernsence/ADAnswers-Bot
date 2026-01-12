@@ -9,11 +9,7 @@ export default new Command({
     .setName("ecsattt")
     .setDescription("provides a list of the recommended Eternity Challenge completions at a given Time Theorem amount")
     .addIntegerOption(option =>
-      option
-        .setName("total-time-theorems")
-        .setDescription("your total time theorems")
-        .setRequired(true)
-        .setMinValue(1)
+      option.setName("total-time-theorems").setDescription("your total time theorems").setRequired(true).setMinValue(1)
     ),
   execute: (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;

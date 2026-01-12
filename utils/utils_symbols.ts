@@ -1,3 +1,6 @@
+// Sorry oxlint -- it's just the name of the feature
+// oxlint-disable no-shadow-restricted-names
+
 export enum Symbols {
   Power = "Ω",
   "Infinity" = "∞",
@@ -28,6 +31,8 @@ export enum Symbols {
   Unpredictability = "Λ"
 }
 
+// TODO: to my knowledge, it's possible to upload emote files to the bot itself, so that
+// it can use them wherever, instead of just in AD
 // AD-server specific
 export enum GlyphEmotes {
   Power = "<:glyph_power:586607087744843776>",

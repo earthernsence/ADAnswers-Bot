@@ -3,8 +3,8 @@ import { Command } from "./Command";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface BasicTextCommandProps {
-  data: SlashCommandBuilder,
-  text: string,
+  data: SlashCommandBuilder;
+  text: string;
 }
 
 export class BasicTextCommand extends Command {
@@ -16,7 +16,7 @@ export class BasicTextCommand extends Command {
 
         interaction.reply({
           content: text,
-          flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
+          flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
         });
       }
     });

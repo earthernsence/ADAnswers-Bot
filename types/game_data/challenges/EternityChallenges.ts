@@ -1,14 +1,14 @@
 export interface EternityChallengeReward {
-  reward: string,
-  formula: string,
+  reward: string;
+  formula: string;
 }
 
 export interface EternityChallengeRewards {
-  [key: number]: EternityChallengeReward
+  [key: number]: EternityChallengeReward;
 }
 
 export interface EternityChallengeDescriptions {
-  [key: number]: string,
+  [key: number]: string;
 }
 
 export interface EternityChallengeSecondaryUnlock {
@@ -22,27 +22,27 @@ export interface EternityChallengeCompletionGoals {
 }
 
 export interface EternityChallengeUnlock {
-  currency: string,
-  amount: string,
-  theorems: number
+  currency: string;
+  amount: string;
+  theorems: number;
 }
 
 export type EC = {
-  challenge: number,
-  completion: number,
-  theorems: number,
-  ip: string,
-  note?: string,
-  tree: string,
-  completionReqs?: string,
-  description: string,
-  reward: EternityChallengeReward,
-  unlock: EternityChallengeUnlock,
+  challenge: number;
+  completion: number;
+  theorems: number;
+  ip: string;
+  note?: string;
+  tree: string;
+  completionReqs?: string;
+  description: string;
+  reward: EternityChallengeReward;
+  unlock: EternityChallengeUnlock;
 };
 
 export type ECsAtTTInfo = {
-  completions: string
-  nextEC: EC,
-  nextECs: string[],
-  nextChallengeTT: number
+  completions: string;
+  nextEC: EC;
+  nextECs: string[];
+  nextChallengeTT: number;
 };

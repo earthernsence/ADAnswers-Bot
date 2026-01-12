@@ -35,18 +35,17 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(InfinityUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(InfinityUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
         .addBooleanOption(option =>
-          option
-            .setName("charged")
-            .setDescription("View information about the charged version?")
-            .setRequired(false)
+          option.setName("charged").setDescription("View information about the charged version?").setRequired(false)
         )
     )
     .addSubcommand(subcommand =>
@@ -57,11 +56,13 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(BreakInfinityUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(BreakInfinityUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -73,11 +74,13 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(EternityUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(EternityUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -89,11 +92,13 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(DilationUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(DilationUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -105,11 +110,13 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(RealityUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(RealityUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -121,11 +128,13 @@ export default new BasicEmbedCommand({
           option
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
-            .setChoices(Object.values(ImaginaryUpgrades).map(upgrade => ({
-              name: upgrade.name,
-              value: upgrade.name,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.values(ImaginaryUpgrades).map(upgrade => ({
+                name: upgrade.name,
+                value: upgrade.name,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     ),

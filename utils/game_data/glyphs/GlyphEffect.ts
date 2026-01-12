@@ -1,11 +1,11 @@
 import type { AlteredGlyphEffect, GlyphEffect as TGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
 
 interface GlyphEffectProps {
-  name: string,
-  primary?: boolean,
-  effect: string,
-  formula: string,
-  altered?: AlteredGlyphEffect
+  name: string;
+  primary?: boolean;
+  effect: string;
+  formula: string;
+  altered?: AlteredGlyphEffect;
 }
 
 export class GlyphEffect implements TGlyphEffect {

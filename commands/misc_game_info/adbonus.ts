@@ -2,9 +2,7 @@ import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new BasicTextCommand({
-  data: new SlashCommandBuilder()
-    .setName("adbonus")
-    .setDescription("sends ad bonus formulas and multipliers"),
+  data: new SlashCommandBuilder().setName("adbonus").setDescription("sends ad bonus formulas and multipliers"),
   text: `
 The highest unlocked effect on this list, is the only effect that applies
 Celestial 7: ||Ad Bonus has been Nullified||

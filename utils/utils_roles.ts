@@ -5,5 +5,5 @@ export enum Roles {
   ADABUpdates = "1112437970256023622",
 
   TestMod = "1452855673007247373",
-  TestRole = "1458225591349149839",
+  TestRole = "1458225591349149839"
 }

@@ -1,13 +1,18 @@
-import { ButtonInteraction, ChatInputCommandInteraction, ComponentType, MessageComponentInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
+import {
+  ButtonInteraction,
+  ChatInputCommandInteraction,
+  ComponentType,
+  MessageComponentInteraction,
+  MessageFlags,
+  SlashCommandBuilder
+} from "discord.js";
 import { Command } from "@/types/Commands/Command";
 import { isUserHelper } from "@/utils/utils_commands";
 import { MetaCustomEmbed } from "@/types/Embeds/MetaCustomEmbed";
 
 export default new Command({
-  data: new SlashCommandBuilder()
-    .setName("meta")
-    .setDescription("Provides some information about the bot."),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  data: new SlashCommandBuilder().setName("meta").setDescription("Provides some information about the bot."),
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     const customEmbed = new MetaCustomEmbed({ interaction });
@@ -26,7 +31,7 @@ export default new Command({
       time: 60000
     });
 
-    collector.on("collect", async(i: ButtonInteraction) => {
+    collector.on("collect", async (i: ButtonInteraction) => {
       const forward = i.customId.includes("next");
 
       const newEmbed = customEmbed.nextPage(forward);
@@ -38,7 +43,7 @@ export default new Command({
       });
     });
 
-    collector.on("end", async() => {
+    collector.on("end", async () => {
       await interaction.editReply({
         embeds: [customEmbed.create()],
         components: [customEmbed.buttons],

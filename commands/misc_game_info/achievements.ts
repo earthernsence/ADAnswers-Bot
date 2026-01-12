@@ -1,5 +1,16 @@
 import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
-import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, italic, MessageComponentInteraction, MessageFlags, SlashCommandBuilder, userMention } from "discord.js";
+import {
+  ButtonInteraction,
+  ButtonStyle,
+  ChatInputCommandInteraction,
+  ComponentType,
+  type InteractionReplyOptions,
+  italic,
+  MessageComponentInteraction,
+  MessageFlags,
+  SlashCommandBuilder,
+  userMention
+} from "discord.js";
 import Achievement from "@/utils/game_data/Achievement";
 import { AchievementCustomEmbed } from "@/types/Embeds/AchievementCustomEmbed";
 import { achievementsList } from "@/utils/game_data/achievements";
@@ -38,7 +49,7 @@ export default new Command({
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
     ),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     const achievementRequested = interaction.options.getInteger("achievement", true);
@@ -48,7 +59,7 @@ export default new Command({
     if (!achievement) {
       const errorEmbed = new ErrorCustomEmbed({
         interaction,
-        text: `That achievement doesn't exist!\nAchievement requested: ${achievementRequested}`,
+        text: `That achievement doesn't exist!\nAchievement requested: ${achievementRequested}`
       });
 
       const errorImage = errorEmbed.getAndSetThumbnail();
@@ -88,8 +99,8 @@ export default new Command({
 
     let currentAchievement = achievement;
 
-    const buttons = (disabled: boolean) => new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
+    const buttons = (disabled: boolean) =>
+      new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId(`ach_button_prev_${expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
@@ -115,9 +126,13 @@ export default new Command({
     const sentReply = await interaction.reply(initialContent);
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-    const collector = sentReply.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 });
+    const collector = sentReply.createMessageComponentCollector({
+      componentType: ComponentType.Button,
+      filter,
+      time: 60000
+    });
 
-    collector.on("collect", async(i: ButtonInteraction) => {
+    collector.on("collect", async (i: ButtonInteraction) => {
       const forward = i.customId.includes("next");
       const nextAchievement = getNext(currentAchievement, forward);
 
@@ -125,24 +140,32 @@ export default new Command({
 
       currentAchievement = nextAchievement;
 
-      const newEmbed = new AchievementCustomEmbed({ interaction, achievement: currentAchievement.value, expirationTimestamp });
+      const newEmbed = new AchievementCustomEmbed({
+        interaction,
+        achievement: currentAchievement.value,
+        expirationTimestamp
+      });
       const newImage = newEmbed.getAndSetThumbnail();
 
       await i.update({
         files: [newImage],
         embeds: [newEmbed.create()],
-        components: [buttons(false)],
+        components: [buttons(false)]
       });
     });
 
-    collector.on("end", async() => {
-      const finalEmbed = new AchievementCustomEmbed({ interaction, achievement: currentAchievement.value, expirationTimestamp });
+    collector.on("end", async () => {
+      const finalEmbed = new AchievementCustomEmbed({
+        interaction,
+        achievement: currentAchievement.value,
+        expirationTimestamp
+      });
       const finalImage = finalEmbed.getAndSetThumbnail();
 
       await sentReply.edit({
         files: [finalImage],
         embeds: [finalEmbed.create()],
-        components: [buttons(true)],
+        components: [buttons(true)]
       });
     });
   }

@@ -7,18 +7,18 @@ import type { GlyphEffect } from "./GlyphEffect";
 import type { Glyph as TGlyph } from "@/types/game_data/glyphs/Glyph";
 
 interface GlyphProps {
-  name: string,
-  effects: Record<string, GlyphEffect>,
+  name: string;
+  effects: Record<string, GlyphEffect>;
   sacrifice?: {
-    effect: string,
-    formula: string
-  }
+    effect: string;
+    formula: string;
+  };
 }
 
 export class Glyph implements TGlyph {
   name: string;
   effects: Record<string, GlyphEffect>;
-  sacrifice?: { effect: string; formula: string; };
+  sacrifice?: { effect: string; formula: string };
   colour: Colours;
   emote: GlyphEmotes;
   symbol: Symbols;

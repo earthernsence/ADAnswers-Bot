@@ -12,7 +12,7 @@ export function isUserHelper(interaction: CommandInteraction): boolean | undefin
 }
 
 export function authorTitle(interaction: CommandInteraction): string {
-  const user: User = interaction.member === null ? interaction.user : interaction.member.user as User;
+  const user: User = interaction.member === null ? interaction.user : (interaction.member.user as User);
 
   return authorTitleFromUser(user);
 }

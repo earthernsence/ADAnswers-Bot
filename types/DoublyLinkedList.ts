@@ -13,14 +13,14 @@ export class DoublyLinkedListNode<T> {
 }
 
 interface IDoublyLinkedList<T> {
-  insertAtBeginning: (value: T) => DoublyLinkedListNode<T>,
-  insertAtEnd: (value: T) => DoublyLinkedListNode<T>,
-  deleteNode: (node: DoublyLinkedListNode<T>) => void,
-  traverse: () => T[],
-  size: () => number,
-  search: (comparison: (value: T) => boolean) => DoublyLinkedListNode<T> | null,
-  getFirstValue: () => DoublyLinkedListNode<T> | null,
-  getLastValue: () => DoublyLinkedListNode<T> | null,
+  insertAtBeginning: (value: T) => DoublyLinkedListNode<T>;
+  insertAtEnd: (value: T) => DoublyLinkedListNode<T>;
+  deleteNode: (node: DoublyLinkedListNode<T>) => void;
+  traverse: () => T[];
+  size: () => number;
+  search: (comparison: (value: T) => boolean) => DoublyLinkedListNode<T> | null;
+  getFirstValue: () => DoublyLinkedListNode<T> | null;
+  getLastValue: () => DoublyLinkedListNode<T> | null;
 }
 
 export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
@@ -57,7 +57,8 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 
     if (this.head) {
       // If the list already has some values, we need to find the last node and set its "next" value to our new node.
-      const getLastNode = (node: DoublyLinkedListNode<T>): DoublyLinkedListNode<T> => (node.next ? getLastNode(node.next) : node);
+      const getLastNode = (node: DoublyLinkedListNode<T>): DoublyLinkedListNode<T> =>
+        node.next ? getLastNode(node.next) : node;
 
       const lastNode = getLastNode(this.head);
 

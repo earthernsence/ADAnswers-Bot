@@ -6,9 +6,9 @@ import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
 import type { GlyphEffect } from "@/utils/game_data/glyphs/GlyphEffect";
 
 interface GlyphEffectCustomEmbedProps {
-  interaction: CommandInteraction,
-  glyph: Glyph,
-  isAltered: boolean
+  interaction: CommandInteraction;
+  glyph: Glyph;
+  isAltered: boolean;
 }
 
 export class GlyphEffectCustomEmbed extends CustomEmbed {
@@ -22,8 +22,9 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer))
-      .setColour(this.glyph.colour);
+    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer)).setColour(
+      this.glyph.colour
+    );
 
     this.setFields(this.getFields());
 
@@ -46,15 +47,19 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
 
   protected getFields(): Array<EmbedField> {
     if (this.isAltered && !this.glyph.canBeAltered) {
-      return [{
-        name: "Whoops!",
-        value: `${this.glyph.capitalisedName} Glyphs can't be Altered!`,
-        inline: false
-      }];
+      return [
+        {
+          name: "Whoops!",
+          value: `${this.glyph.capitalisedName} Glyphs can't be Altered!`,
+          inline: false
+        }
+      ];
     }
 
     const fields: Array<EmbedField> = [];
-    const effectsToConsider: Record<string, GlyphEffect> | Record<string, AlteredGlyphEffect> = this.isAltered ? this.glyph.alteredEffects : this.glyph.effects;
+    const effectsToConsider: Record<string, GlyphEffect> | Record<string, AlteredGlyphEffect> = this.isAltered
+      ? this.glyph.alteredEffects
+      : this.glyph.effects;
 
     for (const [location, effect] of Object.entries(effectsToConsider)) {
       const primaryString = this.isAltered ? "" : `${(effect as GlyphEffect).primary ? ` (Primary Effect)` : ""}`;

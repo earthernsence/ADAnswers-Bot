@@ -11,9 +11,9 @@ export interface TimeStudy {
   isBestWaifu?: string;
   hasGraph?: boolean;
   graph?: string;
-  isTriad?: boolean
-};
+  isTriad?: boolean;
+}
 
 export interface TimeStudies {
-  [key: string]: TimeStudy
+  [key: string]: TimeStudy;
 }

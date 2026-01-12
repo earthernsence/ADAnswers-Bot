@@ -4,8 +4,8 @@ import type { ChargedInfinityUpgrade } from "@/types/game_data/upgrades/ChargedI
 import { Colours } from "@/utils/utils_colours";
 
 interface ChargedInfinityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction,
-  upgrade: ChargedInfinityUpgrade
+  interaction: CommandInteraction;
+  upgrade: ChargedInfinityUpgrade;
 }
 
 export class ChargedInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
@@ -24,12 +24,12 @@ export class ChargedInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       {
         name: "Effect",
         value: this.upgrade.charged.effect,
-        inline: false,
+        inline: false
       },
       {
         name: "Formula",
         value: this.upgrade.charged.formula,
-        inline: false,
+        inline: false
       }
     ];
   }

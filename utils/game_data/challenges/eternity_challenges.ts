@@ -1,4 +1,9 @@
-import type { EternityChallengeCompletionGoals, EternityChallengeDescriptions, EternityChallengeRewards, EternityChallengeSecondaryUnlock } from "@/types/game_data/challenges/EternityChallenges";
+import type {
+  EternityChallengeCompletionGoals,
+  EternityChallengeDescriptions,
+  EternityChallengeRewards,
+  EternityChallengeSecondaryUnlock
+} from "@/types/game_data/challenges/EternityChallenges";
 import Decimal from "break_infinity.js";
 import { DoublyLinkedList } from "@/types/DoublyLinkedList";
 import EternityChallenge from "./EternityChallenge";
@@ -37,13 +42,13 @@ export const eternityChallengeSecondaryUnlockRequirements: EternityChallengeSeco
   // eslint-disable-next-line no-unused-vars
   11: (completions: number) => `Use only the Antimatter Dimension path (TS71, 81, 91, 101)`,
   // eslint-disable-next-line no-unused-vars
-  12: (completions: number) => `Use only the Time Dimension path (TS73, 83, 93, 103)`,
+  12: (completions: number) => `Use only the Time Dimension path (TS73, 83, 93, 103)`
 };
 
 export const eternityChallengeRewards: EternityChallengeRewards = {
   "1": {
     reward: "Time Dimension multiplier based on time spent this Eternity",
-    formula: "×`max(time in this eternity / 10, 0.9) ^ 0.3 + (completions * 0.05)`",
+    formula: "×`max(time in this eternity / 10, 0.9) ^ 0.3 + (completions * 0.05)`"
   },
   "2": {
     reward: "1st Infinity Dimension multiplier based on Infinity Power, capping at ×1e100",
@@ -103,7 +108,7 @@ export const eternityChallengeCompletionGoals: EternityChallengeCompletionGoals 
   9: (completions: number) => new Decimal("1e1750").times(new Decimal("1e250").pow(completions)).toString(),
   10: (completions: number) => new Decimal("1e3000").times(new Decimal("1e300").pow(completions)).toString(),
   11: (completions: number) => new Decimal("1e450").times(new Decimal(1e200).pow(completions)).toString(),
-  12: (completions: number) => new Decimal("1e110000").times(new Decimal("1e12000").pow(completions)).toString(),
+  12: (completions: number) => new Decimal("1e110000").times(new Decimal("1e12000").pow(completions)).toString()
 };
 
 export const eternityChallengeSecondaryUnlockCurrency: { [key: number]: string } = {
@@ -118,7 +123,7 @@ export const eternityChallengeSecondaryUnlockCurrency: { [key: number]: string }
   9: "Infinity Power",
   10: "Eternity Points",
   11: "",
-  12: "",
+  12: ""
 };
 
 export const eternityChallengeTimeTheoremCost: { [key: number]: number } = {
@@ -133,17 +138,17 @@ export const eternityChallengeTimeTheoremCost: { [key: number]: number } = {
   9: 415,
   10: 550,
   11: 1,
-  12: 1,
+  12: 1
 };
 
 // eslint-disable-next-line no-unused-vars
 export const eternityChallengeCompletionRequirements: { [key: number]: (completion: number) => string } = {
   4: (completions: number) => {
-    const infinities = 16 - (completions * 4);
+    const infinities = 16 - completions * 4;
     return `${infinities} Infinities or less`;
   },
   12: (completions: number) => {
-    const seconds = 1 - (completions * 0.2);
+    const seconds = 1 - completions * 0.2;
     const realTimeMinutes = ((seconds * 1000) / 60).toFixed(1);
 
     return `${seconds} seconds or less (${realTimeMinutes} real-time minutes)`;
@@ -156,65 +161,65 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       challenge: 1,
       completion: 1,
       recommendedTheorems: 130,
-      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,171|1!",
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,171|1!"
     }),
     2: new EternityChallenge({
       challenge: 1,
       completion: 2,
       recommendedTheorems: 140,
       recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
-      note: "Get 60,000 Eternities before trying.",
+      note: "Get 60,000 Eternities before trying."
     }),
     3: new EternityChallenge({
       challenge: 1,
       completion: 3,
       recommendedTheorems: 147,
-      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
+      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!"
     }),
     4: new EternityChallenge({
       challenge: 1,
       completion: 4,
       recommendedTheorems: 163,
-      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!",
+      recommendedTree: "11,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171,21,33,31,41|1!"
     }),
     5: new EternityChallenge({
       challenge: 1,
       completion: 5,
       recommendedTheorems: 176,
-      recommendedTree: "11,21,22,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|1!",
-    }),
+      recommendedTree: "11,21,22,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|1!"
+    })
   },
   2: {
     1: new EternityChallenge({
       challenge: 2,
       completion: 1,
       recommendedTheorems: 135,
-      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,171|2!",
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,171|2!"
     }),
     2: new EternityChallenge({
       challenge: 2,
       completion: 2,
       recommendedTheorems: 157,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!"
     }),
     3: new EternityChallenge({
       challenge: 2,
       completion: 3,
       recommendedTheorems: 182,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!"
     }),
     4: new EternityChallenge({
       challenge: 2,
       completion: 4,
       recommendedTheorems: 208,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!"
     }),
     5: new EternityChallenge({
       challenge: 2,
       completion: 5,
       recommendedTheorems: 240,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!",
-    }),
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|2!"
+    })
   },
   3: {
     1: new EternityChallenge({
@@ -222,36 +227,36 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 140,
       recommendedTree: "11,22,32,42,51,61,71,81,91,101,111,122,132,142,151,161,162,171|3!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     2: new EternityChallenge({
       challenge: 3,
       completion: 2,
       recommendedTheorems: 155,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,71,81,91,101,111,121,131,141,151,161,162,171|3!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     3: new EternityChallenge({
       challenge: 3,
       completion: 3,
       recommendedTheorems: 165,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     4: new EternityChallenge({
       challenge: 3,
       completion: 4,
       recommendedTheorems: 182,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     5: new EternityChallenge({
       challenge: 3,
       completion: 5,
       recommendedTheorems: 208,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,72,82,92,102,111,121,131,141,151,161,162,171|3!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
-    }),
+      note: "To unlock the challenge, use TD, and then switch to the tree."
+    })
   },
   4: {
     1: new EternityChallenge({
@@ -259,65 +264,65 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 145,
       recommendedTree: "11,21,22,32,33,42,51,61,73,83,93,103,111,123,133,143|4!",
-      note: "Fail once for achievement",
+      note: "Fail once for achievement"
     }),
     2: new EternityChallenge({
       challenge: 4,
       completion: 2,
       recommendedTheorems: 170,
-      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171|4!",
+      recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171|4!"
     }),
     3: new EternityChallenge({
       challenge: 4,
       completion: 3,
       recommendedTheorems: 176,
-      recommendedTree: "11,21,22,32,42,51,61,62,73,83,93,103,111,123,133,143,151,162,171|4!",
+      recommendedTree: "11,21,22,32,42,51,61,62,73,83,93,103,111,123,133,143,151,162,171|4!"
     }),
     4: new EternityChallenge({
       challenge: 4,
       completion: 4,
       recommendedTheorems: 252,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|4!",
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|4!"
     }),
     5: new EternityChallenge({
       challenge: 4,
       completion: 5,
       recommendedTheorems: 370,
       recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,162,171,181|4!",
-      note: "TS181 required",
-    }),
+      note: "TS181 required"
+    })
   },
   5: {
     1: new EternityChallenge({
       challenge: 5,
       completion: 1,
       recommendedTheorems: 147,
-      recommendedTree: "11,21,22,32,42,51|5!",
+      recommendedTree: "11,21,22,32,42,51|5!"
     }),
     2: new EternityChallenge({
       challenge: 5,
       completion: 2,
       recommendedTheorems: 182,
-      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111|5!",
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111|5!"
     }),
     3: new EternityChallenge({
       challenge: 5,
       completion: 3,
       recommendedTheorems: 200,
-      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141|5!",
+      recommendedTree: "11,22,32,42,51,61,72,82,92,102,111,121,131,141|5!"
     }),
     4: new EternityChallenge({
       challenge: 5,
       completion: 4,
       recommendedTheorems: 220,
-      recommendedTree: "11,21,22,31,32,33,42,51,61,62,72,82,92,102,111,121,131,141,151|5!",
+      recommendedTree: "11,21,22,31,32,33,42,51,61,62,72,82,92,102,111,121,131,141,151|5!"
     }),
     5: new EternityChallenge({
       challenge: 5,
       completion: 5,
       recommendedTheorems: 252,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|5!",
-    }),
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|5!"
+    })
   },
   6: {
     1: new EternityChallenge({
@@ -325,36 +330,36 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 161,
       recommendedTree: "11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,33|6!",
-      note: "1e15 times last crunch, wait for RGs (+TS33 at 163 theorems). Remember to buy DimBoosts!",
+      note: "1e15 times last crunch, wait for RGs (+TS33 at 163 theorems). Remember to buy DimBoosts!"
     }),
     2: new EternityChallenge({
       challenge: 6,
       completion: 2,
       recommendedTheorems: 176,
       recommendedTree: "11,21,22,32,42,51,61,62,72,82,92,102,111,121,131,141,151,162|6!",
-      note: "Remember to buy DimBoosts!",
+      note: "Remember to buy DimBoosts!"
     }),
     3: new EternityChallenge({
       challenge: 6,
       completion: 3,
       recommendedTheorems: 208,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
-      note: "Remember to buy DimBoosts!",
+      note: "Remember to buy DimBoosts!"
     }),
     4: new EternityChallenge({
       challenge: 6,
       completion: 4,
       recommendedTheorems: 252,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
-      note: "Remember to buy DimBoosts!",
+      note: "Remember to buy DimBoosts!"
     }),
     5: new EternityChallenge({
       challenge: 6,
       completion: 5,
       recommendedTheorems: 320,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,72,82,92,102,111,121,131,141,151,161,162,171|6!",
-      note: "Get eternity upgrade 5 (1e40 EP). Remember to buy DimBoosts!",
-    }),
+      note: "Get eternity upgrade 5 (1e40 EP). Remember to buy DimBoosts!"
+    })
   },
   7: {
     1: new EternityChallenge({
@@ -362,36 +367,36 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 167,
       recommendedTree: "11,21,22,32,42,51,61,62,71,81,91,101,111|7!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     2: new EternityChallenge({
       challenge: 7,
       completion: 2,
       recommendedTheorems: 193,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141|7!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     3: new EternityChallenge({
       challenge: 7,
       completion: 3,
       recommendedTheorems: 220,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162|7!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     4: new EternityChallenge({
       challenge: 7,
       completion: 4,
       recommendedTheorems: 252,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171|7!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
+      note: "To unlock the challenge, use TD, and then switch to the tree."
     }),
     5: new EternityChallenge({
       challenge: 7,
       completion: 5,
       recommendedTheorems: 895,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,193,214|7!",
-      note: "To unlock the challenge, use TD, and then switch to the tree.",
-    }),
+      note: "To unlock the challenge, use TD, and then switch to the tree."
+    })
   },
   8: {
     1: new EternityChallenge({
@@ -400,7 +405,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       recommendedTheorems: 207,
       recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,123,133,143,151,161,162|8!",
       // eslint-disable-next-line @stylistic/max-len
-      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1."
     }),
     2: new EternityChallenge({
       challenge: 8,
@@ -408,7 +413,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       recommendedTheorems: 320,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171|8!",
       // eslint-disable-next-line @stylistic/max-len
-      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162,171. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti. Then buy the rest of the tree: 133,143,151,161,162,171. Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1."
     }),
     3: new EternityChallenge({
       challenge: 8,
@@ -416,7 +421,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       recommendedTheorems: 450,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
       // eslint-disable-next-line @stylistic/max-len
-      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 4 RG, 9% chance, remaining on interval - all on ID1.",
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 4 RG, 9% chance, remaining on interval - all on ID1."
     }),
     4: new EternityChallenge({
       challenge: 8,
@@ -424,15 +429,15 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       recommendedTheorems: 600,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
       // eslint-disable-next-line @stylistic/max-len
-      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 5 RG, 9% chance, remaining on interval - all on ID1.",
+      note: "Buy the challenge once, then respec your tree and buy everything up until TS123. Start the challenge and wait for replicanti and max RG. Then buy the rest of the tree: 133,143,151,161,162,171,181. Spend your upgrades on: 5 RG, 9% chance, remaining on interval - all on ID1."
     }),
     5: new EternityChallenge({
       challenge: 8,
       completion: 5,
       recommendedTheorems: 825,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,123,133,143,151,161,162,171,181|8!",
-      note: "Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1.",
-    }),
+      note: "Spend your upgrades on: 0 RG, 9% chance, remaining on interval - all on ID1."
+    })
   },
   9: {
     1: new EternityChallenge({
@@ -440,35 +445,35 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 522,
       recommendedTree: "11,22,32,42,51,61,73,83,93,103,111,121,131,141,151,161,162,171|9!",
-      note: "Can be done with less theorems.",
+      note: "Can be done with less theorems."
     }),
     2: new EternityChallenge({
       challenge: 9,
       completion: 2,
       recommendedTheorems: 575,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
-      note: "Can be done with less theorems.",
+      note: "Can be done with less theorems."
     }),
     3: new EternityChallenge({
       challenge: 9,
       completion: 3,
       recommendedTheorems: 660,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
-      note: "Can be done with less theorems.",
+      note: "Can be done with less theorems."
     }),
     4: new EternityChallenge({
       challenge: 9,
       completion: 4,
       recommendedTheorems: 760,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171|9!",
-      note: "Can be done with less theorems.",
+      note: "Can be done with less theorems."
     }),
     5: new EternityChallenge({
       challenge: 9,
       completion: 5,
       recommendedTheorems: 830,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171,181|9!",
-    }),
+      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,121,131,141,151,161,162,171,181|9!"
+    })
   },
   10: {
     1: new EternityChallenge({
@@ -476,115 +481,190 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 895,
       recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181|10!",
-      note: "Farm 150M infinities inside the challenge.",
+      note: "Farm 150M infinities inside the challenge."
     }),
     2: new EternityChallenge({
       challenge: 10,
       completion: 2,
       recommendedTheorems: 1900,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,193,211,214|10!",
-      note: "10M+ Banked Infinities recommended.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,193,211,214|10!",
+      note: "10M+ Banked Infinities recommended."
     }),
     3: new EternityChallenge({
       challenge: 10,
       completion: 3,
       recommendedTheorems: 2050,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,214|10!",
-      note: "20M+ Banked Infinities recommended.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,214|10!",
+      note: "20M+ Banked Infinities recommended."
     }),
     4: new EternityChallenge({
       challenge: 10,
       completion: 4,
       recommendedTheorems: 3650,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,213,214|10!",
-      note: "30M+ Banked Infinities recommended.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,192,193,213,214|10!",
+      note: "30M+ Banked Infinities recommended."
     }),
     5: new EternityChallenge({
       challenge: 10,
       completion: 5,
       recommendedTheorems: 5200,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,213,214,225,228,233|10!",
-      note: "40M+ Banked Infinities recommended.",
-    }),
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,213,214,225,228,233|10!",
+      note: "40M+ Banked Infinities recommended."
+    })
   },
   11: {
     1: new EternityChallenge({
       challenge: 11,
       completion: 1,
       recommendedTheorems: 5600,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
-      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music)."
     }),
     2: new EternityChallenge({
       challenge: 11,
       completion: 2,
       recommendedTheorems: 5600,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
-      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,121,131,141,151,161,162,171,181,191,192,193,211,212,213,222,225,231,233|11!",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music)."
     }),
     3: new EternityChallenge({
       challenge: 11,
       completion: 3,
       recommendedTheorems: 5950,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music)."
     }),
     4: new EternityChallenge({
       challenge: 11,
       completion: 4,
       recommendedTheorems: 5950,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "Get the Popular Music achievement first (if you need help with it use /achievements Popular Music)."
     }),
     5: new EternityChallenge({
       challenge: 11,
       completion: 5,
       recommendedTheorems: 5950,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
-      note: "This takes around 1h 45m. Get the Popular Music achievement first (if you need help with it use /achievements Popular Music).",
-    }),
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,71,81,91,101,111,123,133,143,151,161,162,171,181,191,192,193,211,212,213,222,223,225,231,233|11!",
+      note: "This takes around 1h 45m. Get the Popular Music achievement first (if you need help with it use /achievements Popular Music)."
+    })
   },
   12: {
     1: new EternityChallenge({
       challenge: 12,
       completion: 1,
       recommendedTheorems: 9800,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity."
     }),
     2: new EternityChallenge({
       challenge: 12,
       completion: 2,
       recommendedTheorems: 9800,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity."
     }),
     3: new EternityChallenge({
       challenge: 12,
       completion: 3,
       recommendedTheorems: 10750,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity."
     }),
     4: new EternityChallenge({
       challenge: 12,
       completion: 4,
       recommendedTheorems: 11200,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity.",
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity."
     }),
     5: new EternityChallenge({
       challenge: 12,
       completion: 5,
       recommendedTheorems: 12350,
-      recommendedTree: "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough achievement (achievement 134).",
-    }),
-  },
+      recommendedTree:
+        "11,21,22,31,32,33,41,42,51,61,62,73,83,93,103,111,122,132,142,151,161,162,171,181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      note: "Enable Auto-Eternity. Can be done earlier if you have the When Will It Be Enough achievement (achievement 134)."
+    })
+  }
 };
 
 // eslint-disable-next-line @stylistic/max-len
-export const order = ["1x1", "2x1", "1x2", "3x1", "4x1", "5x1", "1x3", "3x2", "2x2", "6x1", "1x4", "3x3", "7x1", "4x2", "4x3", "6x2", "1x5", "5x2", "2x3", "3x4", "7x2", "5x3", "8x1", "3x5", "6x3", "2x4", "5x4", "7x3", "2x5", "5x5", "4x4", "6x4", "7x4", "8x2", "6x5", "4x5", "8x3", "9x1", "9x2", "8x4", "9x3", "9x4", "8x5", "9x5", "10x1", "7x5", "10x2", "10x3", "10x4", "10x5", "11x1", "11x2", "11x3", "11x4", "11x5", "12x1", "12x2", "12x3", "12x4", "12x5"];
+export const order = [
+  "1x1",
+  "2x1",
+  "1x2",
+  "3x1",
+  "4x1",
+  "5x1",
+  "1x3",
+  "3x2",
+  "2x2",
+  "6x1",
+  "1x4",
+  "3x3",
+  "7x1",
+  "4x2",
+  "4x3",
+  "6x2",
+  "1x5",
+  "5x2",
+  "2x3",
+  "3x4",
+  "7x2",
+  "5x3",
+  "8x1",
+  "3x5",
+  "6x3",
+  "2x4",
+  "5x4",
+  "7x3",
+  "2x5",
+  "5x5",
+  "4x4",
+  "6x4",
+  "7x4",
+  "8x2",
+  "6x5",
+  "4x5",
+  "8x3",
+  "9x1",
+  "9x2",
+  "8x4",
+  "9x3",
+  "9x4",
+  "8x5",
+  "9x5",
+  "10x1",
+  "7x5",
+  "10x2",
+  "10x3",
+  "10x4",
+  "10x5",
+  "11x1",
+  "11x2",
+  "11x3",
+  "11x4",
+  "11x5",
+  "12x1",
+  "12x2",
+  "12x3",
+  "12x4",
+  "12x5"
+];
 export const orderAsString: string = order.join(", ");
 
 export const orderAsDoublyLinkedList: DoublyLinkedList<EternityChallenge> = new DoublyLinkedList<EternityChallenge>();
@@ -592,7 +672,5 @@ export const orderAsDoublyLinkedList: DoublyLinkedList<EternityChallenge> = new 
 for (const challenge of order) {
   const values = challenge.split("x").map(Number);
 
-  orderAsDoublyLinkedList.insertAtEnd(
-    eternityChallenges[values[0]][values[1]]
-  );
+  orderAsDoublyLinkedList.insertAtEnd(eternityChallenges[values[0]][values[1]]);
 }

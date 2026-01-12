@@ -3,8 +3,8 @@ import { Command } from "./Command";
 import { isUserHelper } from "@/utils/utils_commands";
 
 interface ChoiceTextCommandProps {
-  data: SlashCommandOptionsOnlyBuilder,
-  possibleText: Record<string, string>,
+  data: SlashCommandOptionsOnlyBuilder;
+  possibleText: Record<string, string>;
 }
 
 export class ChoiceTextCommand extends Command {

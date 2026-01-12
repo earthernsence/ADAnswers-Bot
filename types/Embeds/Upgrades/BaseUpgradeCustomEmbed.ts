@@ -1,4 +1,10 @@
-import { AttachmentBuilder, type ColorResolvable, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import {
+  AttachmentBuilder,
+  type ColorResolvable,
+  type CommandInteraction,
+  type EmbedBuilder,
+  type EmbedField
+} from "discord.js";
 import type { BaseUpgrade } from "@/types/game_data/upgrades/BaseUpgrade";
 import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
@@ -6,9 +12,9 @@ import { CustomEmbed } from "../CustomEmbed";
 import { NotImplementedError } from "@/types/NotImplementedError";
 
 interface BaseUpgradeCustomEmbedProps {
-  interaction: CommandInteraction,
-  upgrade: BaseUpgrade,
-  colour?: ColorResolvable
+  interaction: CommandInteraction;
+  upgrade: BaseUpgrade;
+  colour?: ColorResolvable;
 }
 
 export class BaseUpgradeCustomEmbed extends CustomEmbed {
@@ -22,8 +28,7 @@ export class BaseUpgradeCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.upgrade.name)
-      .setColour(this.colour);
+    this.setTitle(this.upgrade.name).setColour(this.colour);
 
     this.setFields(this.getFields());
 

@@ -118,18 +118,17 @@ export default new BasicEmbedCommand({
           option
             .setName("type")
             .setDescription("Which Glyph type would you like information about?")
-            .setChoices(Object.keys(glyphs).map(type => ({
-              name: type,
-              value: type,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.keys(glyphs).map(type => ({
+                name: type,
+                value: type,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
         .addBooleanOption(option =>
-          option
-            .setName("altered")
-            .setDescription("View information about the charged effects?")
-            .setRequired(false)
+          option.setName("altered").setDescription("View information about the charged effects?").setRequired(false)
         )
     )
     .addSubcommand(subcommand =>
@@ -140,11 +139,13 @@ export default new BasicEmbedCommand({
           option
             .setName("type")
             .setDescription("Which Glyph type would you like information about?")
-            .setChoices(Object.keys(glyphs).map(type => ({
-              name: type,
-              value: type,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.keys(glyphs).map(type => ({
+                name: type,
+                value: type,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -156,11 +157,13 @@ export default new BasicEmbedCommand({
           option
             .setName("info")
             .setDescription("What particular information would you like?")
-            .setChoices(Object.keys(glyphInfo).map(choice => ({
-              name: choice,
-              value: choice,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.keys(glyphInfo).map(choice => ({
+                name: choice,
+                value: choice,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -202,7 +205,9 @@ export default new BasicEmbedCommand({
             .addNumberOption(option =>
               option
                 .setName("bonus-rarity")
-                .setDescription("The total percentage rarity added as a bonus in-game (see Glyph Level Factors). default: 0")
+                .setDescription(
+                  "The total percentage rarity added as a bonus in-game (see Glyph Level Factors). default: 0"
+                )
                 .setMinValue(0)
                 .setMaxValue(100)
                 .setRequired(false)

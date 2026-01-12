@@ -16,22 +16,25 @@ import Decimal from "break_infinity.js";
 //   return `${name}${commaSeparated}, ${finalSeperator} ${name}${last}`;
 // }
 
-export function enumerate<itemType = string>(items: Array<itemType>, type: Intl.ListFormatType = "conjunction"): string {
+export function enumerate<itemType = string>(
+  items: Array<itemType>,
+  type: Intl.ListFormatType = "conjunction"
+): string {
   return new Intl.ListFormat("en", {
     style: "long",
-    type,
+    type
   }).format(items.map(item => String(item)));
 }
 
-export const capitalise = function(word: string): string {
+export function capitalise(word: string): string {
   return word.toLowerCase().replace(/^\w/u, c => c.toUpperCase());
-};
+}
 
 export const Caesar = {
   mod: (n: number, p: number) => {
     let n2 = n;
 
-    if (n < 0) n2 = p - Math.abs(n) % p;
+    if (n < 0) n2 = p - (Math.abs(n) % p);
 
     return n2 % p;
   },

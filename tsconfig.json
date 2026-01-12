@@ -28,7 +28,7 @@
     "paths": {
       "@/types/*": ["./types/*"],
       "@/images/*": ["./images/*"],
-      "@/utils/*": ["./utils/*"],
+      "@/utils/*": ["./utils/*"]
     }
   }
 }

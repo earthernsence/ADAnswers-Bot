@@ -423,7 +423,7 @@ export const timeStudies: TimeStudies = {
     cost: 900,
     reqType: TS_REQUIREMENT_TYPE.ONE,
     prerequisites: [192],
-    type: "normal",
+    type: "normal"
   },
   "211": {
     id: 211,
@@ -431,7 +431,7 @@ export const timeStudies: TimeStudies = {
     cost: 120,
     reqType: TS_REQUIREMENT_TYPE.ONE,
     prerequisites: [191],
-    type: "normal",
+    type: "normal"
   },
   "212": {
     id: 212,
@@ -440,7 +440,7 @@ export const timeStudies: TimeStudies = {
     cost: 150,
     reqType: TS_REQUIREMENT_TYPE.ONE,
     prerequisites: [191],
-    type: "normal",
+    type: "normal"
   },
   "213": {
     id: 213,
@@ -448,7 +448,7 @@ export const timeStudies: TimeStudies = {
     cost: 200,
     reqType: TS_REQUIREMENT_TYPE.ONE,
     prerequisites: [193],
-    type: "normal",
+    type: "normal"
   },
   "214": {
     id: 214,
@@ -462,7 +462,7 @@ export const timeStudies: TimeStudies = {
     cost: 120,
     reqType: TS_REQUIREMENT_TYPE.ONE,
     prerequisites: [193],
-    type: "normal",
+    type: "normal"
   },
   "221": {
     id: 221,

@@ -3,10 +3,10 @@ import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface BasicTextCustomEmbedProps {
-  interaction: CommandInteraction,
-  title: string,
-  field: EmbedField,
-  colour?: Colours
+  interaction: CommandInteraction;
+  title: string;
+  field: EmbedField;
+  colour?: Colours;
 }
 
 export class BasicTextCustomEmbed extends CustomEmbed {
@@ -22,8 +22,7 @@ export class BasicTextCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.title)
-      .setColour(this.colour);
+    this.setTitle(this.title).setColour(this.colour);
 
     this.addField(this.field);
 

@@ -1,4 +1,8 @@
-import type { EC, EternityChallengeReward, EternityChallengeUnlock } from "@/types/game_data/challenges/EternityChallenges";
+import type {
+  EC,
+  EternityChallengeReward,
+  EternityChallengeUnlock
+} from "@/types/game_data/challenges/EternityChallenges";
 import {
   eternityChallengeCompletionGoals,
   eternityChallengeCompletionRequirements,
@@ -14,11 +18,11 @@ import { inlineCode } from "discord.js";
 import { quantify } from "@/utils/utils_commands";
 
 interface EternityChallengeProps {
-  challenge: number,
-  completion: number,
-  recommendedTree: string,
-  recommendedTheorems: number,
-  note?: string,
+  challenge: number;
+  completion: number;
+  recommendedTree: string;
+  recommendedTheorems: number;
+  note?: string;
 }
 
 export default class EternityChallenge implements EC {
@@ -60,7 +64,7 @@ export default class EternityChallenge implements EC {
     return {
       currency: eternityChallengeSecondaryUnlockCurrency[this.challenge],
       amount: eternityChallengeSecondaryUnlockRequirements[this.challenge](this.completion - 1),
-      theorems: eternityChallengeTimeTheoremCost[this.challenge],
+      theorems: eternityChallengeTimeTheoremCost[this.challenge]
     };
   }
 
@@ -97,12 +101,14 @@ export default class EternityChallenge implements EC {
   }
 
   public formatUnlock(): string {
-    if (this.challenge === 11 || this.challenge === 12) return `${this.unlock.amount} and ${quantify("Time Theorem", this.unlock.theorems)}`;
+    if (this.challenge === 11 || this.challenge === 12)
+      return `${this.unlock.amount} and ${quantify("Time Theorem", this.unlock.theorems)}`;
     return `${this.unlock.amount} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
   }
 
   public formatGoal(): string {
-    if (this.challenge === 4 || this.challenge === 12) return `${this.ip} Infinity Points in ${eternityChallengeCompletionRequirements[this.challenge](this.completion - 1)}.`;
+    if (this.challenge === 4 || this.challenge === 12)
+      return `${this.ip} Infinity Points in ${eternityChallengeCompletionRequirements[this.challenge](this.completion - 1)}.`;
     return `${inlineCode(this.ip)} Infinity Points`;
   }
 
@@ -113,8 +119,6 @@ Other Eternity Challenge completions recommended: ${this.otherRecommendedComplet
   }
 
   private get nextEC(): EternityChallenge | undefined {
-    return orderAsDoublyLinkedList.search(value =>
-      value === this
-    )?.next?.value;
+    return orderAsDoublyLinkedList.search(value => value === this)?.next?.value;
   }
 }

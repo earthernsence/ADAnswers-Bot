@@ -10,7 +10,8 @@ import {
   MessageComponentInteraction,
   MessageFlags,
   SlashCommandBuilder,
-  userMention } from "discord.js";
+  userMention
+} from "discord.js";
 import { mobileSecretAchievementsList, webSecretAchievementsList } from "@/utils/game_data/secret_achievements";
 import { Command } from "@/types/Commands/Command";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
@@ -20,7 +21,11 @@ import type SecretAchievement from "@/utils/game_data/SecretAchievement";
 import { SecretAchievementCustomEmbed } from "@/types/Embeds/SecretAchievementCustomEmbed";
 import { SecretAchievementType } from "@/types/game_data/SecretAchievements";
 
-const getNext = (current: DoublyLinkedListNode<SecretAchievement>, forward: boolean, type: SecretAchievementType): DoublyLinkedListNode<SecretAchievement> => {
+const getNext = (
+  current: DoublyLinkedListNode<SecretAchievement>,
+  forward: boolean,
+  type: SecretAchievementType
+): DoublyLinkedListNode<SecretAchievement> => {
   if (forward) {
     const newAch = current.next;
     if (!newAch) {
@@ -94,7 +99,7 @@ export default new Command({
             .setRequired(false)
         )
     ),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     const version = interaction.options.getSubcommand(true);
@@ -144,17 +149,23 @@ export default new Command({
     }
 
     const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
-    const embed = new SecretAchievementCustomEmbed({ interaction, achievement: achievement.value, expirationTimestamp });
+    const embed = new SecretAchievementCustomEmbed({
+      interaction,
+      achievement: achievement.value,
+      expirationTimestamp
+    });
     const picture = embed.getAndSetThumbnail();
 
     let currentAchievement = achievement;
 
-    const buttons = (disabled: boolean) => new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
+    const buttons = (disabled: boolean) =>
+      new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId(`secret_ach_button_prev_${expirationTimestamp}`)
           .setEmoji({ name: "◀️" })
-          .setLabel(`Previous Secret Achievement (${currentAchievement.prev ? currentAchievement.prev.value.id : "48"})`)
+          .setLabel(
+            `Previous Secret Achievement (${currentAchievement.prev ? currentAchievement.prev.value.id : "48"})`
+          )
           .setStyle(ButtonStyle.Primary)
           .setDisabled(disabled),
         new ButtonBuilder()
@@ -176,9 +187,13 @@ export default new Command({
     const sentReply = await interaction.reply(initialContent);
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-    const collector = sentReply.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 });
+    const collector = sentReply.createMessageComponentCollector({
+      componentType: ComponentType.Button,
+      filter,
+      time: 60000
+    });
 
-    collector.on("collect", async(i: ButtonInteraction) => {
+    collector.on("collect", async (i: ButtonInteraction) => {
       const forward = i.customId.includes("next");
       const nextAchievement = getNext(currentAchievement, forward, type);
 
@@ -186,24 +201,32 @@ export default new Command({
 
       currentAchievement = nextAchievement;
 
-      const newEmbed = new SecretAchievementCustomEmbed({ interaction, achievement: currentAchievement.value, expirationTimestamp });
+      const newEmbed = new SecretAchievementCustomEmbed({
+        interaction,
+        achievement: currentAchievement.value,
+        expirationTimestamp
+      });
       const newImage = newEmbed.getAndSetThumbnail();
 
       await i.update({
         files: [newImage],
         embeds: [newEmbed.create()],
-        components: [buttons(false)],
+        components: [buttons(false)]
       });
     });
 
-    collector.on("end", async() => {
-      const finalEmbed = new SecretAchievementCustomEmbed({ interaction, achievement: currentAchievement.value, expirationTimestamp });
+    collector.on("end", async () => {
+      const finalEmbed = new SecretAchievementCustomEmbed({
+        interaction,
+        achievement: currentAchievement.value,
+        expirationTimestamp
+      });
       const finalImage = finalEmbed.getAndSetThumbnail();
 
       await sentReply.edit({
         files: [finalImage],
         embeds: [finalEmbed.create()],
-        components: [buttons(true)],
+        components: [buttons(true)]
       });
     });
   }

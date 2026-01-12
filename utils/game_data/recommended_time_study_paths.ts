@@ -36,7 +36,14 @@ export function trees(path?: string) {
       realPath = TREE_PATHS.ACTIVE;
       break;
   }
-  const BASE = [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.TIME, 111, ...TREE_PATHS.ACTIVE, ...TREE_PATHS.POST_SPLIT, ...TREE_PATHS.EXTRA];
+  const BASE = [
+    ...TREE_PATHS.PRE_SPLIT,
+    ...TREE_PATHS.TIME,
+    111,
+    ...TREE_PATHS.ACTIVE,
+    ...TREE_PATHS.POST_SPLIT,
+    ...TREE_PATHS.EXTRA
+  ];
   // All study trees must be sorted in descending order!
   return [
     // Light-Dark Paths
@@ -51,39 +58,39 @@ export function trees(path?: string) {
     },
     {
       requirement: 4945,
-      ts: BASE.concat(191, 211, 222, 212, 224, 232, 192, 201, ...TREE_PATHS.INFINITY, 193, 214, 228, 234, 213, 226),
+      ts: BASE.concat(191, 211, 222, 212, 224, 232, 192, 201, ...TREE_PATHS.INFINITY, 193, 214, 228, 234, 213, 226)
     },
     {
       requirement: 3925,
-      ts: BASE.concat(191, 212, 223, 232, 192, 201, ...TREE_PATHS.INFINITY, 211, 193, 214, 213),
+      ts: BASE.concat(191, 212, 223, 232, 192, 201, ...TREE_PATHS.INFINITY, 211, 193, 214, 213)
     },
     {
       requirement: 3712,
-      ts: BASE.concat(191, 211, 222, 212, 224, 232, 193, 214),
+      ts: BASE.concat(191, 211, 222, 212, 224, 232, 193, 214)
     },
     {
       requirement: 3542,
-      ts: BASE.concat(191, 211, 212, 223, 232, 192, 193, 214),
+      ts: BASE.concat(191, 211, 212, 223, 232, 192, 193, 214)
     },
     {
       requirement: 2692,
-      ts: BASE.concat(191, 212, 223, 232, 193, 214, 211, 213),
+      ts: BASE.concat(191, 212, 223, 232, 193, 214, 211, 213)
     },
     {
       requirement: 2272,
-      ts: BASE.concat(191, 212, 223, 232, 211),
+      ts: BASE.concat(191, 212, 223, 232, 211)
     },
     {
       requirement: 2142,
-      ts: BASE.concat(193, 214, 228, 234),
+      ts: BASE.concat(193, 214, 228, 234)
     },
     {
       requirement: 1292,
-      ts: BASE.concat(191, 212, 193, 214, 211, 213),
+      ts: BASE.concat(191, 212, 193, 214, 211, 213)
     },
     {
       requirement: 318,
-      ts: BASE.concat(191, 212, 211),
+      ts: BASE.concat(191, 212, 211)
     },
     {
       requirement: 147,
@@ -92,7 +99,7 @@ export function trees(path?: string) {
     // Remove 62 from BASE pre-EC5 recommendation
     {
       requirement: 123,
-      ts: [...BASE.filter(study => study !== 62)],
+      ts: [...BASE.filter(study => study !== 62)]
     },
     // 2nd Split
     {
@@ -160,11 +167,13 @@ function getAffordableStudiesFromStudyList(studiesToPurchase: number[], theoremA
 }
 
 export function getRecommendedTree(theoremAmount: number, path: string = "active"): string {
-  let recommendedTree: {
-    ts: Array<number>,
-    desc?: string,
-    requirement: number,
-  } | undefined = undefined;
+  let recommendedTree:
+    | {
+        ts: Array<number>;
+        desc?: string;
+        requirement: number;
+      }
+    | undefined = undefined;
 
   for (const tree of trees(path).reverse()) {
     if (Math.max(theoremAmount, 0) >= tree.requirement) {
@@ -186,12 +195,13 @@ const orderAsECs: Array<EternityChallenge> = orderAsDoublyLinkedList.traverse();
 
 // Function rewritten by Mirai
 export function ecsAtTTAmount(tt: number): ECsAtTTInfo {
-  if (tt >= 12350) return {
-    completions: "All ECs completed!",
-    nextEC: findEC(1, 1),
-    nextECs: [],
-    nextChallengeTT: Number.MAX_VALUE,
-  };
+  if (tt >= 12350)
+    return {
+      completions: "All ECs completed!",
+      nextEC: findEC(1, 1),
+      nextECs: [],
+      nextChallengeTT: Number.MAX_VALUE
+    };
 
   let completions = Array(12);
   const nextECs = [];

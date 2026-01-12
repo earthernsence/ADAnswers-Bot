@@ -2,13 +2,13 @@ import { BaseUpgrade } from "./BaseUpgrade";
 import { InfinityUpgrade } from "./InfinityUpgrade";
 
 interface ChargedInfinityUpgradeInfo {
-  effect: string,
-  formula: string
+  effect: string;
+  formula: string;
 }
 
 interface ChargedInfinityUpgradeProps {
-  baseUpgrade: InfinityUpgrade
-  charged: ChargedInfinityUpgradeInfo
+  baseUpgrade: InfinityUpgrade;
+  charged: ChargedInfinityUpgradeInfo;
 }
 
 export class ChargedInfinityUpgrade extends BaseUpgrade {
@@ -16,7 +16,7 @@ export class ChargedInfinityUpgrade extends BaseUpgrade {
   charged: ChargedInfinityUpgradeInfo;
 
   constructor({ baseUpgrade, charged }: ChargedInfinityUpgradeProps) {
-    super(...[baseUpgrade] as const);
+    super(...([baseUpgrade] as const));
     this.charged = charged;
   }
 }

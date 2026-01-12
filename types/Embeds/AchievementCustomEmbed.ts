@@ -6,9 +6,9 @@ import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface AchievementCustomEmbedProps {
-  interaction: CommandInteraction,
-  achievement: Achievement,
-  expirationTimestamp: number,
+  interaction: CommandInteraction;
+  achievement: Achievement;
+  expirationTimestamp: number;
 }
 
 export class AchievementCustomEmbed extends CustomEmbed {
@@ -22,12 +22,14 @@ export class AchievementCustomEmbed extends CustomEmbed {
   }
 
   private get disabled(): boolean {
-    return Math.floor((Date.now()) / 1000) >= this.expirationTimestamp;
+    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public create(): EmbedBuilder {
     this.setTitle(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`)
-      .setDescription(`Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`)
+      .setDescription(
+        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
+      )
       .setColour(Colours.Achievement);
 
     this.setFields(this.getFields());
@@ -43,9 +45,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
   public doom(): EmbedBuilder {
     this.setColour(Colours.Pelle);
 
-    this.setTitle(Caesar.randomEncrypt(
-      `Achievement ${this.achievement.id} - "${this.achievement.fullName}"`
-    ));
+    this.setTitle(Caesar.randomEncrypt(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`));
 
     const fields: Array<EmbedField> = [];
 
@@ -53,7 +53,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
       fields.push({
         name: Caesar.randomEncrypt(field.name),
         value: Caesar.randomEncrypt(field.value),
-        inline: field.inline ?? false,
+        inline: field.inline ?? false
       });
     }
 
@@ -80,9 +80,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
   }
 
   private getFields(): Array<EmbedField> {
-    const fields: Array<EmbedField> = [
-      { name: "Achievement", value: this.achievement.requirement, inline: false }
-    ];
+    const fields: Array<EmbedField> = [{ name: "Achievement", value: this.achievement.requirement, inline: false }];
 
     if (this.achievement.unlockStrategy) {
       fields.push({ name: "Strategy", value: this.achievement.unlockStrategy, inline: false });

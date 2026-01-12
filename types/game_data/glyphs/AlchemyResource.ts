@@ -1,10 +1,10 @@
 export type AlchemyResource = {
-  name: string,
+  name: string;
   // Ra-Effarig level that the resource unlocks at
-  unlocksAt: number,
-  effect: string,
-  formula: string,
+  unlocksAt: number;
+  effect: string;
+  formula: string;
   // What ring the resource lies on
-  tier: number,
-  reagents?: Array<[string, number]>
+  tier: number;
+  reagents?: Array<[string, number]>;
 };

@@ -13,8 +13,9 @@ export default new BasicEmbedCommand({
         .setDescription("(Optional) Which user would you like to show the information to?")
         .setRequired(false)
     ),
-  embed: (interaction: ChatInputCommandInteraction) => new AntimatterChallengeCustomEmbed({
-    interaction,
-    challenge: antimatterChallenges.c9
-  })
+  embed: (interaction: ChatInputCommandInteraction) =>
+    new AntimatterChallengeCustomEmbed({
+      interaction,
+      challenge: antimatterChallenges.c9
+    })
 });

@@ -1,5 +1,15 @@
 import { ActionRowBuilder, bold, ButtonBuilder, italic } from "@discordjs/builders";
-import { ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, type InteractionReplyOptions, MessageComponentInteraction, MessageFlags, roleMention, SlashCommandBuilder } from "discord.js";
+import {
+  ButtonInteraction,
+  ButtonStyle,
+  ChatInputCommandInteraction,
+  ComponentType,
+  type InteractionReplyOptions,
+  MessageComponentInteraction,
+  MessageFlags,
+  roleMention,
+  SlashCommandBuilder
+} from "discord.js";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
 import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
@@ -9,15 +19,15 @@ import { Roles } from "@/utils/utils_roles";
 
 interface RoleRequestMessages {
   [key: string]: {
-    add: string,
-    remove: string
-  }
+    add: string;
+    remove: string;
+  };
 }
 
 const requestMessages: RoleRequestMessages = {
   [Roles.ADABUpdates]: {
     add: `Doing so will mean that you will be mentioned in relevant ADAB update notifications.`,
-    remove: `Doing so will mean that you are no longer mentioned in relevant ADAB update notifications.`,
+    remove: `Doing so will mean that you are no longer mentioned in relevant ADAB update notifications.`
   },
   [Roles.HelperRole]: {
     add: `Doing so will allow you to ${bold("visibly")} use the bot in public-facing Discord channels, like the Progression discussion chats. \
@@ -25,11 +35,11 @@ To become a Helper, understand that you agree to keep all ${italic("personal")} 
 and only use the bot outside of those places to assist others in Antimatter Dimensions. ${bold("You are not free from consequences")}. \
 Moderators and Admins reserve the right to pursue appropriate avenues of punishment in the event that this is not respected.
     `,
-    remove: `Doing so will prevent your usage of ADAB being visible in the Antimatter Dimensions Discord server.`,
+    remove: `Doing so will prevent your usage of ADAB being visible in the Antimatter Dimensions Discord server.`
   },
   [Roles.TestRole]: {
     add: `Test lorem ipsum ADDING ROLE dolor sit amet.`,
-    remove: `Test lorem ipsum REMOVING ROLE dolor sit amet.`,
+    remove: `Test lorem ipsum REMOVING ROLE dolor sit amet.`
   }
 };
 
@@ -49,7 +59,7 @@ export default new Command({
           { name: "Test role", value: Roles.TestRole }
         ])
     ),
-  execute: async(interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
     // TODO: Change to AD server for release
@@ -102,19 +112,19 @@ export default new Command({
         inline: false
       },
       colour: hasRole ? Colours.Forbidden : Colours.Antimatter
-    })
-      .setDescription(`Are you sure you want to ${hasRole ? "remove" : "add"} the "${role.name}" role?\nExpires <t:${expirationTimestamp}:R> at <t:${expirationTimestamp}:T>`);
+    }).setDescription(
+      `Are you sure you want to ${hasRole ? "remove" : "add"} the "${role.name}" role?\nExpires <t:${expirationTimestamp}:R> at <t:${expirationTimestamp}:T>`
+    );
 
     const picture = embed.getAndSetThumbnail();
 
-    const button = new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
-        new ButtonBuilder()
-          .setStyle(hasRole ? ButtonStyle.Danger : ButtonStyle.Success)
-          .setEmoji({ name: hasRole ? "❌" : "✅" })
-          .setLabel(hasRole ? "Remove role" : "Add role")
-          .setCustomId(`role_request_button_${expirationTimestamp}`)
-      );
+    const button = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setStyle(hasRole ? ButtonStyle.Danger : ButtonStyle.Success)
+        .setEmoji({ name: hasRole ? "❌" : "✅" })
+        .setLabel(hasRole ? "Remove role" : "Add role")
+        .setCustomId(`role_request_button_${expirationTimestamp}`)
+    );
 
     const initialContent: InteractionReplyOptions = {
       embeds: [embed.create()],
@@ -126,9 +136,13 @@ export default new Command({
     const sentReply = await interaction.reply(initialContent);
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-    const collector = sentReply.createMessageComponentCollector({ componentType: ComponentType.Button, filter, time: 60000 });
+    const collector = sentReply.createMessageComponentCollector({
+      componentType: ComponentType.Button,
+      filter,
+      time: 60000
+    });
 
-    collector.once("collect", async(i: ButtonInteraction) => {
+    collector.once("collect", async (i: ButtonInteraction) => {
       await interaction.guild?.members.fetch(interaction.user.id).then(async member => {
         if (hasRole) member.roles.remove(roleID);
         else member.roles.add(roleID);
@@ -137,17 +151,17 @@ export default new Command({
           content: `You have successfully ${hasRole ? "removed" : "added"} the "${roleMention(roleID)}" role. You can safely remove this message. Remember, you can always run /rolerequest again to reverse your decision.`,
           embeds: [],
           components: [],
-          files: [],
+          files: []
         });
       });
     });
 
-    collector.on("end", async() => {
+    collector.on("end", async () => {
       await interaction.editReply({
         content: `The embed has expired. Your requested role was not ${hasRole ? "removed" : "added"}. You can use \`/rolerequest\` to try again.`,
         embeds: [],
         components: [],
-        files: [],
+        files: []
       });
     });
   }

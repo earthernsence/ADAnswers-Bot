@@ -9,14 +9,14 @@ import {
   inlineCode,
   MessageComponentInteraction,
   StringSelectMenuBuilder,
-  underline,
+  underline
 } from "discord.js";
 import type { ADABClient } from "../ADABClient";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface HelpCustomEmbedProps {
-  interaction: CommandInteraction,
+  interaction: CommandInteraction;
 }
 
 export class HelpCustomEmbed extends CustomEmbed {
@@ -58,78 +58,74 @@ export class HelpCustomEmbed extends CustomEmbed {
   }
 
   public get buttons(): ActionRowBuilder<ButtonBuilder> {
-    return new ActionRowBuilder<ButtonBuilder>()
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId(`help_button_prev_${this.expirationTimestamp}`)
-          .setEmoji({ name: "◀️" })
-          .setLabel("Previous page")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(`help_button_next_${this.expirationTimestamp}`)
-          .setEmoji({ name: "▶️" })
-          .setLabel("Next page")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setStyle(ButtonStyle.Link)
-          .setLabel("GitHub repository")
-          .setURL("https://github.com/earthernsence/ADAnswers-Bot")
-      );
+    return new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`help_button_prev_${this.expirationTimestamp}`)
+        .setEmoji({ name: "◀️" })
+        .setLabel("Previous page")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId(`help_button_next_${this.expirationTimestamp}`)
+        .setEmoji({ name: "▶️" })
+        .setLabel("Next page")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setStyle(ButtonStyle.Link)
+        .setLabel("GitHub repository")
+        .setURL("https://github.com/earthernsence/ADAnswers-Bot")
+    );
   }
 
   public get selectMenu(): ActionRowBuilder<StringSelectMenuBuilder> {
-    return new ActionRowBuilder<StringSelectMenuBuilder>()
-      .addComponents(
-        new StringSelectMenuBuilder()
-          .setCustomId(`help_select_menu_${this.expirationTimestamp}`)
-          .setOptions([
-            {
-              label: "Page 1: Pre-Break Infinity",
-              value: "infinity",
-              description: "Pre-Break Infinity commands"
-            },
-            {
-              label: "Page 2: Post-Break Infinity Era",
-              value: "break_infinity",
-              description: "Post-Break Infinity Era commands"
-            },
-            {
-              label: "Page 3: Eternity Era",
-              value: "eternity",
-              description: "Eternity Era commands"
-            },
-            {
-              label: "Page 4: ECs and Dilation",
-              value: "eternity_challenges_dilation",
-              description: "ECs and Dilation commands"
-            },
-            {
-              label: "Page 5: Reality Era",
-              value: "reality",
-              description: "Reality Era commands"
-            },
-            {
-              label: "Page 6: Miscellaneous game commands",
-              value: "misc_game_info",
-              description: "Miscellaneous game commands"
-            },
-            {
-              label: "Page 7: Miscellaneous meta-game commands",
-              value: "misc_meta_game_info",
-              description: "Miscellaneous meta-game commands"
-            },
-            {
-              label: "Page 8: Miscellaneous bot/server commands",
-              value: "misc_bot_server_info",
-              description: "Miscellaneous game commands"
-            },
-            {
-              label: "Page 9: Miscellaneous miscellaneous commands",
-              value: "misc_misc_info",
-              description: "Miscellaneous miscellaneous commands"
-            },
-          ])
-      );
+    return new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+      new StringSelectMenuBuilder().setCustomId(`help_select_menu_${this.expirationTimestamp}`).setOptions([
+        {
+          label: "Page 1: Pre-Break Infinity",
+          value: "infinity",
+          description: "Pre-Break Infinity commands"
+        },
+        {
+          label: "Page 2: Post-Break Infinity Era",
+          value: "break_infinity",
+          description: "Post-Break Infinity Era commands"
+        },
+        {
+          label: "Page 3: Eternity Era",
+          value: "eternity",
+          description: "Eternity Era commands"
+        },
+        {
+          label: "Page 4: ECs and Dilation",
+          value: "eternity_challenges_dilation",
+          description: "ECs and Dilation commands"
+        },
+        {
+          label: "Page 5: Reality Era",
+          value: "reality",
+          description: "Reality Era commands"
+        },
+        {
+          label: "Page 6: Miscellaneous game commands",
+          value: "misc_game_info",
+          description: "Miscellaneous game commands"
+        },
+        {
+          label: "Page 7: Miscellaneous meta-game commands",
+          value: "misc_meta_game_info",
+          description: "Miscellaneous meta-game commands"
+        },
+        {
+          label: "Page 8: Miscellaneous bot/server commands",
+          value: "misc_bot_server_info",
+          description: "Miscellaneous game commands"
+        },
+        {
+          label: "Page 9: Miscellaneous miscellaneous commands",
+          value: "misc_misc_info",
+          description: "Miscellaneous miscellaneous commands"
+        }
+      ])
+    );
   }
 
   public filter(i: MessageComponentInteraction): boolean {
@@ -164,21 +160,21 @@ export class HelpCustomEmbed extends CustomEmbed {
   }
 
   private getFields(): Array<EmbedField> {
-    return this.client.commandsByPage.get(this.pageTitle)?.map(command => {
-      const commandOptions = command.data.options
-        .map(option => option.toJSON())
-        .map(option => `${inlineCode(option.name)} - ${option.description}`)
-        .join("\n");
+    return (
+      this.client.commandsByPage.get(this.pageTitle)?.map(command => {
+        const commandOptions = command.data.options
+          .map(option => option.toJSON())
+          .map(option => `${inlineCode(option.name)} - ${option.description}`)
+          .join("\n");
 
-      const commandAliases = command.aliases
-        .map(alias => inlineCode(alias))
-        .join(", ");
+        const commandAliases = command.aliases.map(alias => inlineCode(alias)).join(", ");
 
-      return {
-        name: command.data.name,
-        value: `${command.data.description}${command.aliases.length > 0 ? `\n${underline("Aliases")}: ${commandAliases}` : ""}${command.data.options.length > 0 ? `\n${underline("Options")}:\n${commandOptions}` : ""}`,
-        inline: false,
-      };
-    }) ?? [];
+        return {
+          name: command.data.name,
+          value: `${command.data.description}${command.aliases.length > 0 ? `\n${underline("Aliases")}: ${commandAliases}` : ""}${command.data.options.length > 0 ? `\n${underline("Options")}:\n${commandOptions}` : ""}`,
+          inline: false
+        };
+      }) ?? []
+    );
   }
 }

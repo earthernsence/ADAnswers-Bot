@@ -10,7 +10,7 @@ import { PerkCustomEmbed } from "@/types/Embeds/PerkCustomEmbed";
 
 const perkInfo: Record<string, string> = {
   /* eslint-disable @stylistic/max-len */
-  "intro": `Welcome to Perks!
+  intro: `Welcome to Perks!
 
 In the Reality Tab, under "Perks", you will find a sprawling tree with a number of nodes, called the "Perk Tree". Each of the nodes is called a "Perk". These Perks provide various Quality-of-life boosts to almost all parts of the game pre-Reality.
 
@@ -20,7 +20,7 @@ To purchase a perk, there are 2 requirements:
     
 If you have a Perk Point, then all immediately purchasable Perks will turn white. It is recommended to use all your Perk Points immediately, as they currently do not have any other uses.`,
 
-  "types": `Each perk has a "type", a color, based on what part of the game it is most useful in. These types are:
+  types: `Each perk has a "type", a color, based on what part of the game it is most useful in. These types are:
     - Red: Automation
     - Orange: Infinity
     - Yellow: Achievements
@@ -30,7 +30,7 @@ If you have a Perk Point, then all immediately purchasable Perks will turn white
     - Purple: Eternity
 This bot groups perks by their type. Make sure to use the correct subcommand/type when searching up a perk.`,
 
-  "strategy": `There is no "one-size-fits-all" strategy for choosing the optimal order for perks. The makers of this bot recommend that you choose whatever perk will minimize the part of the game that you dislike the most.`
+  strategy: `There is no "one-size-fits-all" strategy for choosing the optimal order for perks. The makers of this bot recommend that you choose whatever perk will minimize the part of the game that you dislike the most.`
   /* eslint-enable @stylistic/max-len */
 };
 
@@ -46,11 +46,13 @@ export default new BasicEmbedCommand({
           option
             .setName("info")
             .setDescription("What particular information would you like?")
-            .setChoices(Object.keys(perkInfo).map(choice => ({
-              name: choice,
-              value: choice,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              Object.keys(perkInfo).map(choice => ({
+                name: choice,
+                value: choice,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -62,11 +64,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.ACHIEVEMENT).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.ACHIEVEMENT).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -78,11 +82,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.AUTOMATION).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.AUTOMATION).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -94,11 +100,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.INFINITY).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.INFINITY).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -110,11 +118,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.ETERNITY).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.ETERNITY).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -126,11 +136,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.DILATION).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.DILATION).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     )
@@ -142,11 +154,13 @@ export default new BasicEmbedCommand({
           option
             .setName("perk")
             .setDescription("Which Perk would you like information about?")
-            .setChoices(perksFromFamily(PERK_FAMILY.REALITY).map(perk => ({
-              name: `${perk.id} (${perk.name})`,
-              value: perk.id,
-              type: ApplicationCommandOptionType.String
-            })))
+            .setChoices(
+              perksFromFamily(PERK_FAMILY.REALITY).map(perk => ({
+                name: `${perk.id} (${perk.name})`,
+                value: perk.id,
+                type: ApplicationCommandOptionType.String
+              }))
+            )
             .setRequired(true)
         )
     ),

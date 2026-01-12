@@ -4,8 +4,8 @@ import type { EternityUpgrade } from "@/types/game_data/upgrades/EternityUpgrade
 import { quantify } from "@/utils/utils_commands";
 
 interface EternityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction,
-  upgrade: EternityUpgrade
+  interaction: CommandInteraction;
+  upgrade: EternityUpgrade;
 }
 
 export class EternityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
@@ -30,14 +30,15 @@ export class EternityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
         name: "Cost",
         value: `${quantify("Eternity Point", this.upgrade.cost)}`,
         inline: false
-      },
+      }
     ];
 
-    if (this.upgrade.formula) fields.push({
-      name: "Effect formula",
-      value: this.upgrade.formula,
-      inline: false
-    });
+    if (this.upgrade.formula)
+      fields.push({
+        name: "Effect formula",
+        value: this.upgrade.formula,
+        inline: false
+      });
 
     if (this.upgrade.graph) {
       fields.push({

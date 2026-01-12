@@ -5,8 +5,8 @@ import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgra
 import { quantify } from "@/utils/utils_commands";
 
 interface ImaginaryUpgradeCustomEmbedProps {
-  interaction: CommandInteraction,
-  upgrade: ImaginaryUpgrade
+  interaction: CommandInteraction;
+  upgrade: ImaginaryUpgrade;
 }
 
 export class ImaginaryUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
@@ -31,23 +31,26 @@ ${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upg
       }
     ];
 
-    if (this.upgrade.requirement) fields.push({
-      name: "Unlock requirement",
-      value: this.upgrade.requirement,
-      inline: false
-    });
+    if (this.upgrade.requirement)
+      fields.push({
+        name: "Unlock requirement",
+        value: this.upgrade.requirement,
+        inline: false
+      });
 
-    if (this.upgrade.formula) fields.push({
-      name: "Effect formula",
-      value: this.upgrade.formula,
-      inline: false
-    });
+    if (this.upgrade.formula)
+      fields.push({
+        name: "Effect formula",
+        value: this.upgrade.formula,
+        inline: false
+      });
 
-    if (this.upgrade.strategy) fields.push({
-      name: "Strategy",
-      value: this.upgrade.strategy,
-      inline: false
-    });
+    if (this.upgrade.strategy)
+      fields.push({
+        name: "Strategy",
+        value: this.upgrade.strategy,
+        inline: false
+      });
 
     return fields;
   }

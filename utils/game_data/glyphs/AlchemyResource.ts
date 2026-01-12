@@ -3,12 +3,12 @@ import { Symbols } from "@/utils/utils_symbols";
 import type { AlchemyResource as TAlchemyResource } from "@/types/game_data/glyphs/AlchemyResource";
 
 interface AlchemyResourceProps {
-  name: string,
-  unlocksAt: number,
-  effect: string,
-  formula: string,
-  tier: number,
-  reagents?: Array<[string, number]>
+  name: string;
+  unlocksAt: number;
+  effect: string;
+  formula: string;
+  tier: number;
+  reagents?: Array<[string, number]>;
 }
 
 export class AlchemyResource implements TAlchemyResource {

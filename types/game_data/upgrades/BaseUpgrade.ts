@@ -1,19 +1,19 @@
 export type TBaseUpgrade = {
-  id: number,
-  name: string,
-  effect: string,
-  cost: number,
-  increment?: number,
-  formula?: string,
+  id: number;
+  name: string;
+  effect: string;
+  cost: number;
+  increment?: number;
+  formula?: string;
 };
 
 export interface BaseUpgradeProps {
-  id: number,
-  name: string,
-  effect: string,
-  cost: number,
-  increment?: number,
-  formula?: string,
+  id: number;
+  name: string;
+  effect: string;
+  cost: number;
+  increment?: number;
+  formula?: string;
 }
 
 export class BaseUpgrade implements TBaseUpgrade {
@@ -32,5 +32,5 @@ export class BaseUpgrade implements TBaseUpgrade {
     this.cost = cost;
     this.increment = increment;
     this.formula = formula;
-  };
+  }
 }

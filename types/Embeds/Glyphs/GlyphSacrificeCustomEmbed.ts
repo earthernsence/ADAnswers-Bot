@@ -5,8 +5,8 @@ import { CustomEmbed } from "../CustomEmbed";
 import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
 
 interface GlyphSacrificeCustomEmbedProps {
-  interaction: CommandInteraction,
-  glyph: Glyph
+  interaction: CommandInteraction;
+  glyph: Glyph;
 }
 
 export class GlyphSacrificeCustomEmbed extends CustomEmbed {
@@ -18,8 +18,9 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer))
-      .setColour(this.glyph.colour);
+    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer)).setColour(
+      this.glyph.colour
+    );
 
     this.setFields(this.getFields());
 
@@ -54,16 +55,21 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
       ];
     }
 
-    if (this.glyph.name === "companion") return [{
-      name: "You monster!",
-      value: "You wouldn't incinerate your Companion, would you?",
-      inline: false
-    }];
+    if (this.glyph.name === "companion")
+      return [
+        {
+          name: "You monster!",
+          value: "You wouldn't incinerate your Companion, would you?",
+          inline: false
+        }
+      ];
 
-    return [{
-      name: "Whoops!",
-      value: `You can't Sacrifice ${capitalise(this.glyph.name)} Glyphs!`,
-      inline: false
-    }];
+    return [
+      {
+        name: "Whoops!",
+        value: `You can't Sacrifice ${capitalise(this.glyph.name)} Glyphs!`,
+        inline: false
+      }
+    ];
   }
 }

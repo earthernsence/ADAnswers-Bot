@@ -1,4 +1,11 @@
-import { bold, ChatInputCommandInteraction, inlineCode, MessageFlags, SlashCommandBuilder, underline } from "discord.js";
+import {
+  bold,
+  ChatInputCommandInteraction,
+  inlineCode,
+  MessageFlags,
+  SlashCommandBuilder,
+  underline
+} from "discord.js";
 import { orderAsDoublyLinkedList, orderAsString } from "@/utils/game_data/challenges/eternity_challenges";
 import { Command } from "@/types/Commands/Command";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
@@ -7,11 +14,15 @@ import { isUserHelper } from "@/utils/utils_commands";
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("eternitychallengeorder")
-    .setDescription(`provides an order for the Eternity Challenges. includes optional "most recent challenge" parameter`)
+    .setDescription(
+      `provides an order for the Eternity Challenges. includes optional "most recent challenge" parameter`
+    )
     .addStringOption(option =>
       option
         .setName("most-recent-challenge")
-        .setDescription("(Optional) your most recent challenge completed, in form XxY, where X = challenge and Y = completion")
+        .setDescription(
+          "(Optional) your most recent challenge completed, in form XxY, where X = challenge and Y = completion"
+        )
         .setRequired(false)
     ),
   execute: (interaction: ChatInputCommandInteraction) => {
@@ -28,12 +39,14 @@ export default new Command({
       return;
     }
 
-    const mostRecentChallenge = orderAsDoublyLinkedList.search(value => value.shortName === mostRecentChallengeRequested);
+    const mostRecentChallenge = orderAsDoublyLinkedList.search(
+      value => value.shortName === mostRecentChallengeRequested
+    );
 
     if (!mostRecentChallenge) {
       const errorEmbed = new ErrorCustomEmbed({
         interaction,
-        text: `There was a problem processing either your requested challenge of ${mostRecentChallengeRequested}`,
+        text: `There was a problem processing either your requested challenge of ${mostRecentChallengeRequested}`
       });
 
       const errorImage = errorEmbed.getAndSetThumbnail();
@@ -49,15 +62,13 @@ export default new Command({
     // eslint-disable-next-line no-unused-vars
     const [_firstPart, secondPart] = orderAsDoublyLinkedList.partition(mostRecentChallenge);
     // Include the previous challenge, in case they missed it on accident
-    const newOrder = [
-      mostRecentChallenge.prev?.value,
-      ...secondPart
-    ];
+    const newOrder = [mostRecentChallenge.prev?.value, ...secondPart];
     const newOrderAsShortNames = newOrder.filter(value => Boolean(value)).map(value => value?.shortName);
     const otherRecommendedCompletions = mostRecentChallenge.value.otherRecommendedCompletions;
 
     // Emphasise the most recent challenge
-    newOrderAsShortNames[newOrderAsShortNames.indexOf(mostRecentChallenge.value.shortName)] = `${underline(bold(`${mostRecentChallenge.value.shortName}`))}`;
+    newOrderAsShortNames[newOrderAsShortNames.indexOf(mostRecentChallenge.value.shortName)] =
+      `${underline(bold(`${mostRecentChallenge.value.shortName}`))}`;
 
     interaction.reply({
       content: `
@@ -66,7 +77,7 @@ Other recommended Eternity Challenge completions: ${inlineCode(otherRecommendedC
 For more information on beating this challenge, try using ${inlineCode(`/ec ${mostRecentChallenge.value.challenge} ${mostRecentChallenge.value.completion}`)}
 Your next Eternity Challenge should be: ${inlineCode(mostRecentChallenge.value.nextRecommendedEternityChallenge)}
       `,
-      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
+      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
     });
   },
   aliases: ["eco"]

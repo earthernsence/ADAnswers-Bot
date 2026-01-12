@@ -1,19 +1,25 @@
-import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder, type SlashCommandOptionsOnlyBuilder, type SlashCommandSubcommandsOnlyBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  MessageFlags,
+  SlashCommandBuilder,
+  type SlashCommandOptionsOnlyBuilder,
+  type SlashCommandSubcommandsOnlyBuilder
+} from "discord.js";
 import { ErrorCustomEmbed } from "../Embeds/ErrorCustomEmbed";
 
 // Commands are made up of two parts: the data and the execute function.
 // Data holds all the information that's useful for determining what will be passed in to the execute function,
 // like arguments or other options. Execute handles the processing of data and the response to the user.
 interface CommandProps {
-  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder,
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
   // eslint-disable-next-line no-unused-vars
-  execute: (interaction: ChatInputCommandInteraction) => void,
-  aliases?: Array<string>
+  execute: (interaction: ChatInputCommandInteraction) => void;
+  aliases?: Array<string>;
 }
 
 interface CommandErrorProps {
-  interaction: ChatInputCommandInteraction,
-  text: string,
+  interaction: ChatInputCommandInteraction;
+  text: string;
 }
 
 // This is a super generic command class that can easily be extended.
@@ -34,7 +40,7 @@ export class Command {
   public error({ interaction, text }: CommandErrorProps) {
     const embed = new ErrorCustomEmbed({
       interaction,
-      text,
+      text
     });
 
     const image = embed.getAndSetThumbnail();

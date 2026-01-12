@@ -2,9 +2,7 @@ import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new BasicTextCommand({
-  data: new SlashCommandBuilder()
-    .setName("161or162")
-    .setDescription("explains the difference between TS161 and TS162"),
+  data: new SlashCommandBuilder().setName("161or162").setDescription("explains the difference between TS161 and TS162"),
   text: `
 Get TS161 first. Both give the same maximum bonus, but TS161 gives that bonuses more quickly as it multiplies ADs directly. Once you have EC2 clears, TS162 is slightly better as the study bonus synergises with the EC2 reward.
 

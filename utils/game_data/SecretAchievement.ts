@@ -1,11 +1,14 @@
-import type { SecretAchievementType, SecretAchievement as TSecretAchievement } from "@/types/game_data/SecretAchievements";
+import type {
+  SecretAchievementType,
+  SecretAchievement as TSecretAchievement
+} from "@/types/game_data/SecretAchievements";
 
 interface SecretAchievementProps {
-  id: number,
-  name: string,
-  description: string,
-  unlock: string,
-  type: SecretAchievementType
+  id: number;
+  name: string;
+  description: string;
+  unlock: string;
+  type: SecretAchievementType;
 }
 
 export default class SecretAchievement implements TSecretAchievement {
