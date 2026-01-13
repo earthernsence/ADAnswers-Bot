@@ -62,7 +62,6 @@ export default new Command({
   execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
-    // TODO: Add helper role eligibility condition stuff
     // TODO: Change to AD server for release
     if (!interaction.inGuild() || interaction.guildId !== Channels.TestingServer) {
       const errorEmbed = new ErrorCustomEmbed({
@@ -104,9 +103,56 @@ export default new Command({
     const hasRole = role.members.has(interaction.user.id);
     const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
 
+    // If the use already has the role, don't bother checking the eligibility condition -- waste of time.
+    // I don't think its an issue for the user to be able to remove a role if they "aren't eligible" but
+    // still have it. Also -- it's really a case that should never happen in AD, as the user will have at
+    // least one of these roles once they are eligible no matter what.
+    if (!hasRole) {
+      if (roleID === Roles.HelperRole) {
+        const userRoles = interaction.guild?.members.resolve(interaction.user)?.roles.cache;
+
+        const eligbleRoles = [
+          Roles.InfinityDimension,
+          Roles.GalacticDimension,
+          Roles.EternityDimension,
+          Roles.RealityDimension,
+          Roles.CelestialDimension,
+          Roles.Prestige,
+          Roles.TooCool
+        ].map(role => String(role));
+
+        if (!userRoles) {
+          const errorEmbed = new ErrorCustomEmbed({
+            interaction,
+            text: `There was an issue fetching your user information. Please try again.`
+          });
+
+          const errorImage = errorEmbed.getAndSetThumbnail();
+
+          await interaction.reply({
+            embeds: [errorEmbed.create()],
+            files: [errorImage],
+            flags: MessageFlags.Ephemeral
+          });
+
+          return;
+        }
+
+        if (!userRoles.some(role => eligbleRoles.includes(role.id))) {
+          await interaction.reply({
+            content: `It is with great regret that I inform you that you are ineligible for the Helper role. \
+You can request the role when you are at least Mee6 level 20 and have at least the Infinity Dimension role.`,
+            flags: MessageFlags.Ephemeral
+          });
+
+          return;
+        }
+      }
+    }
+
     const embed = new BasicTextCustomEmbed({
       interaction,
-      title: `"${role?.name}" Role Request`,
+      title: `"${role.name}" Role Request`,
       field: {
         name: `${hasRole ? "Removing" : "Adding"} the "${role.name}" role`,
         value: `You are requesting to ${hasRole ? "remove" : "add"} the ${roleMention(roleID)} role from yourself. ${requestMessages[roleID][hasRole ? "remove" : "add"]}`,
@@ -154,10 +200,13 @@ export default new Command({
           components: [],
           files: []
         });
+
+        collector.stop();
       });
     });
 
     collector.on("end", async () => {
+      if (collector.collected.size > 0) return;
       await interaction.editReply({
         content: `The embed has expired. Your requested role was not ${hasRole ? "removed" : "added"}. You can use \`/rolerequest\` to try again.`,
         embeds: [],
