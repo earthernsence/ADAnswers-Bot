@@ -3,6 +3,8 @@ import type { ADABClient } from "@/types/ADABClient";
 import { Command } from "@/types/Commands/Command";
 import { ContextMenuCommand } from "./types/Commands/ContextMenuCommand";
 import fs from "node:fs";
+import Keyv from "keyv";
+import KeyvSqlite from "@keyv/sqlite";
 import path from "node:path";
 import reportMessage from "./context_commands/reportMessage";
 
@@ -16,6 +18,11 @@ client.commandsByPage = new Collection<string, Collection<string, Command>>();
 
 client.version = process.env.VERSION ?? "Unknown version";
 client.restartTime = Date.now();
+
+const commandsDatabase = new KeyvSqlite("sqlite://keyv_commands.sqlite");
+client.commandsDB = new Keyv<number>({ store: commandsDatabase });
+const usersDatabase = new KeyvSqlite("sqlite://keyv_users.sqlite");
+client.usersDB = new Keyv<number>({ store: usersDatabase });
 
 // Handle importing of all commands
 

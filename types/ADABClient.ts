@@ -1,6 +1,7 @@
 import type { Client, Collection } from "discord.js";
 import type { Command } from "./Commands/Command";
 import type { ContextMenuCommand } from "./Commands/ContextMenuCommand";
+import type Keyv from "keyv";
 
 // We hold all of our commands within our Client object using this interface.
 export interface ADABClient extends Client {
@@ -9,4 +10,6 @@ export interface ADABClient extends Client {
   commandsByPage: Collection<string, Collection<string, Command>>;
   version: string;
   restartTime: number;
+  commandsDB: Keyv<number>;
+  usersDB: Keyv<number>;
 }
