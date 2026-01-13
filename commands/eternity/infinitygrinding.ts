@@ -11,8 +11,8 @@ export default new ChoiceTextCommand({
         .setDescription("part of the game you're in. pre = pre achievement 87, post = post achievement 97")
         .setRequired(true)
         .setChoices([
-          { name: "pre-a87", value: "pre" },
-          { name: "post-a87", value: "post" }
+          { name: "Pre-Achievement 87 (2 Million Infinities)", value: "pre" },
+          { name: "Post-Achievement 87 (2 Million Infinities)", value: "post" }
         ])
     ),
   possibleText: {

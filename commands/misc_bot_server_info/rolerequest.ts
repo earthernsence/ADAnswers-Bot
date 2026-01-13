@@ -37,6 +37,7 @@ Moderators and Admins reserve the right to pursue appropriate avenues of punishm
     `,
     remove: `Doing so will prevent your usage of ADAB being visible in the Antimatter Dimensions Discord server.`
   },
+  // TODO: remove for public release
   [Roles.TestRole]: {
     add: `Test lorem ipsum ADDING ROLE dolor sit amet.`,
     remove: `Test lorem ipsum REMOVING ROLE dolor sit amet.`

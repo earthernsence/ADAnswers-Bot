@@ -44,7 +44,7 @@ export default new ContextMenuCommand({
 
     if (author.bot) {
       await interaction.reply({
-        content: `The user who sent this message (${author.username}) is a bot!`,
+        content: `The user who sent this message (${userMention(author.id)}) is a bot!`,
         flags: MessageFlags.Ephemeral
       });
       return;
@@ -120,6 +120,7 @@ export default new ContextMenuCommand({
 
         interaction.targetMessage.guild?.channels.fetch();
 
+        // TODO: change to AD mod channel for release
         const reportChannel = interaction.targetMessage.guild?.channels.cache.get(Channels.TestingModChannel);
 
         await (reportChannel as TextChannel).send({
@@ -132,11 +133,6 @@ export default new ContextMenuCommand({
           embeds: [messageReportEmbed]
         });
       })
-      .catch(error => {
-        console.error(error);
-        interaction.editReply({
-          content: `No message was reported.`
-        });
-      });
+      .catch(() => console.log(`User (${interaction.user.username}) did not submit report message modal in time.`));
   }
 });
