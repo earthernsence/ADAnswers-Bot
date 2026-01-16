@@ -36,11 +36,6 @@ and only use the bot outside of those places to assist others in Antimatter Dime
 Moderators and Admins reserve the right to pursue appropriate avenues of punishment in the event that this is not respected.
     `,
     remove: `Doing so will prevent your usage of ADAB being visible in the Antimatter Dimensions Discord server.`
-  },
-  // TODO: remove for public release
-  [Roles.TestRole]: {
-    add: `Test lorem ipsum ADDING ROLE dolor sit amet.`,
-    remove: `Test lorem ipsum REMOVING ROLE dolor sit amet.`
   }
 };
 
@@ -55,16 +50,13 @@ export default new Command({
         .setRequired(true)
         .setChoices([
           { name: "ADAnswersBot Updates", value: Roles.ADABUpdates },
-          { name: "Helper", value: Roles.HelperRole },
-          // TODO: remove for public release
-          { name: "Test role", value: Roles.TestRole }
+          { name: "Helper", value: Roles.HelperRole }
         ])
     ),
   execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 
-    // TODO: Change to AD server for release
-    if (!interaction.inGuild() || interaction.guildId !== Channels.TestingServer) {
+    if (!interaction.inGuild() || interaction.guildId !== Channels.AntimatterDimensionsServer) {
       const errorEmbed = new ErrorCustomEmbed({
         interaction,
         text: `You can only request a role inside the Antimatter Dimensions Discord server.`

@@ -50,8 +50,7 @@ export default new ContextMenuCommand({
       return;
     }
 
-    // TODO: Change to AD server for release
-    if (guildId !== Channels.TestingServer) {
+    if (guildId !== Channels.AntimatterDimensionsServer) {
       await interaction.reply({
         content: `This message was not sent in the AD server!`,
         flags: MessageFlags.Ephemeral
@@ -120,8 +119,7 @@ export default new ContextMenuCommand({
 
         interaction.targetMessage.guild?.channels.fetch();
 
-        // TODO: change to AD mod channel for release
-        const reportChannel = interaction.targetMessage.guild?.channels.cache.get(Channels.TestingModChannel);
+        const reportChannel = interaction.targetMessage.guild?.channels.cache.get(Channels.AntimatterDimensionsReportChannel);
 
         await (reportChannel as TextChannel).send({
           content: roleMention(Roles.TestMod),
