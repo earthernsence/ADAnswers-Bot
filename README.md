@@ -34,7 +34,7 @@ _If you are looking for a small guide on how to contribute to ADAB, visit the [c
 
 ## Invite
 
-If, for whatever reason, you want ADAB on your server, go to [this link](https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=265216&integration_type=0&scope=bot+applications.commands) to add it to your server.
+If, for whatever reason, you want ADAB on your server, go to [this link](https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=2147748864&integration_type=0&scope=applications.commands+bot) to add it to your server.
 
 ## Image credits
 

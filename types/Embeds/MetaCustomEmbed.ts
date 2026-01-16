@@ -123,7 +123,7 @@ Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampSty
         },
         {
           name: "Invite",
-          value: `If, for whatever reason, you wish to invite me to your server, go to ${link("this link", "https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=2147560512&scope=applications.commands%20bot")}.`,
+          value: `If, for whatever reason, you wish to invite me to your server, go to ${link("this link", "https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=2147748864&integration_type=0&scope=applications.commands+bot")}.`,
           inline: true
         },
         {
