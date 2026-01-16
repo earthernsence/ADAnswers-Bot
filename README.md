@@ -5,9 +5,9 @@
 [![Release](https://img.shields.io/github/v/release/earthernsence/ADAnswers-Bot?label=Release&color=brightgreen&cacheSeconds=3600)](https://github.com/earthernsence/ADAnswers-Bot/releases/latest)
 [![Discord](https://img.shields.io/badge/join_us-on_discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/antimatterdimensions)
 
-**The bot for the Antimatter Dimensions Discord Server**
+## The bot for the Antimatter Dimensions Discord Server
 
-*Created by Earth*
+### Created by Earth
 
 </div>
 
@@ -30,7 +30,7 @@ ADAnswersBot is a multipurpose Discord bot developed for and by the Antimatter D
 
 The bot is written in pure TypeScript using the [Discord.js](https://discord.js.org/) framework. We use [Bun](https://bun.sh) as our JS runtime and package manager.
 
-<small>_If you are looking for a small guide on how to contribute to ADAB, visit the [contributing](./contributing.md) file._</small>
+_If you are looking for a small guide on how to contribute to ADAB, visit the [contributing](./contributing.md) file._
 
 ## Invite
 
