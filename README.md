@@ -2,7 +2,6 @@
 
 # ADAnswersBot
 
-
 [![Release](https://img.shields.io/github/v/release/earthernsence/ADAnswers-Bot?label=Release&color=brightgreen&cacheSeconds=3600)](https://github.com/earthernsence/ADAnswers-Bot/releases/latest)
 [![Discord](https://img.shields.io/badge/join_us-on_discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/antimatterdimensions)
 
@@ -10,9 +9,9 @@
 
 *Created by Earth*
 
-<!-- <a href="https://ivark.github.io/AntimatterDimensions"><img src="loading-1.png" width="600"/></a> -->
-
 </div>
+
+---
 
 ## About
 
@@ -31,11 +30,11 @@ ADAnswersBot is a multipurpose Discord bot developed for and by the Antimatter D
 
 The bot is written in pure TypeScript using the [Discord.js](https://discord.js.org/) framework. We use [Bun](https://bun.sh) as our JS runtime and package manager.
 
-_If you are looking for a small guide on how to contribute to ADAB, visit the [contributing](./contributing.md) file._
+<small>_If you are looking for a small guide on how to contribute to ADAB, visit the [contributing](./contributing.md) file._</small>
 
 ## Invite
 
-If, for whatever reason, you want ADAB on your server, go to [this link](https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=2147560512&scope=applications.commands%20bot) to add it to your server.
+If, for whatever reason, you want ADAB on your server, go to [this link](https://discord.com/oauth2/authorize?client_id=830197123378053172&permissions=265216&integration_type=0&scope=bot+applications.commands) to add it to your server.
 
 ## Image credits
 
