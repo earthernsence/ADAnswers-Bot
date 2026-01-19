@@ -119,7 +119,9 @@ export default new ContextMenuCommand({
 
         interaction.targetMessage.guild?.channels.fetch();
 
-        const reportChannel = interaction.targetMessage.guild?.channels.cache.get(Channels.AntimatterDimensionsReportChannel);
+        const reportChannel = interaction.targetMessage.guild?.channels.cache.get(
+          Channels.AntimatterDimensionsReportChannel
+        );
 
         await (reportChannel as TextChannel).send({
           content: roleMention(Roles.TestMod),

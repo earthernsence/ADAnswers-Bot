@@ -24,7 +24,7 @@ Much progress has been made in the terrifying landscape of "serverside JavaScrip
 
 Our Discord framework, as has been mentioned, is Discord.js, which works fine for everything we need. There do exist frameworks on _top_ of Discord.js (namely [Sapphire](https://sapphirejs.dev/)), but I didn't find it to be as extensible for what I wanted and needed out of ADAB. It is certainly neat and does play into the whole OOP thing I do here, so I do recommend checking it out for smaller or less complex projects.
 
-I will also take some time here to mention some of the other tools that I used here while working on the bot. Originally, I had been using [ESLint](https://eslint.org/), an excellent [linter](https://en.wikipedia.org/wiki/Lint_(software)) for JavaScript and TypeScript, and so the configuration is still in this repository for that. Ideally, you should be pretty much able to install the ESLint extension in an IDE like [Visual Studio Code](https://code.visualstudio.com/) (my IDE of choice for JavaScript, TypeScript, React, Vue...etc development), and install the relevant packages for the bot, and it should run. However, I have recently been made aware of a new-generation tool (and you know me with my gadgets) known as [Oxc](https://oxc.rs/), which doubles as a linter and formatter and is written in Rust, so it of course is blazingly fast. The goal of including a formatter and linter is to allow there to be extremely consistent code formatting across the whole codebase, which can be done automatically from the CLI (and is handled when certain `bun` scripts are ran). Oxc, too, has a Visual Studio Code extension you can install to implement it.
+I will also take some time here to mention some of the other tools that I used here while working on the bot. Originally, I had been using [ESLint](https://eslint.org/), an excellent [linter](<https://en.wikipedia.org/wiki/Lint_(software)>) for JavaScript and TypeScript, and so the configuration is still in this repository for that. Ideally, you should be pretty much able to install the ESLint extension in an IDE like [Visual Studio Code](https://code.visualstudio.com/) (my IDE of choice for JavaScript, TypeScript, React, Vue...etc development), and install the relevant packages for the bot, and it should run. However, I have recently been made aware of a new-generation tool (and you know me with my gadgets) known as [Oxc](https://oxc.rs/), which doubles as a linter and formatter and is written in Rust, so it of course is blazingly fast. The goal of including a formatter and linter is to allow there to be extremely consistent code formatting across the whole codebase, which can be done automatically from the CLI (and is handled when certain `bun` scripts are ran). Oxc, too, has a Visual Studio Code extension you can install to implement it.
 
 I chose to complete this rewrite using TypeScript. This is not a major change from before, but I figured I'd mention it -- the safety of it all and the way it forces you to think about the code you are writing is a really nice quality that I have grown to appreciate, even though I've invariably gotten angry with some type error each time I work on the bot. Also, coming soon will be TSGo (TypeScript v7), which will be much faster and more performant than before, so there is at least something to be excited about there.
 
@@ -120,13 +120,13 @@ I unfortunately do not have a good way of strangely incorporating a Hemingway ti
 
 In general, I have tried to make it as easy to contribute to this silly thing as I could. I have grown older by accident, and I have less time than I've had ever before. As such, it was my goal to make it reasonable for anybody to edit or move things around here. To a degree, I find that I have succeeded in this task, and so here are some guidelines for all ye who enter here.
 
-1) Never write code you would be shocked to see, or that you aren't used to seeing.
-2) Never write a lot of code when a little code will do.
-3) If it is possible to cut code out, always cut it out.
-4) Never use functional programming where you can use object-oriented programming.
-5) Never use a strange feature of TypeScript when you can think of an everyday equivalent.
-6) Break any of these rules sooner than write anything outright barbarous.
+1. Never write code you would be shocked to see, or that you aren't used to seeing.
+2. Never write a lot of code when a little code will do.
+3. If it is possible to cut code out, always cut it out.
+4. Never use functional programming where you can use object-oriented programming.
+5. Never use a strange feature of TypeScript when you can think of an everyday equivalent.
+6. Break any of these rules sooner than write anything outright barbarous.
 
-I'm getting word that I ripped off Orwell's _Politics and the English Language_. Regardless, write reasonable, well-structured, human-readable code. I do not believe that this codebase is some mecca of code quality (rather, quite the opposite), but I do think there are standards that should be adhered to (as given in the formatter and linter configuation files).
+I'm getting word that I ripped off Orwell's _Politics and the English Language_. Regardless, write reasonable, well-structured, human-readable code. I do not believe that this codebase is some mecca of code quality (rather, quite the opposite), but I do think there are standards that should be adhered to (as given in the formatter and linter configuration files).
 
 Thank you for your contribution!

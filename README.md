@@ -15,7 +15,7 @@
 
 ## About
 
-ADAnswersBot is a multipurpose Discord bot developed for and by the Antimatter Dimensions community to provide accurate and reliable answers to game questions. The bot has served tens of thousans of people over the course of the past several years, and with the community's help, it shall be sustained for years to come. This bot was primarily developed by Earth (Jace Royer), a tester and contributor to the game, but many thanks to the following folks for making this possible:
+ADAnswersBot is a multipurpose Discord bot developed for and by the Antimatter Dimensions community to provide accurate and reliable answers to game questions. The bot has served tens of thousands of people over the course of the past several years, and with the community's help, it shall be sustained for years to come. This bot was primarily developed by Earth (Jace Royer), a tester and contributor to the game, but many thanks to the following folks for making this possible:
 
 - **Hevipelle** for creating Antimatter Dimensions;
 - **Kajfik** for not only developing the Android version of the game, but also providing some helpful code contributions to form the basis of this bot;
