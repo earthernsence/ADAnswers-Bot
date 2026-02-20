@@ -1,6 +1,6 @@
 import { type CommandInteraction, hideLinkEmbed, hyperlink, User } from "discord.js";
 import { Channels } from "./utils_channels";
-import { formatDecimal } from "./utils_formatting";
+import { format } from "./utils_formatting";
 import { Roles } from "./utils_roles";
 
 export function isUserHelper(interaction: CommandInteraction): boolean | undefined {
@@ -36,6 +36,6 @@ export function pluralise(word: string, count: number) {
   return `${word}s`;
 }
 
-export function quantify(word: string, count: number, lessThan: number = 1000): string {
-  return `${formatDecimal(count, 2, lessThan)} ${pluralise(word, count)}`;
+export function quantify(word: string, count: number): string {
+  return `${format(count, 2)} ${pluralise(word, count)}`;
 }

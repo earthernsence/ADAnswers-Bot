@@ -1,6 +1,6 @@
 import type { CommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
-import { formatDecimal } from "@/utils/utils_formatting";
+import { format } from "@/utils/utils_formatting";
 import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgrade";
 import { quantify } from "@/utils/utils_commands";
 
@@ -26,7 +26,7 @@ export class ImaginaryUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       {
         name: "Cost",
         value: `${quantify("Imaginary Machine", this.upgrade.cost)}\
-${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
+${this.upgrade.increment ? `, increasing by a factor of ${format(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
       }
     ];

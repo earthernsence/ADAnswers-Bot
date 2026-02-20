@@ -47,7 +47,7 @@ export default new Command({
     const upcomingECs =
       theorems >= 12350
         ? ""
-        : `(Next: ${enumerate(recommendedECs.nextECs, "conjunction")} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
+        : `(Next: ${enumerate(recommendedECs.nextECs)} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
     const ecString =
       showRecommendedECs && theorems >= 130
         ? `Recommended EC completions for ${theorems} TT: ${recommendedECs.completions} ${upcomingECs}`

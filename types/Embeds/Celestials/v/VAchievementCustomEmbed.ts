@@ -1,7 +1,7 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
-import { formatDecimal } from "@/utils/utils_formatting";
+import { format } from "@/utils/utils_formatting";
 import v from "@/utils/game_data/celestials/v";
 import type { VAchievement } from "@/types/game_data/celestials/v";
 
@@ -43,8 +43,8 @@ export class VAchievementCustomEmbed extends CustomEmbed {
       },
       {
         name: "Goals",
-        value: `${this.achievement.goals.values.map(value => formatDecimal(value)).join(", ")} ${this.achievement.goals.currency}
-${this.achievement.goals.shardReduction ? `${this.achievement.goals.shardReduction.type} ${formatDecimal(this.achievement.goals.shardReduction.amount)} ${this.achievement.goals.currency} per Perk Point reduction` : ""}
+        value: `${this.achievement.goals.values.map(value => format(value)).join(", ")} ${this.achievement.goals.currency}
+${this.achievement.goals.shardReduction ? `${this.achievement.goals.shardReduction.type} ${format(this.achievement.goals.shardReduction.amount)} ${this.achievement.goals.currency} per Perk Point reduction` : ""}
         `,
         inline: false
       }

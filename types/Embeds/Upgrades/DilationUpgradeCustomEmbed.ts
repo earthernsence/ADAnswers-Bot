@@ -1,7 +1,7 @@
 import type { CommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { DilationUpgrade } from "@/types/game_data/upgrades/DilationUpgrade";
-import { formatDecimal } from "@/utils/utils_formatting";
+import { format } from "@/utils/utils_formatting";
 
 interface DilationUpgradeCustomEmbedProps {
   interaction: CommandInteraction;
@@ -24,8 +24,8 @@ export class DilationUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
       },
       {
         name: "Cost",
-        value: `${formatDecimal(this.upgrade.cost)} Dilated Time\
-  ${this.upgrade.increment ? `, increasing by a factor of ${formatDecimal(this.upgrade.increment)} on each purchase` : ""}`,
+        value: `${format(this.upgrade.cost)} Dilated Time\
+  ${this.upgrade.increment ? `, increasing by a factor of ${format(this.upgrade.increment)} on each purchase` : ""}`,
         inline: false
       }
     ];

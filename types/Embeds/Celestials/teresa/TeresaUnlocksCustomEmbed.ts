@@ -1,7 +1,7 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
-import { formatDecimal } from "@/utils/utils_formatting";
+import { format } from "@/utils/utils_formatting";
 import teresa from "@/utils/game_data/celestials/teresa";
 
 interface TeresaUnlocksCustomEmbedProps {
@@ -29,7 +29,7 @@ export class TeresaUnlocksCustomEmbed extends CustomEmbed {
 
   protected getFields(): Array<EmbedField> {
     return teresa.unlocks.map(unlock => ({
-      name: `${formatDecimal(unlock.requirement)} Reality Machines`,
+      name: `${format(unlock.requirement)} Reality Machines`,
       value: unlock.reward,
       inline: false
     }));
