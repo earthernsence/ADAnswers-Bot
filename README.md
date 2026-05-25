@@ -4,6 +4,8 @@
 
 [![Release](https://img.shields.io/github/v/release/earthernsence/ADAnswers-Bot?label=Release&color=brightgreen&cacheSeconds=3600)](https://github.com/earthernsence/ADAnswers-Bot/releases/latest)
 [![Discord](https://img.shields.io/badge/join_us-on_discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/antimatterdimensions)
+[![Static Badge](https://img.shields.io/badge/play-antimatter%20dimensions-gray?color=1dffff)](https://ivark.github.io/AntimatterDimensions)
+
 
 ## The bot for the Antimatter Dimensions Discord Server
 
@@ -15,7 +17,9 @@
 
 ## About
 
-ADAnswersBot is a multipurpose Discord bot developed for and by the Antimatter Dimensions community to provide accurate and reliable answers to game questions. The bot has served tens of thousands of people over the course of the past several years, and with the community's help, it shall be sustained for years to come. This bot was primarily developed by Earth (Jace Royer), a tester and contributor to the game, but many thanks to the following folks for making this possible:
+**Antimatter Dimensions** is an idle-incremental game created by Finnish developer Hevipelle, available on the [web](https://ivark.github.io/AntimatterDimensions), [Steam](https://store.steampowered.com/app/1399720/Antimatter_Dimensions/), [Android](https://play.google.com/store/apps/details?id=kajfosz.antimatterdimensions), and (soon) iOS. The game is known for its unfolding gameplay and multiple prestige layers.
+
+**ADAnswersBot** is a multipurpose Discord bot developed by and for the Antimatter Dimensions community to provide accurate and reliable answers to game questions. The bot has served tens of thousands of people over the course of the past several years, and with the community's help, it shall be sustained for years to come. This bot was primarily developed by Earth (Jace Royer), a tester and contributor to the game, but many thanks to the following folks for making this possible:
 
 - **Hevipelle** for creating Antimatter Dimensions;
 - **Kajfik** for not only developing the Android version of the game, but also providing some helpful code contributions to form the basis of this bot;
