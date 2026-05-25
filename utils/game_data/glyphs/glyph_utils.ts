@@ -16,12 +16,19 @@ export function rarityProbability({ rarity, ru16, bonus }: { rarity: number; ru1
   // The minimum value a normally distributed variable would need to be for the required rarity
   let minimumStrength = (2.5 * (rarity - bonus)) / 100 + 1;
 
+  // Calculate the lowest possible strength value for the glyph of that
+  // rarity, then see if our theoretical minimum is bigger than that to
+  // determine if generating that glyph is possible at all.
+  const baseStrength = rarity / 40 + 1;
+
   // The theoretical minimum rarity that could be generated
   const theoreticalMinimum = ru16 ? Math.min(1.3 + bonus / 40, 3.5) : Math.min(1 + bonus / 40, 3.5);
 
-  if (minimumStrength < theoreticalMinimum) {
+  const infoString = `(${rarity}% rarity${bonus > 0 ? `, +${bonus}% bonus` : ", no bonus"}${ru16 ? ", with RU16" : ", without RU16"})`;
+
+  if (baseStrength < theoreticalMinimum) {
     const theoreticalMinimumRarity = (Math.ceil(400 * (((theoreticalMinimum - 1) * 100) / 2.5)) / 400).toFixed(2);
-    return `The given rarity (${rarity}%) would be impossible, but you are guaranteed a rarity of ${theoreticalMinimumRarity}%.`;
+    return `A Glyph with the given rarity ${infoString} would be impossible, but you are guaranteed a rarity of ${theoreticalMinimumRarity}%.`;
   }
 
   if (ru16) minimumStrength /= 1.3;
@@ -29,10 +36,10 @@ export function rarityProbability({ rarity, ru16, bonus }: { rarity: number; ru1
   const zScore = Math.pow(minimumStrength, 1 / 0.65) - 1;
   const probability = 2 * (1 - normDist(zScore)) * 100;
   if (probability < 0.01) {
-    return `A Glyph with the given rarity (${rarity}%) would have a probability below 0.01%.`;
+    return `A Glyph with the given rarity ${infoString} would have a probability below 0.01%.`;
   }
 
-  return `A Glyph with the given rarity (${rarity}%), or better, would have a probability of ${probability.toFixed(2)}%.`;
+  return `A Glyph with the given rarity ${infoString}, or better, would have a probability of ${probability.toFixed(2)}%.`;
 }
 
 export function effectProbability({
