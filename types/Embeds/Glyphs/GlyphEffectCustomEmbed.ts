@@ -38,7 +38,7 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
       return image;
     }
 
-    const fileName = this.isAltered ? `${this.glyph.name}_altered` : this.glyph.name;
+    const fileName = this.isAltered ? `${this.glyph.name.toLowerCase()}_altered` : this.glyph.name.toLowerCase();
     const file = this.isAltered ? `altered/${fileName}` : fileName;
     const image: AttachmentBuilder = new AttachmentBuilder(`images/glyphs/${file}.png`);
     this.embed.setThumbnail(`attachment://${fileName}.png`);

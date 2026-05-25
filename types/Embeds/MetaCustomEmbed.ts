@@ -32,7 +32,7 @@ export class MetaCustomEmbed extends CustomEmbed {
   }
 
   get disabled(): boolean {
-    return Math.floor(Date.now() / 1000) > this.expirationTimestamp;
+    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public create(): EmbedBuilder {

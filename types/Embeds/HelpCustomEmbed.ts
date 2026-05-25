@@ -42,6 +42,10 @@ export class HelpCustomEmbed extends CustomEmbed {
     this.client = this.interaction.client as ADABClient;
   }
 
+  get disabled(): boolean {
+    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
+  }
+
   public create(): EmbedBuilder {
     const commands = this.client.commands.size;
 
@@ -64,13 +68,13 @@ export class HelpCustomEmbed extends CustomEmbed {
         .setEmoji({ name: "◀️" })
         .setLabel("Previous page")
         .setStyle(ButtonStyle.Primary)
-        .setDisabled(Math.floor(Date.now() / 1000) >= this.expirationTimestamp),
+        .setDisabled(this.disabled),
       new ButtonBuilder()
         .setCustomId(`help_button_next_${this.expirationTimestamp}`)
         .setEmoji({ name: "▶️" })
         .setLabel("Next page")
         .setStyle(ButtonStyle.Primary)
-        .setDisabled(Math.floor(Date.now() / 1000) >= this.expirationTimestamp),
+        .setDisabled(this.disabled),
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel("GitHub repository")
