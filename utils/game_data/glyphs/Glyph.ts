@@ -1,6 +1,5 @@
 import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
 import type { AlteredGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
-import { bold } from "discord.js";
 import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import type { GlyphEffect } from "./GlyphEffect";
@@ -52,8 +51,7 @@ export class Glyph implements TGlyph {
     return Object.keys(this.alteredEffects).length > 0;
   }
 
-  public stylisedName(isADServer: boolean = true): string {
-    if (isADServer) return `${this.emote} ${this.name} ${this.emote}`;
-    return `${bold(this.symbol)} ${this.name} ${bold(this.symbol)}`;
+  public stylisedName(): string {
+    return `${this.emote} ${this.name} ${this.emote}`;
   }
 }

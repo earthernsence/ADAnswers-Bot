@@ -1,31 +1,27 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from "discord.js";
 import { effectProbability, rarityProbability, threshold } from "@/utils/game_data/glyphs/glyph_utils";
-import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
 import { capitalise } from "@/utils/utils_formatting";
-import { Channels } from "@/utils/utils_channels";
 import { Colours } from "@/utils/utils_colours";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { GlyphEffectCustomEmbed } from "@/types/Embeds/Glyphs/GlyphEffectCustomEmbed";
+import { GlyphEmotes } from "@/utils/utils_symbols";
 import { glyphs } from "@/utils/game_data/glyphs/glyphs";
 import { GlyphSacrificeCustomEmbed } from "@/types/Embeds/Glyphs/GlyphSacrificeCustomEmbed";
 
 // eslint-disable-next-line no-unused-vars
-const glyphInfo: Record<string, (isADServer: boolean) => string> = {
+const glyphInfo: Record<string, string> = {
   /* eslint-disable @stylistic/max-len */
-  intro(isADServer: boolean): string {
-    return `Welcome to Reality!
+  intro: `Welcome to Reality!
 
 Whenever you create a new Reality, you will choose (or be given) a new Glyph. These Glyphs provide powerful bonuses, but only while they are equipped.
 
 These glyphs appear in the Glyph tab, in a massive grid called the Glyph Inventory. At the top of the Glyph tab is a series of 3-5 circles, which represent your equipped glyphs. 
 
-On your first Reality, you are guaranteed to receive a ${isADServer ? GlyphEmotes.Power : Symbols.Power} Power Glyph that raises all Antimatter Dimensions to a small power. It is recommended that you equip it immediately.`;
-  },
-  // eslint-disable-next-line no-unused-vars
-  equipping(_isADServer: boolean): string {
-    return `To equip a Glyph, you must do one of two things:
+On your first Reality, you are guaranteed to receive a ${GlyphEmotes.Power} Power Glyph that raises all Antimatter Dimensions to a small power. It is recommended that you equip it immediately.`,
+
+  equipping: `To equip a Glyph, you must do one of two things:
 
     a) Double click the glyph in your inventory. Your glyph inventory is in the lower right corner of the Glyph tab. Go there, find a glyph (such as the power glyph you got from your first Reality), and double click it. 
     
@@ -33,22 +29,19 @@ On your first Reality, you are guaranteed to receive a ${isADServer ? GlyphEmote
     
 To unequip a glyph, you have to click on the "Unequip Glyphs on Reality" button below the equipped glyphs. Then, you have to either complete your reality, or reset it using the "Start this Reality over" button. 
 
-Glyphs that are not equipped have no effect.`;
-  },
-  types(isADServer: boolean): string {
-    return `Each Glyph's type is based on its name, and the symbol located within that glyph. Each Glyph type has its own unique effects, based on the area of the game it represents. 
+Glyphs that are not equipped have no effect.`,
+
+  types: `Each Glyph's type is based on its name, and the symbol located within that glyph. Each Glyph type has its own unique effects, based on the area of the game it represents. 
 
 Before you encounter any Celestials, you will have access to 5 effective glyph types:
 
-    - ${isADServer ? GlyphEmotes.Power : Symbols.Power} Power
-    - ${isADServer ? GlyphEmotes.Infinity : Symbols.Infinity} Infinity
-    - ${isADServer ? GlyphEmotes.Replication : Symbols.Replication} Replication
-    - ${isADServer ? GlyphEmotes.Time : Symbols.Time} Time
-    - ${isADServer ? GlyphEmotes.Dilation : Symbols.Dilation} Dilation`;
-  },
-  // eslint-disable-next-line no-unused-vars
-  rarity(_isADServer: boolean): string {
-    return `Rarity is one of the two values determining the strength of a glyph's effects, the other being Level.
+    - ${GlyphEmotes.Power} Power
+    - ${GlyphEmotes.Infinity} Infinity
+    - ${GlyphEmotes.Replication} Replication
+    - ${GlyphEmotes.Time} Time
+    - ${GlyphEmotes.Dilation} Dilation`,
+
+  rarity: `Rarity is one of the two values determining the strength of a glyph's effects, the other being Level.
     
 The rarity of a glyph is given as a percentage, ranging from 0% to 100%. At first, this value will be determined solely by RNGesus. Later on, there will be ways to improve your odds; the first improvement comes as a result of the achievement "Perks of Living", which increases the rarity of all future Glyphs by 1%. 
 
@@ -63,11 +56,9 @@ At certain rarity thresholds, the color of your glyph will change. These colors 
     - Legendary, 70 - 80%, Orange
     - Mythical, 80 - 90%, Red
     - Transcendent, 90 - 99.9%, Cyan
-    - Celestial, 100%, Celestial Blue`;
-  },
-  // eslint-disable-next-line no-unused-vars
-  level(_isADServer: boolean): string {
-    return `Level is one of the two values determining the strength of a glyph's effects, the other being Rarity.
+    - Celestial, 100%, Celestial Blue`,
+
+  level: `Level is one of the two values determining the strength of a glyph's effects, the other being Rarity.
     
 The level of a glyph is calculuated based on 3 (or 4) resources you collect during a Reality. These resources are Eternity Points, Replicanti, and Dilated Time. When you purchase the Reality Upgrade "Measure of Forever", Eternities also become a part of the equation. Only the highest amount reached in a Reality is considered.
 
@@ -79,30 +70,24 @@ Eternities: \`0.450 * log(Eternities)^0.5\` (if unlocked)
 
 All of the above factors are then multiplied together. Finally, other bonuses (Such as the number of Reality Upgrade rows you have completed, or achievements such as Royal Flush) are added, and that value, rounded down, is your final Glyph level. 
 
-All this information can be found under "Glyph Level Factors" in the Glyph tab. `;
-  },
-  // eslint-disable-next-line no-unused-vars
-  sacrifice(_isADServer: boolean): string {
-    return `Glyph Sacrifice is a mechanic that you unlock from the Reality Upgrade "Scour to Empower", once you have at least 30 glyphs in your inventory. **"Sacrificing" Glyphs will give you no benefit until you unlock it!**
+All this information can be found under "Glyph Level Factors" in the Glyph tab. `,
 
-Glyph Sacrifice allows you to get rid of glyphs that you no longer need, in exchange for a permanent boost based on the glyph's type. Each glyph has a "sacrifice score", based on its level and rarity; when you destroy a glyph, this sacrifice score is added to your total glyph sacrifice for that type.`;
-  },
-  companion(isADServer: boolean): string {
-    return `Oh, I forgot to mention! After you complete your first Reality, you will receive a ${isADServer ? GlyphEmotes.Companion : Symbols.Companion} Companion Glyph. 
+  sacrifice: `Glyph Sacrifice is a mechanic that you unlock from the Reality Upgrade "Scour to Empower", once you have at least 30 glyphs in your inventory. **"Sacrificing" Glyphs will give you no benefit until you unlock it!**
+
+Glyph Sacrifice allows you to get rid of glyphs that you no longer need, in exchange for a permanent boost based on the glyph's type. Each glyph has a "sacrifice score", based on its level and rarity; when you destroy a glyph, this sacrifice score is added to your total glyph sacrifice for that type.`,
+
+  companion: `Oh, I forgot to mention! After you complete your first Reality, you will receive a ${GlyphEmotes.Companion} Companion Glyph. 
     
 This is a unique, one-of-a-kind glyph that simply exists to bring you joy. 
 
 It also records the amount of Eternity Points you gained on your first Reality. It allows some of the older AD players to flex a little.
 
-You wouldn't incinerate your Companion, would you?`;
-  },
-  // eslint-disable-next-line no-unused-vars
-  nextgl(_isADServer: boolean): string {
-    return `
+You wouldn't incinerate your Companion, would you?`,
+
+  nextgl: `
 The X% to next shows how close you are to your Glyph level on reality increasing. You can see the exact breakdown of how this is calculated on the Glyphs screen under "Glyph Level Factors". Once it reaches 100% the Glyph level on Reality will increase by 1.
 
-Basically what the % is showing really is the decimal in the Glyph level formula. Say your Glyph level factors are 1.3x from EP, 1.2x from Replicanti and 1.4x from DT, and +1 from a row of upgrades. Overall that's equal to (1.3 x 1.2 x 1.4) + 1 = 3.184. So you would have a Glyph level of 3, and are 18.4% to next Glyph level.`;
-  }
+Basically what the % is showing really is the decimal in the Glyph level formula. Say your Glyph level factors are 1.3x from EP, 1.2x from Replicanti and 1.4x from DT, and +1 from a row of upgrades. Overall that's equal to (1.3 x 1.2 x 1.4) + 1 = 3.184. So you would have a Glyph level of 3, and are 18.4% to next Glyph level.`
   /* eslint-enable @stylistic/max-len */
 };
 
@@ -290,7 +275,7 @@ export default new BasicEmbedCommand({
         title: "Glyph Information",
         field: {
           name: capitalise(requestedInfo),
-          value: glyphInfo[requestedInfo](interaction.guildId === Channels.AntimatterDimensionsServer),
+          value: glyphInfo[requestedInfo],
           inline: false
         },
         colour: Colours.Reality

@@ -35,13 +35,13 @@ export enum Symbols {
 // it can use them wherever, instead of just in AD
 // AD-server specific
 export enum GlyphEmotes {
-  Power = "<:glyph_power:586607087744843776>",
-  "Infinity" = "<:glyph_infinity:586607119856304129>",
-  Replication = "<:glyph_replication:586607179432460298>",
-  Time = "<:glyph_time:586607148985876501>",
-  Dilation = "<:glyph_dilation:586607200626278421>",
-  Effarig = "<:glyph_effarig:1156626795177726032>",
-  Cursed = "<:glyph_cursed:1400453267997331607>",
-  Reality = "<:glyph_reality_static:1381306219427270767>",
-  Companion = "<:glyph_companion:1053705550644391946>"
+  Power = "<:glyph_power:1508300294197481623>",
+  "Infinity" = "<:glyph_infinity:1508300286861770852>",
+  Replication = "<:glyph_replication:1508300282826854470>",
+  Time = "<:glyph_time:1508300283682226327>",
+  Dilation = "<:glyph_dilation:1508300289751388300>",
+  Effarig = "<:glyph_effarig:1508300288371724398>",
+  Cursed = "<:glyph_cursed:1508300291433435186>",
+  Reality = "<:glyph_reality:1508300284907225088>",
+  Companion = "<:glyph_companion:1508300292905763028>"
 }
