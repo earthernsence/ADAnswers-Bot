@@ -59,7 +59,8 @@ export class CollectorEmbedCommand extends Command {
         // These filters need fairly verbose conditions, in order to not have the interactions overlap when running multiple collectors.
         const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
 
-        const sentReply = await interaction.reply(initialContent);
+        await interaction.reply(initialContent);
+        const sentReply = await interaction.fetchReply();
 
         const collector = sentReply.createMessageComponentCollector({
           componentType: ComponentType.Button,

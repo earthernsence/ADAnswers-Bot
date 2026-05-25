@@ -57,5 +57,15 @@ export default new Command({
         components: [customEmbed.buttons, customEmbed.selectMenu]
       });
     });
+
+    // Listen for just one end because they'll end at the same time --
+    // this disables the buttons/select menu
+    buttonCollector.on("end", async () => {
+      await interaction.editReply({
+        files: [image],
+        embeds: [customEmbed.create()],
+        components: [customEmbed.buttons, customEmbed.selectMenu]
+      });
+    });
   }
 });

@@ -118,7 +118,7 @@ export default new Command({
         });
 
         collector.on("collect", async (i: ButtonInteraction) => {
-          if (i.member?.user.id !== user.id) return;
+          if ((i.member?.user.id ?? i.user.id) !== user.id) return;
 
           // Hacky, but the idea is that without fail, the resource will always be the third
           // member of this array.

@@ -43,7 +43,7 @@ export const BreakInfinityUpgrades: IBreakUpgrades = {
     id: 23,
     name: "Slowest Challenge Multiplier",
     effect: "Antimatter Dimensions gain a multiplier based on slowest challenge run",
-    formula: "`50 / slowest challenge run in minutes` (minimum x1)",
+    formula: "`50 / slowest challenge run in minutes` (minimum x1, maximum x3e4)",
     cost: 1e7
   }),
   infinitiedGen: new BreakInfinityUpgrade({

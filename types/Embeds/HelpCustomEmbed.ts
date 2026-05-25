@@ -63,12 +63,14 @@ export class HelpCustomEmbed extends CustomEmbed {
         .setCustomId(`help_button_prev_${this.expirationTimestamp}`)
         .setEmoji({ name: "◀️" })
         .setLabel("Previous page")
-        .setStyle(ButtonStyle.Primary),
+        .setStyle(ButtonStyle.Primary)
+        .setDisabled(Math.floor(Date.now() / 1000) >= this.expirationTimestamp),
       new ButtonBuilder()
         .setCustomId(`help_button_next_${this.expirationTimestamp}`)
         .setEmoji({ name: "▶️" })
         .setLabel("Next page")
-        .setStyle(ButtonStyle.Primary),
+        .setStyle(ButtonStyle.Primary)
+        .setDisabled(Math.floor(Date.now() / 1000) >= this.expirationTimestamp),
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel("GitHub repository")
@@ -78,53 +80,56 @@ export class HelpCustomEmbed extends CustomEmbed {
 
   public get selectMenu(): ActionRowBuilder<StringSelectMenuBuilder> {
     return new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-      new StringSelectMenuBuilder().setCustomId(`help_select_menu_${this.expirationTimestamp}`).setOptions([
-        {
-          label: "Page 1: Pre-Break Infinity",
-          value: "infinity",
-          description: "Pre-Break Infinity commands"
-        },
-        {
-          label: "Page 2: Post-Break Infinity Era",
-          value: "break_infinity",
-          description: "Post-Break Infinity Era commands"
-        },
-        {
-          label: "Page 3: Eternity Era",
-          value: "eternity",
-          description: "Eternity Era commands"
-        },
-        {
-          label: "Page 4: ECs and Dilation",
-          value: "eternity_challenges_dilation",
-          description: "ECs and Dilation commands"
-        },
-        {
-          label: "Page 5: Reality Era",
-          value: "reality",
-          description: "Reality Era commands"
-        },
-        {
-          label: "Page 6: Miscellaneous game commands",
-          value: "misc_game_info",
-          description: "Miscellaneous game commands"
-        },
-        {
-          label: "Page 7: Miscellaneous meta-game commands",
-          value: "misc_meta_game_info",
-          description: "Miscellaneous meta-game commands"
-        },
-        {
-          label: "Page 8: Miscellaneous bot/server commands",
-          value: "misc_bot_server_info",
-          description: "Miscellaneous game commands"
-        },
-        {
-          label: "Page 9: Miscellaneous miscellaneous commands",
-          value: "misc_misc_info",
-          description: "Miscellaneous miscellaneous commands"
-        }
-      ])
+      new StringSelectMenuBuilder()
+        .setCustomId(`help_select_menu_${this.expirationTimestamp}`)
+        .setOptions([
+          {
+            label: "Page 1: Pre-Break Infinity",
+            value: "infinity",
+            description: "Pre-Break Infinity commands"
+          },
+          {
+            label: "Page 2: Post-Break Infinity Era",
+            value: "break_infinity",
+            description: "Post-Break Infinity Era commands"
+          },
+          {
+            label: "Page 3: Eternity Era",
+            value: "eternity",
+            description: "Eternity Era commands"
+          },
+          {
+            label: "Page 4: ECs and Dilation",
+            value: "eternity_challenges_dilation",
+            description: "ECs and Dilation commands"
+          },
+          {
+            label: "Page 5: Reality Era",
+            value: "reality",
+            description: "Reality Era commands"
+          },
+          {
+            label: "Page 6: Miscellaneous game commands",
+            value: "misc_game_info",
+            description: "Miscellaneous game commands"
+          },
+          {
+            label: "Page 7: Miscellaneous meta-game commands",
+            value: "misc_meta_game_info",
+            description: "Miscellaneous meta-game commands"
+          },
+          {
+            label: "Page 8: Miscellaneous bot/server commands",
+            value: "misc_bot_server_info",
+            description: "Miscellaneous game commands"
+          },
+          {
+            label: "Page 9: Miscellaneous miscellaneous commands",
+            value: "misc_misc_info",
+            description: "Miscellaneous miscellaneous commands"
+          }
+        ])
+        .setDisabled(Math.floor(Date.now() / 1000) >= this.expirationTimestamp)
     );
   }
 

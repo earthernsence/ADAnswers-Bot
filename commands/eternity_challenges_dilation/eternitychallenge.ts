@@ -151,7 +151,8 @@ export default new Command({
       components: [buttons(false)]
     };
 
-    const sentReply = await interaction.reply(initialContent);
+    await interaction.reply(initialContent);
+    const sentReply = await interaction.fetchReply();
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
     const collector = sentReply.createMessageComponentCollector({
@@ -165,7 +166,7 @@ export default new Command({
       const nextECToShow = getNext(currentChallenge, forward);
 
       // Prevent non-senders from using the buttons.
-      if (i.member?.user.id !== user.id) return;
+      if ((i.member?.user.id ?? i.user.id) !== user.id) return;
 
       currentChallenge = nextECToShow;
 

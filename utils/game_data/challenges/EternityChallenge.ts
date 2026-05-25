@@ -1,3 +1,5 @@
+import { inlineCode } from "discord.js";
+
 import type {
   EC,
   EternityChallengeReward,
@@ -14,7 +16,7 @@ import {
   orderAsDoublyLinkedList
 } from "./eternity_challenges";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
-import { inlineCode } from "discord.js";
+import { format } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface EternityChallengeProps {
@@ -48,8 +50,7 @@ export default class EternityChallenge implements EC {
   }
 
   get ip(): string {
-    // [Decimal].toString() formats with a positive/negative sign on the exponent; I don't want it in the response.
-    return eternityChallengeCompletionGoals[this.challenge](this.completion - 1).replace("+", "");
+    return eternityChallengeCompletionGoals[this.challenge](this.completion - 1);
   }
 
   get description(): string {
@@ -103,13 +104,13 @@ export default class EternityChallenge implements EC {
   public formatUnlock(): string {
     if (this.challenge === 11 || this.challenge === 12)
       return `${this.unlock.amount} and ${quantify("Time Theorem", this.unlock.theorems)}`;
-    return `${this.unlock.amount} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
+    return `${format(this.unlock.amount)} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
   }
 
   public formatGoal(): string {
     if (this.challenge === 4 || this.challenge === 12)
-      return `${this.ip} Infinity Points in ${eternityChallengeCompletionRequirements[this.challenge](this.completion - 1)}.`;
-    return `${inlineCode(this.ip)} Infinity Points`;
+      return `${inlineCode(format(this.ip))} Infinity Points in ${eternityChallengeCompletionRequirements[this.challenge](this.completion - 1)}.`;
+    return `${inlineCode(format(this.ip))} Infinity Points`;
   }
 
   public formatStrategy(): string {

@@ -107,16 +107,8 @@ export function trees(path?: string) {
       ts: [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.TIME, 111, ...realPath, 151, 161, 171, 162, ...TREE_PATHS.EXTRA]
     },
     {
-      requirement: 85,
+      requirement: 66,
       ts: [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.INFINITY, 111, ...realPath, 151, 161, 162, 21, 33, 31]
-    },
-    {
-      requirement: 71,
-      ts: [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.ANTIMATTER, 111, ...realPath, 151, 161, 21, 33, 31]
-    },
-    {
-      requirement: 70,
-      ts: [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.INFINITY, 111, ...realPath, 21, 33, 31, 41]
     },
     {
       requirement: 54,

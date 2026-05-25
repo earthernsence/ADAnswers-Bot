@@ -2,7 +2,6 @@ import { type ApplicationCommandOptionChoiceData, ChatInputCommandInteraction, S
 import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/Challenges/AntimatterChallengeCustomEmbed";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
-import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { InfinityChallengeCustomEmbed } from "@/types/Embeds/Challenges/InfinityChallengeCustomEmbed";
 import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challenges";
 
@@ -44,16 +43,9 @@ export default new BasicEmbedCommand({
         .setRequired(false)
     ),
   embed: (interaction: ChatInputCommandInteraction) => {
-    const requestedChallenge = interaction.options.getString("challenge");
+    const requestedChallenge = interaction.options.getString("challenge", true);
 
-    if (!requestedChallenge) {
-      return new ErrorCustomEmbed({
-        interaction,
-        text: `There was a problem processing your requested challenge of ${requestedChallenge}`
-      });
-    }
-
-    return requestedChallenge?.startsWith("c")
+    return requestedChallenge.startsWith("c")
       ? new AntimatterChallengeCustomEmbed({
           interaction,
           challenge: antimatterChallenges[requestedChallenge],

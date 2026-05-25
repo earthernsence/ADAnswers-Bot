@@ -97,7 +97,7 @@ export default new Command({
     const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
 
     // If the use already has the role, don't bother checking the eligibility condition -- waste of time.
-    // I don't think its an issue for the user to be able to remove a role if they "aren't eligible" but
+    // I don't think it's an issue for the user to be able to remove a role if they "aren't eligible" but
     // still have it. Also -- it's really a case that should never happen in AD, as the user will have at
     // least one of these roles once they are eligible no matter what.
     if (!hasRole) {
@@ -173,7 +173,8 @@ You can request the role when you are at least Mee6 level 20 and have at least t
       components: [button]
     };
 
-    const sentReply = await interaction.reply(initialContent);
+    await interaction.reply(initialContent);
+    const sentReply = await interaction.fetchReply();
 
     const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
     const collector = sentReply.createMessageComponentCollector({
