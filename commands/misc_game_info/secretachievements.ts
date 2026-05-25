@@ -224,7 +224,7 @@ export default new Command({
       });
       const finalImage = finalEmbed.getAndSetThumbnail();
 
-      await sentReply.edit({
+      await interaction.editReply({
         files: [finalImage],
         embeds: [finalEmbed.create()],
         components: [buttons(true)]
