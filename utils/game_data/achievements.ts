@@ -100,7 +100,10 @@ export const achievements: Record<number, Achievement> = {
     fullName: "The Gods are pleased",
     requirement: "Get over ×600 from Dimensional Sacrifice outside of Challenge 8.",
     reward: "Dimensional Sacrifice is stronger",
-    rewardFormula: "`AD1 ^ 0.010` -> `AD1 ^ 0.011`"
+    rewardFormula: `
+For Achievements 32 / 57 / 88:
+- Pre-IC2 (base formula: \`(log_10(AD1) / 10) ^ 2.0\`): Add \`0.2\` to exponent
+- Post-IC2 (base formula: \`AD1 ^ 0.008\`): Add \`0.001\` to exponent`
   }),
   33: new Achievement({
     id: 33,
@@ -220,7 +223,10 @@ export const achievements: Record<number, Achievement> = {
     fullName: "Gift from the Gods",
     requirement: "Complete the 8th Antimatter Dimension Autobuyer Challenge in 3 minutes or less.",
     reward: "Dimensional Sacrifice is stronger.",
-    rewardFormula: "`AD1 ^ 0.011` -> `AD1 ^ 0.012`"
+    rewardFormula: `
+For Achievements 32 / 57 / 88:
+- Pre-IC2 (base formula: \`(log_10(AD1) / 10) ^ 2.0\`): Add \`0.2\` to exponent
+- Post-IC2 (base formula: \`AD1 ^ 0.008\`): Add \`0.001\` to exponent`
   }),
   58: new Achievement({
     id: 58,
@@ -373,7 +379,10 @@ export const achievements: Record<number, Achievement> = {
     fullName: "Yet another infinity reference",
     requirement: "Get a ×1.8e308 multiplier in a single Dimensional Sacrifice.",
     reward: "Dimensional Sacrifice is stronger.",
-    rewardFormula: "`AD1 ^ 0.012` -> `AD1 ^ 0.013`"
+    rewardFormula: `
+For Achievements 32 / 57 / 88:
+- Pre-IC2 (base formula: \`(log_10(AD1) / 10) ^ 2.0\`): Add \`0.2\` to exponent
+- Post-IC2 (base formula: \`AD1 ^ 0.008\`): Add \`0.001\` to exponent`
   }),
   91: new Achievement({
     id: 91,

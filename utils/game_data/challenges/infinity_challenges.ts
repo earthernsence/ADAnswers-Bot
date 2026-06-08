@@ -20,7 +20,10 @@ export const infinityChallenges: InfinityChallenges = {
     goal: `Reach **1e10500** antimatter`,
     strategy: `Do not attempt IC2 before you reached ID4 at ~e45 IP. If you cannot get e10500 AM in a normal infinity, why would you try to reach it inside a challenge? No special strat for this challenge.`,
     reward: `Dimensional Sacrifice autobuyer and stronger Dimensional Sacrifice`,
-    rewardFormula: `\`(log10(AD1)/10)^2.6\` to \`AD1^0.011\``,
+    rewardFormula: `
+Change the base of the Sacrifice formula from \`(log_10(AD1) / 10)\` to \`AD1\`.
+For Achievements 32 / 57 / 88:
+- Post-IC2 (base formula: AD1 ^ 0.008): Add 0.001 to exponent`,
     imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928603569135718/IC2.png`
   },
   ic3: {

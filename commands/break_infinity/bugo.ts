@@ -8,6 +8,10 @@ import {
 import { Command } from "@/types/Commands/Command";
 import { isUserHelper } from "@/utils/utils_commands";
 
+// Kind of a silly way to write this command, but I didn't like it using
+// a random Discord link instead of just uploading the image. I *think*
+// this is the only command that really uses a picture in this way, so
+// I don't think it's worth creating a new command subtype for it.
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("bugo")
