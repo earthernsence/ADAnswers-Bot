@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, inlineCode, italic, userMention } from "@discordjs/builders";
+import { ActionRowBuilder, ButtonBuilder, codeBlock, italic, userMention } from "@discordjs/builders";
 import {
   ButtonInteraction,
   ButtonStyle,
@@ -114,7 +114,7 @@ export default new Command({
 
     if (interaction.options.getBoolean("tree", false)) {
       await interaction.reply({
-        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${inlineCode(challenge.value.tree)}`,
+        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(challenge.value.tree)}`,
         flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
       });
 
