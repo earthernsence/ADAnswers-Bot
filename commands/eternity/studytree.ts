@@ -52,7 +52,7 @@ export default new Command({
       showRecommendedECs && theorems >= 130
         ? `Recommended EC completions for ${theorems} TT: ${recommendedECs.completions} ${upcomingECs}`
         : "";
-    const targetString = target ? `${italic(`Suggested for ${userMention(target.id)}\n`)}` : "";
+    const targetString = target ? `${italic(`Suggested for ${userMention(target.id)}`)}\n` : "";
 
     interaction.reply({
       content: `${targetString}${recommendedTree}\n${ecString}`,

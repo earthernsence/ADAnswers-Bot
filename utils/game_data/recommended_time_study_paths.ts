@@ -1,7 +1,7 @@
 import { eternityChallenges, orderAsDoublyLinkedList } from "./challenges/eternity_challenges";
+import { codeBlock } from "discord.js";
 import type { ECsAtTTInfo } from "@/types/game_data/challenges/EternityChallenges";
 import type EternityChallenge from "./challenges/EternityChallenge";
-import { inlineCode } from "discord.js";
 import { timeStudies } from "./time_studies";
 
 const TREE_PATHS: { [key: string]: Array<number> } = {
@@ -17,6 +17,11 @@ const TREE_PATHS: { [key: string]: Array<number> } = {
   POST_SPLIT: [151, 161, 171, 181, 162],
   get BASE() {
     return [...this.PRE_SPLIT, ...this.TIME, 111, ...this.ACTIVE, ...this.POST_SPLIT, ...this.EXTRA];
+  },
+  // 11-62
+  get ALL_PRE_SPLIT() {
+    // Turn it into a set (so only unique values are kept), then transform back to an array
+    return Array.from(new Set([...this.PRE_SPLIT, ...this.PRE_SPLIT_EARLY, ...this.EXTRA])).sort((a, b) => a - b);
   }
 };
 
@@ -46,7 +51,7 @@ export function trees(path?: string) {
   ];
   // All study trees must be sorted in descending order!
   return [
-    // Light-Dark Paths
+    // Light/Dark Paths
     {
       requirement: 12900,
       ts: BASE.concat(191, 211, 222, 212, 224, 232, 192, 201, ...TREE_PATHS.INFINITY, 193, 214, 228, 234, 213, 226)
@@ -54,7 +59,7 @@ export function trees(path?: string) {
     {
       requirement: 12750,
       ts: BASE.concat(191, 211, 222, 212, 224, 232, 192, 201, ...TREE_PATHS.INFINITY, 193, 214, 228, 234, 213, 226),
-      desc: "If you cannot get the last TT to unlock dilation, use /dilationgrind."
+      desc: "Note: If you cannot get the last TT to unlock dilation, use `/dilationgrind`."
     },
     {
       requirement: 4945,
@@ -84,6 +89,7 @@ export function trees(path?: string) {
       requirement: 2142,
       ts: BASE.concat(193, 214, 228, 234)
     },
+    // Pre-Light/Dark
     {
       requirement: 1292,
       ts: BASE.concat(191, 212, 193, 214, 211, 213)
@@ -138,9 +144,9 @@ export function trees(path?: string) {
   ];
 }
 
-function getAffordableStudiesFromStudyList(studiesToPurchase: number[], theoremAmount: number): number[] {
+function getAffordableStudiesFromStudyList(studiesToPurchase: Array<number>, theoremAmount: number): Array<number> {
   let remainingTheorems = theoremAmount;
-  const affordableStudies: number[] = [];
+  const affordableStudies: Array<number> = [];
 
   for (const study of studiesToPurchase.map(s => timeStudies[s])) {
     if (study.cost <= remainingTheorems) {
@@ -156,6 +162,89 @@ function getAffordableStudiesFromStudyList(studiesToPurchase: number[], theoremA
   }
 
   return affordableStudies;
+}
+
+function prettyPrintStudyList(studies: Array<number>): string {
+  const studySet = new Set(studies);
+  const consumed = new Set<number>();
+  // Store the study at which the "group" starts, alongside its replacement
+  const insertions = new Map<number, string>();
+
+  // Checks if a particular group is in the study set,
+  // and if it is, store the study at which the group starts and the
+  // replacement for it.
+  function tryGroup(group: Array<number>, label: string): boolean {
+    if (group.every(s => studySet.has(s))) {
+      const minStudy = Math.min(...group);
+      group.forEach(s => consumed.add(s));
+      insertions.set(minStudy, label);
+      return true;
+    }
+    return false;
+  }
+
+  tryGroup(TREE_PATHS.ALL_PRE_SPLIT, "11-62");
+
+  const dimPathGroups: Array<[Array<number>, string]> = [
+    [TREE_PATHS.ANTIMATTER, "antimatter"],
+    [TREE_PATHS.INFINITY, "infinity"],
+    [TREE_PATHS.TIME, "time"]
+  ]
+
+  for (const [group, replacement] of dimPathGroups) tryGroup(group, replacement);
+
+  tryGroup(TREE_PATHS.ACTIVE, "active");
+  tryGroup(TREE_PATHS.PASSIVE, "passive");
+  tryGroup(TREE_PATHS.IDLE, "idle");
+
+  const postPaceGroups: Array<[Array<number>, string]> = [
+    [[151, 161, 162, 171, 181, 191, 192, 193, 201, 211, 212, 213, 214], "151-214"],
+    [[151, 161, 162, 171, 181, 191, 192, 193, 201], "151-201"],
+    [[151, 161, 162, 171, 181, 191, 192, 193], "151-193"],
+    [[151, 161, 162, 171, 181], "151-181"],
+    [[151, 161, 162, 171], "151-171"],
+  ]
+
+  // We have to worry about 201 separately because it is the *purchase* of 201
+  // that allows the second dimension path to be purchased. Instead of the second dimension path
+  // appearing "sequentially" numerically (that is to say, by the first dimension path), we will
+  // want to place it after 201 has been purchased.
+  let has201 = false;
+
+  for (const [group, replacement] of postPaceGroups) {
+    if (tryGroup(group, replacement)) {
+      has201 = group.includes(201);
+      break;
+    }
+  }
+
+  let secondPath: string | undefined;
+
+  // Figure out where 201 is, then be rid of the insertion from above so that
+  // we can re-insert after 201.
+  if (has201) {
+    const idx201 = studies.indexOf(201);
+    for (const [group, replacement] of dimPathGroups) {
+      if (studySet.has(group[0]) && studies.indexOf(group[0]) > idx201) {
+        secondPath = replacement;
+        insertions.delete(Math.min(...group));
+      }
+    }
+  }
+
+  const tokens: string[] = [];
+
+  for (const study of [...studies].sort((a, b) => a - b)) {
+    if (insertions.has(study)) tokens.push(insertions.get(study)!);
+    // 151 is kind of hard-coded here, but it's because every post-pace path
+    // grouping starts with 151. So, when the study is set to 151, it will insert
+    // the grouping with 201, and then we'll manually push the second path replacement
+    // here, since it's already been thrown out of insertions.
+    if (study === 151 && secondPath) tokens.push(secondPath);
+    if (!consumed.has(study)) tokens.push(String(study));
+  }
+
+  return `${tokens.join(", ")} | 0`;
 }
 
 export function getRecommendedTree(theoremAmount: number, path: string = "active"): string {
@@ -176,7 +265,7 @@ export function getRecommendedTree(theoremAmount: number, path: string = "active
   if (theoremAmount === 0 || !recommendedTree) return "You don't have any Time Theorems, silly!";
 
   const affordableStudies = getAffordableStudiesFromStudyList(recommendedTree.ts, theoremAmount);
-  return `${recommendedTree.desc ?? ""} ${inlineCode(`${affordableStudies.join(",")}|0`)}`;
+  return `${recommendedTree.desc ?? ""}${codeBlock(`${prettyPrintStudyList(affordableStudies)}`)}`;
 }
 
 export function findEC(challenge: number, completion: number): EternityChallenge {

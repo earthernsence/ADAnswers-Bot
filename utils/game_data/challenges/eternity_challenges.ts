@@ -7,7 +7,6 @@ import type {
 import Decimal from "break_infinity.js";
 import { DoublyLinkedList } from "@/types/DoublyLinkedList";
 import EternityChallenge from "./EternityChallenge";
-import { format } from "@/utils/utils_formatting";
 import { pluralise } from "@/utils/utils_commands";
 
 // Considering the game isn't going to receive any more content updates, I feel okay
