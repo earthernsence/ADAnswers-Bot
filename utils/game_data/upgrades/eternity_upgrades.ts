@@ -38,7 +38,7 @@ final multiplier: \`multPreCap * multPostCap\`
     id: 3,
     name: "ID Multiplier from Infinity Challenge Records",
     effect: "Infinity Dimensions multiplier based on sum of Infinity Challenge times",
-    formula: "`2 ^ (30 / max(0.1, IC times in seconds))`",
+    formula: "`2 ^ (30 / max(0.1, IC times in seconds))`, capping at `2 ^ (30 / 0.61)` (around x`6.38e14`)",
     cost: 5e4
   }),
   tdMultAchs: new EternityUpgrade({

@@ -71,7 +71,7 @@ export const BreakInfinityUpgrades: IBreakUpgrades = {
     effect: "Reduce post-infinity Tickspeed Upgrade cost multiplier scaling",
     cost: 5e6,
     increment: 5,
-    formula: "`-x`, where x is the number of purchases of this upgrade (max 8)"
+    formula: "Base: `10x`. `-1` per purchase (max: 8 purchases / `2x` effect)"
   }),
   dimCostMult: new BreakInfinityUpgrade({
     id: 42,
@@ -79,7 +79,7 @@ export const BreakInfinityUpgrades: IBreakUpgrades = {
     effect: "Reduce post-infinity Antimatter Dimension cost multiplier scaling",
     cost: 1e7,
     increment: 5e3,
-    formula: "`-x`, where x is the number of purchases of this upgrade (max 7)"
+    formula: "Base: `10x`. `-1` per purchase (max: 7 purchases / `3x` effect)"
   }),
   ipGen: new BreakInfinityUpgrade({
     id: 43,
@@ -87,6 +87,6 @@ export const BreakInfinityUpgrades: IBreakUpgrades = {
     effect: "Generate a percentage of your best IP/min from your last 10 Infinities, works offline",
     cost: 1e7,
     increment: 10,
-    formula: "`(x * 5)%`, where x is the number of purchases of this upgrade (max 10)"
+    formula: "`+5%` per purchase (max: 10 purchases / 50% effect)"
   })
 };

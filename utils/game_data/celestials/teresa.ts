@@ -79,11 +79,11 @@ Teresa's Reality can be repeated, with stronger rewards obtained by achieving hi
     },
     {
       requirement: 1e21,
-      reward: "Unlock Effarig, Celestial of Ancient Relics."
+      reward: "Unlock Teresa's Perk Point Shop."
     },
     {
       requirement: 1e24,
-      reward: "Unlock Teresa's Perk Point Shop."
+      reward: "Unlock Effarig, Celestial of Ancient Relics."
     }
   ]
 };

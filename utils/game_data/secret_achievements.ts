@@ -36,21 +36,21 @@ export const secretAchievements: Record<string, SecretAchievement> = {
     name: "It pays to have respect",
     description: "Pay respects.",
     unlock:
-      "On web, press `F`. On mobile, import `F`. On mobile, this import is case-insensitive and unaffected by whitespace.",
+      "On web, press `F`. On mobile, import `F`. This import is case-insensitive and unaffected by whitespace.",
     type: SecretAchievementType.Both
   }),
   b14: new SecretAchievement({
     id: 14,
     name: "So do I",
     description: "Say something naughty.",
-    unlock: `Import ${inlineCode("ieatass")} as a savefile. On mobile, this import is case-insensitive and unaffected by whitespace.`,
+    unlock: `Import ${inlineCode("ieatass")} as a savefile. This import is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   b15: new SecretAchievement({
     id: 15,
     name: "Do a barrel roll!",
     description: "Do a barrel roll.",
-    unlock: `Import ${inlineCode("doabarrelroll")} as a savefile. On mobile, this import is case-insensitive and unaffected by whitespace.`,
+    unlock: `Import ${inlineCode("doabarrelroll")} as a savefile. This import is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   b16: new SecretAchievement({
@@ -214,7 +214,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     id: 37,
     name: "You followed the instructions",
     description: "Follow instructions.",
-    unlock: `Import ${inlineCode("tree")} as a Time Study tree or import ${inlineCode("save")} as a savefile. The text to import is dependent on language on the mobile version, but is case-insensitive and unaffected by whitespace.`,
+    unlock: `Import ${inlineCode("tree")} as a Time Study tree or import ${inlineCode("save")} as a savefile. The text to import is dependent on language on the mobile version. This import is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   w38: new SecretAchievement({

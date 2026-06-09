@@ -65,7 +65,7 @@ export const DilationUpgrades: IDilationUpgrades = {
     effect: "Reduce the Dilation penalty (^1.05 after reduction)",
     cost: 1e11,
     formula:
-      "No, this does not make Dilation better than outside of it. It adds a ^1.05 after the main Dilation penalty"
+      "No, this does not make Dilation better than outside of it. It adds a ^1.05 after the main Dilation penalty, which improves the Dilation exponent from ^0.75 to ^0.7875."
   }),
   ttGenerator: new DilationUpgrade({
     id: 41,
