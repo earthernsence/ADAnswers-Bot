@@ -17,9 +17,9 @@ export default new ChoiceTextCommand({
     ),
   possibleText: {
     first: `
-Active: ${inlineCode("11,21,22,31,32,33,41,42,51,61,62,time,111,active,151,161,162,171,181,192,201,infinity,191,211,212,193,213,214,222,223,232,225,233,228|0")}
-Idle: ${inlineCode("11,21,22,31,32,33,41,42,51,61,62,time,111,idle,151,161,162,171,181,192,201,infinity,191,211,212,193,213,214,222,223,232,225,233,228|0")}
-Note: Active will fail for the very first dilation on mobile (and sometimes on web as well).`,
-    after3paths: `${inlineCode("11,21,22,31,32,33,41,42,51,61,62,72,71,73,82,81,83,92,91,93,102,103,101,111,active,151,161,162,171,181,192,191,193,212,211,213,214,222,223,232,225,233,228|0")}`
+Active: ${inlineCode("11-62,time,111,active,151-214,infinity,222,223,225,228,232,233|0")}
+Idle: ${inlineCode("11-62,time,111,idle,151-214,infinity,222,223,225,228,232,233|0")}
+Note: Active will fail for the very first dilation on mobile (and sometimes on web/steam as well).`,
+    after3paths: `${inlineCode("11-111,active,151-214,222,223,225,228,232,233|0")}`
   }
 });

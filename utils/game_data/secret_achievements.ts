@@ -35,21 +35,22 @@ export const secretAchievements: Record<string, SecretAchievement> = {
     id: 13,
     name: "It pays to have respect",
     description: "Pay respects.",
-    unlock: "On web, press `F`. On mobile, import `F`.",
+    unlock:
+      "On web, press `F`. On mobile, import `F`. On mobile, this import is case-insensitive and unaffected by whitespace.",
     type: SecretAchievementType.Both
   }),
   b14: new SecretAchievement({
     id: 14,
     name: "So do I",
     description: "Say something naughty.",
-    unlock: `Import ${inlineCode("ieatass")} as a savefile.`,
+    unlock: `Import ${inlineCode("ieatass")} as a savefile. On mobile, this import is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   b15: new SecretAchievement({
     id: 15,
     name: "Do a barrel roll!",
     description: "Do a barrel roll.",
-    unlock: `Import ${inlineCode("doabarrelroll")} as a savefile.`,
+    unlock: `Import ${inlineCode("doabarrelroll")} as a savefile. On mobile, this import is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   b16: new SecretAchievement({
@@ -65,7 +66,7 @@ export const secretAchievements: Record<string, SecretAchievement> = {
     id: 17,
     name: "30 Lives",
     description: "Input the Konami code.",
-    unlock: `On your keyboard, press the following keys in order, with no other keypresses: up, up, down down, left, right, left, right, B, A. If under 30 antimatter, your antimatter will be set to 30.`,
+    unlock: `On your keyboard, press the following keys in order, with no other keypresses: up, up, down down, left, right, left, right, B, A, enter. If under 30 antimatter, your antimatter will be set to 30.`,
     type: SecretAchievementType.Web
   }),
   m17: new SecretAchievement({
@@ -87,7 +88,7 @@ export const secretAchievements: Record<string, SecretAchievement> = {
     name: "Go study in real life instead.",
     description: "Purchase the secret Time Study.",
     unlock:
-      "The secret Time Study is where Time Study 10 would be (i.e. to the left of TS11). Click in that area, and it will appear.",
+      "On web, the secret Time Study is where Time Study 10 would be (i.e. to the left of TS11). Click in that area, and it will appear. On mobile, the study is to the right of TS11 (that is, where TS12 would be) instead.",
     type: SecretAchievementType.Both
   }),
   b22: new SecretAchievement({
@@ -155,7 +156,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     id: 27,
     name: "It's not calsled matter dimensions is it?",
     description: "Get Infinite matter.",
-    unlock: "Using C11 or IC6, reach 1.8e308 matter.",
+    unlock: "Using C11, IC1, or IC6, reach 1.8e308 matter.",
     type: SecretAchievementType.Both
   }),
   b28: new SecretAchievement({
@@ -206,14 +207,14 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     name: "While you were away...Nothing happened.",
     description: "See nothing happen while you were away.",
     unlock:
-      "Can be done at pretty much any time, but post-Eternity, EC1 will disable TD production and can be easily used for the Achievement.",
+      "Can be done at pretty much any time, but post-Eternity, EC1 will disable TD production and can be easily used for the Achievement. It is also possible to unlock this using the Blind notation or theme, or by disabling all resources in the away progress options.",
     type: SecretAchievementType.Both
   }),
   b37: new SecretAchievement({
     id: 37,
     name: "You followed the instructions",
     description: "Follow instructions.",
-    unlock: `Import ${inlineCode("tree")} as a Time Study tree or import ${inlineCode("save")} as a savefile. The text to import is dependent on language on the mobile version.`,
+    unlock: `Import ${inlineCode("tree")} as a Time Study tree or import ${inlineCode("save")} as a savefile. The text to import is dependent on language on the mobile version, but is case-insensitive and unaffected by whitespace.`,
     type: SecretAchievementType.Both
   }),
   w38: new SecretAchievement({
@@ -248,7 +249,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     id: 42,
     name: "SHAME ON ME",
     description: "Try to use Eternity Challenge 12 to speed up time.",
-    unlock: "Enter EC12 while having an inverted Black Hole inside V's Reality.",
+    unlock: "Enter EC12 while having an inverted Black Hole.",
     type: SecretAchievementType.Both
   }),
   b43: new SecretAchievement({
@@ -269,7 +270,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     id: 45,
     name: "This dragging is dragging on",
     description: "Drag around the Perks for a minute.",
-    unlock: "Hold any Perk node and movew them around for at least a minute without letting go.",
+    unlock: "Hold any Perk node and move them around for at least a minute without letting go.",
     type: SecretAchievementType.Web
   }),
   m45: new SecretAchievement({
@@ -277,7 +278,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
     name: "Accelerated Destruction",
     description: "Wipe out the Credits from existence. You can now skip the Credits.",
     unlock:
-      "During the ending sequence, go to Options > Save & Load > Reset save and enter the confirmation. Do not reset.",
+      "During the ending sequence (which starts upon unlocking the last Achievement), go to Options > Save & Load > Reset save and enter the confirmation. Do not reset.",
     type: SecretAchievementType.Mobile
   }),
   b46: new SecretAchievement({
