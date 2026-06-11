@@ -3,6 +3,7 @@
 # ADAnswersBot
 
 [![Release](https://img.shields.io/github/v/release/earthernsence/ADAnswers-Bot?label=Release&color=brightgreen&cacheSeconds=3600)](https://github.com/earthernsence/ADAnswers-Bot/releases/latest)
+[![CodeFactor](https://www.codefactor.io/repository/github/earthernsence/adanswers-bot/badge)](https://www.codefactor.io/repository/github/earthernsence/adanswers-bot)
 [![Discord](https://img.shields.io/badge/join_us-on_discord-5865F2?logo=discord&logoColor=white)](https://discord.gg/antimatterdimensions)
 [![Link to AD](https://img.shields.io/badge/play-antimatter%20dimensions-gray?color=1dffff)](https://ivark.github.io/AntimatterDimensions)
 
