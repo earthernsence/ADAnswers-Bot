@@ -128,7 +128,7 @@ Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampSty
         },
         {
           name: "Contributing",
-          value: `If you are interested in contributing to the bot, we're working on some guides for you! Check back later. You can visit the GitHub to get a sneak peek!`,
+          value: `If you are interested in contributing to the bot, check out ${link("this full-length contributing guide", "https://github.com/earthernsence/ADAnswers-Bot/blob/main/contributing.md")} on GitHub!`,
           inline: true
         }
       ];

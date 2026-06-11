@@ -609,7 +609,8 @@ If you cannot get this naturally, try this strategy anytime after e1000 EP or so
     fullName: "When will it be enough?",
     requirement: "Reach 1e18,000 Replicanti",
     reward: "You gain Replicanti 2 times faster under 1.8e308 Replicanti.",
-    unlockStrategy: "Disable the Replicanti Galaxy autobuyer while grinding Banked Infinities (achievement 131). Use the passive Time Study path for 1.5x Replicanti speed."
+    unlockStrategy:
+      "Disable the Replicanti Galaxy autobuyer while grinding Banked Infinities (achievement 131). Use the passive Time Study path for 1.5x Replicanti speed."
   }),
   135: new Achievement({
     id: 135,

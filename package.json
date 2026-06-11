@@ -8,12 +8,12 @@
   "scripts": {
     "initialise": "bun deploy.ts && bun .",
     "initialise:global": "bun deploy.ts --global && bun .",
-    "start": "oxlint && oxfmt --check && bun .",
+    "start": "oxlint && oxfmt && bun .",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "lint:legacy": "bunx eslint .",
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt",
     "build": "oxlint --fix && oxfmt && docker build . -t adanswersbot"
   },
   "dependencies": {

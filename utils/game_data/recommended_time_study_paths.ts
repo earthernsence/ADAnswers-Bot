@@ -189,7 +189,7 @@ function prettyPrintStudyList(studies: Array<number>): string {
     [TREE_PATHS.ANTIMATTER, "antimatter"],
     [TREE_PATHS.INFINITY, "infinity"],
     [TREE_PATHS.TIME, "time"]
-  ]
+  ];
 
   for (const [group, replacement] of dimPathGroups) tryGroup(group, replacement);
 
@@ -202,8 +202,8 @@ function prettyPrintStudyList(studies: Array<number>): string {
     [[151, 161, 162, 171, 181, 191, 192, 193, 201], "151-201"],
     [[151, 161, 162, 171, 181, 191, 192, 193], "151-193"],
     [[151, 161, 162, 171, 181], "151-181"],
-    [[151, 161, 162, 171], "151-171"],
-  ]
+    [[151, 161, 162, 171], "151-171"]
+  ];
 
   // We have to worry about 201 separately because it is the *purchase* of 201
   // that allows the second dimension path to be purchased. Instead of the second dimension path

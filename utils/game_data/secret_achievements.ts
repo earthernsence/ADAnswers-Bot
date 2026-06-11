@@ -35,8 +35,7 @@ export const secretAchievements: Record<string, SecretAchievement> = {
     id: 13,
     name: "It pays to have respect",
     description: "Pay respects.",
-    unlock:
-      "On web, press `F`. On mobile, import `F`. This import is case-insensitive and unaffected by whitespace.",
+    unlock: "On web, press `F`. On mobile, import `F`. This import is case-insensitive and unaffected by whitespace.",
     type: SecretAchievementType.Both
   }),
   b14: new SecretAchievement({

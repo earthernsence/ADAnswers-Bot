@@ -92,7 +92,8 @@ export const ImaginaryUpgrades: IImaginaryUpgrades = {
     cost: 5e7,
     formula: "`2e4 * rebuyable count`",
     requirement: "Make a level 9,000 Glyph with a single Glyph level factor weight at 100",
-    strategy: "Hint: ||Look closely at the Glyph factors dropdown||\nSolution: ||yepit||, with ||the Dilated Time Glyph factor weight at 100||"
+    strategy:
+      "Hint: ||Look closely at the Glyph factors dropdown||\nSolution: ||yepit||, with ||the Dilated Time Glyph factor weight at 100||"
   }),
   transienceOfInformation: new ImaginaryUpgrade({
     id: 33,
