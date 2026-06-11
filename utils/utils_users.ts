@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
 export enum Users {
-  Earth = "213071245896450068"
+  Earth = "213071245896450068",
+  ADAB = "830197123378053172"
 }
