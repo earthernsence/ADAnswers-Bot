@@ -1,12 +1,13 @@
+import type Decimal from "break_infinity.js";
+
 export interface InfinityChallenge {
   number: number;
-  requirements: string;
+  requirements: Decimal;
   challenge: string;
-  goal: string;
+  goal: Decimal;
   strategy: string;
   reward: string;
   rewardFormula: string;
-  imagePath: string;
 }
 
 export interface InfinityChallenges {

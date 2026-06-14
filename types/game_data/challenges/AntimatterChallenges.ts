@@ -5,7 +5,6 @@ export interface AntimatterChallenge {
   goal: string;
   strategy: string;
   reward: string;
-  imagePath: string;
 }
 
 export interface AntimatterChallenges {

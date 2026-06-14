@@ -24,15 +24,15 @@ export const eternityChallengeDescriptions: EternityChallengeDescriptions = {
   7: `1st Time Dimension produces 8th Infinity Dimensions, and 1st Infinity Dimension produces 7th Antimatter Dimensions. Tickspeed also directly applies to Infinity and Time Dimensions.`,
   8: `You can only upgrade Infinity Dimensions 50 times and Replicanti upgrades 40 times. Infinity Dimension and Replicanti upgrade autobuyers are disabled.`,
   9: `You can't buy Tickspeed upgrades. Infinity Power instead multiplies Time Dimensions with greatly reduced effect.`,
-  10: `Time Dimensions and Infinity Dimensions are disabled. You gain an immense boost from Infinities to Antimatter Dimensions (Infinities^950 (Infinities^1000 on web)).`,
+  10: `Time Dimensions and Infinity Dimensions are disabled. You gain an immense boost from Infinities to Antimatter Dimensions (Infinities^950).`,
   11: `All dimension multipliers and powers are disabled except for the multipliers from Infinity Power and Dimension Boosts (to Antimatter Dimensions).`,
   12: `The game runs ×1,000 slower. The goal must be reached within a certain amount of time or you will fail the Challenge.`
 };
 
 export const eternityChallengeSecondaryUnlockRequirements: EternityChallengeSecondaryUnlock = {
-  1: (completions: number) => new Decimal(20000).plus(completions * 20000).toString(),
+  1: (completions: number) => new Decimal(20000).plus(completions * 20_000).toString(),
   2: (completions: number) => new Decimal(1300).plus(completions * 150).toString(),
-  3: (completions: number) => new Decimal(17300).plus(completions * 1250).toString(),
+  3: (completions: number) => new Decimal(17300).plus(completions * 1_250).toString(),
   4: (completions: number) => new Decimal(1e8).plus(completions * 2.5e7).toString(),
   5: (completions: number) => new Decimal(160).plus(completions * 14).toString(),
   6: (completions: number) => new Decimal(40).plus(completions * 5).toString(),

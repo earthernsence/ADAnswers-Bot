@@ -1,3 +1,5 @@
+import Decimal from "break_infinity.js";
+
 import type { InfinityChallenges } from "@/types/game_data/challenges/InfinityChallenges";
 
 const icBase = (ic: number, ip: number) => `Attempt IC${ic} at ~e${ip} IP. No special strat for this challenge.`;
@@ -5,42 +7,39 @@ const icBase = (ic: number, ip: number) => `Attempt IC${ic} at ~e${ip} IP. No sp
 export const infinityChallenges: InfinityChallenges = {
   ic1: {
     number: 1,
-    requirements: `Reach **1e2000** antimatter`,
+    requirements: new Decimal("1e2000"),
     challenge: `All Normal Challenges, with the exception of Tickspeed (C9) and Big Crunch (C11) Challenges, are active at the same time.`,
-    goal: `Reach **1e650** antimatter`,
+    goal: new Decimal("1e650"),
     strategy: `As the reward of IC1 is not that good, it's recommended to do it once you have the galaxy upgrade for 5e11 IP. No special strat for this challenge.`,
     reward: `×1.3 on all Infinity Dimensions for each Infinity Challenge completed`,
-    rewardFormula: `\`1.3 ^ ICs completed\` (to a max of ×8.2)`,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928603309109358/IC1.png`
+    rewardFormula: `\`1.3 ^ ICs completed\` (to a max of ×8.2)`
   },
   ic2: {
     number: 2,
-    requirements: `Reach **1e11000** antimatter`,
+    requirements: new Decimal("1e11000"),
     challenge: `Automatically Dimensional Sacrifice every 400 milliseconds once you have an 8th Antimatter Dimension.`,
-    goal: `Reach **1e10500** antimatter`,
+    goal: new Decimal("1e10500"),
     strategy: `Do not attempt IC2 before you reached ID4 at ~e45 IP. If you cannot get e10500 AM in a normal infinity, why would you try to reach it inside a challenge? No special strat for this challenge.`,
     reward: `Dimensional Sacrifice autobuyer and stronger Dimensional Sacrifice`,
     rewardFormula: `
 Change the base of the Sacrifice formula from \`(log_10(AD1) / 10)\` to \`AD1\`.
 For Achievements 32 / 57 / 88:
-- Post-IC2 (base formula: AD1 ^ 0.008): Add 0.001 to exponent`,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928603569135718/IC2.png`
+- Post-IC2 (base formula: AD1 ^ 0.008): Add 0.001 to exponent`
   },
   ic3: {
     number: 3,
-    requirements: `Reach **1e12000** antimatter`,
+    requirements: new Decimal("1e12000"),
     challenge: `Tickspeed upgrades are always ×1. For every Tickspeed upgrade purchase, you instead get a static multiplier on all Antimatter Dimensions which increases based on Antimatter Galaxies.`,
-    goal: `Reach **1e5000** antimatter`,
+    goal: new Decimal("1e5000"),
     strategy: `Attempt IC3 after getting the ID1 for e56 IP. This might take an hour to do. No special strat for this challenge.`,
     reward: `Antimatter Dimension multiplier based on Antimatter Galaxies and Tickspeed purchases`,
-    rewardFormula: `\`(1.05 + (galaxies * 0.005)) ^ tickspeed upgrade bought\``,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928603795644426/IC3.png`
+    rewardFormula: `\`(1.05 + (galaxies * 0.005)) ^ tickspeed upgrade bought\``
   },
   ic4: {
     number: 4,
-    requirements: `Reach **1e14000** antimatter`,
+    requirements: new Decimal("1e14000"),
     challenge: `Only the latest bought Antimatter Dimension's production is normal, all other Antimatter Dimensions produce less (^0.25).`,
-    goal: `Reach **1e13000** antimatter`,
+    goal: new Decimal("1e13000"),
     strategy: `
 You can attempt IC4 at e68+ IP.
 
@@ -64,48 +63,43 @@ You can attempt IC4 at e68+ IP.
 PC guide: <https://youtu.be/R9v49lCAUk4>
 Mobile guide: <https://youtu.be/lI70hBlpaqc>`,
     reward: `All Antimatter Dimension multipliers become multiplier^1.05`,
-    rewardFormula: `\`multiplier ^ 1.05\``,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928603996946542/IC4.png`
+    rewardFormula: `\`multiplier ^ 1.05\``
   },
   ic5: {
     number: 5,
-    requirements: `Reach **1e18000** antimatter`,
+    requirements: new Decimal("1e18000"),
     challenge: `Buying Antimatter Dimensions 1-4 causes all smaller Antimatter Dimension costs to increase, and buying Antimatter Dimensions 5-8 causes all larger Antimatter Dimension costs to increase.`,
-    goal: `Reach **1e16500** antimatter`,
+    goal: new Decimal("1e16500"),
     // eslint-disable-next-line @stylistic/max-len
     strategy: `Set Antimatter Dimension autobuyers 1-7 to "Buy Singles". Leave 8th dimension autobuyer enabled with "Buys until 10". Then just wait. All other autobuyers should remain on & purchasing (ie make sure you are still buying galaxies/dimboosts!)`,
     reward: `All Galaxies are 10% stronger and reduce the requirements for them and Dimension Boosts by 1`,
-    rewardFormula: `Think really hard`,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928604277997599/IC5.png`
+    rewardFormula: `Think really hard`
   },
   ic6: {
     number: 6,
-    requirements: `Reach **1e22500** antimatter`,
+    requirements: new Decimal("1e22500"),
     challenge: `Once you have at least 1 2nd Antimatter Dimension, exponentially rising matter divides the multiplier on all of your Antimatter Dimensions.`,
-    goal: `Reach **2e22222** antimatter`,
+    goal: new Decimal("2e22222"),
     strategy: icBase(6, 102),
     reward: `Infinity Dimension multiplier based on tickspeed`,
-    rewardFormula: `\`Tickspeed per second ^ 0.0005\``,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928604621905970/IC6.png`
+    rewardFormula: `\`Tickspeed per second ^ 0.0005\``
   },
   ic7: {
     number: 7,
-    requirements: `Reach **1e23000** antimatter`,
+    requirements: new Decimal("1e23000"),
     challenge: `You can't get Antimatter Galaxies, but Dimension Boost multiplier ×2.5 ➜ ×10`,
-    goal: `Reach **1e10000** antimatter`,
+    goal: new Decimal("1e10000"),
     strategy: icBase(7, 114),
     reward: `Dimension Boost multiplier ×2.5 ➜ ×4`,
-    rewardFormula: `\`×2.5\` to \`×4\``,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928604856803338/IC7.png`
+    rewardFormula: `\`×2.5\` to \`×4\``
   },
   ic8: {
     number: 8,
-    requirements: `Reach **1e28000** antimatter`,
+    requirements: new Decimal("1e28000"),
     challenge: `Your production is at 100% after purchasing anything, after that it rapidly drops down.`,
-    goal: `Reach **1e27000** antimatter`,
+    goal: new Decimal("1e27000"),
     strategy: icBase(8, 129),
     reward: `You get a multiplier to Antimatter Dimensions 2-7 based on 1st and 8th Antimatter Dimension multipliers.`,
-    rewardFormula: `\`(AD1 multiplier * AD8 multiplier) ^ 0.02\``,
-    imagePath: `https://cdn.discordapp.com/attachments/824678601160917003/980928605091659856/IC8.png`
+    rewardFormula: `\`(AD1 multiplier * AD8 multiplier) ^ 0.02\``
   }
 };

@@ -1,6 +1,7 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder } from "discord.js";
+import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
+import { format } from "@/utils/utils_formatting";
 import type { InfinityChallenge } from "../../game_data/challenges/InfinityChallenges";
 
 interface InfinityChallengeCustomEmbedProps {
@@ -18,6 +19,14 @@ export class InfinityChallengeCustomEmbed extends CustomEmbed {
     this.challenge = challenge;
     this.strategyOnly = strategyOnly ?? true;
   }
+  
+  private get formattedUnlock(): string {
+    return `Reach ${bold(format(this.challenge.requirements))} antimatter.`
+  }
+
+  private get formattedGoal(): string {
+    return `Reach ${bold(format(this.challenge.goal))} antimatter.`;
+  }
 
   // For the shorthands /c9, /ic4, and /ic5, we don't really care about the other things --
   // generally, when people use those commands, they want the strategy. Obviously, /challenge
@@ -28,9 +37,9 @@ export class InfinityChallengeCustomEmbed extends CustomEmbed {
     if (this.strategyOnly) this.setFields([{ name: "Strategy", value: `${this.challenge.strategy}`, inline: false }]);
     else
       this.setFields([
-        { name: "Unlock requirements", value: `${this.challenge.requirements}`, inline: false },
+        { name: "Unlock requirements", value: `${this.formattedUnlock}`, inline: false },
         { name: "Challenge", value: `${this.challenge.challenge}`, inline: false },
-        { name: "Goal", value: `${this.challenge.goal}`, inline: false },
+        { name: "Goal", value: `${this.formattedGoal}`, inline: false },
         { name: "Strategy", value: `${this.challenge.strategy}`, inline: false },
         { name: "Reward", value: `${this.challenge.reward}`, inline: false },
         { name: "Reward formula", value: `${this.challenge.rewardFormula}`, inline: false }
