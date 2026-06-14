@@ -115,7 +115,7 @@ export default class EternityChallenge implements EC {
 
   public formatStrategy(): string {
     return `
-Time Theorems recommended: ${this.theorems}
+Total Time Theorems recommended: ${this.theorems}
 Other Eternity Challenge completions recommended: ${this.otherRecommendedCompletions}${this.note ? `\nNote: ${inlineCode(this.note)}` : ""}`;
   }
 

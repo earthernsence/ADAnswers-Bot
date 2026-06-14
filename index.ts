@@ -7,7 +7,12 @@ import path from "node:path";
 import reportMessage from "./context_commands/reportMessage";
 
 const client: ADABClient = <ADABClient>new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages]
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages],
+  presence: {
+    activities: [{
+      name: "Use /help for more information!"
+    }]
+  }
 });
 
 client.commands = new Collection<string, Command>();
