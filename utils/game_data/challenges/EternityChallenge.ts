@@ -119,6 +119,12 @@ Time Theorems recommended: ${this.theorems}
 Other Eternity Challenge completions recommended: ${this.otherRecommendedCompletions}${this.note ? `\nNote: ${inlineCode(this.note)}` : ""}`;
   }
 
+  // These challenges should already have shorthands implemented for
+  // importing, but they aren't pretty-formatted yet.
+  public get formattedTree(): string {
+    return this.tree.replaceAll(",", ", ").replace("|", " | ");
+  }
+
   private get nextEC(): EternityChallenge | undefined {
     return orderAsDoublyLinkedList.search(value => value === this)?.next?.value;
   }

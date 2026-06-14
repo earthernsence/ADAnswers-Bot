@@ -114,7 +114,7 @@ export default new Command({
 
     if (interaction.options.getBoolean("tree", false)) {
       await interaction.reply({
-        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(challenge.value.tree)}`,
+        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(challenge.value.formattedTree)}`,
         flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
       });
 
