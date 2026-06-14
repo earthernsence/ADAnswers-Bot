@@ -16,6 +16,6 @@ Reality Unlocked in current Reality (after your first Reality): ||${inlineCode("
 Dilation Unlocked: ||${inlineCode("2x")} to Dilated Time||
 10+ Eternities: ||${inlineCode("min(max(EP^0.01, 1.5), 1e10)")} to Eternity Points||
 10+ Infinities: ||${inlineCode("max(IP^0.01, 2)")} to Infinity Points||
-AD: 2x to Antimatter Dimensions.
+AD: ${inlineCode("2x")} to Antimatter Dimensions.
 And no, ad bonus is not coming to Steam (you simply can't!)`
 });
