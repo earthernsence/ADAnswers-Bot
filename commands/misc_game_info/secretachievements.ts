@@ -68,7 +68,7 @@ export default new Command({
         .addIntegerOption(option =>
           option
             .setName("secret-achievement")
-            .setDescription("What Secret Achievement would you like information about?")
+            .setDescription("Which Secret Achievement would you like information about?")
             .setRequired(true)
             .setMinValue(11)
             .setMaxValue(48)
@@ -87,7 +87,7 @@ export default new Command({
         .addIntegerOption(option =>
           option
             .setName("secret-achievement")
-            .setDescription("What Secret Achievement would you like information about?")
+            .setDescription("Which Secret Achievement would you like information about?")
             .setRequired(true)
             .setMinValue(11)
             .setMaxValue(48)

@@ -4,7 +4,7 @@ import { ChoiceTextCommand } from "@/types/Commands/ChoiceTextCommand";
 export default new ChoiceTextCommand({
   data: new SlashCommandBuilder()
     .setName("reality")
-    .setDescription("information about the Reality Update, AD's final content update")
+    .setDescription("Information about the Reality Update, AD's final content update")
     .addStringOption(option =>
       option
         .setName("info")

@@ -1,6 +1,5 @@
 import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import type { AlteredGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
-import { Channels } from "@/utils/utils_channels";
 import { CustomEmbed } from "../CustomEmbed";
 import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
 import type { GlyphEffect } from "@/utils/game_data/glyphs/GlyphEffect";
@@ -22,7 +21,7 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer)).setColour(
+    this.setTitle(this.glyph.stylisedName()).setColour(
       this.glyph.colour
     );
 

@@ -7,7 +7,7 @@ import { enumerate } from "@/utils/utils_formatting";
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("ecsattt")
-    .setDescription("provides a list of the recommended Eternity Challenge completions at a given Time Theorem amount")
+    .setDescription("Provides a list of the recommended Eternity Challenge completions at a given Time Theorem amount")
     .addIntegerOption(option =>
       option.setName("total-time-theorems").setDescription("your total time theorems").setRequired(true).setMinValue(1)
     ),

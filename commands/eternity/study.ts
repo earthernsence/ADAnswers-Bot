@@ -7,7 +7,7 @@ import { TimeStudyCustomEmbed } from "@/types/Embeds/TimeStudyCustomEmbed";
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("study")
-    .setDescription("takes in a study ID and returns information about the study")
+    .setDescription("Takes in a study ID and returns information about the study")
     .addIntegerOption(option =>
       option
         .setName("study")

@@ -1,16 +1,16 @@
+import { channelMention, SlashCommandBuilder } from "discord.js";
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
-import { SlashCommandBuilder } from "discord.js";
 
 export default new BasicTextCommand({
   data: new SlashCommandBuilder()
     .setName("eternityprogression")
-    .setDescription("describes the general progression of the game after eternity, pre-ECs"),
+    .setDescription("describes the general progression of the game after Eternity, pre-ECs"),
   text: `
-1.  First eternity's EP on TD1
-2.  (Buying TS21 path + RESPEC) Eternity at e426IP for 3EP, spend all on TT
-3.  (Buy TS42) Eternity at e500IP for 4 EP 
-5.  (Buy TS51) Eternity at e614IP for 8EP
-4.  Buy TS61, then get 100 eternities.
+1.  First Eternity's EP on TD1
+2.  (Buying Time Study 21 path + enabling RESPEC at the top of the Time Study page) Buy all the Time Theorems you can with antimatter & Infinity Points, then Eternity at e426IP for 3EP. Spend all EP on TT. You should have 11 total Time Theorems.
+3.  (Buy up to TS42) Buy Time Theorems as they become available. Then Eternity at e500IP for 4 EP & buy another EP Time Theorem. You should have 14 total Time Theorems.
+4.  (Buy TS51) Continue to buy Time Theorems as they become available. Then Eternity at e614IP for 8EP & buy another EP Time Theorem. You should have 17 total Time Theorems.
+5.  Buy TS61, then get 100 Eternities to complete the early Eternity Milestones.
     
-    Afterwards, check out this flowchart (also pinned in eternity to ec1): https://i.imgur.com/pdmy3bN.png`
+    Afterwards, check out this flowchart (also pinned in ${channelMention("387799188848640013")}): https://i.imgur.com/pdmy3bN.png. The pins in that channel can be a massive help!`
 });

@@ -6,7 +6,7 @@ import { isUserHelper } from "@/utils/utils_commands";
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("rm")
-    .setDescription("calculates the amount of EP needed for a provided RM amount (2 < x < 1000)")
+    .setDescription("Calculates the amount of EP needed for a provided RM amount (2 <= x <= 1000)")
     .addIntegerOption(option =>
       option
         .setName("rm")

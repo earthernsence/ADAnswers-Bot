@@ -11,7 +11,7 @@ import { Command } from "@/types/Commands/Command";
 import { HelpCustomEmbed } from "@/types/Embeds/HelpCustomEmbed";
 
 export default new Command({
-  data: new SlashCommandBuilder().setName("help").setDescription("displays a help embed with all possible commands"),
+  data: new SlashCommandBuilder().setName("help").setDescription("Displays a help embed with all possible commands"),
   execute: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction) return;
 

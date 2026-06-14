@@ -5,7 +5,7 @@ import { SlashCommandBuilder } from "discord.js";
 export default new ChoiceTextCommand({
   data: new SlashCommandBuilder()
     .setName("news")
-    .setDescription("provides some information about the news ticker")
+    .setDescription("Provides some information about the news ticker")
     .addStringOption(option =>
       option
         .setName("info")

@@ -4,10 +4,11 @@ import { SlashCommandBuilder } from "discord.js";
 export default new BasicTextCommand({
   data: new SlashCommandBuilder()
     .setName("sacrifice")
-    .setDescription("describes dimensional sacrifice, its benefits, and when to do so"),
+    .setDescription("Describes dimensional sacrifice, its benefits, and when to do so"),
   // eslint-disable-next-line @stylistic/max-len
   text: `
-Sacrifice resets all Antimatter Dimensions besides 8th Dimensions, and in return you get a multiplier based on First Dimensions. This effect stacks, and is reset on DimBoost/Galaxy/Infinity/etc. I recommend saccing after you buy 10 8th dims and the multiplier is >2x.
+Sacrifice resets all Antimatter Dimensions besides 8th Antimatter Dimensions, and in return you get a multiplier based on 1st Antimatter Dimensions.
+This effect stacks multiplicatively, and is reset on DimBoost/Galaxy/Infinity/etc. We recommend Sacrificing after you buy 10 8th Antimatter Dimensions and the multiplier is >2x.
 Sacrifice uses the following formulas:
 
 For the rewards of Achievements 32 / 57 / 88:

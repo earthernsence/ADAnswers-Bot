@@ -52,6 +52,6 @@ export class Glyph implements TGlyph {
   }
 
   public stylisedName(): string {
-    return `${this.emote} ${this.name} ${this.emote}`;
+    return `${this.emote} ${this.capitalisedName} ${this.emote}`;
   }
 }

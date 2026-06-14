@@ -126,7 +126,7 @@ export default new BasicEmbedCommand({
             .setDescription("Which Glyph type would you like information about?")
             .setChoices(
               Object.keys(glyphs).map(type => ({
-                name: type,
+                name: capitalise(type),
                 value: type,
                 type: ApplicationCommandOptionType.String
               }))

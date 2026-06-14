@@ -2,7 +2,7 @@ import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new BasicTextCommand({
-  data: new SlashCommandBuilder().setName("adbonus").setDescription("sends ad bonus formulas and multipliers"),
+  data: new SlashCommandBuilder().setName("adbonus").setDescription("Sends mobile ad bonus formulas and multipliers"),
   text: `
 The highest unlocked effect on this list, is the only effect that applies
 Celestial 7: ||Ad Bonus has been Nullified||
@@ -16,5 +16,5 @@ Dilation Unlocked: ||DT: 2||
 10+ Eternities: ||EP: min(max(EP^0.01, 1.5), 1e10)||
 10+ Infintiies: ||IP: max(IP^0.01, 2)||
 AD: 2.
-And no, ad bonus is not coming to steam (you simply can't!)`
+And no, ad bonus is not coming to Steam (you simply can't!)`
 });

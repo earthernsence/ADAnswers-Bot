@@ -73,18 +73,17 @@ export const antimatterChallenges: AntimatterChallenges = {
     requirements: `Reach Infinity`,
     challenge: `Whenever you buy Tickspeed upgrades, or 10 of an Antimatter Dimension, everything else of equal cost will increase to its next cost step.`,
     // eslint-disable-next-line @stylistic/max-len
-    strategy: `I recommend having the first twelve Infinity Upgrades (except for the last 4 which do not work in Challenges) and at least 100 unspent IP before attempting C9. Some players prefer attempting this challenge at higher IP values (10k+) where the challenge becomes trivial.\n
+    strategy: `We recommend having the first twelve Infinity Upgrades (the last 4 do not work in Challenges) and at least 100 unspent IP before attempting C9. Some players prefer attempting this challenge at higher IP values (10k+) where the challenge becomes trivial.\n
 You can use this [video guide](<https://youtu.be/6o-QKHLcimU>) or you can use this strategy: 
-- Disable all autobuyers except 6th Antimatter Dimension, 8th Antimatter Dimension, Dimension Boost, and Antimatter Galaxy autobuyers which should stay enabled.
+- Disable all autobuyers except 6th Dimension, 8th Dimension, Dimension Boost, and Galaxy autobuyers.
 - Keep repeatedly buying the highest Dimension available.
 - From time to time, buy Tickspeed in singles, and make sure to keep the Tickspeed cost under the cost of Dimensions.
-- Make sure to not press M/Max or Buy max tickspeed.
+- Do not press M/Max or Buy max tickspeed
 For post-1e7 IP upgrade:
 - Enable Auto Retry Challenges option
-- Crunch autobuyer on at 0 IP
+- Big Crunch autobuyer on at 0 IP, Galaxy autobuyer off
 - Dimension Boost autobuyer on with "Galaxies required to always Dimension Boost" disabled and "Limit Dimension Boosts" enabled at 4
-- Galaxy autobuyer off
-- Hold M/Max for additional speed -- if this causes trouble, try tapping it instead of holding`,
+- Hold M/Max for additional speed -- if issues arise, try tapping it instead of holding`,
     reward: `Upgradeable Tickspeed autobuyer`,
     goal: `Reach Infinity under these circumstances`
   },

@@ -8,16 +8,17 @@ import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challe
 function getChallengeChoices(): Array<ApplicationCommandOptionChoiceData<string>> {
   const choices: Array<ApplicationCommandOptionChoiceData<string>> = [];
 
+  // Sooooooo hacky but it does work
   for (const challenge in antimatterChallenges) {
     choices.push({
-      name: challenge,
+      name: `Normal Challenge ${challenge.split("c")[1]} (${challenge.toUpperCase()})`,
       value: challenge
     });
   }
 
   for (const challenge in infinityChallenges) {
     choices.push({
-      name: challenge,
+      name: `Infinity Challenge ${challenge.split("c")[1]} (${challenge.toUpperCase()})`,
       value: challenge
     });
   }

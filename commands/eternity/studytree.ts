@@ -7,7 +7,7 @@ import { isUserHelper } from "@/utils/utils_commands";
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("studytree")
-    .setDescription("generate a recommended Time Study tree based on total Time Theorems")
+    .setDescription("Generate a recommended Time Study tree based on total Time Theorems")
     .addIntegerOption(option =>
       option.setName("theorems").setDescription("your total time theorems").setRequired(true).setMinValue(1)
     )

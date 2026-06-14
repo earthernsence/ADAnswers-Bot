@@ -1,6 +1,5 @@
 import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { capitalise } from "@/utils/utils_formatting";
-import { Channels } from "@/utils/utils_channels";
 import { CustomEmbed } from "../CustomEmbed";
 import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
 
@@ -18,7 +17,7 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.glyph.stylisedName(this.interaction.guildId === Channels.AntimatterDimensionsServer)).setColour(
+    this.setTitle(this.glyph.stylisedName()).setColour(
       this.glyph.colour
     );
 
@@ -43,19 +42,19 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
     if (this.glyph.sacrifice) {
       return [
         {
-          name: `${capitalise(this.glyph.name)} Sacrifice effect`,
+          name: `${this.glyph.capitalisedName} Sacrifice effect`,
           value: this.glyph.sacrifice.effect,
           inline: false
         },
         {
-          name: `${capitalise(this.glyph.name)} Sacrifice effect formula`,
+          name: `${this.glyph.capitalisedName} Sacrifice effect formula`,
           value: this.glyph.sacrifice.formula,
           inline: false
         }
       ];
     }
 
-    if (this.glyph.name === "companion")
+    if (this.glyph.name.toLowerCase() === "companion") {
       return [
         {
           name: "You monster!",
@@ -63,6 +62,7 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
           inline: false
         }
       ];
+    }
 
     return [
       {

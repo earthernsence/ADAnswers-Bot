@@ -15,7 +15,7 @@ export default new Command({
   data: new SlashCommandBuilder()
     .setName("eternitychallengeorder")
     .setDescription(
-      `provides an order for the Eternity Challenges. includes optional "most recent challenge" parameter`
+      `Provides an order for the Eternity Challenges. includes optional "most recent challenge" parameter`
     )
     .addStringOption(option =>
       option
@@ -46,7 +46,7 @@ export default new Command({
     if (!mostRecentChallenge) {
       const errorEmbed = new ErrorCustomEmbed({
         interaction,
-        text: `There was a problem processing either your requested challenge of ${mostRecentChallengeRequested}`
+        text: `There was a problem processing your requested Eternity Challenge of ${mostRecentChallengeRequested}`
       });
 
       const errorImage = errorEmbed.getAndSetThumbnail();

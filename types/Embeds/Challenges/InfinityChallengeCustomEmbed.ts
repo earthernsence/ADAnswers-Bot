@@ -19,9 +19,9 @@ export class InfinityChallengeCustomEmbed extends CustomEmbed {
     this.challenge = challenge;
     this.strategyOnly = strategyOnly ?? true;
   }
-  
+
   private get formattedUnlock(): string {
-    return `Reach ${bold(format(this.challenge.requirements))} antimatter.`
+    return `Reach ${bold(format(this.challenge.requirements))} antimatter.`;
   }
 
   private get formattedGoal(): string {

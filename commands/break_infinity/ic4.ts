@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { InfinityChallengeCustomEmbed } from "@/types/Embeds/Challenges/InfinityChallengeCustomEmbed";
 import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challenges";
@@ -6,7 +6,7 @@ import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challe
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("ic4")
-    .setDescription(`shorthand for ${inlineCode("/challenge ic4")}`)
+    .setDescription(`Strategy shorthand for /challenge ic4)}`)
     .addUserOption(user =>
       user
         .setName("target")

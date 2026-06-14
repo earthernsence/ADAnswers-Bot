@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { AntimatterChallengeCustomEmbed } from "@/types/Embeds/Challenges/AntimatterChallengeCustomEmbed";
 import { antimatterChallenges } from "@/utils/game_data/challenges/antimatter_challenges";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
@@ -6,7 +6,7 @@ import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("c9")
-    .setDescription(`shorthand for ${inlineCode("/challenge c9")}`)
+    .setDescription(`Strategy shorthand for /challenge c9`)
     .addUserOption(user =>
       user
         .setName("target")

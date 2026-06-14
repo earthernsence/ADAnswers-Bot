@@ -40,11 +40,11 @@ const getNext = (
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("eternitychallenge")
-    .setDescription("generates an Eternity Challenge guide for the requested challenge.")
+    .setDescription("Generates an Eternity Challenge guide for the requested challenge")
     .addIntegerOption(option =>
       option
         .setName("challenge")
-        .setDescription("what Eternity Challenge would you like a guide for?")
+        .setDescription("Which Eternity Challenge would you like a guide for?")
         .setRequired(true)
         .setMinValue(1)
         .setMaxValue(12)
@@ -52,7 +52,7 @@ export default new Command({
     .addIntegerOption(option =>
       option
         .setName("completion")
-        .setDescription("what completion of that challenge would you like a guide for?")
+        .setDescription("Which completion of that challenge would you like a guide for?")
         .setRequired(true)
         .setMinValue(1)
         .setMaxValue(5)

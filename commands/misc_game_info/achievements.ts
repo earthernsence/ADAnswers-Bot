@@ -38,7 +38,7 @@ export default new Command({
     .addIntegerOption(option =>
       option
         .setName("achievement")
-        .setDescription("What Achivement would you like information about?")
+        .setDescription("Which Achivement would you like information about?")
         .setRequired(true)
         .setMinValue(11)
         .setMaxValue(188)

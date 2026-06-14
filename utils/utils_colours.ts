@@ -29,6 +29,7 @@ export enum Colours {
 
   // Glyph-specific
   Power = Antimatter,
+  Cursed = Light,
 
   // Celestials
   Teresa = "#5151ec",

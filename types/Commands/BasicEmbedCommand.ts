@@ -33,7 +33,7 @@ export class BasicEmbedCommand extends Command {
 
         interaction.reply({
           content: targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}` : undefined,
-          embeds: [customEmbed.create(true)],
+          embeds: [customEmbed.create(data.name !== "challenge")],
           files: [image],
           flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
         });

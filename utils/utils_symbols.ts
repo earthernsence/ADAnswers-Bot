@@ -31,9 +31,7 @@ export enum Symbols {
   Unpredictability = "Λ"
 }
 
-// TODO: to my knowledge, it's possible to upload emote files to the bot itself, so that
-// it can use them wherever, instead of just in AD
-// AD-server specific
+// These are bot-specific (that is, they are uploaded to the bot from Discord)
 export enum GlyphEmotes {
   Power = "<:glyph_power:1508300294197481623>",
   "Infinity" = "<:glyph_infinity:1508300286861770852>",

@@ -4,11 +4,11 @@ import { SlashCommandBuilder } from "discord.js";
 export default new ChoiceTextCommand({
   data: new SlashCommandBuilder()
     .setName("antitables")
-    .setDescription("Displays a guide on how to complete the Antitables achivement.")
+    .setDescription("Displays a guide on how to complete the Antitables achivement (Achievement 43).")
     .addStringOption(option =>
       option
         .setName("when")
-        .setDescription("at what point in the game would you like a guide for?")
+        .setDescription("At what point in the game would you like a guide for?")
         .setRequired(true)
         .setChoices([
           { name: "pre-break-infinity", value: "prebreak" },
