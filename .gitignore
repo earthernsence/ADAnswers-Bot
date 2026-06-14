@@ -176,4 +176,5 @@ dist
 
 # Miscellaneous
 .github
+.trunk
 azure-deploy.bat

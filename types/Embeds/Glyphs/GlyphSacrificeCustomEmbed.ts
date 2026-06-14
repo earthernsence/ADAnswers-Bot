@@ -17,9 +17,7 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
   }
 
   public create(): EmbedBuilder {
-    this.setTitle(this.glyph.stylisedName()).setColour(
-      this.glyph.colour
-    );
+    this.setTitle(this.glyph.stylisedName()).setColour(this.glyph.colour);
 
     this.setFields(this.getFields());
 
