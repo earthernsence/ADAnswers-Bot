@@ -75,8 +75,8 @@ export default new BasicEmbedCommand({
             .setName("upgrade")
             .setDescription("Which upgrade would you like information about?")
             .setChoices(
-              Object.values(EternityUpgrades).map(upgrade => ({
-                name: upgrade.name,
+              Object.values(EternityUpgrades).map((upgrade, index: number) => ({
+                name: `${upgrade.name} (EU${index + 1})`,
                 value: upgrade.name,
                 type: ApplicationCommandOptionType.String
               }))

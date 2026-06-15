@@ -108,7 +108,8 @@ export default new BasicEmbedCommand({
               value: teresa.info,
               inline: false
             },
-            colour: Colours.Teresa
+            colour: Colours.Teresa,
+            thumbnailPath: "images/celestials/teresa.png"
           });
         case "reality":
           return new TeresaRealityCustomEmbed({ interaction });
@@ -132,7 +133,8 @@ export default new BasicEmbedCommand({
               value: v.info,
               inline: false
             },
-            colour: Colours.V
+            colour: Colours.V,
+            thumbnailPath: "images/celestials/v.png"
           });
         case "reality":
           return new BasicTextCustomEmbed({
@@ -143,7 +145,8 @@ export default new BasicEmbedCommand({
               value: v.reality,
               inline: false
             },
-            colour: Colours.V
+            colour: Colours.V,
+            thumbnailPath: "images/celestials/v.png"
           });
         case "unlocks":
           return new VUnlocksCustomEmbed({ interaction });
@@ -166,7 +169,8 @@ export default new BasicEmbedCommand({
               value: ra.info,
               inline: false
             },
-            colour: Colours.Ra
+            colour: Colours.Ra,
+            thumbnailPath: "images/celestials/ra.png"
           });
         case "reality":
           return new BasicTextCustomEmbed({
@@ -177,7 +181,8 @@ export default new BasicEmbedCommand({
               value: ra.reality,
               inline: false
             },
-            colour: Colours.Ra
+            colour: Colours.Ra,
+            thumbnailPath: "images/celestials/ra.png"
           });
         case "celestial-memories":
           return new RaCelestialMemoriesCustomEmbed({

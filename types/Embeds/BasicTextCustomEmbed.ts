@@ -7,18 +7,21 @@ interface BasicTextCustomEmbedProps {
   title: string;
   field: EmbedField;
   colour?: Colours;
+  thumbnailPath?: string;
 }
 
 export class BasicTextCustomEmbed extends CustomEmbed {
   title: string;
   field: EmbedField;
   colour: Colours;
+  thumbnailPath: string;
 
-  constructor({ interaction, title, field, colour }: BasicTextCustomEmbedProps) {
+  constructor({ interaction, title, field, colour, thumbnailPath }: BasicTextCustomEmbedProps) {
     super({ interaction });
     this.title = title;
     this.field = field;
     this.colour = colour ?? Colours.Antimatter;
+    this.thumbnailPath = thumbnailPath ?? "images/misc/help.png";
   }
 
   public create(): EmbedBuilder {
@@ -30,8 +33,13 @@ export class BasicTextCustomEmbed extends CustomEmbed {
   }
 
   public getAndSetThumbnail(): AttachmentBuilder {
-    const image: AttachmentBuilder = new AttachmentBuilder("images/misc/help.png");
-    this.embed.setThumbnail(`attachment://help.png`);
+    const image: AttachmentBuilder = new AttachmentBuilder(this.thumbnailPath);
+    this.embed.setThumbnail(`attachment://${this.thumbnailName}`);
     return image;
+  }
+
+  private get thumbnailName() {
+    const pathParts = this.thumbnailPath.split("/");
+    return pathParts[pathParts.length - 1];
   }
 }

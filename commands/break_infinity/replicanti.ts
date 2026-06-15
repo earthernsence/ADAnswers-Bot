@@ -4,7 +4,7 @@ import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
 export default new BasicTextCommand({
   data: new SlashCommandBuilder()
     .setName("replicanti")
-    .setDescription("explains what replicanti & replicanti upgrades do"),
+    .setDescription("Explains what replicanti & replicanti upgrades do"),
   text: `
 Replicanti are a mechanic unlocked at 1e140 IP. Excerpted from the pins of <#387799099472216095>:
     

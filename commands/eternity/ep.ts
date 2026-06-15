@@ -6,7 +6,7 @@ import { isUserHelper } from "@/utils/utils_commands";
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("ep")
-    .setDescription("calculates the amount of IP needed for a provided EP amount (2 <= x <= 1000")
+    .setDescription("Calculates the amount of IP needed for a provided EP amount (2 <= x <= 1000)")
     .addIntegerOption(option =>
       option
         .setName("ep")

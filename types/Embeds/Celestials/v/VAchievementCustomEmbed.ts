@@ -1,4 +1,4 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, inlineCode } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import { format } from "@/utils/utils_formatting";
@@ -43,8 +43,8 @@ export class VAchievementCustomEmbed extends CustomEmbed {
       },
       {
         name: "Goals",
-        value: `${this.achievement.goals.values.map(value => format(value)).join(", ")} ${this.achievement.goals.currency}
-${this.achievement.goals.shardReduction ? `${this.achievement.goals.shardReduction.type} ${format(this.achievement.goals.shardReduction.amount)} ${this.achievement.goals.currency} per Perk Point reduction` : ""}
+        value: `${this.achievement.goals.values.map(value => `${inlineCode(format(value))}`).join(", ")} ${this.achievement.goals.currency}
+${this.achievement.goals.shardReduction ? `${this.achievement.goals.shardReduction.type} ${inlineCode(format(this.achievement.goals.shardReduction.amount))} ${this.achievement.goals.currency} per Perk Point reduction` : ""}
         `,
         inline: false
       }

@@ -13,7 +13,7 @@ export default new BasicEmbedCommand({
         .setName("study")
         .setDescription("the study you want to get information about")
         .setRequired(true)
-        .setMinValue(1)
+        .setMinValue(10)
         .setMaxValue(304)
     ),
   embed: (interaction: ChatInputCommandInteraction) => {

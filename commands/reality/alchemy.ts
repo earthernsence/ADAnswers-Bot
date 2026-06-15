@@ -171,16 +171,5 @@ export default new Command({
       embeds: [embed.create()],
       files: [image]
     });
-
-    // Return new BasicTextCustomEmbed({
-    //   interaction,
-    //   title: "Alchemy Information",
-    //   field: {
-    //     name: capitalise(info),
-    //     value: alchemyInfo[info],
-    //     inline: false
-    //   },
-    //   colour: Colours.Reality
-    // });
   }
 });

@@ -1,4 +1,4 @@
-import { inlineCode, SlashCommandBuilder } from "discord.js";
+import { codeBlock, SlashCommandBuilder } from "discord.js";
 import { ChoiceTextCommand } from "@/types/Commands/ChoiceTextCommand";
 
 export default new ChoiceTextCommand({
@@ -17,9 +17,9 @@ export default new ChoiceTextCommand({
     ),
   possibleText: {
     first: `
-Active: ${inlineCode("11-62, time, 111, active, 151-214, antimatter, 222, 223, 225, 228, 232, 233 | 0")}
-Idle: ${inlineCode("11-62, time, 111, idle, 151-214, antimatter, 222, 223, 225, 228, 232, 233 | 0")}
+Active: ${codeBlock("11-62, time, 111, active, 151-214, antimatter, 222, 223, 225, 228, 232, 233 | 0")}
+Idle: ${codeBlock("11-62, time, 111, idle, 151-214, antimatter, 222, 223, 225, 228, 232, 233 | 0")}
 Note: Active will fail for the very first Dilated Eternity on mobile (and sometimes on web/steam as well).`,
-    after3paths: `${inlineCode("11-111, active, 151-214, 222, 223, 225, 228, 232, 233 | 0")}`
+    after3paths: `${codeBlock("11-111, active, 151-214, 222, 223, 225, 228, 232, 233 | 0")}`
   }
 });

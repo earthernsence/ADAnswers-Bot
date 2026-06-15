@@ -9,9 +9,11 @@ import reportMessage from "./context_commands/reportMessage";
 const client: ADABClient = <ADABClient>new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages],
   presence: {
-    activities: [{
-      name: "Use /help for more information!"
-    }]
+    activities: [
+      {
+        name: "Use /help for more information!"
+      }
+    ]
   }
 });
 

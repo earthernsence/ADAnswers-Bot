@@ -17,9 +17,9 @@ export default new Command({
         .setDescription("(Optional) the second-split path you want to use; works when 54 < TT < 123")
         .setRequired(false)
         .setChoices([
-          { name: "active (TS121, 131, 141)", value: "active" },
-          { name: "passive (TS122, 132, 142)", value: "passive" },
-          { name: "idle (TS123, 133, 143)", value: "idle" }
+          { name: "Active (TS121, 131, 141)", value: "active" },
+          { name: "Passive (TS122, 132, 142)", value: "passive" },
+          { name: "Idle (TS123, 133, 143)", value: "idle" }
         ])
     )
     .addBooleanOption(option =>
