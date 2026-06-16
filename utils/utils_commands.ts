@@ -36,6 +36,7 @@ export function pluralise(word: string, count: number) {
   return `${word}s`;
 }
 
-export function quantify(word: string, count: number): string {
-  return `${format(count, 2)} ${pluralise(word, count)}`;
+export function quantify(word: string, count: number, shouldFormat = true): string {
+  if (shouldFormat) return `${format(count, 2)} ${pluralise(word, count)}`;
+  return `${count} ${pluralise(word, count)}`;
 }

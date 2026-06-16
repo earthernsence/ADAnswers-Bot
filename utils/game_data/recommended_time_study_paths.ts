@@ -276,7 +276,12 @@ const orderAsECs: Array<EternityChallenge> = orderAsDoublyLinkedList.traverse();
 
 // Function rewritten by Mirai
 export function ecsAtTTAmount(tt: number): ECsAtTTInfo {
-  if (tt >= 12350)
+  // The recommendation tends to change for this, and the command panics if 
+  // this gets skipped with all ECs being completed.
+  // For example, this used to be 12_350, but the EC12x5 recommendation got
+  // moved to 12_000, so /studytree would panic for TT values between those
+  // two points & throw an error.
+  if (tt >= Math.max(...orderAsECs.map(ec => ec.theorems)))
     return {
       completions: "All ECs completed!",
       nextEC: findEC(1, 1),

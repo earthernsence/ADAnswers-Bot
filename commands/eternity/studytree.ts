@@ -2,7 +2,9 @@ import { ChatInputCommandInteraction, italic, MessageFlags, SlashCommandBuilder,
 import { ecsAtTTAmount, getRecommendedTree } from "@/utils/game_data/recommended_time_study_paths";
 import { Command } from "@/types/Commands/Command";
 import { enumerate } from "@/utils/utils_formatting";
+import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 import { isUserHelper } from "@/utils/utils_commands";
+import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 
 export default new Command({
   data: new SlashCommandBuilder()
@@ -42,10 +44,11 @@ export default new Command({
     const showRecommendedECs = interaction.options.getBoolean("show-recommended-ecs");
     const target = interaction.options.getUser("target");
 
+    const orderAsECs: Array<EternityChallenge> = orderAsDoublyLinkedList.traverse();
     const recommendedTree = getRecommendedTree(theorems, path);
     const recommendedECs = ecsAtTTAmount(theorems);
     const upcomingECs =
-      theorems >= 12350
+      theorems >= Math.max(...orderAsECs.map(ec => ec.theorems))
         ? ""
         : `(Next: ${enumerate(recommendedECs.nextECs)} at ${recommendedECs.nextChallengeTT} Time Theorems)`;
     const ecString =
