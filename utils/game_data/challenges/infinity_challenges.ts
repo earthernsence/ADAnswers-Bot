@@ -2,7 +2,7 @@ import Decimal from "break_infinity.js";
 
 import type { InfinityChallenges } from "@/types/game_data/challenges/InfinityChallenges";
 
-const icBase = (ic: number, ip: number) => `Attempt IC${ic} at ~e${ip} IP. No special strat for this challenge.`;
+const icBase = (ic: number, ip: number) => `Attempt IC${ic} at ~e${ip} IP. No special strategy for this challenge.`;
 
 export const infinityChallenges: InfinityChallenges = {
   ic1: {
@@ -10,7 +10,7 @@ export const infinityChallenges: InfinityChallenges = {
     requirements: new Decimal("1e2000"),
     challenge: `All Normal Challenges, with the exception of Tickspeed (C9) and Big Crunch (C11) Challenges, are active at the same time.`,
     goal: new Decimal("1e650"),
-    strategy: `As the reward of IC1 is not that good, it's recommended to do it once you have the galaxy upgrade for 5e11 IP. No special strat for this challenge.`,
+    strategy: `As the reward of IC1 is not that good, it's recommended to do it once you have the galaxy upgrade for 5e11 IP. No special strategy for this challenge.`,
     reward: `×1.3 on all Infinity Dimensions for each Infinity Challenge completed`,
     rewardFormula: `\`1.3 ^ ICs completed\` (to a max of ×8.2)`
   },
@@ -19,7 +19,7 @@ export const infinityChallenges: InfinityChallenges = {
     requirements: new Decimal("1e11000"),
     challenge: `Automatically Dimensional Sacrifice every 400 milliseconds once you have an 8th Antimatter Dimension.`,
     goal: new Decimal("1e10500"),
-    strategy: `Do not attempt IC2 before you reached ID4 at ~e45 IP. If you cannot get e10500 AM in a normal infinity, why would you try to reach it inside a challenge? No special strat for this challenge.`,
+    strategy: `Do not attempt IC2 before you reached ID4 at ~e45 IP. If you cannot get e10500 AM in a normal infinity, why would you try to reach it inside a challenge? No special strategy for this challenge.`,
     reward: `Dimensional Sacrifice autobuyer and stronger Dimensional Sacrifice`,
     rewardFormula: `
 Change the base of the Sacrifice formula from \`(log_10(AD1) / 10)\` to \`AD1\`.
@@ -31,7 +31,7 @@ For Achievements 32 / 57 / 88:
     requirements: new Decimal("1e12000"),
     challenge: `Tickspeed upgrades are always ×1. For every Tickspeed upgrade purchase, you instead get a static multiplier on all Antimatter Dimensions which increases based on Antimatter Galaxies.`,
     goal: new Decimal("1e5000"),
-    strategy: `Attempt IC3 after getting the ID1 for e56 IP. This might take an hour to do. No special strat for this challenge.`,
+    strategy: `Attempt IC3 after getting the ID1 for e56 IP. This might take an hour to do. No special strategy for this challenge.`,
     reward: `Antimatter Dimension multiplier based on Antimatter Galaxies and Tickspeed purchases`,
     rewardFormula: `\`(1.05 + (galaxies * 0.005)) ^ tickspeed upgrade bought\``
   },
@@ -71,7 +71,7 @@ Mobile guide: <https://youtu.be/lI70hBlpaqc>`,
     challenge: `Buying Antimatter Dimensions 1-4 causes all smaller Antimatter Dimension costs to increase, and buying Antimatter Dimensions 5-8 causes all larger Antimatter Dimension costs to increase.`,
     goal: new Decimal("1e16500"),
     // eslint-disable-next-line @stylistic/max-len
-    strategy: `Set Antimatter Dimension autobuyers 1-7 to "Buy Singles". Leave 8th dimension autobuyer enabled with "Buys until 10". Then just wait. All other autobuyers should remain on & purchasing (ie make sure you are still buying galaxies/dimboosts!)`,
+    strategy: `Set Antimatter Dimension autobuyers 1-7 to "Buy Singles". Leave 8th Antimatter Dimension autobuyer enabled with "Buys until 10". Then just wait. All other autobuyers should remain on & purchasing (i.e., make sure you are still buying Antimatter Galaxies / Dimension Boosts!)`,
     reward: `All Galaxies are 10% stronger and reduce the requirements for them and Dimension Boosts by 1`,
     rewardFormula: `Think really hard`
   },

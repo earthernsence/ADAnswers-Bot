@@ -1,4 +1,5 @@
 import type { AntimatterChallenges } from "@/types/game_data/challenges/AntimatterChallenges";
+import { inlineCode } from "discord.js";
 
 const base = ` It is recommended to have at least the first 12 infinity upgrades and 100 spare IP.
  If you want to get those 100 IP, you probably want to get upgrade 13 and 14 as well to speed things up. (Note: Those upgrades won't work inside challenges.)`;
@@ -63,8 +64,8 @@ export const antimatterChallenges: AntimatterChallenges = {
     number: 8,
     requirements: `Reach Infinity`,
     challenge: `Dimension Boosts provide no boost and Antimatter Galaxies cannot be bought, but Dimensional Sacrifice is significantly stronger and resets antimatter and all Antimatter Dimensions.`,
-    strategy: `No strat or tips for this challenge. Just start it, get five Dimension Boosts and hit Sacrifice at ~10x.
-      Make sure to do the antitable achievement in these runs, because this achievement is pretty easy for now. If you need a guide for it, feel free to call the bot with "/antitables prebreak".`,
+    strategy: `No strategy or tips for this challenge. Just start it, get five Dimension Boosts and hit Sacrifice at ~10x repeatedly.
+      Make sure to do the Antitables achievement (achievement 43) in these runs, because this achievement is pretty easy for now. If you need a guide for it, use ${inlineCode("/antitables prebreak")}.`,
     reward: `Upgradeable 8th Antimatter Dimension autobuyer`,
     goal: `Reach Infinity under these circumstances`
   },
