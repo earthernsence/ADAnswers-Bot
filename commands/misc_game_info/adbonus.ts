@@ -9,7 +9,7 @@ Celestial 7 unlock: ||Ad Bonus has been Nullified||
 Celestial 6 unlock: ||${inlineCode("2x")} to Dark Energy||
 Celestial 5 unlock: ||${inlineCode("1.5x")} to all Ra-Celestial Memory gain||
 Celestial 3 unlock: ||${inlineCode("+5%")} to Glyph rarity||
-Celestial 2 unlock: ||${inlineCode("1.5x")} to Relic Shards||
+Celestial 2 unlock: ||${inlineCode("2x")} to Relic Shards||
 Celestial 1 unlock: ||${inlineCode("2x")} to Reality Machines||
 Note that all pre-Reality effects will come back at their respective stages before Reality is unlocked.
 Reality Unlocked in current Reality (after your first Reality): ||${inlineCode("2x")} to game speed||
