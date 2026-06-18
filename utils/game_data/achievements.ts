@@ -85,8 +85,7 @@ export const achievements: Record<number, Achievement> = {
     id: 28,
     fullName: "There's no point in doing that...",
     requirement: "Buy a single 1st Antimatter Dimension when you have over 1e150 of them.",
-    unlockStrategy:
-      'Once you have 1e150 1st Antimatter Dimensions, toggle the 1st Antimatter Dimension autobuyer to "buy singles"',
+    unlockStrategy: `Once you have 1e150 1st Antimatter Dimensions, toggle the 1st Antimatter Dimension autobuyer to "buy singles"`,
     reward: "1st Antimatter Dimensions are 10% stronger."
   }),
   31: new Achievement({

@@ -169,7 +169,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 2,
       recommendedTheorems: 140,
       recommendedTree: "11,21,22,32,42,51,61,infinity,111,active,151-171|1!",
-      note: "Get 60,000 Eternities before trying to boost the second Eternity Upgrade."
+      note: "Get 60,000 Eternities before attempting this Challenge in order to boost the second Eternity Upgrade."
     }),
     3: new EternityChallenge({
       challenge: 1,
@@ -265,7 +265,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       completion: 1,
       recommendedTheorems: 142,
       recommendedTree: "11,22,32,33,42,51,61,time,111,idle|4!",
-      note: 'Fail once for Achievement 114 ("You\'re a mistake"). Add TS21 at 145 total TT.'
+      note: `Fail once for Achievement 114 ("You're a mistake"). Add TS21 at 145 total TT.`
     }),
     2: new EternityChallenge({
       challenge: 4,

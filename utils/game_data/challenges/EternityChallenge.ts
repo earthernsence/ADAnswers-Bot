@@ -1,3 +1,4 @@
+import type { DecimalSource } from "break_infinity.js";
 import { inlineCode } from "discord.js";
 
 import type {
@@ -26,6 +27,11 @@ interface EternityChallengeProps {
   recommendedTheorems: number;
   note?: string;
 }
+
+// This represents which challenges should format their unlocks
+// as actual numbers. So EC1 should show its unlock as
+// "100,000 Eternities" instead of "1.00e5 Eternities".
+const INTEGER_FORMATTED_CHALLENGE_UNLOCKS: Array<number> = [1, 2, 3, 4];
 
 export default class EternityChallenge implements EC {
   challenge: number;
@@ -104,7 +110,7 @@ export default class EternityChallenge implements EC {
   public formatUnlock(): string {
     if (this.challenge === 11 || this.challenge === 12)
       return `${this.unlock.amount} and ${quantify("Time Theorem", this.unlock.theorems)}`;
-    return `${format(this.unlock.amount)} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
+    return `${this.formatFn(this.unlock.amount)} ${this.unlock.currency} and ${quantify("Time Theorem", this.unlock.theorems)}`;
   }
 
   public formatGoal(): string {
@@ -127,5 +133,9 @@ Other Eternity Challenge completions recommended: ${this.otherRecommendedComplet
 
   private get nextEC(): EternityChallenge | undefined {
     return orderAsDoublyLinkedList.search(value => value === this)?.next?.value;
+  }
+
+  private formatFn(value: DecimalSource): string {
+    return format(value, 2, INTEGER_FORMATTED_CHALLENGE_UNLOCKS.includes(this.challenge));
   }
 }

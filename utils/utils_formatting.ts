@@ -1,5 +1,5 @@
 import * as ADNotations from "@antimatter-dimensions/notations";
-import Decimal from "break_infinity.js";
+import Decimal, { type DecimalSource } from "break_infinity.js";
 
 // Old implementation for enumerations. In general, enumerate() should be
 // just as effective, and "better" in some way. Keeping both implementations for posterity.
@@ -65,6 +65,15 @@ export const Caesar = {
 
 const scientific = new ADNotations.ScientificNotation();
 
-export function format(number: Decimal | number | string, decimals: number = 2) {
+export function format(number: DecimalSource, decimals: number = 2, useIntegerFormatting = false): string {
+  if (useIntegerFormatting) return formatWithCommas(new Decimal(number).toFixed(0));
   return scientific.format(number, decimals);
+}
+
+const commaRegexp = /\B(?=(\d{3})+(?!\d))/gu;
+
+function formatWithCommas(value: string): string {
+  const decimalPointSplit = value.split(".");
+  decimalPointSplit[0] = decimalPointSplit[0].replace(commaRegexp, ",");
+  return decimalPointSplit.join(".");
 }

@@ -63,4 +63,3 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
     return image;
   }
 }
- 
