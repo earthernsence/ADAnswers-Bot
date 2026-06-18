@@ -1,8 +1,8 @@
 import {
   AttachmentBuilder,
+  codeBlock,
   type CommandInteraction,
   type EmbedBuilder,
-  inlineCode,
   time,
   TimestampStyles
 } from "discord.js";
@@ -42,7 +42,7 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
       { name: "Challenge description", value: this.challenge.description, inline: false },
       { name: "Goal", value: this.challenge.formatGoal(), inline: false },
       { name: "Strategy", value: this.challenge.formatStrategy(), inline: false },
-      { name: "Recommended Time Studies", value: inlineCode(this.challenge.formattedTree), inline: false },
+      { name: "Recommended Time Studies", value: codeBlock(this.challenge.formattedTree), inline: false },
       { name: "Reward", value: this.challenge.reward.reward, inline: false },
       { name: "Reward formula", value: this.challenge.reward.formula, inline: false },
       {
@@ -63,3 +63,4 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
     return image;
   }
 }
+ 
