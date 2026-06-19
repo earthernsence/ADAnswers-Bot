@@ -124,7 +124,7 @@ export default new ContextMenuCommand({
         );
 
         await (reportChannel as TextChannel).send({
-          content: roleMention(Roles.TestMod),
+          content: roleMention(Roles.AntimatterDimensionsMod),
           embeds: [messageReportEmbed]
         });
 
