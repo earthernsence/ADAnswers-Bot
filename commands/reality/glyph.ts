@@ -35,11 +35,11 @@ Glyphs that are not equipped have no effect.`,
 
 Before you encounter any Celestials, you will have access to 5 effective glyph types:
 
-    - ${GlyphEmotes.Power} Power
-    - ${GlyphEmotes.Infinity} Infinity
-    - ${GlyphEmotes.Replication} Replication
-    - ${GlyphEmotes.Time} Time
-    - ${GlyphEmotes.Dilation} Dilation`,
+- ${GlyphEmotes.Power} Power
+- ${GlyphEmotes.Infinity} Infinity
+- ${GlyphEmotes.Replication} Replication
+- ${GlyphEmotes.Time} Time
+- ${GlyphEmotes.Dilation} Dilation`,
 
   rarity: `Rarity is one of the two values determining the strength of a glyph's effects, the other being Level.
     
@@ -49,14 +49,14 @@ This rarity is wholly independent from level, and is determined from the moment 
 
 At certain rarity thresholds, the color of your glyph will change. These colors are as follows:
 
-    - Common: 0 - 20%, White
-    - Uncommon: 20 - 40%, Green
-    - Rare: 40 - 60%, Light Blue
-    - Epic: 60 - 70%, Purple
-    - Legendary, 70 - 80%, Orange
-    - Mythical, 80 - 90%, Red
-    - Transcendent, 90 - 99.9%, Cyan
-    - Celestial, 100%, Celestial Blue`,
+- Common: 0 - 20%, White
+- Uncommon: 20 - 40%, Green
+- Rare: 40 - 60%, Light Blue
+- Epic: 60 - 70%, Purple
+- Legendary, 70 - 80%, Orange
+- Mythical, 80 - 90%, Red
+- Transcendent, 90 - 99.9%, Cyan
+- Celestial, 100%, Celestial Blue`,
 
   level: `Level is one of the two values determining the strength of a glyph's effects, the other being Rarity.
     
@@ -66,7 +66,7 @@ Initially, these factors are as follows:
 Eternity Points: \`0.016 * log(EP)^0.5\`
 Replicanti: \`0.025 * log(Rep)^0.4\`
 Dilated Time: \`0.025 * log(DT)^1.3\`
-Eternities: \`0.450 * log(Eternities)^0.5\` (if unlocked)
+Eternities: \`0.450 * log(Eternities)^0.5\` (if unlocked with Reality Upgrade "Measure of Forever")
 
 All of the above factors are then multiplied together. Finally, other bonuses (Such as the number of Reality Upgrade rows you have completed, or achievements such as Royal Flush) are added, and that value, rounded down, is your final Glyph level. 
 

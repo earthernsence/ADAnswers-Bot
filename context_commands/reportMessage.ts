@@ -133,6 +133,6 @@ export default new ContextMenuCommand({
           embeds: [messageReportEmbed]
         });
       })
-      .catch(() => console.log(`User (${interaction.user.username}) did not submit report message modal in time.`));
+      .catch(error => console.error(error));
   }
 });
