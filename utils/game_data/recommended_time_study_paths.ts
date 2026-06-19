@@ -18,10 +18,16 @@ const TREE_PATHS: { [key: string]: Array<number> } = {
   get BASE() {
     return [...this.PRE_SPLIT, ...this.TIME, 111, ...this.ACTIVE, ...this.POST_SPLIT, ...this.EXTRA];
   },
+  // 11-61
+  get ALL_PRE_SPLIT_NO_EC5() {
+    // Turn it into a set (so only unique values are kept), then transform back to an array
+    return Array.from(
+      new Set([...this.PRE_SPLIT, ...this.PRE_SPLIT_EARLY, ...this.EXTRA].filter(study => study !== 62))
+    ).sort((a, b) => a - b);
+  },
   // 11-62
   get ALL_PRE_SPLIT() {
-    // Turn it into a set (so only unique values are kept), then transform back to an array
-    return Array.from(new Set([...this.PRE_SPLIT, ...this.PRE_SPLIT_EARLY, ...this.EXTRA])).sort((a, b) => a - b);
+    return [...this.ALL_PRE_SPLIT_NO_EC5, 62];
   }
 };
 
@@ -110,7 +116,17 @@ export function trees(path?: string) {
     // 2nd Split
     {
       requirement: 100,
-      ts: [...TREE_PATHS.PRE_SPLIT, ...TREE_PATHS.TIME, 111, ...realPath, 151, 161, 171, 162, ...TREE_PATHS.EXTRA]
+      ts: [
+        ...TREE_PATHS.PRE_SPLIT,
+        ...TREE_PATHS.TIME,
+        111,
+        ...realPath,
+        151,
+        161,
+        171,
+        162,
+        ...TREE_PATHS.EXTRA
+      ].filter(study => study !== 62)
     },
     {
       requirement: 66,
@@ -183,7 +199,11 @@ function prettyPrintStudyList(studies: Array<number>): string {
     return false;
   }
 
-  tryGroup(TREE_PATHS.ALL_PRE_SPLIT, "11-62");
+  // 11-62 requires that EC5 is completed, which is recommended to be completed
+  // at 147 total Time Theorems. But before then, everything through 61
+  // is also a group, so if 11-62 fails, this falls back on trying 11-61
+  // (which could also fail).
+  if (!tryGroup(TREE_PATHS.ALL_PRE_SPLIT, "11-62")) tryGroup(TREE_PATHS.ALL_PRE_SPLIT_NO_EC5, "11-61");
 
   const dimPathGroups: Array<[Array<number>, string]> = [
     [TREE_PATHS.ANTIMATTER, "antimatter"],
