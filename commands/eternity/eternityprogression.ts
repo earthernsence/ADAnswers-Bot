@@ -1,5 +1,6 @@
 import { channelMention, SlashCommandBuilder } from "discord.js";
 import { BasicTextCommand } from "@/types/Commands/BasicTextCommand";
+import { Channels } from "@/utils/utils_channels";
 
 export default new BasicTextCommand({
   data: new SlashCommandBuilder()
@@ -12,5 +13,5 @@ export default new BasicTextCommand({
 4. (Buy TS51) Continue to buy Time Theorems as they become available. Then Eternity at e614IP for 8EP & buy another EP Time Theorem. You should have 17 total Time Theorems.
 5. Buy TS61, then get 100 Eternities to complete the early Eternity Milestones.
     
-Afterwards, check out [this flowchart](https://i.imgur.com/pdmy3bN.png) (also pinned in ${channelMention("387799188848640013")}). The pins in that channel can be a massive help!`
+Afterwards, check out [this flowchart](https://i.imgur.com/pdmy3bN.png) (also pinned in ${channelMention(Channels.EternityToEC1)}). The pins in that channel can be a massive help!`
 });
