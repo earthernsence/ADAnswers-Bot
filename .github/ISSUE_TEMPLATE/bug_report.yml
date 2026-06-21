@@ -1,0 +1,40 @@
+name: Bug Report
+description: File a bug report. This could be anything from incorrect information to an issue running a particular command.
+title: "bug: <your title here>"
+labels: ["bug"]
+projects: ["earthernsence/2"]
+assignees: 
+  - earthernsence
+type: bug
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search the GitHub repository to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing, open issues.
+          required: true
+  - type: markdown
+    attributes:
+      label: Current behaviour
+      description: A clear & concise description of what you're experiencing.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      label: Expected behaviour
+      description: A clear & concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: markdown
+    attributes: 
+      label: Suggested resolution
+      description: (Optional) A proposed solution to the issue.
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      label: Anything else?
+      description: (Optional) Use this area for screenshots or other helpful information.
+    validations:
+      required: false

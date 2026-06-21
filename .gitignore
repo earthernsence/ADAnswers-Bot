@@ -175,6 +175,5 @@ dist
 .DS_Store
 
 # Miscellaneous
-.github
 .trunk
 azure-deploy.bat
