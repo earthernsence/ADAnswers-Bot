@@ -15,19 +15,19 @@ body:
           required: true
   - type: textarea
     attributes:
-      value: Command structure
+      label: Command structure
       description: Provide a general outline of what the command should be. This can be a name or a description, as well as any subcommands or options that would be necessary.
     validations:
       required: true
   - type: textarea
     attributes:
-      value: Expected behaviour
+      label: Expected behaviour
       description: A clear & concise description of possible command output.
     validations:
       required: true
   - type: textarea
     attributes:
-      value: Anything else?
+      label: Anything else?
       description: (Optional) Use this area for screenshots or other helpful information.
     validations:
       required: false

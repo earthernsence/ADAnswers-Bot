@@ -15,25 +15,25 @@ body:
           required: true
   - type: textarea
     attributes:
-      value: Current behaviour
+      label: Current behaviour
       description: "A clear & concise description of what you're experiencing."
     validations:
       required: true
   - type: textarea
     attributes:
-      value: Expected behaviour
+      label: Expected behaviour
       description: A clear & concise description of what you expected to happen.
     validations:
       required: true
   - type: textarea
     attributes: 
-      value: Suggested resolution
+      label: Suggested resolution
       description: (Optional) A proposed solution to the issue.
     validations:
       required: false
   - type: textarea
     attributes:
-      value: Anything else?
+      label: Anything else?
       description: (Optional) Use this area for screenshots or other helpful information.
     validations:
       required: false
