@@ -1,0 +1,39 @@
+name: Command Improvement
+description: Suggest an improvement to an *existing* command. This is not the same as a bug, which is for incorrect information in commands & more.
+title: "enhancement(command): <your title here>"
+labels: ["command improvement"]
+projects: ["earthernsence/2"]
+assignees:
+  - earthernsence
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search the GitHub repository to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing, open issues.
+          required: true
+  - type: input
+    attributes:
+      label: Command name
+      description: Which command needs improving?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current issue
+      description: A clear & concise description of what is currently wrong with this command's output.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Suggested improvement
+      description: A clear & concise description of what should be done to relieve this issue.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: (Optional) Use this area for screenshots or other helpful information.
+    validations:
+      required: false
