@@ -3,7 +3,7 @@ description: Suggest a new command, including any subcommands, options, etc.
 title: "suggestion(command): <your title here>"
 labels: ["command suggestion"]
 projects: ["earthernsence/2"]
-assignees: 
+assignees:
   - earthernsence
 body:
   - type: checkboxes

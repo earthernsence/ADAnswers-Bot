@@ -3,7 +3,7 @@ description: File a bug report. This could be anything from incorrect informatio
 title: "bug: <your title here>"
 labels: ["bug"]
 projects: ["earthernsence/2"]
-assignees: 
+assignees:
   - earthernsence
 body:
   - type: checkboxes
@@ -26,7 +26,7 @@ body:
     validations:
       required: true
   - type: textarea
-    attributes: 
+    attributes:
       label: Suggested resolution
       description: (Optional) A proposed solution to the issue.
     validations:
