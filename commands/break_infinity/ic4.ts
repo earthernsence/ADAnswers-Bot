@@ -6,7 +6,7 @@ import { infinityChallenges } from "@/utils/game_data/challenges/infinity_challe
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("ic4")
-    .setDescription(`Strategy shorthand for /challenge ic4)}`)
+    .setDescription(`Strategy shorthand for /challenge ic4`)
     .addUserOption(user =>
       user
         .setName("target")
