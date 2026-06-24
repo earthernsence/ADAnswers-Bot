@@ -6,6 +6,13 @@ import fs from "node:fs";
 import path from "node:path";
 import reportMessage from "./context_commands/reportMessage";
 
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled promise rejection:", reason);
+});
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught exception:", err);
+});
+
 const client: ADABClient = <ADABClient>new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages],
   presence: {
