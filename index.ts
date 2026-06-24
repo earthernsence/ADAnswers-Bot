@@ -6,10 +6,10 @@ import fs from "node:fs";
 import path from "node:path";
 import reportMessage from "./context_commands/reportMessage";
 
-process.on("unhandledRejection", (reason) => {
+process.on("unhandledRejection", reason => {
   console.error("Unhandled promise rejection:", reason);
 });
-process.on("uncaughtException", (err) => {
+process.on("uncaughtException", err => {
   console.error("Uncaught exception:", err);
 });
 
