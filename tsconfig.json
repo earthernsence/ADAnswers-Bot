@@ -3,10 +3,17 @@
     // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "preserve",
     "moduleDetection": "force",
     "jsx": "react-jsx",
     "allowJs": true,
+    // We now have to explicitly declare types here in compilerOptions
+    // on TypeScript versions 6 and 7. This is because they no longer
+    // auto-discover @types packages. Therefore, any time an additional
+    // @types package is added (which still needs to be installed in the
+    // usual way, since it needs to be in node_modules), add another
+    // entry to this array.
+    "types": ["bun"],
 
     // Bundler mode
     "moduleResolution": "bundler",
@@ -18,6 +25,8 @@
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
 
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,

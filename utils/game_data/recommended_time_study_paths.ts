@@ -229,11 +229,11 @@ function prettyPrintStudyList(studies: Array<number>): string {
   // that allows the second dimension path to be purchased. Instead of the second dimension path
   // appearing "sequentially" numerically (that is to say, by the first dimension path), we will
   // want to place it after 201 has been purchased.
-  let has201 = false;
+  let has201FromGroup = false;
 
   for (const [group, replacement] of postPaceGroups) {
     if (tryGroup(group, replacement)) {
-      has201 = group.includes(201);
+      has201FromGroup = group.includes(201);
       break;
     }
   }
@@ -242,12 +242,17 @@ function prettyPrintStudyList(studies: Array<number>): string {
 
   // Figure out where 201 is, then be rid of the insertion from above so that
   // we can re-insert after 201.
-  if (has201) {
+  if (studySet.has(201)) {
     const idx201 = studies.indexOf(201);
+    // Detect secondary dim path whenever 201 is present at all; consumed or not,
+    // it's always what gates purchasing a second dimension path.
+    // Use consumed.has() rather than studySet.has() so we only fire when the
+    // full path was bought (i.e. tryGroup consumed all four of its studies).
     for (const [group, replacement] of dimPathGroups) {
-      if (studySet.has(group[0]) && studies.indexOf(group[0]) > idx201) {
+      if (group.every(study => consumed.has(study)) && studies.indexOf(group[0]) > idx201) {
         secondPath = replacement;
         insertions.delete(Math.min(...group));
+        break;
       }
     }
   }
@@ -260,8 +265,13 @@ function prettyPrintStudyList(studies: Array<number>): string {
     // grouping starts with 151. So, when the study is set to 151, it will insert
     // the grouping with 201, and then we'll manually push the second path replacement
     // here, since it's already been thrown out of insertions.
-    if (study === 151 && secondPath) tokens.push(secondPath);
+    // Case 1: 201 was a part of a grouping shorthand, so place the
+    // second path after the purchasing of that group (which is "at" study 151.)
+    if (study === 151 && has201FromGroup && secondPath) tokens.push(secondPath);
     if (!consumed.has(study)) tokens.push(String(study));
+    // Case 2: 201 is not part of a grouping shorthand, so place the
+    // second path after the purchasing of specifically study 201
+    if (study === 201 && !consumed.has(201) && secondPath) tokens.push(secondPath);
   }
 
   return `${tokens.join(", ")} | 0`;

@@ -521,7 +521,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       challenge: 11,
       completion: 1,
       recommendedTheorems: 2886,
-      recommendedTree: "11-62,antimatter,111,active,151-181,191,193,211,214|11!",
+      recommendedTree: "11-62,antimatter,111,active,151-181,191,193,211,212,213,222,231|11!",
       note: "Get Achievement 126 prior to completing any EC11. You may also want Achievement 125, but it is only worth unlocking on mobile (takes ~1hr on PC compared to instantly on mobile) and only saves a few minutes."
     }),
     2: new EternityChallenge({
@@ -558,36 +558,36 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       challenge: 12,
       completion: 1,
       recommendedTheorems: 9500,
-      recommendedTree: "11-62,time,111,passive,151-181,191,193,211,212,213,214,222,224,226,228,232,234|12!",
+      recommendedTree: "11-62,time,111,passive,151-181,191,193,211-214,222,224,226,227,232,234|12!",
       note: "Enable Auto-Eternity."
     }),
     2: new EternityChallenge({
       challenge: 12,
       completion: 2,
       recommendedTheorems: 10_000,
-      recommendedTree: "11-62,time,111,passive,151-181,191,193,211,212,213,214,222,224,226,228,232,234|12!",
+      recommendedTree: "11-62,time,111,passive,151-181,191,193,211-214,222,224,226,227,232,234|12!",
       note: "Enable Auto-Eternity."
     }),
     3: new EternityChallenge({
       challenge: 12,
       completion: 3,
       recommendedTheorems: 10_000,
-      recommendedTree: "11-62,time,111,passive,151-181,191,193,211,212,213,214,222,224,226,228,232,234|12!",
+      recommendedTree: "11-62,time,111,passive,151-181,191,193,211-214,222,224,226,227,232,234|12!",
       note: "Enable Auto-Eternity."
     }),
     4: new EternityChallenge({
       challenge: 12,
       completion: 4,
       recommendedTheorems: 10_700,
-      recommendedTree: "11-62,time,111,passive,151-181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
+      recommendedTree: "11-62,time,111,passive,151-181,191,193,211-214,222,224,226,227,232,234|12!",
       note: "Enable Auto-Eternity."
     }),
     5: new EternityChallenge({
       challenge: 12,
       completion: 5,
       recommendedTheorems: 12_000,
-      recommendedTree: "11-62,time,111,passive,151-181,191,193,211,212,213,214,222,224,226,227,232,234|12!",
-      note: "Enable Auto-Eternity. Can be done with less theorems, though it will probably be slower. It may be difficult to reach 12,000 total Time Theorems! It is also worth banking ~1e8 Infinities. This can be done earlier with the When Will It Be Enough achievement (Achievement 134)."
+      recommendedTree: "11-62,time,111,passive,151-181,191,193,211-214,222,224,226,227,232,234|12!",
+      note: `Enable Auto-Eternity. Can be done with less theorems, though it will probably be slower. It may be difficult to reach 12,000 total Time Theorems! It is also worth banking ~1e8 Infinities. This can be done earlier with Achievement 134 ("When will it be enough?").`
     })
   }
 };

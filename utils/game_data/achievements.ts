@@ -252,7 +252,7 @@ For Achievements 32 / 57 / 88:
   64: new Achievement({
     id: 64,
     fullName: "Zero Deaths",
-    requirement: "Get to Infinity without Dimension Boosts or Antimatter Galaxies while in a Normal Challenge.",
+    requirement: `${bold(`(Note: on mobile versions of the game, Achievement 64 is "1 Million is a lot", which is Achievement 77 on web & in this bot.)`)}\nGet to Infinity without Dimension Boosts or Antimatter Galaxies while in a Normal Challenge.`,
     reward: "Antimatter Dimensions 1-4 are 25% stronger."
   }),
   65: new Achievement({
@@ -321,7 +321,7 @@ For Achievements 32 / 57 / 88:
   77: new Achievement({
     id: 77,
     fullName: "1 Million is a lot",
-    requirement: "Reach 1e6 Infinity Power."
+    requirement: `${bold(`(Note: on mobile versions of the game, Achievement 77 is "Zero Deaths", which is Achievement 64 on web & in this bot.)`)}\nReach 1e6 Infinity Power.`
   }),
   78: new Achievement({
     id: 78,

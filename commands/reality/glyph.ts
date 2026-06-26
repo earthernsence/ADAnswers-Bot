@@ -1,12 +1,12 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, inlineCode, SlashCommandBuilder } from "discord.js";
 import { effectProbability, rarityProbability, threshold } from "@/utils/game_data/glyphs/glyph_utils";
+import { GlyphEmotes, Symbols } from "@/utils/utils_symbols";
 import { BasicEmbedCommand } from "@/types/Commands/BasicEmbedCommand";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
 import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import { GlyphEffectCustomEmbed } from "@/types/Embeds/Glyphs/GlyphEffectCustomEmbed";
-import { GlyphEmotes } from "@/utils/utils_symbols";
 import { glyphs } from "@/utils/game_data/glyphs/glyphs";
 import { GlyphSacrificeCustomEmbed } from "@/types/Embeds/Glyphs/GlyphSacrificeCustomEmbed";
 
@@ -91,6 +91,11 @@ Basically what the % is showing really is the decimal in the Glyph level formula
   /* eslint-enable @stylistic/max-len */
 };
 
+const prettyPrintGlyphName = (type: string) => {
+  const capitalisedName = capitalise(type);
+  return `${Symbols[capitalisedName as keyof typeof Symbols]} ${capitalisedName}`;
+};
+
 export default new BasicEmbedCommand({
   data: new SlashCommandBuilder()
     .setName("glyph")
@@ -105,7 +110,7 @@ export default new BasicEmbedCommand({
             .setDescription("Which Glyph type would you like information about?")
             .setChoices(
               Object.keys(glyphs).map(type => ({
-                name: type,
+                name: prettyPrintGlyphName(type),
                 value: type,
                 type: ApplicationCommandOptionType.String
               }))
@@ -126,8 +131,8 @@ export default new BasicEmbedCommand({
             .setDescription("Which Glyph type would you like information about?")
             .setChoices(
               Object.keys(glyphs).map(type => ({
-                name: capitalise(type),
-                value: type,
+                name: prettyPrintGlyphName(type),
+                value: type.toLowerCase(),
                 type: ApplicationCommandOptionType.String
               }))
             )
