@@ -1,6 +1,5 @@
-import { type ChatInputCommandInteraction, MessageFlags, type SlashCommandOptionsOnlyBuilder } from "discord.js";
+import { type ChatInputCommandInteraction, type SlashCommandOptionsOnlyBuilder } from "discord.js";
 import { Command } from "./Command";
-import { isUserHelper } from "@/utils/utils_commands";
 
 interface ChoiceTextCommandProps {
   data: SlashCommandOptionsOnlyBuilder;
@@ -25,7 +24,7 @@ export class ChoiceTextCommand extends Command {
 
         interaction.reply({
           content,
-          flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
+          flags: this.getFlags(interaction)
         });
       }
     });

@@ -1,7 +1,6 @@
 import {
   type ChatInputCommandInteraction,
   italic,
-  MessageFlags,
   type SlashCommandBuilder,
   type SlashCommandOptionsOnlyBuilder,
   type SlashCommandSubcommandsOnlyBuilder,
@@ -9,7 +8,6 @@ import {
 } from "discord.js";
 import { Command } from "./Command";
 import type { CustomEmbed } from "../Embeds/CustomEmbed";
-import { isUserHelper } from "@/utils/utils_commands";
 
 interface BasicEmbedCommandProps {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
@@ -35,7 +33,7 @@ export class BasicEmbedCommand extends Command {
           content: targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}` : undefined,
           embeds: [customEmbed.create(data.name !== "challenge")],
           files: [image],
-          flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
+          flags: this.getFlags(interaction)
         });
       }
     });

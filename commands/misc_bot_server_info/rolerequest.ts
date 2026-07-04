@@ -189,7 +189,7 @@ You can request the role when you are at least Mee6 level 20 and have at least t
         else member.roles.add(roleID);
 
         await i.update({
-          content: `You have successfully ${hasRole ? "removed" : "added"} the "${roleMention(roleID)}" role. You can safely remove this message. Remember, you can always run /rolerequest again to reverse your decision.`,
+          content: `You have successfully ${hasRole ? "removed" : "added"} the "${roleMention(roleID)}" role. You can safely remove this message. Remember, you can always run \`/rolerequest\` again to reverse your decision.`,
           embeds: [],
           components: [],
           files: []

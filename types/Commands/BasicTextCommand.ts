@@ -1,6 +1,5 @@
-import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { Command } from "./Command";
-import { isUserHelper } from "@/utils/utils_commands";
 
 interface BasicTextCommandProps {
   data: SlashCommandBuilder;
@@ -16,7 +15,7 @@ export class BasicTextCommand extends Command {
 
         interaction.reply({
           content: text,
-          flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
+          flags: this.getFlags(interaction)
         });
       }
     });

@@ -6,6 +6,7 @@ import {
   type SlashCommandSubcommandsOnlyBuilder
 } from "discord.js";
 import { ErrorCustomEmbed } from "../Embeds/ErrorCustomEmbed";
+import { isUserHelper } from "@/utils/utils_commands";
 
 // Commands are made up of two parts: the data and the execute function.
 // Data holds all the information that's useful for determining what will be passed in to the execute function,
@@ -50,5 +51,9 @@ export class Command {
       files: [image],
       flags: MessageFlags.Ephemeral
     });
+  }
+
+  protected getFlags(interaction: ChatInputCommandInteraction) {
+    return isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral;
   }
 }
