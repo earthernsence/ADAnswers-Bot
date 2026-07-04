@@ -16,7 +16,7 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
     this.glyph = glyph;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.glyph.stylisedName()).setColour(this.glyph.colour);
 
     this.setFields(this.getFields());
@@ -24,7 +24,7 @@ export class GlyphSacrificeCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     if (this.glyph.sacrifice) {
       const image: AttachmentBuilder = new AttachmentBuilder(`images/glyphs/sacrificed/${this.glyph.name}.png`);
       this.embed.setThumbnail(`attachment://${this.glyph.name}.png`);

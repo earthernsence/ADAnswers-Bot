@@ -20,7 +20,7 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
     this.isAltered = isAltered;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.glyph.stylisedName()).setColour(this.glyph.colour);
 
     this.setFields(this.getFields());
@@ -28,7 +28,7 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     if (this.isAltered && !this.glyph.canBeAltered) {
       const image: AttachmentBuilder = new AttachmentBuilder(`images/glyphs/altered/none_altered.png`);
       this.embed.setThumbnail(`attachment://none_altered.png`);

@@ -20,15 +20,17 @@ export class VAchievementCustomEmbed extends CustomEmbed {
     this.achievement = v.achievements[achievement];
   }
 
-  public create(): EmbedBuilder {
-    this.setTitle(`V-Achievement - "${this.achievement.name}"`).setColour(Colours.V);
+  public override create(): EmbedBuilder {
+    this.setTitle(`${this.achievement.hard ? "Hard " : ""}V-Achievement - "${this.achievement.name}"`).setColour(
+      Colours.V
+    );
 
     this.setFields(this.getFields());
 
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/celestials/v-achievements/ach_${this._label}.png`);
     this.embed.setThumbnail(`attachment://ach_${this._label}.png`);
     return image;

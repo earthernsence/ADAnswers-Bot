@@ -22,7 +22,7 @@ export class AntimatterChallengeCustomEmbed extends CustomEmbed {
   // For the shorthands /c9, /ic4, and /ic5, we don't really care about the other things --
   // generally, when people use those commands, they want the strategy. Obviously, /challenge
   // would show everything if that's what the user requested.
-  public create(strategyOnly = false): EmbedBuilder {
+  public override create(strategyOnly = false): EmbedBuilder {
     this.setTitle(`Challenge ${this.challenge.number}`).setColour(Colours.Antimatter);
 
     if (strategyOnly) this.setFields([{ name: "Strategy", value: `${this.challenge.strategy}`, inline: false }]);
@@ -39,7 +39,7 @@ export class AntimatterChallengeCustomEmbed extends CustomEmbed {
   }
 
   // We need to send the image with the reply, so set it here but also return it back.
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(
       `images/challenges/antimatter_challenges/c${this.challenge.number}.png`
     );

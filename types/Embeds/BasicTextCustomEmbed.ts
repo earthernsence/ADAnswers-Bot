@@ -24,7 +24,7 @@ export class BasicTextCustomEmbed extends CustomEmbed {
     this.thumbnailPath = thumbnailPath ?? "images/misc/help.png";
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.title).setColour(this.colour);
 
     this.addField(this.field);
@@ -32,7 +32,7 @@ export class BasicTextCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(this.thumbnailPath);
     this.embed.setThumbnail(`attachment://${this.thumbnailName}`);
     return image;

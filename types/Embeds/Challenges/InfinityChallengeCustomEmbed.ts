@@ -31,7 +31,7 @@ export class InfinityChallengeCustomEmbed extends CustomEmbed {
   // For the shorthands /c9, /ic4, and /ic5, we don't really care about the other things --
   // generally, when people use those commands, they want the strategy. Obviously, /challenge
   // would show everything if that's what the user requested.
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(`Infinity Challenge ${this.challenge.number}`).setColour(Colours.Infinity);
 
     if (this.strategyOnly) this.setFields([{ name: "Strategy", value: `${this.challenge.strategy}`, inline: false }]);
@@ -48,7 +48,7 @@ export class InfinityChallengeCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(
       `images/challenges/infinity_challenges/ic${this.challenge.number}.png`
     );

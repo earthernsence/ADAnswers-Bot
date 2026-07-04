@@ -34,7 +34,7 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
     return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.resource.prettyName)
       .setDescription(
         `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
@@ -46,7 +46,7 @@ export class AlchemyResourceCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/alchemy/${this.resource.name.toLowerCase()}.png`);
     this.embed.setThumbnail(`attachment://${this.resource.name.toLowerCase()}.png`);
     return image;

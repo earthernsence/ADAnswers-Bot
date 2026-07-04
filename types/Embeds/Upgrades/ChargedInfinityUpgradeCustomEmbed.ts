@@ -15,11 +15,11 @@ export class ChargedInfinityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
     super({ interaction, upgrade, colour: Colours.Celestial });
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     return super.create().setTitle(`${this.upgrade.name} (Charged)`);
   }
 
-  protected getFields(): Array<EmbedField> {
+  protected override getFields(): Array<EmbedField> {
     return [
       {
         name: "Effect",

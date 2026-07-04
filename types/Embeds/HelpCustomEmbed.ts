@@ -46,7 +46,7 @@ export class HelpCustomEmbed extends CustomEmbed {
     return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     const commands = this.client.commands.size;
 
     this.setTitle(`ADAB Help (page ${this.pageNumber}/${this.possiblePages.length - 1})`)
@@ -141,7 +141,7 @@ export class HelpCustomEmbed extends CustomEmbed {
     return i.customId.endsWith(String(this.expirationTimestamp));
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/misc/help.png`);
     this.embed.setThumbnail("attachment://help.png");
     return image;

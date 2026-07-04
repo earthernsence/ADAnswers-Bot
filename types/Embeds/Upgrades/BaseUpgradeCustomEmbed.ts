@@ -27,7 +27,7 @@ export class BaseUpgradeCustomEmbed extends CustomEmbed {
     this.colour = colour ?? Colours[capitalise(this.upgrade.type) as keyof typeof Colours];
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.upgrade.name).setColour(this.colour);
 
     this.setFields(this.getFields());
@@ -35,7 +35,7 @@ export class BaseUpgradeCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/upgrades/${this.upgrade.type}.png`);
     this.embed.setThumbnail(`attachment://${this.upgrade.type}.png`);
     return image;

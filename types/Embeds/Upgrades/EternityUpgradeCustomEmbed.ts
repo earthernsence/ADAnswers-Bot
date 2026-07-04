@@ -15,11 +15,11 @@ export class EternityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
     super({ interaction, upgrade });
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     return super.create().setTitle(`${this.upgrade.name} (EU${this.upgrade.id})`);
   }
 
-  protected getFields(): Array<EmbedField> {
+  protected override getFields(): Array<EmbedField> {
     const fields: Array<EmbedField> = [
       {
         name: "Effect",

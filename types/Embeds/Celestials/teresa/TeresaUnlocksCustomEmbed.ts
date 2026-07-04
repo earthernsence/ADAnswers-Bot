@@ -13,7 +13,7 @@ export class TeresaUnlocksCustomEmbed extends CustomEmbed {
     super({ interaction });
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(`Teresa's Unlocks`).setColour(Colours.Teresa);
 
     this.setFields(this.getFields());
@@ -21,7 +21,7 @@ export class TeresaUnlocksCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder("images/celestials/teresa.png");
     this.embed.setThumbnail("attachment://teresa.png");
     return image;

@@ -25,7 +25,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
     return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`)
       .setDescription(
         `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
@@ -67,7 +67,7 @@ export class AchievementCustomEmbed extends CustomEmbed {
     return this.embed;
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     if (this.achievement.isDoomed) {
       const image: AttachmentBuilder = new AttachmentBuilder(`images/misc/doomed.png`);
       this.embed.setThumbnail(`attachment://doomed.png`);

@@ -15,7 +15,7 @@ export class ErrorCustomEmbed extends CustomEmbed {
     this.text = text;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle("Error!").setColour(Colours.Forbidden);
 
     this.embed.setDescription("Please try again!");
@@ -25,7 +25,7 @@ export class ErrorCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder("images/misc/help.png");
     this.embed.setThumbnail(`attachment://help.png`);
     return image;

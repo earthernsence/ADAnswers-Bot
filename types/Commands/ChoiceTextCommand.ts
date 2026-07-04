@@ -13,7 +13,7 @@ export class ChoiceTextCommand extends Command {
       execute: (interaction: ChatInputCommandInteraction) => {
         if (!interaction) return;
 
-        const choice = interaction.options.getString(data.options[0].toJSON().name);
+        const choice = interaction.options.getString(data.options[0]!.toJSON().name);
 
         if (!choice || !possibleText[choice]) {
           this.error({ interaction, text: `Invalid choice of ${choice}!` });

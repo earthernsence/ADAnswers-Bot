@@ -18,7 +18,7 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
     this.study = study;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(`Time Study ${this.study.id}`).setColour(
       Colours[capitalise(this.study.type) as keyof typeof Colours]
     );
@@ -86,7 +86,7 @@ export class TimeStudyCustomEmbed extends CustomEmbed {
     }
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/studies/${this.study.type}.png`);
     this.embed.setThumbnail(`attachment://${this.study.type}.png`);
     return image;

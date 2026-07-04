@@ -32,7 +32,7 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
     return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.achievement.title)
       .setDescription(
         `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
@@ -44,7 +44,7 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     let image: AttachmentBuilder;
 
     switch (this.achievement.type) {

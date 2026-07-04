@@ -16,7 +16,7 @@ export class RealityUpgradeCustomEmbed extends BaseUpgradeCustomEmbed {
     super({ interaction, upgrade });
   }
 
-  protected getFields(): Array<EmbedField> {
+  protected override getFields(): Array<EmbedField> {
     const fields: Array<EmbedField> = [
       {
         name: "Effect",

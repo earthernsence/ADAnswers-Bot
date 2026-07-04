@@ -18,7 +18,7 @@ export class PerkCustomEmbed extends CustomEmbed {
     this.perk = perk;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(this.fullTitle).setColour(Colours[capitalise(this.perk.family) as keyof typeof Colours]);
 
     this.setFields(this.getFields());
@@ -26,7 +26,7 @@ export class PerkCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const file = `${this.perk.family}${this.perk.ap ? "_ap" : ""}`;
     const image: AttachmentBuilder = new AttachmentBuilder(`images/perks/${file}.png`);
     this.embed.setThumbnail(`attachment://${file}.png`);

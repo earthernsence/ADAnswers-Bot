@@ -30,7 +30,7 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
     return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
-  public create(): EmbedBuilder {
+  public override create(): EmbedBuilder {
     this.setTitle(`Eternity Challenge ${this.challenge.shortName}`)
       .setDescription(
         `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.LongDateTime)}`
@@ -55,7 +55,7 @@ export class EternityChallengeCustomEmbed extends CustomEmbed {
     return this.finalise();
   }
 
-  public getAndSetThumbnail(): AttachmentBuilder {
+  public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(
       `images/challenges/eternity_challenges/ec${this.challenge.challenge}.png`
     );
