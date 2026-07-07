@@ -257,6 +257,12 @@ function prettyPrintStudyList(studies: Array<number>): string {
     }
   }
 
+  // These should work in all versions of the game now. I doubt
+  // light is ever used, but dark will be, so this cuts down on
+  // string sizes a fair bit for the later trees (hopefully).
+  tryGroup([221, 223, 225, 227, 231, 233], "light");
+  tryGroup([222, 224, 226, 228, 232, 234], "dark");
+
   const tokens: string[] = [];
 
   for (const study of [...studies].sort((a, b) => a - b)) {
@@ -295,7 +301,8 @@ export function getRecommendedTree(theoremAmount: number, path: string = "active
   if (theoremAmount === 0 || !recommendedTree) return "You don't have any Time Theorems, silly!";
 
   const affordableStudies = getAffordableStudiesFromStudyList(recommendedTree.ts, theoremAmount);
-  return `${recommendedTree.desc ?? ""}${codeBlock(`${prettyPrintStudyList(affordableStudies)}`)}`;
+  const desc = recommendedTree.desc ? `${recommendedTree.desc}\n` : "";
+  return `${desc}${codeBlock(prettyPrintStudyList(affordableStudies))}`;
 }
 
 export function findEC(challenge: number, completion: number): EternityChallenge {
