@@ -169,6 +169,7 @@ export default new Command({
 
     await interaction.reply({
       embeds: [embed.create()],
+      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
       files: [image]
     });
   }
