@@ -5,7 +5,7 @@ interface EternityUpgradeProps extends BaseUpgradeProps {
 }
 
 export class EternityUpgrade extends BaseUpgrade {
-  type: string = "eternity";
+  override type: string = "eternity";
   graph?: string;
 
   constructor({ id, name, effect, formula, cost, graph }: EternityUpgradeProps) {

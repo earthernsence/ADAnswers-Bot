@@ -5,11 +5,11 @@ export interface RealityUpgradeProps extends BaseUpgradeProps {
 }
 
 export class RealityUpgrade extends BaseUpgrade {
-  type: string = "reality";
+  override type: string = "reality";
   requirement?: string;
 
-  constructor({ id, name, effect, cost, increment, requirement }: RealityUpgradeProps) {
-    super({ id, name, effect, cost, increment });
+  constructor({ id, name, effect, cost, formula, increment, requirement }: RealityUpgradeProps) {
+    super({ id, name, effect, cost, formula, increment });
     this.requirement = requirement;
   }
 }

@@ -5,11 +5,11 @@ interface ImaginaryUpgradeProps extends RealityUpgradeProps {
 }
 
 export class ImaginaryUpgrade extends RealityUpgrade {
-  type: string = "imaginary";
+  override type: string = "imaginary";
   strategy?: string;
 
-  constructor({ id, name, effect, cost, increment, requirement, strategy }: ImaginaryUpgradeProps) {
-    super({ id, name, effect, cost, increment, requirement });
+  constructor({ id, name, effect, cost, increment, formula, requirement, strategy }: ImaginaryUpgradeProps) {
+    super({ id, name, effect, cost, increment, formula, requirement });
     this.strategy = strategy;
   }
 }

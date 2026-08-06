@@ -80,7 +80,7 @@ export const ImaginaryUpgrades: IImaginaryUpgrades = {
     name: "Suspicion of Interference",
     effect: "Time Dimension power based on total antimatter",
     cost: 5e7,
-    formula: "`1 + (log10(log10(antimatter)) / 100)`",
+    formula: "^`1 + (log10(log10(antimatter)) / 100)`",
     requirement: "1e90 total Relic Shards",
     strategy:
       "This one, you'll probably need Nameless 25 (for the extra Time glyph effect), and a max Reality Glyph. It may take some time to grind the Relic Shards up to 1e90, but it shouldn't be too long."
@@ -90,7 +90,7 @@ export const ImaginaryUpgrades: IImaginaryUpgrades = {
     name: "Consequences of Illusions",
     effect: "Gain free Dimboosts based on Imaginary rebuyable count",
     cost: 5e7,
-    formula: "`2e4 * rebuyable count`",
+    formula: "+`2e4 * rebuyable count`",
     requirement: "Make a level 9,000 Glyph with a single Glyph level factor weight at 100",
     strategy:
       "Hint: ||Look closely at the Glyph factors dropdown||\nSolution: ||yepit||, with ||the Dilated Time Glyph factor weight at 100||"
@@ -100,7 +100,7 @@ export const ImaginaryUpgrades: IImaginaryUpgrades = {
     name: "Transience of Information",
     effect: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
     cost: 5e7,
-    formula: "`1 + (rebuyables / 20) + (one time purchases / 2)`",
+    formula: "×`1 + (rebuyables / 20) + (one time purchases / 2)`",
     requirement: "Reach 1.80e308 projected Reality Machines within The Nameless Ones' Reality",
     strategy: "Hint: ||Make sure you're using all of Nameless' tricks in the Reality||\nSolution: ||yettt||"
   }),
@@ -184,7 +184,7 @@ export const ImaginaryUpgrades: IImaginaryUpgrades = {
     name: "Planar Purification",
     effect: "Increase free Dimboost count based on Tesseract count",
     cost: 6e14,
-    formula: "`floor(0.25 * (tesseracts ^ 2))`",
+    formula: "`floor(0.25 * (effective tesseracts ^ 2))`",
     requirement: "Reach Glyph level 20,000 in Ra's Reality with at most 0 Glyphs equipped",
     strategy:
       "Hint: ||at most 0 Glyphs equipped...? What decreases the number of Glyphs equipped?||\nSolution: ||cyer (cursed is -3)||"
