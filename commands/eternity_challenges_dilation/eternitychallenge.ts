@@ -1,204 +1,149 @@
-import { ActionRowBuilder, ButtonBuilder, codeBlock, italic, userMention } from "@discordjs/builders";
 import {
+  ButtonBuilder,
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
-  ComponentType,
-  type InteractionReplyOptions,
-  MessageComponentInteraction,
+  codeBlock,
+  italic,
   MessageFlags,
-  SlashCommandBuilder
+  type RepliableInteraction,
+  SlashCommandBuilder,
+  userMention
 } from "discord.js";
-import { Command } from "@/types/Commands/Command";
+import { buildCustomId } from "@/utils/utils_commands";
+import { CollectorEmbedCommand } from "@/types/Commands/CollectorEmbedCommand";
 import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
-import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 import { EternityChallengeCustomEmbed } from "@/types/Embeds/Challenges/EternityChallengeCustomEmbed";
-import { isUserHelper } from "@/utils/utils_commands";
 import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 
-const getNext = (
-  current: DoublyLinkedListNode<EternityChallenge>,
-  forward: boolean
-): DoublyLinkedListNode<EternityChallenge> => {
-  if (forward) {
-    const newEC = current.next;
-    // If we can't retrieve the head (for some reason), just default back to the current EC
-    if (!newEC) return orderAsDoublyLinkedList.getFirstValue() ?? current;
-    return newEC;
+/**
+ * `/eternitychallenge` - look up an Eternity Challenge guide and page through the full ordered
+ * list with buttons, with an extra "Copy Tree" button for pulling just the recommended Time
+ * Study tree as copy-pastable text (handy on mobile).
+ *
+ * All the lookup/button/embed plumbing lives in {@link CollectorEmbedCommand}; this class only
+ * supplies the challenge-specific bits, plus the `tree` boolean slash option, which is kept as a
+ * standalone shortcut alongside the button for anyone used to the old behaviour.
+ */
+class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> {
+  constructor() {
+    super({
+      data: new SlashCommandBuilder()
+        .setName("eternitychallenge")
+        .setDescription("Generates an Eternity Challenge guide for the requested challenge")
+        .addIntegerOption(option =>
+          option
+            .setName("challenge")
+            .setDescription("Which Eternity Challenge would you like a guide for?")
+            .setRequired(true)
+            .setMinValue(1)
+            .setMaxValue(12)
+        )
+        .addIntegerOption(option =>
+          option
+            .setName("completion")
+            .setDescription("Which completion of that challenge would you like a guide for?")
+            .setRequired(true)
+            .setMinValue(1)
+            .setMaxValue(5)
+        )
+        .addUserOption(option =>
+          option
+            .setName("target")
+            .setDescription("(Optional) Which user would you like to show the information to?")
+            .setRequired(false)
+        )
+        .addBooleanOption(option =>
+          option
+            .setName("tree")
+            .setDescription("(Optional) Request only the tree for easy copying.")
+            .setRequired(false)
+        ),
+      prefix: "ec",
+      list: orderAsDoublyLinkedList,
+      aliases: ["ec"]
+    });
   }
 
-  const newEC = current.prev;
-
-  if (!newEC) return orderAsDoublyLinkedList.getLastValue() ?? current;
-
-  return newEC;
-};
-
-// I really want there to be a super easy way to generalise this, but I haven't come across anything that
-// would be easier than just writing it all in the execute method. I'm sorry for now.
-export default new Command({
-  data: new SlashCommandBuilder()
-    .setName("eternitychallenge")
-    .setDescription("Generates an Eternity Challenge guide for the requested challenge")
-    .addIntegerOption(option =>
-      option
-        .setName("challenge")
-        .setDescription("Which Eternity Challenge would you like a guide for?")
-        .setRequired(true)
-        .setMinValue(1)
-        .setMaxValue(12)
-    )
-    .addIntegerOption(option =>
-      option
-        .setName("completion")
-        .setDescription("Which completion of that challenge would you like a guide for?")
-        .setRequired(true)
-        .setMinValue(1)
-        .setMaxValue(5)
-    )
-    .addUserOption(option =>
-      option
-        .setName("target")
-        .setDescription("(Optional) Which user would you like to show the information to?")
-        .setRequired(false)
-    )
-    .addBooleanOption(option =>
-      option.setName("tree").setDescription("(Optional) Request only the tree for easy copying.").setRequired(false)
-    ),
-  execute: async (interaction: ChatInputCommandInteraction) => {
-    if (!interaction) return;
-
+  protected findInitial(interaction: ChatInputCommandInteraction): DoublyLinkedListNode<EternityChallenge> | undefined {
     const challengeRequested = interaction.options.getInteger("challenge", true);
     const completionRequested = interaction.options.getInteger("completion", true);
-    const challenge = orderAsDoublyLinkedList.search(
-      value => challengeRequested === value.challenge && completionRequested === value.completion
+
+    return (
+      this.list.search(value => value.challenge === challengeRequested && value.completion === completionRequested) ??
+      undefined
     );
+  }
 
-    if (!challenge) {
-      const errorEmbed = new ErrorCustomEmbed({
-        interaction,
-        text: `That challenge doesn't exist!\nChallenge requested: ${challengeRequested}\nCompletion requested: ${completionRequested}`
-      });
+  protected notFoundText(interaction: ChatInputCommandInteraction): string {
+    const challengeRequested = interaction.options.getInteger("challenge", true);
+    const completionRequested = interaction.options.getInteger("completion", true);
 
-      const errorImage = errorEmbed.getAndSetThumbnail();
+    return `That challenge doesn't exist!\nChallenge requested: ${challengeRequested}\nCompletion requested: ${completionRequested}`;
+  }
 
-      interaction.reply({
-        embeds: [errorEmbed.create()],
-        files: [errorImage],
-        flags: MessageFlags.Ephemeral
-      });
+  protected encodeIdentifier(item: EternityChallenge): string {
+    return `${item.challenge}x${item.completion}`;
+  }
 
-      return;
-    }
+  protected decodeIdentifier(encoded: string): DoublyLinkedListNode<EternityChallenge> | undefined {
+    const [challenge, completion] = encoded.split("x").map(Number);
+    return this.list.search(value => value.challenge === challenge && value.completion === completion) ?? undefined;
+  }
 
-    const targetUser = interaction.options.getUser("target") ?? undefined;
-    const user = interaction.member === null ? interaction.user : interaction.member.user;
+  protected buildEmbed(interaction: RepliableInteraction, item: EternityChallenge): EternityChallengeCustomEmbed {
+    return new EternityChallengeCustomEmbed({ interaction, challenge: item });
+  }
 
-    if (!user) {
-      const errorEmbed = new ErrorCustomEmbed({
-        interaction,
-        text: `There was an issue running this command.`
-      });
+  protected getButtonLabel(item: EternityChallenge): string {
+    return item.shortName;
+  }
 
-      const errorImage = errorEmbed.getAndSetThumbnail();
+  protected override extraButtons(item: EternityChallenge, userId: string): Array<ButtonBuilder> {
+    return [
+      new ButtonBuilder()
+        .setCustomId(buildCustomId(this.prefix, "tree", userId, this.encodeIdentifier(item)))
+        .setEmoji({ name: "📋" })
+        .setLabel("Copy Tree")
+        .setStyle(ButtonStyle.Secondary)
+    ];
+  }
 
-      interaction.reply({
-        embeds: [errorEmbed.create()],
-        files: [errorImage],
-        flags: MessageFlags.Ephemeral
-      });
+  protected override async handleExtraAction(
+    interaction: ButtonInteraction,
+    action: string,
+    item: EternityChallenge
+  ): Promise<boolean> {
+    if (action !== "tree") return false;
 
-      return;
-    }
+    await interaction.reply({ content: codeBlock(item.formattedTree), flags: MessageFlags.Ephemeral });
+    return true;
+  }
 
+  // Preserved as a fast, no-embed shortcut for anyone used to the old `tree` option - falls
+  // through to the normal embed + buttons flow otherwise.
+  protected override async performExecute(interaction: ChatInputCommandInteraction): Promise<void> {
     if (interaction.options.getBoolean("tree", false)) {
+      const node = this.findInitial(interaction);
+
+      if (!node) {
+        this.error({ interaction, text: this.notFoundText(interaction) });
+        return;
+      }
+
+      const targetUser = interaction.options.getUser("target") ?? undefined;
+
       await interaction.reply({
-        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(challenge.value.formattedTree)}`,
-        flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
+        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(node.value.formattedTree)}`,
+        flags: this.getFlags(interaction)
       });
 
       return;
     }
 
-    const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
-    const embed = new EternityChallengeCustomEmbed({ interaction, challenge: challenge.value, expirationTimestamp });
-    const picture = embed.getAndSetThumbnail();
+    await super.performExecute(interaction);
+  }
+}
 
-    let currentChallenge = challenge;
-
-    const buttons = (disabled: boolean) =>
-      new ActionRowBuilder<ButtonBuilder>().addComponents(
-        new ButtonBuilder()
-          .setCustomId(`ec_button_prev_${expirationTimestamp}`)
-          .setEmoji({ name: "◀️" })
-          .setLabel(`Previous EC (${getNext(currentChallenge, false).value.shortName})`)
-          .setStyle(ButtonStyle.Primary)
-          .setDisabled(disabled),
-        new ButtonBuilder()
-          .setCustomId(`ec_button_next_${expirationTimestamp}`)
-          .setEmoji({ name: "▶️" })
-          .setLabel(`Next EC (${getNext(currentChallenge, true).value.shortName})`)
-          .setStyle(ButtonStyle.Primary)
-          .setDisabled(disabled)
-      );
-
-    const initialContent: InteractionReplyOptions = {
-      content: targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : undefined,
-      embeds: [embed.create()],
-      files: [picture],
-      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
-      components: [buttons(false)]
-    };
-
-    await interaction.reply(initialContent);
-    const sentReply = await interaction.fetchReply();
-
-    const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-    const collector = sentReply.createMessageComponentCollector({
-      componentType: ComponentType.Button,
-      filter,
-      time: 60000
-    });
-
-    collector.on("collect", async (i: ButtonInteraction) => {
-      const forward = i.customId.startsWith("ec_button_next");
-      const nextECToShow = getNext(currentChallenge, forward);
-
-      // Prevent non-senders from using the buttons.
-      if ((i.member?.user.id ?? i.user.id) !== user.id) return;
-
-      currentChallenge = nextECToShow;
-
-      const newEmbed = new EternityChallengeCustomEmbed({
-        interaction,
-        challenge: nextECToShow.value,
-        expirationTimestamp
-      });
-      const newImage = newEmbed.getAndSetThumbnail();
-
-      await i.update({
-        files: [newImage],
-        embeds: [newEmbed.create()],
-        components: [buttons(false)]
-      });
-    });
-
-    collector.on("end", async () => {
-      const finalEmbed = new EternityChallengeCustomEmbed({
-        interaction,
-        challenge: currentChallenge.value,
-        expirationTimestamp
-      });
-
-      const finalImage = finalEmbed.getAndSetThumbnail();
-
-      await interaction.editReply({
-        embeds: [finalEmbed.create()],
-        components: [buttons(true)],
-        files: [finalImage]
-      });
-    });
-  },
-  aliases: ["ec"]
-});
+export default new EternityChallengeCommand();

@@ -1,4 +1,4 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type EmbedBuilder, type EmbedField, type RepliableInteraction } from "discord.js";
 import { time, TimestampStyles } from "@discordjs/builders";
 import type Achievement from "@/utils/game_data/Achievement";
 import { Caesar } from "@/utils/utils_formatting";
@@ -6,30 +6,21 @@ import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface AchievementCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
   achievement: Achievement;
-  expirationTimestamp: number;
 }
 
 export class AchievementCustomEmbed extends CustomEmbed {
   achievement: Achievement;
-  expirationTimestamp: number;
 
-  constructor({ interaction, achievement, expirationTimestamp }: AchievementCustomEmbedProps) {
+  constructor({ interaction, achievement }: AchievementCustomEmbedProps) {
     super({ interaction });
     this.achievement = achievement;
-    this.expirationTimestamp = expirationTimestamp;
-  }
-
-  private get disabled(): boolean {
-    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public override create(): EmbedBuilder {
     this.setTitle(`Achievement ${this.achievement.id} - "${this.achievement.fullName}"`)
-      .setDescription(
-        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
-      )
+      .setDescription(`Updated ${time(Math.floor(Date.now() / 1000), TimestampStyles.RelativeTime)}`)
       .setColour(Colours.Achievement);
 
     this.setFields(this.getFields());

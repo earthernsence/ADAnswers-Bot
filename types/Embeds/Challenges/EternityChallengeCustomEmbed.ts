@@ -1,40 +1,24 @@
-import {
-  AttachmentBuilder,
-  codeBlock,
-  type CommandInteraction,
-  type EmbedBuilder,
-  time,
-  TimestampStyles
-} from "discord.js";
+import { AttachmentBuilder, codeBlock, type EmbedBuilder, type RepliableInteraction, time, TimestampStyles } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 
 interface EternityChallengeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
   challenge: EternityChallenge;
-  expirationTimestamp: number;
 }
 
 export class EternityChallengeCustomEmbed extends CustomEmbed {
   challenge: EternityChallenge;
-  expirationTimestamp: number;
 
-  constructor({ interaction, challenge, expirationTimestamp }: EternityChallengeCustomEmbedProps) {
+  constructor({ interaction, challenge }: EternityChallengeCustomEmbedProps) {
     super({ interaction });
     this.challenge = challenge;
-    this.expirationTimestamp = expirationTimestamp;
-  }
-
-  private get disabled() {
-    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public override create(): EmbedBuilder {
     this.setTitle(`Eternity Challenge ${this.challenge.shortName}`)
-      .setDescription(
-        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.LongDateTime)}`
-      )
+      .setDescription(`Updated ${time(Math.floor(Date.now() / 1000), TimestampStyles.RelativeTime)}`)
       .setColour(Colours.Eternity);
 
     this.setFields([

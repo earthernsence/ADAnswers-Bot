@@ -857,7 +857,7 @@ From here on, we will enable things bit by bit to keep gains small:
     requirement: "Encounter the fourth Pelle Strike."
   }),
   186: new Achievement({
-    id: 181,
+    id: 186,
     fullName: "An unhealthy obsession",
     requirement: "Purchase Time Study 181 while Doomed."
   }),
