@@ -1,4 +1,11 @@
-import { AttachmentBuilder, codeBlock, type EmbedBuilder, type RepliableInteraction, time, TimestampStyles } from "discord.js";
+import {
+  AttachmentBuilder,
+  codeBlock,
+  type EmbedBuilder,
+  type RepliableInteraction,
+  time,
+  TimestampStyles
+} from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";

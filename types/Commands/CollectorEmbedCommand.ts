@@ -56,6 +56,7 @@ export abstract class CollectorEmbedCommand<T> extends Command {
   constructor(props: CollectorEmbedCommandProps<T>) {
     // `execute` is overwritten immediately below with `performExecute`, which subclasses can
     // override; Command's constructor just needs something to satisfy its own typing here.
+    // oxlint-disable-next-line no-empty-function
     super({ data: props.data, execute: () => {}, aliases: props.aliases });
 
     this.prefix = props.prefix;
@@ -103,7 +104,7 @@ export abstract class CollectorEmbedCommand<T> extends Command {
    * Handles a click on one of {@link extraButtons}. Return `true` once handled (and make sure to
    * reply/update the interaction yourself), or `false` to let the base class report it as unknown.
    */
-  // eslint-disable-next-line no-unused-vars
+  // oxlint-disable-next-line require-await, eslint-disable-next-line no-unused-vars
   protected async handleExtraAction(interaction: ButtonInteraction, action: string, item: T): Promise<boolean> {
     return false;
   }
@@ -182,6 +183,7 @@ export abstract class CollectorEmbedCommand<T> extends Command {
    * @param encodedUserId - The user ID decoded from the custom ID (i.e. who's allowed to click).
    * @param encoded - The encoded item identifier decoded from the custom ID.
    */
+  // oxlint-disable-next-line max-params
   public async handleButton(
     interaction: ButtonInteraction,
     action: string,

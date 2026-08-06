@@ -55,10 +55,7 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
             .setRequired(false)
         )
         .addBooleanOption(option =>
-          option
-            .setName("tree")
-            .setDescription("(Optional) Request only the tree for easy copying.")
-            .setRequired(false)
+          option.setName("tree").setDescription("(Optional) Request only the tree for easy copying.").setRequired(false)
         ),
       prefix: "ec",
       list: orderAsDoublyLinkedList,

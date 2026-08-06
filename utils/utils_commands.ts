@@ -64,6 +64,7 @@ export interface ParsedCustomId {
   encoded: string;
 }
 
+// oxlint-disable-next-line max-params
 export function buildCustomId(prefix: string, action: string, userId: string, encoded: string): string {
   return `${prefix}:${action}:${userId}:${encoded}`;
 }

@@ -176,7 +176,8 @@ export const perks: Record<string, Perk> = {
   IDL: new Perk({
     id: "IDL",
     name: "Idle Path Buff",
-    effect: "Idle path multipliers start as if you have spent 15 minutes in this Infinity/Eternity.\nNew starting multipliers -- TS123: ×35.4; TS143: ×2.63e33",
+    effect:
+      "Idle path multipliers start as if you have spent 15 minutes in this Infinity/Eternity.\nNew starting multipliers -- TS123: ×35.4; TS143: ×2.63e33",
     family: PERK_FAMILY.ETERNITY,
     prerequisites: ["EC5R"]
   }),
