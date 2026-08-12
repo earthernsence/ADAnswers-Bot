@@ -1,10 +1,10 @@
-import type { CommandInteraction, EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { DilationUpgrade } from "@/types/game_data/upgrades/DilationUpgrade";
 import { format } from "@/utils/utils_formatting";
 
 interface DilationUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: DilationUpgrade;
 }
 

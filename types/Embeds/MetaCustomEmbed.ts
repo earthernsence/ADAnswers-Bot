@@ -3,7 +3,7 @@ import {
   AttachmentBuilder,
   ButtonBuilder,
   ButtonStyle,
-  type CommandInteraction,
+  type ChatInputCommandInteraction,
   type EmbedBuilder,
   type EmbedField,
   MessageComponentInteraction,
@@ -17,7 +17,7 @@ import { link } from "@/utils/utils_commands";
 import ms from "ms";
 
 interface MetaCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
 }
 
 export class MetaCustomEmbed extends CustomEmbed {

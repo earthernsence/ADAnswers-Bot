@@ -1,11 +1,11 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type ChatInputCommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import type { RaCelestialMemories, RaCelestials } from "@/types/game_data/celestials/ra";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import ra from "@/utils/game_data/celestials/ra";
 
 interface RaCelestialMemoriesCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   celestial: RaCelestials;
 }
 

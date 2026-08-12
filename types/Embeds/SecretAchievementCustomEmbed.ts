@@ -1,6 +1,6 @@
 import {
   AttachmentBuilder,
-  type CommandInteraction,
+  type ChatInputCommandInteraction,
   type EmbedBuilder,
   type EmbedField,
   spoiler,
@@ -13,7 +13,7 @@ import type SecretAchievement from "@/utils/game_data/SecretAchievement";
 import { SecretAchievementType } from "../game_data/SecretAchievements";
 
 interface SecretAchievementCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   achievement: SecretAchievement;
   expirationTimestamp: number;
 }

@@ -1,4 +1,4 @@
-import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, bold, type ChatInputCommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
@@ -6,7 +6,7 @@ import type Perk from "@/utils/game_data/Perk";
 import { pluralise } from "@/utils/utils_commands";
 
 interface PerkCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   perk: Perk;
 }
 

@@ -1,7 +1,7 @@
 import {
   AttachmentBuilder,
   bold,
-  type CommandInteraction,
+  type ChatInputCommandInteraction,
   EmbedBuilder,
   type EmbedField,
   time,
@@ -15,7 +15,7 @@ import { enumerate } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface AlchemyResourceCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   resource: AlchemyResource;
   expirationTimestamp: number;
 }

@@ -3,7 +3,7 @@ import {
   AttachmentBuilder,
   ButtonBuilder,
   ButtonStyle,
-  type CommandInteraction,
+  type ChatInputCommandInteraction,
   type EmbedBuilder,
   type EmbedField,
   inlineCode,
@@ -16,7 +16,7 @@ import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface HelpCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
 }
 
 export class HelpCustomEmbed extends CustomEmbed {

@@ -1,11 +1,11 @@
-import type { CommandInteraction, EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import { format } from "@/utils/utils_formatting";
 import type { ImaginaryUpgrade } from "@/types/game_data/upgrades/ImaginaryUpgrade";
 import { quantify } from "@/utils/utils_commands";
 
 interface ImaginaryUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: ImaginaryUpgrade;
 }
 

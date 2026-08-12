@@ -1,11 +1,11 @@
-import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder } from "discord.js";
+import { AttachmentBuilder, bold, type ChatInputCommandInteraction, type EmbedBuilder } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../CustomEmbed";
 import { format } from "@/utils/utils_formatting";
 import type { InfinityChallenge } from "../../game_data/challenges/InfinityChallenges";
 
 interface InfinityChallengeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   challenge: InfinityChallenge;
   strategyOnly?: boolean;
 }

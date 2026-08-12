@@ -1,4 +1,4 @@
-import type { CommandInteraction, EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { BreakInfinityUpgrade } from "@/types/game_data/upgrades/BreakInfinityUpgrade";
 import { Colours } from "@/utils/utils_colours";
@@ -6,7 +6,7 @@ import { format } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface BreakInfinityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: BreakInfinityUpgrade;
 }
 
