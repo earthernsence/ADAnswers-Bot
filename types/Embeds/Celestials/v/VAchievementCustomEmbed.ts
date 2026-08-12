@@ -1,4 +1,10 @@
-import { AttachmentBuilder, type ChatInputCommandInteraction, type EmbedBuilder, type EmbedField, inlineCode } from "discord.js";
+import {
+  AttachmentBuilder,
+  type ChatInputCommandInteraction,
+  type EmbedBuilder,
+  type EmbedField,
+  inlineCode
+} from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import { format } from "@/utils/utils_formatting";

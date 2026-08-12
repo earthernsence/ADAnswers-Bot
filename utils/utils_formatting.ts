@@ -77,3 +77,12 @@ function formatWithCommas(value: string): string {
   decimalPointSplit[0] = decimalPointSplit[0].replace(commaRegexp, ",");
   return decimalPointSplit.join(".");
 }
+
+/**
+ * Adjusts a value for use as a percentage & returns a formatted percentage string.
+ * @param value A number less than 1 representing a percentage
+ * @param decimals The number of decimals to format with
+ */
+export function formatPercent(value: number, decimals: number = 2): string {
+  return `${(value * 100).toFixed(decimals)}%`;
+}

@@ -45,6 +45,8 @@ export class AlchemyResource implements TAlchemyResource {
   public createReagentButtons(expirationTimestamp: number): Array<ActionRowBuilder<ButtonBuilder>> {
     if (this.reagents.length === 0) return [];
 
+    // This only applies for the Reality resource;
+    // everything else is <5 reagents.
     if (this.reagents.length > 5) {
       const half = Math.ceil(this.reagents.length / 2);
       const firstRow = this.reagents.slice(0, half);
