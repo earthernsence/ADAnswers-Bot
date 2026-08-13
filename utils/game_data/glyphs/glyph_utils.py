@@ -1,3 +1,9 @@
+"""
+Improved Glyph utilities implementation by Alex9127 for use in ADAB v6.2.
+Treated as the source-of-truth for calculations done by the TypeScript
+implementation.
+"""
+
 import math
 import matplotlib.pyplot as plt
 import numpy as np
