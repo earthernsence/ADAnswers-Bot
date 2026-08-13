@@ -161,7 +161,10 @@ export abstract class CollectorEmbedCommand<T> extends Command {
     encodedUserId: string,
     encoded: string
   ): Promise<void> {
-    if (interaction.user.id !== encodedUserId) {
+    // I feel okay about including this as an allowed action for any user,
+    // since it is a utility thing and if somebody sends the guide intended
+    // for somebody else to use, it shouldn't block them from copying.
+    if (interaction.user.id !== encodedUserId && action !== "tree") {
       await interaction.reply({ content: "This isn't your embed to control!", flags: MessageFlags.Ephemeral });
       return;
     }
