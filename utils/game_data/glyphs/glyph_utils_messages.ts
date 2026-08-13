@@ -134,8 +134,8 @@ export class GlyphUtilsMessages {
     with ${underline(exact ? "exactly" : "at least")} \
     ${quantify("effect", effects, false)}, \
     given that you have ${bonus > 0 ? `+${formatPercent(bonus / 100, 1)} bonus rarity` : "no bonus rarity"}, \
-    ${ru16 ? "purchased RU16" : "not purchased RU16"}, and you have ${ru17 ? "purchased RU17" : "not purchased RU17"}`
+    ${ru16 ? "purchased RU16" : "not purchased RU16"}, and you have ${ru17 ? "purchased RU17" : "not purchased RU17"}`;
 
-    return `The probability of finding ${infoString}, ${formatPercent(probability, probability < 0.01 ? 3 : 2)}.`
+    return `The probability of finding ${infoString}, ${formatPercent(probability, probability < 0.01 ? 3 : 2)}.`;
   }
 }

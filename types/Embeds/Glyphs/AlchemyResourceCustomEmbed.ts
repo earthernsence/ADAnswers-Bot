@@ -1,9 +1,9 @@
 import {
   AttachmentBuilder,
   bold,
-  type ChatInputCommandInteraction,
   EmbedBuilder,
   type EmbedField,
+  type RepliableInteraction,
   time,
   TimestampStyles
 } from "discord.js";
@@ -15,30 +15,21 @@ import { enumerate } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 
 interface AlchemyResourceCustomEmbedProps {
-  interaction: ChatInputCommandInteraction;
+  interaction: RepliableInteraction;
   resource: AlchemyResource;
-  expirationTimestamp: number;
 }
 
 export class AlchemyResourceCustomEmbed extends CustomEmbed {
   resource: AlchemyResource;
-  expirationTimestamp: number;
 
-  constructor({ interaction, resource, expirationTimestamp }: AlchemyResourceCustomEmbedProps) {
+  constructor({ interaction, resource }: AlchemyResourceCustomEmbedProps) {
     super({ interaction });
     this.resource = resource;
-    this.expirationTimestamp = expirationTimestamp;
-  }
-
-  private get disabled(): boolean {
-    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public override create(): EmbedBuilder {
     this.setTitle(this.resource.prettyName)
-      .setDescription(
-        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
-      )
+      .setDescription(`Updated ${time(Math.floor(Date.now() / 1000), TimestampStyles.RelativeTime)}`)
       .setColour(Colours.Reality);
 
     this.setFields(this.getFields());

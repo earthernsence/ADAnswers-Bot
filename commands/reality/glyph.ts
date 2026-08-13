@@ -246,7 +246,9 @@ export default new BasicEmbedCommand({
         .addSubcommand(subcommand =>
           subcommand
             .setName("global-effect-probability")
-            .setDescription("Returns the probability of seeing a specified number of effects on a Glyph for all possible rarities")
+            .setDescription(
+              "Returns the probability of seeing a specified number of effects on a Glyph for all possible rarities"
+            )
             .addIntegerOption(option =>
               option
                 .setName("effects")
@@ -402,7 +404,16 @@ export default new BasicEmbedCommand({
         title: "Glyph Information",
         field: {
           name: "Global Effect Count Probability Calculator",
-          value: GlyphUtilsMessages.globalEffectProbability({ effects, level, minRarity, ru16, ru17, bonus, isEffarig, exact }),
+          value: GlyphUtilsMessages.globalEffectProbability({
+            effects,
+            level,
+            minRarity,
+            ru16,
+            ru17,
+            bonus,
+            isEffarig,
+            exact
+          }),
           inline: false
         },
         colour: Colours.Reality

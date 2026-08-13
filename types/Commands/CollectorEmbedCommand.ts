@@ -1,155 +1,124 @@
 import {
   ActionRowBuilder,
-  ButtonBuilder,
   ButtonInteraction,
-  ButtonStyle,
   ChatInputCommandInteraction,
   italic,
+  type MessageActionRowComponentBuilder,
   MessageFlags,
   type RepliableInteraction,
   SlashCommandBuilder,
   type SlashCommandOptionsOnlyBuilder,
   type SlashCommandSubcommandsOnlyBuilder,
+  StringSelectMenuInteraction,
   userMention
 } from "discord.js";
-import type { DoublyLinkedList, DoublyLinkedListNode } from "@/types/DoublyLinkedList";
-import { buildCustomId } from "@/utils/utils_commands";
 import { Command } from "./Command";
 import type { CustomEmbed } from "@/types/Embeds/CustomEmbed";
 
 type CommandData = SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
 
-interface CollectorEmbedCommandProps<T> {
+export interface CollectorEmbedCommandProps {
   data: CommandData;
-  /** Short, unique routing key embedded in every button's custom ID (e.g. `"ach"`, `"ec"`). */
   prefix: string;
-  /** The list this command lets a user page through. */
-  list: DoublyLinkedList<T>;
   aliases?: Array<string>;
 }
 
+/** Anything that can trigger a CollectorEmbedCommand's `handleAction`. */
+export type CollectorComponentInteraction = ButtonInteraction | StringSelectMenuInteraction;
+
 /**
- * Base class for commands that reply with an embed + Previous/Next buttons letting a user page
- * through a {@link DoublyLinkedList}, where the buttons work forever - not just for the lifetime
- * of a message component collector.
+ * Base class for commands that reply with an embed plus interactive components (buttons and/or a
+ * select menu) that re-render the embed in place to create persistent collector commands.
  *
- * How it works: every button's custom ID encodes everything needed to redraw the embed from
- * scratch (which item is showing, and who's allowed to click) - see utils_commands. A
- * single global button handler (see `ButtonInteraction.ts`) looks up the right command instance
- * via {@link CollectorEmbedCommand.registry} and calls {@link handleButton}, so there's no
- * per-message state to expire, and clicking a button on a month-old embed works exactly the same
- * as clicking one that was posted a second ago.
+ * How it works: every component's custom ID encodes everything needed to re-render the embed from
+ * scratch (which item is showing, and who's allowed to interact) through a unique interaction ID
+ * (see more in `utils_commands.ts`).
+ * A single global handler (`ComponentInteraction.ts`) looks up the right command instance via
+ * {@link CollectorEmbedCommand.registry} and calls {@link handleComponent}, so there's no
+ * per-message state to expire, which allows these components to also never expire & therefore
+ * be used at any point of time.
  *
- * To make a new command out of this, extend the class and implement the abstract methods below -
- * they're the only command-specific pieces. Everything else (option-not-found handling, button
- * construction, navigation wraparound, authorization) is shared.
+ * A command instance is a singleton, shared across every user who ever runs it. Never
+ * store per-request state (the current item, current page, etc.) on `this`. It always has to
+ * travel through the encoded custom ID and get resolved fresh on every call, or two users'
+ * interactions could cause issues.
  *
- * @typeParam T - The type of item stored in the list (e.g. `Achievement`, `EternityChallenge`).
+ * To make a new command out of this, extend the class and implement the abstract methods below.
+ * If your command pages through a `DoublyLinkedList` the same way Achievements/Eternity Challenges do,
+ * extend `LinkedListCollectorEmbedCommand` instead; it implements `buildComponents`/`handleAction`
+ * on top of this class.
+ *
+ * @typeParam T - The type of item currently shown by the embed (e.g. an `Achievement`, a page
+ * number, an `AlchemyResource`). This does not have to be a raw domain object. If a single ID
+ * can mean different things in different contexts (see Secret Achievements' mobile/web lists),
+ * make `T` a small view/wrapper that carries that context alongside the underlying value.
  */
 export abstract class CollectorEmbedCommand<T> extends Command {
-  /** Maps a command's `prefix` to the instance that owns it, for the global button handler to look up. */
+  /** Maps a command's `prefix` to the instance that owns it for the global component handler to look up. */
   static registry = new Map<string, CollectorEmbedCommand<unknown>>();
 
   protected prefix: string;
-  protected list: DoublyLinkedList<T>;
 
-  constructor(props: CollectorEmbedCommandProps<T>) {
+  constructor(props: CollectorEmbedCommandProps) {
     // `execute` is overwritten immediately below with `performExecute`, which subclasses can
     // override; Command's constructor just needs something to satisfy its own typing here.
     // oxlint-disable-next-line no-empty-function
     super({ data: props.data, execute: () => {}, aliases: props.aliases });
 
     this.prefix = props.prefix;
-    this.list = props.list;
     this.execute = this.performExecute.bind(this);
 
     CollectorEmbedCommand.registry.set(this.prefix, this as unknown as CollectorEmbedCommand<unknown>);
   }
 
   // ---------------------------------------------------------------------------------------
-  // Abstract - subclasses must implement these. Each one is the command-specific equivalent
-  // of a piece of logic that used to be duplicated across every collector-embed command.
+  // Abstract: subclasses must implement these.
   // ---------------------------------------------------------------------------------------
 
   /** Looks up the initial item from the slash command's options. Return `undefined` if nothing matches. */
-  protected abstract findInitial(interaction: ChatInputCommandInteraction): DoublyLinkedListNode<T> | undefined;
+  protected abstract findInitial(interaction: ChatInputCommandInteraction): T | undefined;
 
   /** The error text shown when {@link findInitial} comes back empty. */
   protected abstract notFoundText(interaction: ChatInputCommandInteraction): string;
 
-  /** Turns an item into a compact string safe to embed in a custom ID (e.g. `"142"`, `"7-3"`). */
+  /** Turns an item into a compact string safe to embed in a custom ID (e.g. `"142"`, `"7x3"`). */
   protected abstract encodeIdentifier(item: T): string;
 
-  /** The inverse of {@link encodeIdentifier} - re-finds the node from a decoded button click. */
-  protected abstract decodeIdentifier(encoded: string): DoublyLinkedListNode<T> | undefined;
+  /** The inverse of {@link encodeIdentifier} - re-resolves an item from a decoded component click. */
+  protected abstract decodeIdentifier(encoded: string): T | undefined;
 
-  /** Builds the embed for a given item. `interaction` may be the original command or a later button click. */
+  /** Builds the embed for a given item. `interaction` may be the original command or a later component interaction. */
   protected abstract buildEmbed(interaction: RepliableInteraction, item: T): CustomEmbed;
 
-  /** The short label shown in a neighbour-preview, e.g. a Previous/Next button's text (`"142"`, `"EC7"`). */
-  protected abstract getButtonLabel(item: T): string;
-
-  // ---------------------------------------------------------------------------------------
-  // Optional hooks - override only if a command needs extra buttons beyond Previous/Next
-  // (e.g. Eternity Challenge's "Copy Tree" button).
-  // ---------------------------------------------------------------------------------------
-
-  /** Extra buttons to append after Previous/Next. Default: none. */
+  /** Builds every component row shown alongside the embed for a given item. */
   // eslint-disable-next-line no-unused-vars
-  protected extraButtons(item: T, userId: string): Array<ButtonBuilder> {
-    return [];
-  }
+  protected abstract buildComponents(
+    item: T,
+    userId: string
+  ): Array<ActionRowBuilder<MessageActionRowComponentBuilder>>;
 
   /**
-   * Handles a click on one of {@link extraButtons}. Return `true` once handled (and make sure to
-   * reply/update the interaction yourself), or `false` to let the base class report it as unknown.
+   * Handles a click/selection. Return the item to re-render the embed with, or `null` if you
+   * already fully handled the interaction yourself (e.g. an ephemeral reply that shouldn't touch
+   * the underlying embed message).
    */
-  // oxlint-disable-next-line require-await, eslint-disable-next-line no-unused-vars
-  protected async handleExtraAction(interaction: ButtonInteraction, action: string, item: T): Promise<boolean> {
-    return false;
-  }
+  protected abstract handleAction(
+    interaction: CollectorComponentInteraction,
+    action: string,
+    item: T
+    // eslint-disable-next-line no-unused-vars
+  ): Promise<T | null>;
 
-  // ---------------------------------------------------------------------------------------
-  // Shared logic - fully generic, no subclass ever needs to touch this.
-  // ---------------------------------------------------------------------------------------
-
-  /** Gets the next/previous node, wrapping around to the other end of the list at the boundaries. */
-  protected getNext(current: DoublyLinkedListNode<T>, forward: boolean): DoublyLinkedListNode<T> {
-    const neighbour = forward ? current.next : current.prev;
-
-    if (neighbour) return neighbour;
-
-    const wrapped = forward ? this.list.getFirstValue() : this.list.getLastValue();
-    return wrapped ?? current;
-  }
-
-  private buildButtons(current: DoublyLinkedListNode<T>, userId: string): ActionRowBuilder<ButtonBuilder> {
-    const previousItem = this.getNext(current, false).value;
-    const nextItem = this.getNext(current, true).value;
-    const encoded = this.encodeIdentifier(current.value);
-
-    return new ActionRowBuilder<ButtonBuilder>().addComponents(
-      new ButtonBuilder()
-        .setCustomId(buildCustomId(this.prefix, "prev", userId, encoded))
-        .setEmoji({ name: "◀️" })
-        .setLabel(`Previous (${this.getButtonLabel(previousItem)})`)
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(buildCustomId(this.prefix, "next", userId, encoded))
-        .setEmoji({ name: "▶️" })
-        .setLabel(`Next (${this.getButtonLabel(nextItem)})`)
-        .setStyle(ButtonStyle.Primary),
-      ...this.extraButtons(current.value, userId)
-    );
-  }
+  // All below this *should* be pretty much fully generic & never extended or overridden by
+  // subclasses. If they do, a super call should be made as a fallback.
 
   /**
    * The slash command's `execute` implementation. Handles the not-found case, then replies with
-   * the initial embed and its navigation buttons.
+   * the initial embed and its components.
    *
    * Subclasses that need to do something before the normal flow (e.g. Eternity Challenge's
-   * standalone `tree` boolean option) can override this - just call `super.performExecute(interaction)`
-   * to fall through to the default behaviour.
+   * standalone `tree` boolean option, Alchemy's separate `info` subcommand) can override this
+   * by calling `super.performExecute(interaction)` to fall through to the default behaviour.
    */
   protected async performExecute(interaction: ChatInputCommandInteraction): Promise<void> {
     const initial = this.findInitial(interaction);
@@ -162,7 +131,7 @@ export abstract class CollectorEmbedCommand<T> extends Command {
     const targetUser = interaction.options.getUser("target") ?? undefined;
     const userId = interaction.user.id;
 
-    const embed = this.buildEmbed(interaction, initial.value);
+    const embed = this.buildEmbed(interaction, initial);
     const picture = embed.getAndSetThumbnail();
 
     await interaction.reply({
@@ -170,22 +139,24 @@ export abstract class CollectorEmbedCommand<T> extends Command {
       embeds: [embed.create()],
       files: [picture],
       flags: this.getFlags(interaction),
-      components: [this.buildButtons(initial, userId)]
+      components: this.buildComponents(initial, userId)
     });
   }
 
   /**
-   * Handles a click on any button this command produced. Called by the global button handler
-   * (`ButtonInteraction.ts`) once it's routed the click here via `CollectorEmbedCommand.registry`.
+   * Handles a click/selection on any component this command produced. Called by the global
+   * component handler (`ComponentInteraction.ts`) once it's routed the interaction here via
+   * `CollectorEmbedCommand.registry`.
    *
-   * @param interaction - The button click itself.
-   * @param action - `"prev"`, `"next"`, or a command-specific extra action string.
-   * @param encodedUserId - The user ID decoded from the custom ID (i.e. who's allowed to click).
-   * @param encoded - The encoded item identifier decoded from the custom ID.
+   * @param interaction - The button click or select-menu choice itself
+   * @param action - `"prev"`, `"next"`, or a command-specific action string
+   * @param encodedUserId - The user ID decoded from the custom ID (i.e. who's allowed to interact)
+   * @param encoded - The encoded item identifier decoded from the custom ID (the item that was on
+   * screen *before* this interaction)
    */
   // oxlint-disable-next-line max-params
-  public async handleButton(
-    interaction: ButtonInteraction,
+  public async handleComponent(
+    interaction: CollectorComponentInteraction,
     action: string,
     encodedUserId: string,
     encoded: string
@@ -195,34 +166,31 @@ export abstract class CollectorEmbedCommand<T> extends Command {
       return;
     }
 
-    const node = this.decodeIdentifier(encoded);
+    const item = this.decodeIdentifier(encoded);
 
-    if (!node) {
+    // Realistically shouldn't happen since the bot matches up with all of the game's data, but
+    // I'd rather have the protection than not.
+    if (!item) {
       await interaction.reply({
-        content: "That data seems to be out of date - try running the command again!",
+        content: "That data seems to be out of date. Try running the command again!",
         flags: MessageFlags.Ephemeral
       });
       return;
     }
 
-    if (action !== "prev" && action !== "next") {
-      const handled = await this.handleExtraAction(interaction, action, node.value);
+    const newItem = await this.handleAction(interaction, action, item);
 
-      if (!handled) {
-        await interaction.reply({ content: "That button doesn't do anything (yet)!", flags: MessageFlags.Ephemeral });
-      }
+    // `null` means the subclass already fully handled the interaction (e.g. an ephemeral reply)
+    // and the underlying embed message shouldn't be touched.
+    if (newItem === null) return;
 
-      return;
-    }
-
-    const nextNode = this.getNext(node, action === "next");
-    const embed = this.buildEmbed(interaction, nextNode.value);
+    const embed = this.buildEmbed(interaction, newItem);
     const image = embed.getAndSetThumbnail();
 
     await interaction.update({
       embeds: [embed.create()],
       files: [image],
-      components: [this.buildButtons(nextNode, encodedUserId)]
+      components: this.buildComponents(newItem, encodedUserId)
     });
   }
 }

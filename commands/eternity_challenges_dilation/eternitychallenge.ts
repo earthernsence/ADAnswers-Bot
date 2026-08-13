@@ -1,6 +1,5 @@
 import {
   ButtonBuilder,
-  ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
   codeBlock,
@@ -10,23 +9,23 @@ import {
   SlashCommandBuilder,
   userMention
 } from "discord.js";
+import type { DoublyLinkedList, DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import { buildCustomId } from "@/utils/utils_commands";
-import { CollectorEmbedCommand } from "@/types/Commands/CollectorEmbedCommand";
-import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
+import type { CollectorComponentInteraction } from "@/types/Commands/CollectorEmbedCommand";
 import type EternityChallenge from "@/utils/game_data/challenges/EternityChallenge";
 import { EternityChallengeCustomEmbed } from "@/types/Embeds/Challenges/EternityChallengeCustomEmbed";
+import { LinkedListCollectorEmbedCommand } from "@/types/Commands/LinkedListCollectorEmbedCommand";
 import { orderAsDoublyLinkedList } from "@/utils/game_data/challenges/eternity_challenges";
 
 /**
  * `/eternitychallenge` - look up an Eternity Challenge guide and page through the full ordered
  * list with buttons, with an extra "Copy Tree" button for pulling just the recommended Time
- * Study tree as copy-pastable text (handy on mobile).
+ * Study tree as copy-pastable text.
  *
- * All the lookup/button/embed plumbing lives in {@link CollectorEmbedCommand}; this class only
- * supplies the challenge-specific bits, plus the `tree` boolean slash option, which is kept as a
- * standalone shortcut alongside the button for anyone used to the old behaviour.
+ * The `tree` boolean slash option is kept as a standalone shortcut alongside the button, for
+ * anyone used to the old behaviour.
  */
-class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> {
+class EternityChallengeCommand extends LinkedListCollectorEmbedCommand<EternityChallenge> {
   constructor() {
     super({
       data: new SlashCommandBuilder()
@@ -58,18 +57,18 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
           option.setName("tree").setDescription("(Optional) Request only the tree for easy copying.").setRequired(false)
         ),
       prefix: "ec",
-      list: orderAsDoublyLinkedList,
       aliases: ["ec"]
     });
   }
 
-  protected findInitial(interaction: ChatInputCommandInteraction): DoublyLinkedListNode<EternityChallenge> | undefined {
+  protected findInitial(interaction: ChatInputCommandInteraction): EternityChallenge | undefined {
     const challengeRequested = interaction.options.getInteger("challenge", true);
     const completionRequested = interaction.options.getInteger("completion", true);
 
     return (
-      this.list.search(value => value.challenge === challengeRequested && value.completion === completionRequested) ??
-      undefined
+      orderAsDoublyLinkedList.search(
+        value => value.challenge === challengeRequested && value.completion === completionRequested
+      )?.value ?? undefined
     );
   }
 
@@ -84,13 +83,28 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
     return `${item.challenge}x${item.completion}`;
   }
 
-  protected decodeIdentifier(encoded: string): DoublyLinkedListNode<EternityChallenge> | undefined {
+  protected decodeIdentifier(encoded: string): EternityChallenge | undefined {
     const [challenge, completion] = encoded.split("x").map(Number);
-    return this.list.search(value => value.challenge === challenge && value.completion === completion) ?? undefined;
+    return (
+      orderAsDoublyLinkedList.search(value => value.challenge === challenge && value.completion === completion)
+        ?.value ?? undefined
+    );
   }
 
   protected buildEmbed(interaction: RepliableInteraction, item: EternityChallenge): EternityChallengeCustomEmbed {
     return new EternityChallengeCustomEmbed({ interaction, challenge: item });
+  }
+
+  protected resolveList(): DoublyLinkedList<EternityChallenge> {
+    return orderAsDoublyLinkedList;
+  }
+
+  protected findNode(item: EternityChallenge): DoublyLinkedListNode<EternityChallenge> | undefined {
+    return (
+      orderAsDoublyLinkedList.search(
+        value => value.challenge === item.challenge && value.completion === item.completion
+      ) ?? undefined
+    );
   }
 
   protected getButtonLabel(item: EternityChallenge): string {
@@ -102,13 +116,13 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
       new ButtonBuilder()
         .setCustomId(buildCustomId(this.prefix, "tree", userId, this.encodeIdentifier(item)))
         .setEmoji({ name: "📋" })
-        .setLabel("Copy Tree")
+        .setLabel("Copy tree")
         .setStyle(ButtonStyle.Secondary)
     ];
   }
 
   protected override async handleExtraAction(
-    interaction: ButtonInteraction,
+    interaction: CollectorComponentInteraction,
     action: string,
     item: EternityChallenge
   ): Promise<boolean> {
@@ -118,13 +132,12 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
     return true;
   }
 
-  // Preserved as a fast, no-embed shortcut for anyone used to the old `tree` option - falls
-  // through to the normal embed + buttons flow otherwise.
+  // Preserved as a fast, no-embed shortcut for anyone used to the old `tree` option
   protected override async performExecute(interaction: ChatInputCommandInteraction): Promise<void> {
     if (interaction.options.getBoolean("tree", false)) {
-      const node = this.findInitial(interaction);
+      const item = this.findInitial(interaction);
 
-      if (!node) {
+      if (!item) {
         this.error({ interaction, text: this.notFoundText(interaction) });
         return;
       }
@@ -132,7 +145,7 @@ class EternityChallengeCommand extends CollectorEmbedCommand<EternityChallenge> 
       const targetUser = interaction.options.getUser("target") ?? undefined;
 
       await interaction.reply({
-        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(node.value.formattedTree)}`,
+        content: `${targetUser ? `${italic(`Suggested for ${userMention(targetUser.id)}`)}\n` : ""}${codeBlock(item.formattedTree)}`,
         flags: this.getFlags(interaction)
       });
 

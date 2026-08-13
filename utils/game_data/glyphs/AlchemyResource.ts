@@ -1,4 +1,4 @@
-import { ActionRowBuilder, bold, ButtonBuilder, ButtonStyle } from "discord.js";
+import { bold } from "discord.js";
 import { Symbols } from "@/utils/utils_symbols";
 import type { AlchemyResource as TAlchemyResource } from "@/types/game_data/glyphs/AlchemyResource";
 
@@ -40,47 +40,5 @@ export class AlchemyResource implements TAlchemyResource {
     if (this.reagents.length === 0) return "No reaction to create this resource; refine Glyphs to obtain resource.";
     const formattedReagents = this.reagents.map(value => `${value[1]} ${value[0]}`);
     return `${formattedReagents.join(" + ")} ➜ 1 ${this.name}`;
-  }
-
-  public createReagentButtons(expirationTimestamp: number): Array<ActionRowBuilder<ButtonBuilder>> {
-    if (this.reagents.length === 0) return [];
-
-    // This only applies for the Reality resource;
-    // everything else is <5 reagents.
-    if (this.reagents.length > 5) {
-      const half = Math.ceil(this.reagents.length / 2);
-      const firstRow = this.reagents.slice(0, half);
-      const secondRow = this.reagents.slice(half);
-
-      const firstRowButtons = new ActionRowBuilder<ButtonBuilder>();
-      const secondRowButtons = new ActionRowBuilder<ButtonBuilder>();
-
-      for (const [resource] of firstRow) {
-        firstRowButtons.addComponents(this.makeButton(resource, expirationTimestamp));
-      }
-
-      for (const [resource] of secondRow) {
-        secondRowButtons.addComponents(this.makeButton(resource, expirationTimestamp));
-      }
-
-      return [firstRowButtons, secondRowButtons];
-    }
-
-    const buttons = new ActionRowBuilder<ButtonBuilder>();
-
-    for (const [resource] of this.reagents) {
-      buttons.addComponents(this.makeButton(resource, expirationTimestamp));
-    }
-
-    return [buttons];
-  }
-
-  private makeButton(resource: string, expirationTimestamp: number): ButtonBuilder {
-    const disabled = Math.floor(Date.now() / 1000) >= expirationTimestamp;
-    return new ButtonBuilder()
-      .setLabel(`${Symbols[resource as keyof typeof Symbols]} ${resource}`)
-      .setCustomId(`alchemy_button_${resource}_${expirationTimestamp}`)
-      .setStyle(ButtonStyle.Primary)
-      .setDisabled(disabled);
   }
 }

@@ -1,8 +1,8 @@
 import {
   AttachmentBuilder,
-  type ChatInputCommandInteraction,
   type EmbedBuilder,
   type EmbedField,
+  type RepliableInteraction,
   spoiler,
   time,
   TimestampStyles
@@ -13,30 +13,21 @@ import type SecretAchievement from "@/utils/game_data/SecretAchievement";
 import { SecretAchievementType } from "../game_data/SecretAchievements";
 
 interface SecretAchievementCustomEmbedProps {
-  interaction: ChatInputCommandInteraction;
+  interaction: RepliableInteraction;
   achievement: SecretAchievement;
-  expirationTimestamp: number;
 }
 
 export class SecretAchievementCustomEmbed extends CustomEmbed {
   achievement: SecretAchievement;
-  expirationTimestamp: number;
 
-  constructor({ interaction, achievement, expirationTimestamp }: SecretAchievementCustomEmbedProps) {
+  constructor({ interaction, achievement }: SecretAchievementCustomEmbedProps) {
     super({ interaction });
     this.achievement = achievement;
-    this.expirationTimestamp = expirationTimestamp;
-  }
-
-  private get disabled(): boolean {
-    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
   }
 
   public override create(): EmbedBuilder {
     this.setTitle(this.achievement.title)
-      .setDescription(
-        `Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} on ${time(this.expirationTimestamp, TimestampStyles.FullDateShortTime)}`
-      )
+      .setDescription(`Updated ${time(Math.floor(Date.now() / 1000), TimestampStyles.RelativeTime)}`)
       .setColour(Colours.Achievement);
 
     this.setFields(this.getFields());

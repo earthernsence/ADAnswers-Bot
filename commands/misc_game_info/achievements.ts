@@ -1,17 +1,11 @@
 import { ChatInputCommandInteraction, type RepliableInteraction, SlashCommandBuilder } from "discord.js";
+import type { DoublyLinkedList, DoublyLinkedListNode } from "@/types/DoublyLinkedList";
 import type Achievement from "@/utils/game_data/Achievement";
 import { AchievementCustomEmbed } from "@/types/Embeds/AchievementCustomEmbed";
 import { achievementsList } from "@/utils/game_data/achievements";
-import { CollectorEmbedCommand } from "@/types/Commands/CollectorEmbedCommand";
-import type { DoublyLinkedListNode } from "@/types/DoublyLinkedList";
+import { LinkedListCollectorEmbedCommand } from "@/types/Commands/LinkedListCollectorEmbedCommand";
 
-/**
- * `/achievements` - look up an Achievement by ID and page through the full list with buttons.
- *
- * All the lookup/button/embed plumbing lives in {@link CollectorEmbedCommand}; this class only
- * supplies the achievement-specific bits.
- */
-class AchievementsCommand extends CollectorEmbedCommand<Achievement> {
+class AchievementsCommand extends LinkedListCollectorEmbedCommand<Achievement> {
   constructor() {
     super({
       data: new SlashCommandBuilder()
@@ -20,7 +14,7 @@ class AchievementsCommand extends CollectorEmbedCommand<Achievement> {
         .addIntegerOption(option =>
           option
             .setName("achievement")
-            .setDescription("Which Achievement would you like information about?")
+            .setDescription("Which Achivement would you like information about?")
             .setRequired(true)
             .setMinValue(11)
             .setMaxValue(188)
@@ -31,14 +25,13 @@ class AchievementsCommand extends CollectorEmbedCommand<Achievement> {
             .setDescription("(Optional) Which user would you like to show the information to?")
             .setRequired(false)
         ),
-      prefix: "ach",
-      list: achievementsList
+      prefix: "ach"
     });
   }
 
-  protected findInitial(interaction: ChatInputCommandInteraction): DoublyLinkedListNode<Achievement> | undefined {
+  protected findInitial(interaction: ChatInputCommandInteraction): Achievement | undefined {
     const achievementRequested = interaction.options.getInteger("achievement", true);
-    return this.list.search(value => value.id === achievementRequested) ?? undefined;
+    return achievementsList.search(value => value.id === achievementRequested)?.value ?? undefined;
   }
 
   protected notFoundText(interaction: ChatInputCommandInteraction): string {
@@ -50,13 +43,21 @@ class AchievementsCommand extends CollectorEmbedCommand<Achievement> {
     return String(item.id);
   }
 
-  protected decodeIdentifier(encoded: string): DoublyLinkedListNode<Achievement> | undefined {
+  protected decodeIdentifier(encoded: string): Achievement | undefined {
     const id = Number(encoded);
-    return this.list.search(value => value.id === id) ?? undefined;
+    return achievementsList.search(value => value.id === id)?.value ?? undefined;
   }
 
   protected buildEmbed(interaction: RepliableInteraction, item: Achievement): AchievementCustomEmbed {
     return new AchievementCustomEmbed({ interaction, achievement: item });
+  }
+
+  protected resolveList(): DoublyLinkedList<Achievement> {
+    return achievementsList;
+  }
+
+  protected findNode(item: Achievement): DoublyLinkedListNode<Achievement> | undefined {
+    return achievementsList.search(value => value.id === item.id) ?? undefined;
   }
 
   protected getButtonLabel(item: Achievement): string {

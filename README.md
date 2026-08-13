@@ -26,6 +26,7 @@
 - **Ninjatsu** for creating the Eternity Challenge spreadsheet and guide, without which this bot would be effectively useless;
 - **MrKrutaman** for art contributions in Glyph Alchemy, Challenge, Glyph, Perk, Time Study, and Upgrade commands;
 - **Gaunter** for developing the original version of [GlyphAPI](https://github.com/lrobt97/glyphapi), a few utilities for Glyph calculations;
+- **Alex9127** for developing a more involved version of the GlyphAPI for more advanced Glyph calculations;
 - **Mirai Sozo** for adding in various odds & ends during the Reality Update Update;
 - **So many more**...
 - ...and lastly, the **amazing Antimatter Dimensions Discord community** for being a welcoming home for this bot.

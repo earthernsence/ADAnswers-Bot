@@ -1,54 +1,85 @@
 import {
-  ButtonInteraction,
-  ChatInputCommandInteraction,
-  ComponentType,
-  MessageComponentInteraction,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
   MessageFlags,
+  type RepliableInteraction,
   SlashCommandBuilder
 } from "discord.js";
-import { Command } from "@/types/Commands/Command";
-import { isUserHelper } from "@/utils/utils_commands";
+import { type CollectorComponentInteraction, CollectorEmbedCommand } from "@/types/Commands/CollectorEmbedCommand";
+import { buildCustomId } from "@/utils/utils_commands";
 import { MetaCustomEmbed } from "@/types/Embeds/MetaCustomEmbed";
+import { wrappingArrayNeighbor } from "@/utils/utils_component_navigation";
 
-export default new Command({
-  data: new SlashCommandBuilder().setName("meta").setDescription("Provides some information about the bot."),
-  execute: async (interaction: ChatInputCommandInteraction) => {
-    if (!interaction) return;
+// oxlint-disable-next-line no-unused-vars
+const PAGES: ReadonlyArray<number> = Array.from({ length: MetaCustomEmbed.MAX_PAGES }, (_value, index) => index + 1);
 
-    const customEmbed = new MetaCustomEmbed({ interaction });
-    const image = customEmbed.getAndSetThumbnail();
-
-    const initialReply = await interaction.reply({
-      embeds: [customEmbed.create()],
-      files: [image],
-      components: [customEmbed.buttons],
-      flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral
-    });
-
-    const collector = initialReply.createMessageComponentCollector({
-      componentType: ComponentType.Button,
-      filter: (i: MessageComponentInteraction) => customEmbed.filter(i),
-      time: 60000
-    });
-
-    collector.on("collect", async (i: ButtonInteraction) => {
-      const forward = i.customId.includes("next");
-
-      const newEmbed = customEmbed.nextPage(forward);
-
-      await i.update({
-        files: [image],
-        embeds: [newEmbed],
-        components: [customEmbed.buttons]
-      });
-    });
-
-    collector.on("end", async () => {
-      await interaction.editReply({
-        embeds: [customEmbed.create()],
-        components: [customEmbed.buttons],
-        files: [image]
-      });
+/** `/meta` - hard-coded, fixed-length pages about the bot itself. Previous/Next only, no lookup. */
+class MetaCommand extends CollectorEmbedCommand<number> {
+  constructor() {
+    super({
+      data: new SlashCommandBuilder().setName("meta").setDescription("Provides some information about the bot."),
+      prefix: "meta"
     });
   }
-});
+
+  protected findInitial(): number | undefined {
+    return PAGES[0];
+  }
+
+  protected notFoundText(): string {
+    // Meta always has a first page; this only exists to satisfy the base class.
+    return "There was an issue loading the meta page.";
+  }
+
+  protected encodeIdentifier(item: number): string {
+    return String(item);
+  }
+
+  protected decodeIdentifier(encoded: string): number | undefined {
+    const page = Number(encoded);
+    return PAGES.includes(page) ? page : undefined;
+  }
+
+  protected buildEmbed(interaction: RepliableInteraction, item: number): MetaCustomEmbed {
+    return new MetaCustomEmbed({ interaction, pageNumber: item });
+  }
+
+  protected buildComponents(item: number, userId: string): Array<ActionRowBuilder<ButtonBuilder>> {
+    const encoded = this.encodeIdentifier(item);
+
+    return [
+      new ActionRowBuilder<ButtonBuilder>().addComponents(
+        new ButtonBuilder()
+          .setCustomId(buildCustomId(this.prefix, "prev", userId, encoded))
+          .setEmoji({ name: "◀️" })
+          .setLabel("Previous page")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(buildCustomId(this.prefix, "next", userId, encoded))
+          .setEmoji({ name: "▶️" })
+          .setLabel("Next page")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setStyle(ButtonStyle.Link)
+          .setLabel("GitHub repository")
+          .setURL("https://github.com/earthernsence/ADAnswers-Bot")
+      )
+    ];
+  }
+
+  protected async handleAction(
+    interaction: CollectorComponentInteraction,
+    action: string,
+    item: number
+  ): Promise<number | null> {
+    if (action === "prev" || action === "next") {
+      return wrappingArrayNeighbor(PAGES, item, action === "next");
+    }
+
+    await interaction.reply({ content: "That button doesn't do anything (yet)!", flags: MessageFlags.Ephemeral });
+    return null;
+  }
+}
+
+export default new MetaCommand();

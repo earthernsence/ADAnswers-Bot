@@ -13,7 +13,7 @@
     // @types package is added (which still needs to be installed in the
     // usual way, since it needs to be in node_modules), add another
     // entry to this array.
-    "types": ["bun"],
+    "types": ["bun", "ms"],
 
     // Bundler mode
     "moduleResolution": "bundler",
