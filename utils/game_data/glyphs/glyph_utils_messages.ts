@@ -126,8 +126,8 @@ export class GlyphUtilsMessages {
     exact
   }: GlyphUtilsMessageGlobalEffectProbabilityProps): string {
     const probability = exact
-      ? globalEffectProbabilityExact({ effects, level, minRarity: minRarity / 100, ru16, ru17, bonus, isEffarig })
-      : globalEffectProbabilityAtLeast({ effects, level, minRarity: minRarity / 100, ru16, ru17, bonus, isEffarig });
+      ? globalEffectProbabilityExact({ effects, level, minRarity, ru16, ru17, bonus, isEffarig })
+      : globalEffectProbabilityAtLeast({ effects, level, minRarity, ru16, ru17, bonus, isEffarig });
 
     const infoString = `a level ${level} ${isEffarig ? "Effarig Glyph" : "Glyph"} \
     ${minRarity > 0 ? `of a rarity of at least ${formatPercent(minRarity / 100, 1)}` : "of any rarity"} \
