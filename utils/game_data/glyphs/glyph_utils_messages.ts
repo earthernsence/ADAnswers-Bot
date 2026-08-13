@@ -126,16 +126,16 @@ export class GlyphUtilsMessages {
     exact
   }: GlyphUtilsMessageGlobalEffectProbabilityProps): string {
     const probability = exact
-      ? globalEffectProbabilityExact({ effects, level, minRarity, ru16, ru17, bonus, isEffarig })
-      : globalEffectProbabilityAtLeast({ effects, level, minRarity, ru16, ru17, bonus, isEffarig });
+      ? globalEffectProbabilityExact({ effects, level, minRarity: minRarity / 100, ru16, ru17, bonus, isEffarig })
+      : globalEffectProbabilityAtLeast({ effects, level, minRarity: minRarity / 100, ru16, ru17, bonus, isEffarig });
 
     const infoString = `a level ${level} ${isEffarig ? "Effarig Glyph" : "Glyph"} \
-    ${minRarity > 0 ? `of a rarity of at least ${formatPercent(minRarity)}` : "of any rarity"} \
+    ${minRarity > 0 ? `of a rarity of at least ${formatPercent(minRarity / 100, 1)}` : "of any rarity"} \
     with ${underline(exact ? "exactly" : "at least")} \
     ${quantify("effect", effects, false)}, \
     given that you have ${bonus > 0 ? `+${formatPercent(bonus / 100, 1)} bonus rarity` : "no bonus rarity"}, \
-    ${ru16 ? "purchased RU16" : "not purchased RU16"}, and you have ${ru17 ? "purchased RU17" : "not purchased RU17"}`;
+    ${ru16 ? "purchased RU16" : "not purchased RU16"}, and ${ru17 ? "purchased RU17" : "not purchased RU17"}`;
 
-    return `The probability of finding ${infoString}, ${formatPercent(probability, probability < 0.01 ? 3 : 2)}.`;
+    return `The probability of finding ${infoString}, is ${formatPercent(probability, probability < 0.01 ? 3 : 2)}.`;
   }
 }
