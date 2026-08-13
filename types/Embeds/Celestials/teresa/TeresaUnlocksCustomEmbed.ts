@@ -1,11 +1,11 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type ChatInputCommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import { format } from "@/utils/utils_formatting";
 import teresa from "@/utils/game_data/celestials/teresa";
 
 interface TeresaUnlocksCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
 }
 
 export class TeresaUnlocksCustomEmbed extends CustomEmbed {

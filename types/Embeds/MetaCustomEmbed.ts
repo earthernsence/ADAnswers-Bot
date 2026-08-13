@@ -1,12 +1,8 @@
 import {
-  ActionRowBuilder,
   AttachmentBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  type CommandInteraction,
   type EmbedBuilder,
   type EmbedField,
-  MessageComponentInteraction,
+  type RepliableInteraction,
   time,
   TimestampStyles
 } from "discord.js";
@@ -17,28 +13,28 @@ import { link } from "@/utils/utils_commands";
 import ms from "ms";
 
 interface MetaCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
+  pageNumber: number;
 }
 
 export class MetaCustomEmbed extends CustomEmbed {
-  pageNumber: number = 1;
-  client: ADABClient;
-  expirationTimestamp: number = Math.floor((Date.now() + 60000) / 1000);
-  private MAX_PAGES: number = 2;
+  static readonly MAX_PAGES = 2;
 
-  constructor({ interaction }: MetaCustomEmbedProps) {
+  pageNumber: number;
+  client: ADABClient;
+
+  constructor({ interaction, pageNumber }: MetaCustomEmbedProps) {
     super({ interaction });
     this.client = this.interaction.client as ADABClient;
-  }
-
-  get disabled(): boolean {
-    return Math.floor(Date.now() / 1000) >= this.expirationTimestamp;
+    this.pageNumber = pageNumber;
   }
 
   public override create(): EmbedBuilder {
-    this.setTitle(`ADAB Meta (page ${this.pageNumber}/${this.MAX_PAGES})`)
-      .setDescription(`Some various internal information about ADAB.
-Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampStyles.RelativeTime)} at ${time(this.expirationTimestamp, TimestampStyles.MediumTime)}`)
+    this.setTitle(`ADAB Meta (page ${this.pageNumber}/${MetaCustomEmbed.MAX_PAGES})`)
+      .setDescription(
+        `Some various internal information about ADAB.\nUpdated \
+        ${time(Math.floor(Date.now() / 1000), TimestampStyles.RelativeTime)}`
+      )
       .setColour(Colours.Companion);
 
     this.setFields(this.getFields());
@@ -49,53 +45,10 @@ Expire${this.disabled ? "d" : "s"} ${time(this.expirationTimestamp, TimestampSty
     });
   }
 
-  public get buttons(): ActionRowBuilder<ButtonBuilder> {
-    return new ActionRowBuilder<ButtonBuilder>().addComponents(
-      new ButtonBuilder()
-        .setCustomId(`meta_button_prev_${this.expirationTimestamp}`)
-        .setEmoji({ name: "◀️" })
-        .setLabel("Previous page")
-        .setStyle(ButtonStyle.Primary)
-        .setDisabled(this.disabled),
-      new ButtonBuilder()
-        .setCustomId(`meta_button_next_${this.expirationTimestamp}`)
-        .setEmoji({ name: "▶️" })
-        .setLabel("Next page")
-        .setStyle(ButtonStyle.Primary)
-        .setDisabled(this.disabled),
-      new ButtonBuilder()
-        .setStyle(ButtonStyle.Link)
-        .setLabel("GitHub repository")
-        .setURL("https://github.com/earthernsence/ADAnswers-Bot")
-    );
-  }
-
-  public filter(i: MessageComponentInteraction): boolean {
-    return i.customId.endsWith(String(this.expirationTimestamp));
-  }
-
   public override getAndSetThumbnail(): AttachmentBuilder {
     const image: AttachmentBuilder = new AttachmentBuilder(`images/misc/help.png`);
     this.embed.setThumbnail("attachment://help.png");
     return image;
-  }
-
-  public nextPage(forward: boolean): EmbedBuilder {
-    // Oxlint-disable-next-line no-unused-vars
-    const possiblePages: Array<number> = Array(this.MAX_PAGES)
-      .fill(0)
-      // oxlint-disable-next-line no-unused-vars
-      .map((_value, index) => index + 1);
-    let index = possiblePages.indexOf(this.pageNumber);
-
-    if (forward) index++;
-    else index--;
-
-    index = (index + possiblePages.length) % possiblePages.length;
-
-    this.pageNumber = possiblePages[index];
-
-    return this.create();
   }
 
   private getFields(): Array<EmbedField> {

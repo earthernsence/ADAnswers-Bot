@@ -1,9 +1,9 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder } from "discord.js";
+import { AttachmentBuilder, type EmbedBuilder, type RepliableInteraction } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "./CustomEmbed";
 
 interface ErrorCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
   text: string;
 }
 

@@ -5,7 +5,7 @@ export interface InfinityUpgradeProps extends BaseUpgradeProps {
 }
 
 export class InfinityUpgrade extends BaseUpgrade {
-  type: string = "infinity";
+  override type: string = "infinity";
   requirement?: string;
 
   constructor({ id, name, effect, cost, formula, requirement }: InfinityUpgradeProps) {

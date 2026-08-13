@@ -9,38 +9,38 @@ export const glyphs: Record<string, Glyph> = {
         name: "Antimatter Dimensions Power",
         primary: true,
         effect: "Raise Antimatter Dimensions to a power.",
-        formula: "`1.015 + (Level)^0.2 * (1 + 2.5 * Rarity)^0.4 / 75`",
+        formula: "`1.015 + (level)^0.2 * (strength)^0.4 / 75`",
         altered: {
           name: "Antimatter Galaxy Cost Decrease",
           effect: "Decrease the cost of Antimatter Galaxies by a multiplier, in addition to the normal effect.",
-          formula: "`2 / ((1.015 + (Level)^0.2 * (1 + 2.5 * Rarity)^0.4 / 75) + 1)`"
+          formula: "`2 / ((1.015 + (level)^0.2 * (strength)^0.4 / 75) + 1)`"
         }
       }),
       "Top Left": new GlyphEffect({
         name: "Antimatter Dimensions Multiplier",
         effect: "Multiply Antimatter Dimensions by a static multiplier.",
-        formula: "`(Level * (1 + 2.5 * Rarity)) ^ (Level * (1 + 2.5 * Rarity))`",
+        formula: "`(level * strength) ^ (level * strength)`",
         altered: {
           name: "Empowered Antimatter Dimensions Multiplier",
           effect: "Multiply Antimatter Dimensions by a static multiplier with an empowered formula.",
-          formula: "`1e11111 ^ (Level * 220)`"
+          formula: "`1e11111 ^ (level * 220)`"
         }
       }),
       "Top Right": new GlyphEffect({
         name: "Dimension Boost Multiplier",
         effect: "Multiply the effect of Dimension Boosts by a static multiplier.",
-        formula: "`sqrt(Level * (1 + 2.5 * Rarity))`",
+        formula: "`sqrt(level * strength)`",
         altered: {
           name: "Boosted Dimension Boost Multiplier",
           effect:
             "Multiply the effect of Dimension Boosts by a static multiplier, with a boosted formula based on Power Glyph Sacrifice.",
-          formula: "`sqrt(Level * (1 + 2.5 * Rarity)) * ((1 + log(max(min(sacrifice, 1e100) / 1e60, 1)) / 2) ^ 3)`"
+          formula: "`sqrt(level * strength) * ((1 + log(max(min(sacrifice, 1e100) / 1e60, 1)) / 2) ^ 3)`"
         }
       }),
       "Bottom Right": new GlyphEffect({
         name: "Buy 10 Multiplier",
         effect: "Multiply the multiplier from buying 10 Antimatter Dimensions.",
-        formula: "`1 + Level * (1 + 2.5 * Rarity) / 12`"
+        formula: "`1 + level * strength / 12`"
       })
     },
     sacrifice: {
@@ -55,37 +55,37 @@ export const glyphs: Record<string, Glyph> = {
         name: "Infinity Dimension Power",
         primary: true,
         effect: "Raise Infinity Dimensions to a power.",
-        formula: "`1.007 + (Level)^0.21 * (1 + 2.5 * Rarity)^0.4 / 75`",
+        formula: "`1.007 + (level)^0.21 * (strength)^0.4 / 75`",
         altered: {
           name: "Boosted Infinity Dimension Power",
           effect: "Raise Infinity Dimensions to a power, with a boosted formula based on Infinity Glyph Sacrifice.",
           formula:
-            "`1.007 + (Level)^0.21 * (1 + 2.5 * Rarity)^0.4 / 75 + (log(max(min(infinity sacrifice, 1e100) / 1e60, 1)) / 2) / 50)`"
+            "`1.007 + (level)^0.21 * (strength)^0.4 / 75 + (log(max(min(infinity sacrifice, 1e100) / 1e60, 1)) / 2) / 50)`"
         }
       }),
       "Top Left": new GlyphEffect({
         name: "Infinity Power Conversion Exponent increase",
         effect: "Increase the Exponent used to convert Infinity Power into a multiplier on Antimatter Dimensions.",
-        formula: "`(Level)^0.2 * (1 + 2.5 * Rarity)^0.4 / 25`"
+        formula: "`(level)^0.2 * (strength)^0.4 / 25`"
       }),
       "Top Right": new GlyphEffect({
         name: "Infinity Point Multiplier",
         effect: "Multiply Infinity Point gain by a static multiplier.",
-        formula: "`1.00e4 * (Level * (2 + 2.5 * Rarity))^6`",
+        formula: "`1.00e4 * (level * (2 + 2.5 * Rarity))^6`",
         altered: {
           name: "Infinity Point Gain Power",
           effect: "Raise Infinity Point gain to a power, in addition to the normal effect.",
-          formula: "`1 + log(1.00e4 * (Level * (2 + 2.5 * Rarity))^6) / 1800`"
+          formula: "`1 + log(1.00e4 * (level * (2 + 2.5 * Rarity))^6) / 1800`"
         }
       }),
       "Bottom Right": new GlyphEffect({
         name: "Infinity Multiplier",
         effect: "Multiply Infinities by a static multiplier.",
-        formula: "`2 * (Level * (1 + 2.5 * Rarity))^1.5`",
+        formula: "`2 * (level * strength)^1.5`",
         altered: {
           name: "Empowered Infinity Multiplier",
           effect: "Multiply Infinities by a static multiplier, with an empowered formula.",
-          formula: "`1.02 ^ Level`"
+          formula: "`1.02 ^ level`"
         }
       })
     },
@@ -100,39 +100,38 @@ export const glyphs: Record<string, Glyph> = {
       "Bottom Left": new GlyphEffect({
         name: "Replicanti Replication Speed",
         effect: "Multiply the speed of Replication (or, divide the Replicanti interval).",
-        formula: "`3 * (Level * (1 + 2.5 * Rarity))`",
+        formula: "`3 * (level * strength)`",
         altered: {
           name: "Empowered Replicanti Replication Speed",
           effect: "Multiply the speed of Replication (or, divide the Replicanti interval), with an empowered formula.",
-          formula: "`(1.006 ^ Level) * 3`"
+          formula: "`(1.006 ^ level) * 3`"
         }
       }),
       "Top Left": new GlyphEffect({
         name: "Replicanti Effect Power",
         effect: "Raise the effect of Replicanti on Infinity (and Time) Dimensions to a power.",
-        formula: "`1.1 + sqrt(Level) * (1 + 2.5 * Rarity) / 25`",
+        formula: "`1.1 + sqrt(level) * strength / 25`",
         altered: {
           name: "Boosted Replicanti Effect Power",
           effect:
             "Raise the effect of Replicanti on Infinity (and Time) Dimensions to a power, with a boosted formula based on Replication Glyph Sacrifice.",
-          formula:
-            "`1.1 + sqrt(Level) * (1 + 2.5 * Rarity) / 25 + log(max(min(replication sacrifice, 1e100) / 1e60, 1)) / 2 * 3`"
+          formula: "`1.1 + sqrt(level) * strength / 25 + log(max(min(replication sacrifice, 1e100) / 1e60, 1)) / 2 * 3`"
         }
       }),
       "Top Right": new GlyphEffect({
         name: "Dilated Time Multiplier based on Replicanti",
         effect: "Multiply Dilated Time gain based on current Replicanti amount.",
-        formula: "`3.00e-4 * (Level)^0.3 * (1 + 2.5 * Rarity)^0.65`",
+        formula: "`3.00e-4 * (level)^0.3 * (strength)^0.65`",
         altered: {
           name: "Replicanti Speed Multiplier based on Replicanti",
           effect: "Multiply Replicanti gain based on current Replicanti amount, in addition to the normal effect.",
-          formula: "`3.00e-4 * (Level)^0.3 * (1 + 2.5 * Rarity)^0.65`"
+          formula: "`3.00e-4 * (level)^0.3 * (strength)^0.65`"
         }
       }),
       "Bottom Right": new GlyphEffect({
         name: "Replication Glyph Level Effect",
         effect: "Increase the exponent in the Replicanti Glyph Level Factor (log(rep)^0.400 -> log(rep)^0.4XX)",
-        formula: "`sqrt((Level)^0.25 * (1 + 2.5 * Rarity)^0.4) / 50`"
+        formula: "`sqrt((level)^0.25 * (strength)^0.4) / 50`"
       })
     },
     sacrifice: {
@@ -147,36 +146,36 @@ export const glyphs: Record<string, Glyph> = {
         name: "Time Dimension Power",
         primary: true,
         effect: "Raise Time Dimensions to a power.",
-        formula: "`1.01 + (Level)^0.32 * (1 + 2.5 * Rarity)^0.45 / 75`"
+        formula: "`1.01 + (level)^0.32 * (strength)^0.45 / 75`"
       }),
       "Top Left": new GlyphEffect({
         name: "Game Speed Multiplier",
         effect: "Multiply Game speed, and effectively everything affected by it.",
-        formula: "`1 + (Level)^0.3 * (1 + 2.5 * Rarity)^0.65 / 20`",
+        formula: "`1 + (level)^0.3 * (strength)^0.65 / 20`",
         altered: {
           name: "Empowered Game Speed Multiplier",
           effect: "Multiply Game speed, and effectively everything affected by it, with an empowered formula.",
-          formula: "`1 + (Level ^ 0.35)`"
+          formula: "`1 + (level ^ 0.35)`"
         }
       }),
       "Top Right": new GlyphEffect({
         name: "Eternity Multiplier",
         effect: "Multiply Eternities by a static multiplier.",
-        formula: "`((Level + 3) * (1 + 2.5 * Rarity))^0.9`",
+        formula: "`((level + 3) * strength)^0.9`",
         altered: {
           name: "Boosted Eternity Multiplier",
           effect: "Multiply Eternities by a static multiplier with a boosted formula based on Time Glyph Sacrifice.",
-          formula: "`((Level + 3) * (1 + 2.5 * Rarity))^0.9 * (3 * log(max(min(time sacrifice, 1e100) / 1e60, 1)) / 2)`"
+          formula: "`((level + 3) * strength)^0.9 * (3 * log(max(min(time sacrifice, 1e100) / 1e60, 1)) / 2)`"
         }
       }),
       "Bottom Right": new GlyphEffect({
         name: "Eternity Point Multiplier",
         effect: "Multiply Eternity Point gain by a static Multiplier.",
-        formula: "`100 * (Level * (1 + 2.5 * Rarity))^3`",
+        formula: "`100 * (level * strength)^3`",
         altered: {
           name: "Eternity Point Power",
           effect: "Raise Eternity Point gain to a power, in addition to the normal effect.",
-          formula: "`1 + log(100 * (Level * (1 + 2.5 * Rarity))^3) / 1000`"
+          formula: "`1 + log(100 * (level * strength)^3) / 1000`"
         }
       })
     },
@@ -191,38 +190,38 @@ export const glyphs: Record<string, Glyph> = {
       "Bottom Left": new GlyphEffect({
         name: "Dilated Time Multiplier",
         effect: "Multiply Dilated Time by a static multiplier",
-        formula: "`2 * (Level * (1 + 2.5 * Rarity))^1.5`",
+        formula: "`2 * (level * strength)^1.5`",
         altered: {
           name: "Empowered Dilated Time Multiplier",
           effect: "Multiply Dilated Time by a static multiplier, with an empowered formula.",
-          formula: "`(1.005 ^ Level) * 15`"
+          formula: "`(1.005 ^ level) * 15`"
         }
       }),
       "Top Left": new GlyphEffect({
         name: "Tachyon Galaxy Threshold Multiplier",
         effect: `"Multiply" (Divide) the threshold scaling for Tachyon Galaxies. Only affects the fraction after 1.`,
-        formula: "`1 - ((Level)^0.17 * (1 + 2.5 * Rarity)^0.35) / 100`",
+        formula: "`1 - ((level)^0.17 * (strength)^0.35) / 100`",
         altered: {
           name: "Boosted Tachyon Galaxy Threshold Multiplier",
           effect: `"Multiply" (Divide) the threshold scaling for Tachyon Galaxies, with a boosted formula based on Dilation Glyph Sacrifice.`,
           formula:
-            "`1 - ((Level)^0.17 * (1 + 2.5 * Rarity)^0.35) / 100 - log(max(min(dilation sacrifice, 1e100) / 1e60, 1)) / 2 / 50`"
+            "`1 - ((level)^0.17 * (strength)^0.35) / 100 - log(max(min(dilation sacrifice, 1e100) / 1e60, 1)) / 2 / 50`"
         }
       }),
       "Top Right": new GlyphEffect({
         name: "Time Theorem Generation",
         effect: "Passively Generate Time Theorems, even without the relevant Dilation Upgrade.",
-        formula: "`sqrt(Level * (1 + 2.5 * Rarity)) / 1.00e4`",
+        formula: "`sqrt(level * strength) / 1.00e4`",
         altered: {
           name: "Time Theorem Generation Multiplier",
           effect: "Multiply passive Time Theorem generation from all sources, in addition to the normal effect.",
-          formula: "`max((10000 * sqrt(Level * (1 + 2.5 * Rarity)) / 1.00e4) ^ 1.6, 1)`"
+          formula: "`max((10000 * sqrt(level * strength) / 1.00e4) ^ 1.6, 1)`"
         }
       }),
       "Bottom Right": new GlyphEffect({
         name: "Dilated Antimatter Dimension Power",
         effect: "Raise all Antimatter Dimensions to a power, but only while in Time Dilation",
-        formula: "`1.1 + (Level * (1 + 2.5 * Rarity))^0.7 / 25`"
+        formula: "`1.1 + (level * strength)^0.7 / 25`"
       })
     },
     sacrifice: {
@@ -236,53 +235,53 @@ export const glyphs: Record<string, Glyph> = {
       Southwest: new GlyphEffect({
         name: "Reality Machine Multiplier",
         effect: "Multiply Reality Machine gain.",
-        formula: "`Level ^ 0.6 * (1 + 2.5 * Rarity)`",
+        formula: "`level ^ 0.6 * strength`",
         altered: {
           name: "Empowered Reality Machine Multiplier",
           effect: "Multiply Reality Machine gain by a multiplier with an empowered formula.",
-          formula: "`Level ^ 1.5`"
+          formula: "`level ^ 1.5`"
         }
       }),
       West: new GlyphEffect({
         name: "Instability Delay",
         effect: "Increase Glyph Instability starting level",
-        formula: "`floor(10 * sqrt(Level * (1 + 2.5 * Rarity)))`"
+        formula: "`floor(10 * sqrt(level * strength))`"
       }),
       Northwest: new GlyphEffect({
         name: "Game Speed Power",
         effect: "Raise game speed to a power.",
-        formula: "`1 + (Level ^ 0.25) * ((1 + 2.5 * Rarity) ^ 0.4) / 75`"
+        formula: "`1 + (level ^ 0.25) * ((strength) ^ 0.4) / 75`"
       }),
       North: new GlyphEffect({
         name: "Achievement Multiplier Power",
         effect: "Raise Achievement multiplier to a power.",
-        formula: "`1 + (Level ^ 0.4) * ((1 + 2.5 * Rarity) ^ 0.6) / 60`",
+        formula: "`1 + (level ^ 0.4) * ((strength) ^ 0.6) / 60`",
         altered: {
           name: "Boosted Achievement Multiplier Power",
           effect: "Raise Achievement multiplier to a power with a formula boosted based on Effarig Glyph Sacrifice.",
           formula:
-            "`(1 + (Level ^ 0.4) * ((1 + 2.5 * Rarity) ^ 0.6) / 60) + log(max(min(effarig sacrifice, 1e100) / 1e60, 1)) / 2 / 10`"
+            "`(1 + (level ^ 0.4) * ((strength) ^ 0.6) / 60) + log(max(min(effarig sacrifice, 1e100) / 1e60, 1)) / 2 / 10`"
         }
       }),
       Northeast: new GlyphEffect({
         name: "Buy 10 Multiplier Power",
         effect: "Raise the Buy 10 Dimensions multiplier to a power.",
-        formula: "`1 + 2 * (Level ^ 0.25) * ((1 + 2.5 * Rarity) ^ 0.4)`",
+        formula: "`1 + 2 * (level ^ 0.25) * ((strength) ^ 0.4)`",
         altered: {
           name: "Dimension Boost Multiplier Power",
           effect: "Raise the effect of Dimension Boosts to a power, in addition to the normal effect.",
-          formula: "`(1 + 2 * (Level ^ 0.25) * ((1 + 2.5 * Rarity) ^ 0.4)) ^ 0.4`"
+          formula: "`(1 + 2 * (level ^ 0.25) * ((strength) ^ 0.4)) ^ 0.4`"
         }
       }),
       East: new GlyphEffect({
         name: "Dimension Power",
         effect: "Raise all dimension multipliers to a power",
-        formula: "`1 + (Level ^ 0.25) * ((1 + 2.5 * Rarity) ^ 0.4) / 500`"
+        formula: "`1 + (level ^ 0.25) * ((strength) ^ 0.4) / 500`"
       }),
       Southeast: new GlyphEffect({
         name: "Antimatter Production Power",
         effect: "Raise antimatter production to a power",
-        formula: "`1 + (Level ^ 0.25) * ((1 + 2.5 * Rarity) ^ 0.4) / 5000`"
+        formula: "`1 + (level ^ 0.25) * ((strength) ^ 0.4) / 5000`"
       })
     },
     sacrifice: {
@@ -296,22 +295,22 @@ export const glyphs: Record<string, Glyph> = {
       "Bottom Left": new GlyphEffect({
         name: "Cursed Galaxies",
         effect: "Reduce the effectiveness of all Galaxies.",
-        formula: "`Level ^ -0.03`"
+        formula: "`level ^ -0.03`"
       }),
       "Top Left": new GlyphEffect({
         name: "Cursed Tickspeed",
         effect: "The threshold for Tickspeed Upgrades from Time Dimensions is increased.",
-        formula: "`max(log(Level), 1)`"
+        formula: "`max(log(level), 1)`"
       }),
       "Top Right": new GlyphEffect({
         name: "Cursed Dimensions",
         effect: "Reduce all Dimension multipliers.",
-        formula: "`Level ^ -0.035`"
+        formula: "`level ^ -0.035`"
       }),
       "Bottom Right": new GlyphEffect({
         name: "Cursed EP",
         effect: "Divide EP gain.",
-        formula: "`10 ^ (-Level / 10)`"
+        formula: "`10 ^ (-level / 10)`"
       })
     }
   }),
@@ -321,20 +320,20 @@ export const glyphs: Record<string, Glyph> = {
       "Bottom Left": new GlyphEffect({
         name: "Equipped Glyph Level Increase",
         effect: "Increase the effective level of equipped basic Glyphs",
-        formula: "`floor(sqrt(Level * 90))`"
+        formula: "`floor(sqrt(level * 90))`"
       }),
       "Top Left": new GlyphEffect({
         name: "Galaxy Strength Increase",
         effect: "Increase the strength of all Galaxies",
-        formula: "`1 + sqrt(Level / 100000)`"
+        formula: "`1 + sqrt(level / 100000)`"
       }),
       "Top Right": new GlyphEffect({
         name: "Reality Amplifier Amplifier",
         effect: "Multipliers from Reality Upgrade Amplifiers are increased",
-        formula: "`1 + Level / 125000`"
+        formula: "`1 + level / 125000`"
       }),
       "Bottom Right": new GlyphEffect({
-        name: "Dilation Glyph Level Effect",
+        name: "Dilation Glyph level Effect",
         effect: "Dilated Time factor for Glyph level is increased",
         formula: "`0.1`"
       })

@@ -1,10 +1,10 @@
-import type { CommandInteraction, EmbedBuilder, EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedBuilder, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { EternityUpgrade } from "@/types/game_data/upgrades/EternityUpgrade";
 import { quantify } from "@/utils/utils_commands";
 
 interface EternityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: EternityUpgrade;
 }
 

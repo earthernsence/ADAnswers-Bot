@@ -1,7 +1,7 @@
 import {
   AttachmentBuilder,
+  type ChatInputCommandInteraction,
   type ColorResolvable,
-  type CommandInteraction,
   type EmbedBuilder,
   type EmbedField
 } from "discord.js";
@@ -12,7 +12,7 @@ import { CustomEmbed } from "../CustomEmbed";
 import { NotImplementedError } from "@/types/NotImplementedError";
 
 interface BaseUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: BaseUpgrade;
   colour?: ColorResolvable;
 }

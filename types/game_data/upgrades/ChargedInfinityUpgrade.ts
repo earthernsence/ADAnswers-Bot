@@ -12,7 +12,7 @@ interface ChargedInfinityUpgradeProps {
 }
 
 export class ChargedInfinityUpgrade extends BaseUpgrade {
-  type: string = "charged";
+  override type: string = "charged";
   charged: ChargedInfinityUpgradeInfo;
 
   constructor({ baseUpgrade, charged }: ChargedInfinityUpgradeProps) {

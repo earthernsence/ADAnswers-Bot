@@ -1,4 +1,4 @@
-import { bold, inlineCode } from "discord.js";
+import { bold, inlineCode, italic } from "discord.js";
 import Achievement from "./Achievement";
 import { DoublyLinkedList } from "@/types/DoublyLinkedList";
 
@@ -557,7 +557,7 @@ If you cannot get this naturally, try this strategy anytime after e1000 EP or so
     reward: "Infinity Point multiplier based on time spent this Infinity",
     rewardFormula:
       "thisInfinity = `seconds in infinity * 10 + 1`\n effect = `2 ^ log_10(thisInfinity) * min(thisInfinity ^ 0.11, 500)`",
-    unlockStrategy: `Only possible after you buy TS181. Using idle, disable AD/ID autobuyers and eternity, enter Challenge 12, and buy a 4th Antimatter Dimension. Instant on mobile versions of the game; up to 60 minutes on web/Steam without the IPx Dilation upgrade.`
+    unlockStrategy: `Only possible after you buy TS181. Using idle, disable AD/ID autobuyers and eternity, enter Challenge 12 (${italic("not")} Eternity Challenge 12), and buy a 4th Antimatter Dimension. Instant on mobile versions of the game; up to 60 minutes on web/Steam without the IPx Dilation upgrade.`
   }),
   126: new Achievement({
     id: 126,
@@ -857,7 +857,7 @@ From here on, we will enable things bit by bit to keep gains small:
     requirement: "Encounter the fourth Pelle Strike."
   }),
   186: new Achievement({
-    id: 181,
+    id: 186,
     fullName: "An unhealthy obsession",
     requirement: "Purchase Time Study 181 while Doomed."
   }),

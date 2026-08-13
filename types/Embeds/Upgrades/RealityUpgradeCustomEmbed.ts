@@ -1,11 +1,11 @@
-import type { CommandInteraction, EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import { format } from "@/utils/utils_formatting";
 import { quantify } from "@/utils/utils_commands";
 import type { RealityUpgrade } from "@/types/game_data/upgrades/RealityUpgrade";
 
 interface RealityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: RealityUpgrade;
 }
 

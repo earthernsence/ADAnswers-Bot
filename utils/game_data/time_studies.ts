@@ -586,7 +586,7 @@ export const timeStudies: TimeStudies = {
     id: 301,
     effect: "Time Study 231 improves the effect of Time Study 221",
     formula: "`(TS221's effect) ^ (TS231's effect - 1)`",
-    cost: 12,
+    cost: 10,
     reqType: TS_REQUIREMENT_TYPE.TRIAD(221, 222, 231),
     prerequisites: [221, 222, 231],
     type: "triad",
@@ -595,7 +595,7 @@ export const timeStudies: TimeStudies = {
   "302": {
     id: 302,
     effect: "Distant Galaxy scaling threshold starts another 3000 Antimatter Galaxies later",
-    cost: 12,
+    cost: 10,
     reqType: TS_REQUIREMENT_TYPE.TRIAD(223, 224, 232),
     prerequisites: [223, 224, 232],
     type: "triad",
@@ -603,8 +603,8 @@ export const timeStudies: TimeStudies = {
   },
   "303": {
     id: 303,
-    effect: "Gain 50% more extra Replicanti Galaxies from Time Studies 225 and 226",
-    cost: 12,
+    effect: "Gain 50% more extra Replicanti Galaxies from Time Studies 225 and 226, and from Effarig's Infinity",
+    cost: 10,
     reqType: TS_REQUIREMENT_TYPE.TRIAD(225, 226, 233),
     prerequisites: [225, 226, 233],
     type: "triad",
@@ -613,7 +613,7 @@ export const timeStudies: TimeStudies = {
   "304": {
     id: 304,
     effect: "Dimensional Sacrifice multiplier is squared",
-    cost: 12,
+    cost: 10,
     reqType: TS_REQUIREMENT_TYPE.TRIAD(227, 228, 234),
     prerequisites: [227, 228, 234],
     type: "triad",

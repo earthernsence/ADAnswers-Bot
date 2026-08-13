@@ -1,4 +1,10 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField, inlineCode } from "discord.js";
+import {
+  AttachmentBuilder,
+  type ChatInputCommandInteraction,
+  type EmbedBuilder,
+  type EmbedField,
+  inlineCode
+} from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import { format } from "@/utils/utils_formatting";
@@ -6,7 +12,7 @@ import v from "@/utils/game_data/celestials/v";
 import type { VAchievement } from "@/types/game_data/celestials/v";
 
 interface VAchievementCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   achievement: keyof typeof v.achievements;
 }
 

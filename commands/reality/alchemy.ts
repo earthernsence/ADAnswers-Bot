@@ -1,21 +1,21 @@
 import {
+  ActionRowBuilder,
   ApplicationCommandOptionType,
-  ButtonInteraction,
+  ButtonBuilder,
+  ButtonStyle,
   ChatInputCommandInteraction,
-  ComponentType,
-  type InteractionReplyOptions,
-  MessageComponentInteraction,
   MessageFlags,
+  type RepliableInteraction,
   SlashCommandBuilder
 } from "discord.js";
+import { type CollectorComponentInteraction, CollectorEmbedCommand } from "@/types/Commands/CollectorEmbedCommand";
+import { AlchemyResource } from "@/utils/game_data/glyphs/AlchemyResource";
 import { AlchemyResourceCustomEmbed } from "@/types/Embeds/Glyphs/AlchemyResourceCustomEmbed";
 import { alchemyResources } from "@/utils/game_data/glyphs/alchemy";
 import { BasicTextCustomEmbed } from "@/types/Embeds/BasicTextCustomEmbed";
+import { buildCustomId } from "@/utils/utils_commands";
 import { capitalise } from "@/utils/utils_formatting";
 import { Colours } from "@/utils/utils_colours";
-import { Command } from "@/types/Commands/Command";
-import { ErrorCustomEmbed } from "@/types/Embeds/ErrorCustomEmbed";
-import { isUserHelper } from "@/utils/utils_commands";
 
 const alchemyInfo: Record<string, string> = {
   /* eslint-disable @stylistic/max-len */
@@ -30,146 +30,147 @@ The cap for compound resources is equal to the lowest cap amongst all of its rea
   /* eslint-enable @stylistic/max-len */
 };
 
-export default new Command({
-  data: new SlashCommandBuilder()
-    .setName("alchemy")
-    .setDescription("Provides information about Glyph Alchemy & its effects")
-    .addSubcommand(subcommand =>
-      subcommand
-        .setName("info")
-        .setDescription("View basic information about Glyph Alchemy")
-        .addStringOption(option =>
-          option
+/**
+ * `/alchemy resource`: view an Alchemy Resource, with buttons that jump straight to its
+ * reagents.
+ *
+ * `/alchemy info` is a separate, static-content subcommand handled directly in `performExecute`
+ * before falling through to the collector-embed flow. This is the same pattern as Eternity Challenge's
+ * standalone `tree` option.
+ */
+class AlchemyCommand extends CollectorEmbedCommand<AlchemyResource> {
+  constructor() {
+    super({
+      data: new SlashCommandBuilder()
+        .setName("alchemy")
+        .setDescription("Provides information about Glyph Alchemy & its effects")
+        .addSubcommand(subcommand =>
+          subcommand
             .setName("info")
-            .setDescription("What particular information would you like?")
-            .setChoices(
-              Object.keys(alchemyInfo).map(choice => ({
-                name: choice,
-                value: choice,
-                type: ApplicationCommandOptionType.String
-              }))
+            .setDescription("View basic information about Glyph Alchemy")
+            .addStringOption(option =>
+              option
+                .setName("info")
+                .setDescription("What particular information would you like?")
+                .setChoices(
+                  Object.keys(alchemyInfo).map(choice => ({
+                    name: choice,
+                    value: choice,
+                    type: ApplicationCommandOptionType.String
+                  }))
+                )
+                .setRequired(true)
             )
-            .setRequired(true)
         )
-    )
-    .addSubcommand(subcommand =>
-      subcommand
-        .setName("resource")
-        .setDescription("View information about a specific Glyph Alchemy resource")
-        .addStringOption(option =>
-          option
+        .addSubcommand(subcommand =>
+          subcommand
             .setName("resource")
-            .setDescription("Which resource would you like information about?")
-            .setChoices(
-              Object.entries(alchemyResources).map(resource => ({
-                name: resource[1].prettyName.replaceAll("**", ""),
-                value: resource[0],
-                type: ApplicationCommandOptionType.String
-              }))
+            .setDescription("View information about a specific Glyph Alchemy resource")
+            .addStringOption(option =>
+              option
+                .setName("resource")
+                .setDescription("Which resource would you like information about?")
+                .setChoices(
+                  Object.entries(alchemyResources).map(resource => ({
+                    name: resource[1].prettyName.replaceAll("**", ""),
+                    value: resource[0],
+                    type: ApplicationCommandOptionType.String
+                  }))
+                )
+                .setRequired(true)
             )
-            .setRequired(true)
-        )
-    ),
-  execute: async (interaction: ChatInputCommandInteraction) => {
+        ),
+      prefix: "alch"
+    });
+  }
+
+  protected findInitial(interaction: ChatInputCommandInteraction): AlchemyResource | undefined {
+    const requestedResource = interaction.options.getString("resource", true);
+    return alchemyResources[requestedResource];
+  }
+
+  protected notFoundText(interaction: ChatInputCommandInteraction): string {
+    const requestedResource = interaction.options.getString("resource", true);
+    return `That Alchemy Resource doesn't exist!\nResource requested: ${requestedResource}`;
+  }
+
+  protected encodeIdentifier(item: AlchemyResource): string {
+    return item.name.toLowerCase();
+  }
+
+  protected decodeIdentifier(encoded: string): AlchemyResource | undefined {
+    return alchemyResources[encoded];
+  }
+
+  protected buildEmbed(interaction: RepliableInteraction, item: AlchemyResource): AlchemyResourceCustomEmbed {
+    return new AlchemyResourceCustomEmbed({ interaction, resource: item });
+  }
+
+  protected buildComponents(item: AlchemyResource, userId: string): Array<ActionRowBuilder<ButtonBuilder>> {
+    if (item.reagents.length === 0) return [];
+
+    const buttons = item.reagents.map(([reagentName]) => {
+      const reagent = alchemyResources[reagentName.toLowerCase()];
+
+      return new ButtonBuilder()
+        .setCustomId(buildCustomId(this.prefix, "goto", userId, this.encodeIdentifier(reagent)))
+        .setLabel(`${reagent.symbol} ${reagent.name}`)
+        .setStyle(ButtonStyle.Primary);
+    });
+
+    // Discord caps a row at 5 buttons. Only Reality has more than 5 reagents; split evenly across
+    // two rows when that happens.
+    if (buttons.length > 5) {
+      const half = Math.ceil(buttons.length / 2);
+      return [
+        new ActionRowBuilder<ButtonBuilder>().addComponents(...buttons.slice(0, half)),
+        new ActionRowBuilder<ButtonBuilder>().addComponents(...buttons.slice(half))
+      ];
+    }
+
+    return [new ActionRowBuilder<ButtonBuilder>().addComponents(...buttons)];
+  }
+
+  protected async handleAction(
+    interaction: CollectorComponentInteraction,
+    action: string,
+    item: AlchemyResource
+  ): Promise<AlchemyResource | null> {
+    // `item` here is already the destination reagent - decodeIdentifier resolved it directly,
+    // there's no separate "current -> next" step the way Previous/Next commands have.
+    if (action === "goto") return item;
+
+    await interaction.reply({ content: "That button doesn't do anything (yet)!", flags: MessageFlags.Ephemeral });
+    return null;
+  }
+
+  protected override async performExecute(interaction: ChatInputCommandInteraction): Promise<void> {
     const subcommand = interaction.options.getSubcommand(true);
 
-    if (subcommand === "resource") {
-      const requestedResource = interaction.options.getString("resource", true);
-      const user = interaction.member === null ? interaction.user : interaction.member.user;
+    if (subcommand === "info") {
+      const info = interaction.options.getString("info", true);
+      const content = alchemyInfo[info];
 
-      if (!user) {
-        const errorEmbed = new ErrorCustomEmbed({
-          interaction,
-          text: `There was an issue running this command.`
-        });
+      const embed = new BasicTextCustomEmbed({
+        interaction,
+        title: "Alchemy Info",
+        field: { name: capitalise(info), value: content, inline: false },
+        colour: Colours.Reality
+      });
 
-        const errorImage = errorEmbed.getAndSetThumbnail();
+      const image = embed.getAndSetThumbnail();
 
-        interaction.reply({
-          embeds: [errorEmbed.create()],
-          files: [errorImage],
-          flags: MessageFlags.Ephemeral
-        });
-
-        return;
-      }
-
-      let resource = alchemyResources[requestedResource];
-      const expirationTimestamp = Math.floor((Date.now() + 60000) / 1000);
-      const embed = new AlchemyResourceCustomEmbed({ interaction, resource, expirationTimestamp });
-      const picture = embed.getAndSetThumbnail();
-
-      const initialContent: InteractionReplyOptions = {
+      await interaction.reply({
         embeds: [embed.create()],
-        files: [picture],
-        flags: isUserHelper(interaction) ? undefined : MessageFlags.Ephemeral,
-        components: resource.createReagentButtons(expirationTimestamp)
-      };
-
-      const response = await interaction.reply(initialContent);
-
-      // Don't bother making a collector if there's nothing that can be pressed.
-      if (resource.reagents.length > 0) {
-        const filter = (i: MessageComponentInteraction) => i.customId.endsWith(String(expirationTimestamp));
-        const collector = response.createMessageComponentCollector({
-          componentType: ComponentType.Button,
-          time: 60_000,
-          filter
-        });
-
-        collector.on("collect", async (i: ButtonInteraction) => {
-          if ((i.member?.user.id ?? i.user.id) !== user.id) return;
-
-          // Hacky, but the idea is that without fail, the resource will always be the third
-          // member of this array.
-          const res = i.customId.split("_")[2].toLowerCase();
-
-          resource = alchemyResources[res];
-
-          const newEmbed = new AlchemyResourceCustomEmbed({ interaction, resource, expirationTimestamp });
-          const newPicture = newEmbed.getAndSetThumbnail();
-
-          await i.update({
-            embeds: [newEmbed.create()],
-            files: [newPicture],
-            components: resource.createReagentButtons(expirationTimestamp)
-          });
-        });
-
-        collector.on("end", async () => {
-          const finalEmbed = new AlchemyResourceCustomEmbed({ interaction, resource, expirationTimestamp });
-          const finalImage = finalEmbed.getAndSetThumbnail();
-
-          await response.edit({
-            embeds: [finalEmbed.create()],
-            files: [finalImage],
-            components: resource.createReagentButtons(expirationTimestamp)
-          });
-        });
-      }
+        flags: this.getFlags(interaction),
+        files: [image]
+      });
 
       return;
     }
 
-    const info = interaction.options.getString("info", true);
-    const content = alchemyInfo[info];
-
-    const embed = new BasicTextCustomEmbed({
-      interaction,
-      title: "Alchemy Info",
-      field: {
-        name: capitalise(info),
-        value: content,
-        inline: false
-      },
-      colour: Colours.Reality
-    });
-
-    const image = embed.getAndSetThumbnail();
-
-    await interaction.reply({
-      embeds: [embed.create()],
-      files: [image]
-    });
+    await super.performExecute(interaction);
   }
-});
+}
+
+export default new AlchemyCommand();

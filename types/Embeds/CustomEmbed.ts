@@ -1,9 +1,9 @@
 import {
   AttachmentBuilder,
   type ColorResolvable,
-  CommandInteraction,
   EmbedBuilder,
   type EmbedField,
+  type RepliableInteraction,
   User
 } from "discord.js";
 import { authorTitle } from "@/utils/utils_commands";
@@ -12,12 +12,12 @@ import { NotImplementedError } from "../NotImplementedError";
 const FOOTER_IMAGE_URL = `https://cdn.discordapp.com/attachments/351479640755404820/980696250389254195/antimatter.png`;
 
 interface CustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
 }
 
 export class CustomEmbed {
   embed: EmbedBuilder;
-  interaction: CommandInteraction;
+  interaction: RepliableInteraction;
   user: User;
 
   constructor({ interaction }: CustomEmbedProps) {

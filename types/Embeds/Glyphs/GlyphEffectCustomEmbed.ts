@@ -1,11 +1,18 @@
-import { AttachmentBuilder, bold, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import {
+  AttachmentBuilder,
+  bold,
+  type ChatInputCommandInteraction,
+  type EmbedBuilder,
+  type EmbedField,
+  inlineCode
+} from "discord.js";
 import type { AlteredGlyphEffect } from "@/types/game_data/glyphs/GlyphEffect";
 import { CustomEmbed } from "../CustomEmbed";
 import type { Glyph } from "@/utils/game_data/glyphs/Glyph";
 import type { GlyphEffect } from "@/utils/game_data/glyphs/GlyphEffect";
 
 interface GlyphEffectCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   glyph: Glyph;
   isAltered: boolean;
 }
@@ -22,6 +29,8 @@ export class GlyphEffectCustomEmbed extends CustomEmbed {
 
   public override create(): EmbedBuilder {
     this.setTitle(this.glyph.stylisedName()).setColour(this.glyph.colour);
+
+    this.setDescription(`${bold("Note")}: ${inlineCode("strength")} = ${inlineCode("1 + 2.5 * Rarity")}`);
 
     this.setFields(this.getFields());
 

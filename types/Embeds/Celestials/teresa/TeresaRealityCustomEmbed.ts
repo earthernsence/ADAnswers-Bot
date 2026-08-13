@@ -1,10 +1,10 @@
-import { AttachmentBuilder, type CommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
+import { AttachmentBuilder, type ChatInputCommandInteraction, type EmbedBuilder, type EmbedField } from "discord.js";
 import { Colours } from "@/utils/utils_colours";
 import { CustomEmbed } from "../../CustomEmbed";
 import teresa from "@/utils/game_data/celestials/teresa";
 
 interface TeresaRealityCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
 }
 
 export class TeresaRealityCustomEmbed extends CustomEmbed {

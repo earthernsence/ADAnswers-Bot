@@ -1,10 +1,10 @@
-import { type CommandInteraction, type EmbedField } from "discord.js";
+import type { ChatInputCommandInteraction, EmbedField } from "discord.js";
 import { BaseUpgradeCustomEmbed } from "./BaseUpgradeCustomEmbed";
 import type { InfinityUpgrade } from "../../game_data/upgrades/InfinityUpgrade";
 import { quantify } from "@/utils/utils_commands";
 
 interface InfinityUpgradeCustomEmbedProps {
-  interaction: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   upgrade: InfinityUpgrade;
 }
 

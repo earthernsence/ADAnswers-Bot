@@ -35,7 +35,7 @@ export function rarityProbability({ rarity, ru16, bonus }: { rarity: number; ru1
 
   const zScore = Math.pow(minimumStrength, 1 / 0.65) - 1;
   const probability = 2 * (1 - normDist(zScore)) * 100;
-  if (probability < 0.01) {
+  if (probability < 0.001) {
     return `A Glyph with the given rarity ${infoString} would have a probability below 0.01%.`;
   }
 
@@ -76,7 +76,7 @@ export function effectProbability({
 
   const probability = getFinalProbability({ min, strength, level, effects, effarig, ru17 });
 
-  return `The probability of finding the given${effarig ? " Effarig" : " "}Glyph (GL${level}, rarity ${rarity}%, ${quantify("effect", effects)}) is ${(probability * 100).toFixed(2)}%.`;
+  return `The probability of finding the given${effarig ? " Effarig " : " "}Glyph (GL${level}, rarity ${rarity}%, ${quantify("effect", effects)}) is ${(probability * 100).toFixed(2)}%.`;
 }
 
 function probabilityModel({
