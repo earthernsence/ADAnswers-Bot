@@ -153,7 +153,7 @@ Note that secret themes do not exist on the mobile verison of the game.`,
   }),
   b27: new SecretAchievement({
     id: 27,
-    name: "It's not calsled matter dimensions is it?",
+    name: "It's not called matter dimensions is it?",
     description: "Get Infinite matter.",
     unlock: "Using C11, IC1, or IC6, reach 1.8e308 matter.",
     type: SecretAchievementType.Both
