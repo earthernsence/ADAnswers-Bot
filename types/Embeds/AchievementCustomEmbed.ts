@@ -30,7 +30,8 @@ export class AchievementCustomEmbed extends CustomEmbed {
       return this.doom();
     }
 
-    return this.finalise();
+    // Need different footer text for achievement-specific embeds (Omsi art, not Kruta)
+    return this.finalise().setFooter({ text: this.getFooterText(), iconURL: this.footerImage });
   }
 
   public doom(): EmbedBuilder {
@@ -85,5 +86,9 @@ export class AchievementCustomEmbed extends CustomEmbed {
     }
 
     return fields;
+  }
+
+  public override getFooterText(): string {
+    return Math.random() > 0.5 ? `Be sure to read the pins in your progression channel!` : `Achievement art by Omsi`;
   }
 }

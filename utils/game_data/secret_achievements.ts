@@ -274,10 +274,10 @@ Note that secret themes do not exist on the mobile verison of the game.`,
   }),
   m45: new SecretAchievement({
     id: 45,
-    name: "Accelerated Destruction",
-    description: "Wipe out the Credits from existence. You can now skip the Credits.",
+    name: "Loophole Destruction",
+    description: "Attempt to wipe out Pelle from existence. As if they would let you.",
     unlock:
-      "During the ending sequence (which starts upon unlocking the last Achievement), go to Options > Save & Load > Reset save and enter the confirmation. Do not reset.",
+      "Any time while Doomed (in Celestial 7), go to Options > Save & Load > Reset save and enter the confirmation and reset (note that Pelle does not let you reset your save).",
     type: SecretAchievementType.Mobile
   }),
   b46: new SecretAchievement({

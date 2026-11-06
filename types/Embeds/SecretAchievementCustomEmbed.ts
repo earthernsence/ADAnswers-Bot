@@ -32,7 +32,7 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
 
     this.setFields(this.getFields());
 
-    return this.finalise();
+    return this.finalise().setFooter({ text: this.getFooterText(), iconURL: this.footerImage });
   }
 
   public override getAndSetThumbnail(): AttachmentBuilder {
@@ -68,5 +68,9 @@ export class SecretAchievementCustomEmbed extends CustomEmbed {
         inline: false
       }
     ];
+  }
+
+  public override getFooterText(): string {
+    return Math.random() > 0.5 ? `Be sure to read the pins in your progression channel!` : `Achievement art by Omsi`;
   }
 }

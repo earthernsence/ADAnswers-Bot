@@ -9,8 +9,6 @@ import {
 import { authorTitle } from "@/utils/utils_commands";
 import { NotImplementedError } from "../NotImplementedError";
 
-const FOOTER_IMAGE_URL = `https://cdn.discordapp.com/attachments/351479640755404820/980696250389254195/antimatter.png`;
-
 interface CustomEmbedProps {
   interaction: RepliableInteraction;
 }
@@ -30,7 +28,7 @@ export class CustomEmbed {
     return this.embed
       .setAuthor({ name: authorTitle(this.interaction), iconURL: this.user.displayAvatarURL() })
       .setTimestamp()
-      .setFooter({ text: this.getFooterText(), iconURL: FOOTER_IMAGE_URL });
+      .setFooter({ text: this.getFooterText(), iconURL: this.footerImage });
   }
 
   public setFields(fields: Array<EmbedField>): CustomEmbed {
@@ -72,7 +70,11 @@ export class CustomEmbed {
     throw new NotImplementedError();
   }
 
-  private getFooterText(): string {
+  public get footerImage(): string {
+    return `https://cdn.discordapp.com/attachments/351479640755404820/980696250389254195/antimatter.png`;
+  }
+
+  public getFooterText(): string {
     return Math.random() > 0.5 ? `Be sure to read the pins in your progression channel!` : `Art by @mrkrutaman`;
   }
 }

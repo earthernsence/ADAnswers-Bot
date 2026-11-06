@@ -340,7 +340,7 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       challenge: 6,
       completion: 2,
       recommendedTheorems: 175,
-      recommendedTree: "11,21,22,32,42,51,61,62,infinity,111,active,151,162|6!",
+      recommendedTree: "11,21,22,32,42,51,61,62,infinity,111,active,151|6!",
       note: "Remember to buy DimBoosts & manually purchase Replicanti Galaxies!"
     }),
     3: new EternityChallenge({
@@ -370,8 +370,8 @@ export const eternityChallenges: Record<number, Record<number, EternityChallenge
       challenge: 7,
       completion: 1,
       recommendedTheorems: 166,
-      recommendedTree: "11,21,22,32,42,51,61,62,antimatter,111|7!",
-      note: "To unlock the challenge, use the Time Dimension path, and then switch to the specified tree."
+      recommendedTree: "11,21,22,32,42,51,61,62,antimatter,111|7!"
+      // 7x1 doesn't need the Time Dimension path for unlock necessarily, so there's no mention here of that
     }),
     2: new EternityChallenge({
       challenge: 7,
